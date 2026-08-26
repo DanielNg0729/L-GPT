@@ -1,14 +1,14 @@
-# TikTok TechJam 2026 — Tổng hợp 5 Tracks & Problem Statements
+# TikTok TechJam 2026 — Overview of all 5 tracks & problem statements
 
-> Nguồn: `TikTok_TechJam_2026_Tracks_and_Problem_Statements.pdf` (Early Bird Access, Feishu Docs).
-> Bản PDF có **đầy đủ** nội dung cả 5 track (bản HTML chỉ có Track 1 do Feishu lazy-load).
+> Source: `TikTok_TechJam_2026_Tracks_and_Problem_Statements.pdf` (Early Bird Access, Feishu Docs).
+> The PDF contains the **complete** content for all 5 tracks (the HTML version only shows Track 1, due to Feishu lazy-loading).
 
-## Webinar (bắt buộc nên xem trước khi chọn track)
+## Webinar (worth watching before picking a track)
 
-- **Ngày:** Thứ Sáu 28/08/2026, 1–6pm SGT (GMT+8), mỗi track 45 phút
-- **Link:** https://vc-my.larkoffice.com/j/484622806 (link chính thức share sau public release)
+- **Date:** Friday, August 28, 2026, 1–6pm SGT (GMT+8), 45 minutes per track
+- **Link:** https://vc-my.larkoffice.com/j/484622806 (the official link is shared after the public release)
 
-| Giờ | Track |
+| Time | Track |
 |---|---|
 | 1:00–1:45pm | 1. Agent Launchpad: Design and Build Lightweight Agent Middleware |
 | 2:00–2:45pm | 2. Autonomous ML Research Agent for Recommender Systems |
@@ -16,21 +16,21 @@
 | 4:00–4:45pm | 4. Shopping Copilot: AI Conversational Search and Recommendations |
 | 5:00–5:45pm | 5. Robust Detection of AI-Generated Images Under Real-World Transformations |
 
-## So sánh nhanh
+## Quick comparison
 
-| # | Track | Kỹ năng chính | Chấm điểm chính | Độ khó / rủi ro |
+| # | Track | Core skills | Main scoring driver | Difficulty / risk |
 |---|---|---|---|---|
-| 1 | Agent Middleware | Full-stack TS (React + Fastify), Docker, security/observability | 40% end-to-end middleware behavior | Vừa. Có starter kit chạy sẵn, đề mở → dễ vào nhưng phải chọn scope khôn |
-| 2 | ML Research Agent | LLM agent + RecSys (CTR/CVR), MLOps | Delta điểm trên hidden test (đo tự động) | **Cao nhất.** Cần GPU, data ~80M samples, thời gian train |
-| 3 | GPU Kernel | CUDA/Triton, profiling, tối ưu | 35% Technical Execution | Cao về chuyên môn, nhưng scope gọn và rõ; cần GPU riêng |
-| 4 | Shopping Copilot | RAG / hybrid retrieval, dialog state, prompt eng | 35% Technical Execution + evaluator tự động | **Vừa nhất.** In-memory, không cần GPU, có evaluator local |
-| 5 | AIGC Image Detection | CV, robustness, augmentation | 35% Technical Execution | Vừa. Dataset public sẵn, giới hạn model < 2B params |
+| 1 | Agent Middleware | Full-stack TS (React + Fastify), Docker, security/observability | 40% end-to-end middleware behavior | Moderate. A working starter kit and an open-ended prompt → easy to get into, but you have to scope wisely |
+| 2 | ML Research Agent | LLM agent + RecSys (CTR/CVR), MLOps | Score delta on a hidden test (measured automatically) | **Highest.** Needs a GPU, ~80M samples of data, and training time |
+| 3 | GPU Kernel | CUDA/Triton, profiling, optimization | 35% Technical Execution | Demanding expertise, but tight, clear scope; needs your own GPU |
+| 4 | Shopping Copilot | RAG / hybrid retrieval, dialog state, prompt engineering | 35% Technical Execution + automated evaluator | **Most manageable.** In-memory, no GPU needed, local evaluator available |
+| 5 | AIGC Image Detection | CV, robustness, augmentation | 35% Technical Execution | Moderate. Public datasets available, models limited to < 2B params |
 
-Tiêu chí chấm chung cho track 3, 4, 5 (và gần giống track 1, 2):
+Shared judging criteria for tracks 3, 4, and 5 (and close to the same for tracks 1 and 2):
 Technical Execution 35% · Innovation & Problem Insight 20% · Impact & Relevance 20% ·
-Feasibility & Practicality 15% · Presentation & Communication 10% *(chỉ ở Final Event)*.
+Feasibility & Practicality 15% · Presentation & Communication 10% *(Final Event only)*.
 
-Deliverables chung cho track 2–5: **Devpost description + public GitHub repo (README đầy đủ) + demo video YouTube public**.
+Shared deliverables for tracks 2–5: **Devpost description + public GitHub repo (with a complete README) + public YouTube demo video**.
 
 ---
 
@@ -39,237 +39,237 @@ Deliverables chung cho track 2–5: **Devpost description + public GitHub repo (
 **Starter kit:** https://github.com/RrankPyramid/CodeJam
 **Slogan:** *"Build the missing middleware, not the platform."*
 
-## Bối cảnh
-Agent platform cần nhiều hơn một khung chat: operator phải **hiểu chuyện gì đã xảy ra**,
-**kiểm soát Agent được truy cập gì**, và **cô lập phần thực thi không an toàn**. Starter kit
-đã lo hết phần platform để đội dành trọn 3 ngày cho một bài toán hạ tầng.
+## Context
+An agent platform needs more than a chat frame: operators must be able to **understand what happened**,
+**control what the agent can access**, and **isolate unsafe execution**. The starter kit handles all of the
+platform work so teams can spend all 3 days on a single infrastructure problem.
 
-## Starter Kit đã có gì
-- CRUD/start/stop/delete Agent từ browser, Playground multi-turn, poll Run status bất đồng bộ
-- Codex CLI ghi file & chạy lệnh trong workspace riêng của từng Agent, resume session
-- Lưu Agent/message/Run metadata vào JSON store local
-- Mỗi turn chạy trong container Docker/Colima/Podman dùng-rồi-bỏ
-- Kết nối BytePlus ModelArk (Responses-compatible endpoint)
-- Deploy tuỳ chọn lên BytePlus ECS (Terraform)
+## What the starter kit already provides
+- Create/start/stop/delete agents from the browser, a multi-turn Playground, asynchronous Run status polling
+- Codex CLI writing files & running commands in each agent's own workspace, with session resume
+- Agent/message/Run metadata persisted to a local JSON store
+- Each turn runs in a disposable Docker/Colima/Podman container
+- BytePlus ModelArk connectivity (Responses-compatible endpoint)
+- Optional deployment to BytePlus ECS (Terraform)
 
-**Cố tình thiếu (phần mình làm):** user identity, trace timeline, audit model, sandbox policy cứng.
-Đây là POC single-user; bearer token không phải hệ thống identity; JSON store 1 process;
-container thường không phải isolation boundary multi-tenant.
+**Deliberately missing (your part):** user identity, trace timeline, audit model, hard sandbox policy.
+This is a single-user POC; the bearer token is not an identity system; the JSON store is single-process;
+ordinary containers are not a multi-tenant isolation boundary.
 
-## Phân chia trách nhiệm
+## Division of responsibility
 
-| Mảng | Starter Kit | Sinh viên làm |
+| Area | Starter kit | Your work |
 |---|---|---|
-| Product experience | React UI, Agent list, form, lifecycle, Playground, Run status | Giữ baseline chạy; chỉ thêm UI vừa đủ để lộ middleware |
-| Control plane | Fastify API, validation, async Runs, AgentService, JSON persistence | Cắm hành vi middleware thật vào backend path |
-| Agent Runtime | Codex CLI, session bền, workspace/Agent, container dùng-rồi-bỏ | Cắm middleware vào đúng execution boundary |
-| Infrastructure | Docker, Colima, Podman, Compose, ECS, Terraform | Dùng runtime path nhỏ nhất đủ chứng minh. Cloud **optional** |
-| Middleware | (trống) | Chọn / chỉnh / kết hợp / **tự sáng tạo** một bộ capability mạch lạc |
+| Product experience | React UI, agent list, forms, lifecycle, Playground, Run status | Keep the baseline working; add only enough UI to expose the middleware |
+| Control plane | Fastify API, validation, async Runs, AgentService, JSON persistence | Wire real middleware behavior into the backend path |
+| Agent runtime | Codex CLI, durable sessions, per-agent workspaces, disposable containers | Hook middleware into the correct execution boundary |
+| Infrastructure | Docker, Colima, Podman, Compose, ECS, Terraform | Use the smallest runtime path that proves the point. Cloud is **optional** |
+| Middleware | (empty) | Choose / adapt / combine / **invent** a coherent set of capabilities |
 
-## Chạy baseline
-Yêu cầu: macOS/Linux · Node ≥ 22, npm ≥ 10 · một container engine · **Ark model API key** + endpoint `ep-...`
+## Running the baseline
+Requirements: macOS/Linux · Node ≥ 22, npm ≥ 10 · a container engine · an **Ark model API key** + an `ep-...` endpoint
 
 ```bash
 git clone https://github.com/RrankPyramid/CodeJam.git && cd CodeJam
 ARK_API_KEY=your-ark-api-key ARK_MODEL=ep-your-endpoint-id npm run poc
-# rootless podman: thêm CONTAINER_ENGINE=podman
-# mở http://localhost:3000
+# rootless podman: add CONTAINER_ENGINE=podman
+# open http://localhost:3000
 ```
-⚠️ `ARK_API_KEY` phải là **Ark model API key**, KHÔNG phải AK/SK tài khoản BytePlus → sai sẽ ra 401.
+⚠️ `ARK_API_KEY` must be an **Ark model API key**, NOT your BytePlus account AK/SK — the wrong one gives a 401.
 
-**Acceptance test baseline:** tạo Agent → gửi task Playground ("Create a TypeScript hello-world CLI,
-add a test, run it, and summarize the files you created") → Run xong có phản hồi → follow-up
-tiếp tục cùng session → stop/restart Agent workspace vẫn còn.
-**Chưa pass baseline thì chưa được bắt tay làm middleware.**
-Trước khi nộp bắt buộc chạy `npm run check` (TS check + server tests + production build).
+**Baseline acceptance test:** create an agent → send a Playground task ("Create a TypeScript hello-world CLI,
+add a test, run it, and summarize the files you created") → the Run completes with a response → a follow-up
+continues in the same session → stop/restart the agent and the workspace is still there.
+**Do not start on middleware until the baseline passes.**
+Before submitting you must run `npm run check` (TS check + server tests + production build).
 
-## Yêu cầu thiết kế middleware
-- **Giữ nguyên baseline** (CRUD, lifecycle, Playground, persistence, model execution vẫn chạy)
-- **Hành vi thật**: phải chạy ở backend / Runtime / data / infra path. Màn hình tĩnh + message hard-code = **không tính**
-- **Định nghĩa boundary**: component nào sở hữu quyết định/event, data nào đi qua, fail thì sao
-- **Bằng chứng thuyết phục**: demo cả case bình thường **và** case failure/denial/recovery/degraded/abuse
-- **Có automated test** cho hành vi middleware lõi (không chỉ test render UI)
-- **Không lộ secret** ở source, git history, log, trace, screenshot, browser storage, demo output
-- Ưu tiên hạ tầng nhỏ nhất; **local là judging path mặc định, ECS không cộng điểm**
+## Middleware design requirements
+- **Keep the baseline intact** (CRUD, lifecycle, Playground, persistence, model execution all still work)
+- **Real behavior**: it has to run on the backend / runtime / data / infra path. A static screen with hard-coded messages **does not count**
+- **Define the boundary**: which component owns the decision/event, what data flows through, what happens on failure
+- **Convincing evidence**: demo both the happy path **and** failure/denial/recovery/degraded/abuse cases
+- **Automated tests** for the core middleware behavior (not just UI render tests)
+- **No leaked secrets** in source, git history, logs, traces, screenshots, browser storage, or demo output
+- Prefer the smallest infrastructure; **local is the default judging path, ECS earns no extra points**
 
-## Các hướng middleware gợi ý (không bắt buộc)
-1. **Identity & Authorization** — tách human principal vs Agent principal; per-Agent identity rotate/revoke được; delegated authority scoped + time-bound; policy enforcement ở backend (không phải UI); approval boundary cho hành động rủi ro; action attribution; secret handling & revocation. *Mock identity là chấp nhận được* (VD: chứng minh Agent của User A không đọc được resource của User B). Login screen mà không có server-side authz thì không tính.
-2. **Trace, Audit & Observability** — Run = chuỗi span có liên kết, không phải log rời. ID ổn định (agent/version/run/session/trace/span/actor), thời gian + status + error + retry, span category (orchestration, model call, tool call, memory, sandbox, policy decision, approval, cloud op), input/output đã redact, token/cost. UI: Run list + trace detail dạng tree/timeline, filter, tìm bước fail.
-3. **Layered Agent Architecture** — Experience / Control Plane / Identity & Policy / Agent Runtime / Execution & Data / Observability / Cloud Resource. Ghi rõ contract giữa các layer.
-4. **Threat Modeling & Safety** — credential theft, privilege escalation / confused deputy, prompt injection & tool misuse, sandbox escape, cross-user data exfiltration, runaway execution/cost (timeout, quota, budget, stop control), sensitive trace capture. *Lưu ý: CPU/memory/PID limit sẵn có KHÔNG được tính là capability mới.*
-5. **Multi-Agent Coordination** — shared session/topic, turn-selection rule, shared state, event history, timeout/retry. Demo mẫu: nhiều Agent đếm ngược 10→1 trong một hội thoại chung, không trùng không thiếu số.
-6. **Tự nghĩ** — lifecycle reconciliation & recovery, memory governance, human-in-the-loop, cost/budget control, provider abstraction, versioning & rollback, tool/model routing, credential exchange, auto-diagnosis & remediation.
+## Suggested middleware directions (not mandatory)
+1. **Identity & authorization** — separate human principal from agent principal; per-agent identity that can be rotated/revoked; scoped, time-bound delegated authority; policy enforcement in the backend (not the UI); an approval boundary for risky actions; action attribution; secret handling & revocation. *Mock identity is acceptable* (e.g. prove that User A's agent cannot read User B's resources). A login screen without server-side authz does not count.
+2. **Trace, audit & observability** — a Run is a linked chain of spans, not scattered logs. Stable IDs (agent/version/run/session/trace/span/actor), timings + status + error + retry, span categories (orchestration, model call, tool call, memory, sandbox, policy decision, approval, cloud op), redacted input/output, tokens/cost. UI: Run list + trace detail as a tree/timeline, filters, and a way to find the failing step.
+3. **Layered agent architecture** — Experience / Control Plane / Identity & Policy / Agent Runtime / Execution & Data / Observability / Cloud Resource. Document the contract between layers.
+4. **Threat modeling & safety** — credential theft, privilege escalation / confused deputy, prompt injection & tool misuse, sandbox escape, cross-user data exfiltration, runaway execution/cost (timeout, quota, budget, stop control), sensitive trace capture. *Note: the built-in CPU/memory/PID limits do NOT count as a new capability.*
+5. **Multi-agent coordination** — shared session/topic, turn-selection rules, shared state, event history, timeout/retry. Sample demo: several agents counting down 10→1 in one shared conversation, with no duplicated or missing numbers.
+6. **Your own idea** — lifecycle reconciliation & recovery, memory governance, human-in-the-loop, cost/budget control, provider abstraction, versioning & rollback, tool/model routing, credential exchange, auto-diagnosis & remediation.
 
-## Kế hoạch 3 ngày (đề xuất trong đề)
-| Ngày | Mục tiêu | Bằng chứng cuối ngày |
+## Suggested 3-day plan (from the prompt)
+| Day | Goal | End-of-day evidence |
 |---|---|---|
-| 1 | Chạy & hiểu baseline, chốt bài toán + middleware story, định nghĩa contract, xong backend path đầu tiên | Baseline pass; trigger được 1 hành vi middleware thật từ API hoặc test |
-| 2 | Hoàn thiện core path, persist evidence, UI tối thiểu, các case success/failure quan trọng | Kịch bản đầy đủ chạy end-to-end từ browser xuống backend/Runtime/data/infra |
-| 3 | Automated tests, xử lý lỗi & cleanup, architecture diagram + README, tập demo | `npm run check` pass; demo gọn trong **3 phút** |
+| 1 | Run & understand the baseline, settle on the problem + middleware story, define contracts, finish the first backend path | Baseline passes; one real middleware behavior can be triggered from the API or a test |
+| 2 | Complete the core path, persist evidence, minimal UI, the key success/failure cases | The full scenario runs end-to-end from the browser down to backend/runtime/data/infra |
+| 3 | Automated tests, error handling & cleanup, architecture diagram + README, rehearse the demo | `npm run check` passes; the demo fits in **3 minutes** |
 
-## Deliverables & chấm điểm
-**Nộp:** demo live 3 phút · architecture diagram 1 trang (middleware, data flow, trust boundary, điểm enforcement/instrument/recovery) · code repo (setup, rationale, design summary, tests, demo steps, limitations, không secret).
+## Deliverables & scoring
+**Submit:** a 3-minute live demo · a one-page architecture diagram (middleware, data flow, trust boundaries, enforcement/instrumentation/recovery points) · the code repo (setup, rationale, design summary, tests, demo steps, limitations, no secrets).
 
-| Tiêu chí | Trọng số |
+| Criterion | Weight |
 |---|---|
 | End-to-end middleware behavior | **40%** |
 | Technical design & integration | 25% |
 | Verification & robustness | 20% |
 | Demo & reproducibility | 15% |
 
-**Bắt đầu đọc code ở:** `apps/server/src/types.ts`, `app.ts`, `agent-service.ts`, 2 bản `AgentRunner`, rồi `apps/web/src/App.tsx`.
+**Start reading the code at:** `apps/server/src/types.ts`, `app.ts`, `agent-service.ts`, both `AgentRunner` implementations, then `apps/web/src/App.tsx`.
 
 ---
 
 # Track 2 — Autonomous ML Research Agent for Recommender Systems
 
-## Đề bài
-Xây một **Autonomous ML Research Agent** tự chạy trọn vòng lặp MLE:
-đọc đề → EDA → feature engineering → train + tune → evaluate → reflect & revise → lặp lại.
-Code của từng stage là do agent tự viết, không được cho sẵn.
-Tham chiếu prior work: MLE-Bench (OpenAI), AIDE (Weco AI), AI-Scientist-v2 (Sakana AI).
+## The problem
+Build an **Autonomous ML Research Agent** that runs the full MLE loop on its own:
+read the prompt → EDA → feature engineering → train + tune → evaluate → reflect & revise → repeat.
+The code for each stage is written by the agent itself; none of it is provided.
+Prior work for reference: MLE-Bench (OpenAI), AIDE (Weco AI), AI-Scientist-v2 (Sakana AI).
 
-Agent phải: (1) reproduce official baseline, (2) tự iterate cải tiến pipeline, (3) vượt baseline
-trên hidden test. Chỉ được dùng train + validation, **không bao giờ thấy hidden test**.
+The agent must: (1) reproduce the official baseline, (2) iterate on the pipeline autonomously, and (3) beat the baseline
+on a hidden test. Only train + validation may be used — the agent **never sees the hidden test**.
 
-## Benchmark
-| Dataset | Mô tả | Metric | Scale |
+## Benchmarks
+| Dataset | Description | Metric | Scale |
 |---|---|---|---|
-| **AliCCP** (bắt buộc, 100% primary score) | Taobao, funnel impression→click→conversion | CTR AUC (toàn bộ impression) / CVR AUC (subset đã click) | ~80 triệu samples |
-| **KuaiRand** (bonus) | Short-video feed, 12 tín hiệu feedback + randomized exposure | NDCG@10 / Recall@50, click = positive | ~chục triệu interactions |
+| **AliCCP** (required, 100% of the primary score) | Taobao, impression→click→conversion funnel | CTR AUC (all impressions) / CVR AUC (clicked subset) | ~80 million samples |
+| **KuaiRand** (bonus) | Short-video feed, 12 feedback signals + randomized exposure | NDCG@10 / Recall@50, click = positive | ~tens of millions of interactions |
 
-Link: AliCCP https://tianchi.aliyun.com/dataset/408 · KuaiRand https://kuairand.com
-Baseline chính thức: NISE (AliCCP), CWM (KuaiRand).
+Links: AliCCP https://tianchi.aliyun.com/dataset/408 · KuaiRand https://kuairand.com
+Official baselines: NISE (AliCCP), CWM (KuaiRand).
 
-## Luật
-- **In scope:** mọi thư viện open-source, mọi paper / public solution / pretrained weights, sửa bất kỳ stage nào
-- **Out of scope:** ❌ external training data; ❌ pretrained weights train trên test label của 2 benchmark này; ❌ đụng hidden test khi dev
-- Compute budget: TBD. Hidden test chấm **một lần duy nhất** trên final submission
+## Rules
+- **In scope:** any open-source library, any paper / public solution / pretrained weights, modifying any stage
+- **Out of scope:** ❌ external training data; ❌ pretrained weights trained on these two benchmarks' test labels; ❌ touching the hidden test during development
+- Compute budget: TBD. The hidden test is scored **exactly once**, on the final submission
 
-## Chấm điểm
-| Tiêu chí | Trọng số | Nội dung |
+## Scoring
+| Criterion | Weight | What it covers |
 |---|---|---|
-| Technical Execution | 35% | **Primary metric**: `delta(m) = score_agent(m) − score_baseline(m)`, lấy trung bình các metric. Chấm ở **điểm converged** (val score không cải thiện quá ε trong N vòng, hoặc hết budget), dùng validation-best checkpoint. + **Robustness**: fail thì recover/retry/route around được, không crash/stall/diverge |
-| Innovation & Problem Insight | 20% | Agent chọn cải tiến gì và **vì sao** — không chấm implementation |
-| Impact & Relevance | 20% | **Autonomy** — đo bằng **số lần can thiệp thủ công**, càng ít càng cao |
-| Feasibility & Practicality | 15% | **Resource**: tổng token (in+out) + tổng **GPU-hours** để đạt converged |
+| Technical Execution | 35% | **Primary metric**: `delta(m) = score_agent(m) − score_baseline(m)`, averaged across metrics. Scored at the **converged point** (validation score improves by less than ε over N rounds, or the budget runs out), using the validation-best checkpoint. Plus **robustness**: on failure it recovers/retries/routes around, without crashing, stalling, or diverging |
+| Innovation & Problem Insight | 20% | Which improvements the agent chose and **why** — the implementation itself is not scored here |
+| Impact & Relevance | 20% | **Autonomy** — measured by the **number of manual interventions**; fewer is better |
+| Feasibility & Practicality | 15% | **Resources**: total tokens (in+out) + total **GPU-hours** to reach convergence |
 | Presentation & Communication | 10% | Final Event only |
 
-## Deliverables riêng
-Ngoài Devpost + repo: **run/iteration logs** (mỗi vòng: hypothesis, code diff, metric, error & recovery),
-số lần can thiệp thủ công, final predictions/checkpoint theo schema, bảng kết quả + delta so với baseline,
-và báo cáo token + GPU-hours.
+## Track-specific deliverables
+Beyond Devpost + repo: **run/iteration logs** (per round: hypothesis, code diff, metric, error & recovery),
+the number of manual interventions, final predictions/checkpoint in the specified schema, a results table with the delta vs baseline,
+and a report of token and GPU-hour usage.
 
-> Có Appendix A: primer về recommender system (pipeline recall→pre-rank→rank→re-rank, CTR/CVR, multi-task, AUC/NDCG/Recall, embedding & feature crossing) — đọc 1–2 tiếng là đủ nền.
-> Tool gợi ý: LLM coding agent bất kỳ, hoặc **Trae** của ByteDance (trial 7 ngày).
+> There is an Appendix A: a recommender-systems primer (recall→pre-rank→rank→re-rank pipeline, CTR/CVR, multi-task, AUC/NDCG/Recall, embeddings & feature crossing) — 1–2 hours of reading is enough grounding.
+> Suggested tooling: any LLM coding agent, or ByteDance's **Trae** (7-day trial).
 
 ---
 
 # Track 3 — Implement a GPU Kernel for a Transformer Layer
 
-## Đề bài
-Tối ưu runtime của một Transformer layer trên GPU bằng phương pháp **AI-assisted**.
-Nộp một hoặc nhiều GPU kernel implement layer đó và pass test case.
+## The problem
+Optimize the runtime of a Transformer layer on GPU using an **AI-assisted** approach.
+Submit one or more GPU kernels implementing that layer and pass the test cases.
 
-- Test case viết bằng **PyTorch hoặc TensorFlow** (chọn 1 là đủ); được sửa implementation của layer → tự quyết fuse phần nào vào 1 kernel
-- **Sai số cho phép: relative error < 0.02, absolute error < 0.002** so với bản gốc
-- Test nhiều shape khác nhau (batch size, seq length, dimension lớn/nhỏ) — được viết shape check để chọn implementation khác nhau cho từng shape; **mọi tổ hợp shape sẽ được công bố trước**
-- Tự chạy & tối ưu **trên máy của mình** (GPU của mình) → optimization phụ thuộc card
-- Khuyến khích mạnh dùng AI tools; **tech report rõ ràng về AI skills/tools đã dùng → được điểm bonus**
+- Test cases are written in **PyTorch or TensorFlow** (picking one is enough); you may modify the layer's implementation → you decide what to fuse into a single kernel
+- **Allowed error: relative error < 0.02, absolute error < 0.002** against the original
+- Multiple shapes are tested (batch size, sequence length, large/small dimensions) — you may write shape checks and use different implementations per shape; **all shape combinations will be published in advance**
+- Run & optimize **on your own machine** (your own GPU) → the optimization is card-dependent
+- Using AI tools is strongly encouraged; **a clear tech report on the AI skills/tools used earns bonus points**
 
-## Hướng tối ưu gợi ý
-Operator fusion · memory layout · reduced precision · tensor core · softmax optimization ·
-custom CUDA / Triton / TF / PyTorch implementation.
+## Suggested optimization directions
+Operator fusion · memory layout · reduced precision · tensor cores · softmax optimization ·
+custom CUDA / Triton / TF / PyTorch implementations.
 
 ## Scope
-In scope: AI-based code generation, GPU kernel fusion, dùng profiling tools.
+In scope: AI-based code generation, GPU kernel fusion, use of profiling tools.
 Out of scope: production-ready deployment.
 
-## Việc cần làm
-1. Tải benchmark script (`torch_transformer_benchmark.py` **hoặc** `tensorflow_transformer_benchmark.py`)
-2. Implement phần customized-implementation, tối ưu hết mức
-3. Chạy trên máy mình
-4. Viết tech report: môi trường (CPU/GPU/DISK), các optimization đã làm, kết quả test cuối
+## What to do
+1. Download the benchmark script (`torch_transformer_benchmark.py` **or** `tensorflow_transformer_benchmark.py`)
+2. Implement the customized-implementation section and optimize it as far as you can
+3. Run it on your own machine
+4. Write a tech report: environment (CPU/GPU/DISK), the optimizations you applied, and the final test results
 
-Chấm điểm: bộ tiêu chí chung 35/20/20/15/10.
+Scoring: the shared 35/20/20/15/10 criteria.
 
 ---
 
 # Track 4 — Shopping Copilot: AI Conversational Search & Recommendations
 
-## Đề bài
-Xây shopping agent hội thoại trên dataset Amazon, vượt qua keyword matching tĩnh.
-Bốn trụ cột bắt buộc:
+## The problem
+Build a conversational shopping agent over an Amazon dataset that goes beyond static keyword matching.
+Four required pillars:
 
 **I. Core Architecture — Intent Routing & Hybrid Pipeline**
-- **Dual-track routing**: phát hiện intent → track filter chính xác cao cho "Buying" (khoá hard constraint) / track dense retrieval đa dạng cho "Browsing" (cross-category)
+- **Dual-track routing**: detect intent → a high-precision filter track for "Buying" (hard constraints locked in) / a diverse dense-retrieval track for "Browsing" (cross-category)
 - **Pipeline**: in-memory, "Multi-Route Retrieval → LLM Semantic Ranking" (keyword + category + vector similarity)
 
 **II. Dialog Strategy — Multi-Turn Scenario Evolution**
-- **Dynamic state machine**: xử lý Information Accumulation (slot tăng dần) và Intent Override (xoá & ghi lại slot)
-- **Proactive guidance**: khi Over-Generality (pool ứng viên quá lớn) → cắt retrieval, chủ động hỏi clarification có cấu trúc
+- **Dynamic state machine**: handle both information accumulation (slots build up) and intent override (clear & rewrite slots)
+- **Proactive guidance**: on over-generality (candidate pool too large) → cut retrieval short, proactively ask a structured clarifying question
 
 **III. Self-Evolution — Dynamic Context Programming**
-- **Runtime adaptation**: personalized context distillation từ lịch sử hội thoại, cập nhật short-term session state + long-term user profile
-- **Adaptive orchestration**: re-orchestrate workflow lúc runtime, tự tinh chỉnh logic guidance
+- **Runtime adaptation**: personalized context distillation from the conversation history, updating short-term session state + long-term user profile
+- **Adaptive orchestration**: re-orchestrate the workflow at runtime, refining the guidance logic autonomously
 
-**IV. Evaluation Matrix** (neo vào record mua hàng thực trong dataset)
-- **Coverage**: Hit Rate@K (giai đoạn retrieval)
-- **Precision**: MRR / Top-K Hit Rate (LLM đẩy đúng món đã mua lên top)
-- **Efficiency**: **MTTC (Mean Turns to Conversion)** — ít lượt hơn = điểm cao hơn
+**IV. Evaluation Matrix** (anchored to real purchase records in the dataset)
+- **Coverage**: Hit Rate@K (retrieval stage)
+- **Precision**: MRR / Top-K Hit Rate (does the LLM push the purchased item to the top?)
+- **Efficiency**: **MTTC (Mean Turns to Conversion)** — fewer turns = higher score
 
 ## Constraints
-- ❌ UI/UX (chấm hoàn toàn qua backend API + headless pipeline)
-- ❌ Train / full fine-tune base LLM
-- ❌ Vector DB cluster ngoài — **phải chạy hoàn toàn in-memory**
-- ❌ Multi-modal — chỉ text catalog, structured metadata, text dialog
-- ⚠️ **Hard limit 10 turns/session — vượt là bị terminate và 0 điểm**
-- ⚠️ Catalog read-only, cấm mutate hoặc inject ASIN giả
-- Giả định: input đã sạch (không cần xử lý typo/ASR noise), catalog tĩnh, mỗi session 1 user
+- ❌ UI/UX (judged entirely through the backend API + headless pipeline)
+- ❌ Training / full fine-tuning of a base LLM
+- ❌ External vector DB clusters — **must run entirely in-memory**
+- ❌ Multi-modal — text catalog, structured metadata, and text dialog only
+- ⚠️ **Hard limit of 10 turns/session — going over means termination and a zero score**
+- ⚠️ Catalog is read-only; no mutation and no fake ASINs
+- Assumptions: input is already clean (no typo/ASR-noise handling needed), the catalog is static, one user per session
 
-## Tài nguyên
-- Catalog đóng băng **50.000 sản phẩm** từ Amazon Reviews 2023 (Clothing_Shoes_and_Jewelry)
-- **200 session public** để dev + **800 session private** để chấm cuối (user & target product tách biệt)
-- Starter agent BM25 yếu, **local evaluator deterministic** (Hit Rate@10, MRR, MTTC, Efficiency, TechnicalScore), Python agent interface + API contract, SHA256 checksum
+## Resources
+- A frozen catalog of **50,000 products** from Amazon Reviews 2023 (Clothing_Shoes_and_Jewelry)
+- **200 public sessions** for development + **800 private sessions** for final judging (disjoint users & target products)
+- A weak BM25 starter agent, a **deterministic local evaluator** (Hit Rate@10, MRR, MTTC, Efficiency, TechnicalScore), a Python agent interface + API contract, SHA256 checksums
 - Repo: https://github.com/TechJam2026/techjam-conversational-search
-  (Kit release: `/releases/tag/participant-kit`) · Data gốc: https://amazon-reviews-2023.github.io/
-- ⚠️ **BTC KHÔNG cấp API key / model access / credit** — dùng LLM ngoài thì tự trả tiền, và **không được commit secret**. Không bắt buộc dùng LLM trả phí.
+  (Kit release: `/releases/tag/participant-kit`) · Original data: https://amazon-reviews-2023.github.io/
+- ⚠️ **The organizers do NOT provide API keys / model access / credits** — if you use an external LLM you pay for it yourself, and **secrets must never be committed**. Using a paid LLM is not required.
 
-Chấm điểm: bộ tiêu chí chung 35/20/20/15/10.
+Scoring: the shared 35/20/20/15/10 criteria.
 
 ---
 
 # Track 5 — Robust Detection of AI-Generated Images
 
-## Đề bài
-Phân biệt ảnh AI-generated vs ảnh thật, **giữ được độ chính xác sau khi ảnh bị hậu xử lý / phát tán lại**.
-Không chỉ accuracy trên data sạch — phải bàn rõ trade-off giữa robustness, generalisation và false positive.
+## The problem
+Distinguish AI-generated images from real ones while **retaining accuracy after the image has been post-processed or re-shared**.
+Accuracy on clean data is not enough — you must explicitly discuss the trade-off between robustness, generalization, and false positives.
 
-## Các phép biến đổi phải chịu được
-| Transform | Tham số | Tình huống thực tế |
+## Transformations the detector must survive
+| Transform | Parameters | Real-world situation |
 |---|---|---|
-| JPEG Compression | quality 90 / 70 / 50 / 30 | Re-encode khi lên MXH, nhắn tin |
-| Gaussian Blur | σ = 0.5 / 1.0 / 2.0 | Out-of-focus |
-| Resize | scale 0.5× / 0.25× rồi upscale lại | Sinh thumbnail |
-| Gaussian Noise | σ = 0.02 / 0.05 / 0.10 | Nhiễu cảm biến thiếu sáng |
-| Color Jitter | brightness/contrast/saturation ±20% | App filter, auto-enhance |
-| Center Crop | crop 80% | Cắt ảnh đại diện |
+| JPEG compression | quality 90 / 70 / 50 / 30 | Re-encoding on social media and messaging apps |
+| Gaussian blur | σ = 0.5 / 1.0 / 2.0 | Out of focus |
+| Resize | scale 0.5× / 0.25×, then upscaled back | Thumbnail generation |
+| Gaussian noise | σ = 0.02 / 0.05 / 0.10 | Sensor noise in low light |
+| Color jitter | brightness/contrast/saturation ±20% | App filters, auto-enhance |
+| Center crop | 80% crop | Cropping for a profile picture |
 
 ## Constraints
-- In scope: AIGC detection mức ảnh, robustness, feature engineering, model design, evaluation design, error analysis, explainability
-- Out of scope: production deployment, hệ thống moderation toàn platform, video/audio
-- ⚠️ **Model phải < 2B parameters**; quy mô prototype hackathon
+- In scope: image-level AIGC detection, robustness, feature engineering, model design, evaluation design, error analysis, explainability
+- Out of scope: production deployment, platform-wide moderation systems, video/audio
+- ⚠️ **The model must be < 2B parameters**; hackathon prototype scale
 
-## Dataset
+## Datasets
 - https://huggingface.co/datasets/saberzl/SID_Set
 - https://www.kaggle.com/datasets/birdy654/cifake-real-and-ai-generated-synthetic-images
 - https://modelscope.cn/datasets/hy2628982280/WildFake/summary
-- **Validation set demo (KHÔNG dùng để train, không tính điểm):** subset WildFake — Non-AIGC COCO val2017 (4998 ảnh), AIGC DALL·E Advanced (8843 ảnh)
+- **Demo validation set (NOT for training, not scored):** a WildFake subset — non-AIGC COCO val2017 (4,998 images), AIGC DALL·E Advanced (8,843 images)
 
-## Deliverables riêng
-Ngoài Devpost + repo + demo video:
-- **Script nhận vào 1 thư mục ảnh, xuất JSON gồm `image_path` và `pred`** (confidence là AIGC)
-- **Robustness evaluation summary**: bảng/biểu đồ so sánh clean vs transformed
-- **Error analysis note**: false positive / false negative tiêu biểu và trade-off
+## Track-specific deliverables
+Beyond Devpost + repo + demo video:
+- **A script that takes an image directory and outputs JSON containing `image_path` and `pred`** (confidence that it is AIGC)
+- **A robustness evaluation summary**: a table/chart comparing clean vs transformed
+- **An error analysis note**: representative false positives / false negatives and the trade-offs
 
-Chấm điểm: bộ tiêu chí chung 35/20/20/15/10.
+Scoring: the shared 35/20/20/15/10 criteria.

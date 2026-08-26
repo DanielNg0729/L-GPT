@@ -1,24 +1,24 @@
 # TikTok TechJam 2026 — Track 4: Shopping Copilot
 
-AI conversational search & recommendation agent trên catalog Amazon (50.000 sản phẩm,
-`Clothing_Shoes_and_Jewelry`). Agent phải tìm ra đúng sản phẩm mục tiêu đang bị giấu
-trong **tối đa 10 lượt hội thoại**.
+An AI conversational search & recommendation agent over an Amazon catalog (50,000 products,
+`Clothing_Shoes_and_Jewelry`). The agent has to surface the correct hidden target product
+within **at most 10 conversation turns**.
 
-## Trạng thái
+## Status
 
-- [x] Tải + verify toàn bộ tài nguyên BTC cấp → [provided/](provided/)
-- [x] Reproduce baseline BM25 bằng evaluator chính thức — **khớp 100%** số BTC công bố
+- [x] Download + verify all organizer-provided resources → [provided/](provided/)
+- [x] Reproduce the BM25 baseline with the official evaluator — **100% match** with the published numbers
 - [ ] Intent router (Buying / Browsing)
 - [ ] Multi-route retrieval (BM25 + category + vector, in-memory)
 - [ ] Dialog state machine (slot accumulation + intent override)
 - [ ] LLM semantic ranking
-- [ ] Tối ưu MTTC
+- [ ] MTTC optimization
 
-## Baseline đã chạy được
+## Baseline reproduced
 
-`starter/agent.py` (BM25 yếu) trên 200 public session:
+`starter/agent.py` (weak BM25) over the 200 public sessions:
 
-| Metric | Số của mình | BTC công bố |
+| Metric | Ours | Published |
 |---|---|---|
 | Hit Rate@10 | 0.125 | 0.125 |
 | MRR | 0.068034 | 0.068034 |
@@ -26,7 +26,7 @@ trong **tối đa 10 lượt hội thoại**.
 | Efficiency | 0.119 | 0.119 |
 | **TechnicalScore** | **0.10671** | **0.10671** |
 
-Tách theo scenario — chỗ này lộ ra điểm yếu chính của baseline:
+Broken down by scenario — this is where the baseline's main weakness shows up:
 
 | Scenario | n | Hit@10 | MRR | MTTC |
 |---|---|---|---|---|
@@ -35,28 +35,28 @@ Tách theo scenario — chỗ này lộ ra điểm yếu chính của baseline:
 | browsing | 80 | **0.025** | 0.0045 | 10.75 |
 | boundary | 10 | **0.000** | 0.0000 | 11.00 |
 
-> **browsing + boundary = 90/200 session gần như trắng điểm.** Đây là chỗ ăn điểm lớn nhất:
-> chỉ cần kéo browsing từ 0.025 lên ngang buying là TechnicalScore gần gấp đôi.
+> **browsing + boundary = 90/200 sessions score almost nothing.** This is the biggest scoring
+> opportunity: simply lifting browsing from 0.025 up to the buying level nearly doubles TechnicalScore.
 
-## Chạy lại
+## Reproducing
 
 ```bash
-cd provided && ./fetch.sh                          # tải catalog (không nằm trong git)
+cd provided && ./fetch.sh                          # download the catalog (not tracked in git)
 cd techjam-conversational-search
 python3 -m evaluator.local_evaluator               # -> results.json
 ```
 
-Không cần cài dependency — evaluator và starter agent chỉ dùng stdlib.
+No dependencies to install — the evaluator and starter agent use the standard library only.
 
-## Tài liệu
+## Documentation
 
-- [TRACK4_SHOPPING_COPILOT.md](TRACK4_SHOPPING_COPILOT.md) — tóm tắt đề bài, rule, tiêu chí chấm
-- [TechJam2026_Tom_tat.md](TechJam2026_Tom_tat.md) — tóm tắt chung các track
-- [provided/README.md](provided/README.md) — nguồn gốc & checksum tài nguyên BTC
+- [TRACK4_SHOPPING_COPILOT.md](TRACK4_SHOPPING_COPILOT.md) — problem statement, rules, and judging criteria
+- [TechJam2026_Tom_tat.md](TechJam2026_Tom_tat.md) — overview of all tracks
+- [provided/README.md](provided/README.md) — provenance & checksums of the organizer-provided resources
 
-## Rule dễ mất điểm
+## Rules that will cost you points
 
-- Vượt **10 turn** → session đó **0 điểm**. Phải có hard counter trong agent loop.
-- Catalog **read-only** — cấm mutate, cấm inject ASIN giả.
-- Vector index phải **in-memory**, không dựng service ngoài.
-- **Không commit API key.** BTC không cấp và không hoàn tiền API credit.
+- Exceeding **10 turns** → that session scores **zero**. You need a hard counter in the agent loop.
+- The catalog is **read-only** — no mutation, no injecting fake ASINs.
+- The vector index must be **in-memory**; no external service.
+- **Never commit API keys.** The organizers do not provide or reimburse API credits.

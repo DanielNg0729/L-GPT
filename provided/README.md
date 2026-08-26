@@ -1,65 +1,65 @@
-# `provided/` — Tài nguyên do BTC TikTok TechJam 2026 cấp
+# `provided/` — Resources supplied by the TikTok TechJam 2026 organizers
 
-> **READ-ONLY.** Không sửa bất cứ file nào trong thư mục này. Code của team viết ở ngoài,
-> import vào. Catalog là read-only theo rule (cấm mutate cấu trúc, cấm inject ASIN giả).
+> **READ-ONLY.** Do not modify any file in this directory. Team code lives outside and imports
+> from here. The catalog is read-only per the rules (no structural mutation, no fake ASINs).
 
-## Nguồn
+## Source
 
 | | |
 |---|---|
-| Repo BTC | https://github.com/TechJam2026/techjam-conversational-search |
+| Organizer repo | https://github.com/TechJam2026/techjam-conversational-search |
 | Release | `participant-kit` (published 2026-08-24) |
-| Upstream commit | xem `UPSTREAM_COMMIT.txt` |
-| Data gốc | Amazon Reviews 2023 — https://amazon-reviews-2023.github.io/ |
+| Upstream commit | see `UPSTREAM_COMMIT.txt` |
+| Original data | Amazon Reviews 2023 — https://amazon-reviews-2023.github.io/ |
 
-## Cấu trúc
+## Layout
 
 ```
 provided/
-├── SHA256SUMS                       # checksum chính chủ BTC
-├── UPSTREAM_COMMIT.txt              # commit repo BTC đã snapshot
-├── fetch.sh                         # tải lại + verify (dùng khi clone mới)
-├── release/                         # asset nguyên bản (KHÔNG commit — xem .gitignore)
+├── SHA256SUMS                       # official organizer checksums
+├── UPSTREAM_COMMIT.txt              # organizer repo commit that was snapshotted
+├── fetch.sh                         # re-download + verify (use after a fresh clone)
+├── release/                         # original assets (NOT committed — see .gitignore)
 │   ├── catalog.jsonl.gz             # 18MB
 │   └── techjam-participant-kit.zip  # 18MB
-└── techjam-conversational-search/   # kit đã giải nén (= repo BTC + catalog)
-    ├── README.md                    # bản trong repo, mới hơn bản trong zip
+└── techjam-conversational-search/   # unpacked kit (= organizer repo + catalog)
+    ├── README.md                    # the repo version, newer than the one in the zip
     ├── DATA_ATTRIBUTION.md
     ├── data/
-    │   ├── catalog.jsonl            # 50.000 sản phẩm, 60MB — KHÔNG commit
-    │   └── public_set.jsonl         # 200 dev session có nhãn
+    │   ├── catalog.jsonl            # 50,000 products, 60MB — NOT committed
+    │   └── public_set.jsonl         # 200 labeled dev sessions
     ├── docs/                        # spec, API contract, eval config, baseline, rules
-    ├── evaluator/local_evaluator.py # evaluator chính thức, deterministic
-    ├── starter/agent.py             # BM25 baseline yếu
-    └── tests/test_evaluator.py      # chỉ có trong repo, không có trong zip
+    ├── evaluator/local_evaluator.py # official evaluator, deterministic
+    ├── starter/agent.py             # weak BM25 baseline
+    └── tests/test_evaluator.py      # only in the repo, not in the zip
 ```
 
-## Sau khi clone repo này
+## After cloning this repo
 
-`catalog.jsonl`, `catalog.jsonl.gz`, `techjam-participant-kit.zip` bị gitignore (tổng ~96MB).
-Chạy để lấy lại:
+`catalog.jsonl`, `catalog.jsonl.gz`, and `techjam-participant-kit.zip` are gitignored (~96MB total).
+Run this to restore them:
 
 ```bash
 cd provided && ./fetch.sh
 ```
 
-Cần `gh` CLI đã đăng nhập. Script tự verify SHA-256 và kiểm tra đúng 50.000 dòng.
+Requires an authenticated `gh` CLI. The script verifies SHA-256 itself and checks for exactly 50,000 lines.
 
-## Đã verify
+## Verified
 
-- `shasum -a 256 -c SHA256SUMS` → cả 2 asset **OK**
-- `catalog.jsonl` trong zip **trùng hash** với `catalog.jsonl.gz` giải nén
-- `catalog.jsonl` = 50.000 dòng · `public_set.jsonl` = 200 dòng
-- Phân bố scenario: buying 80 · browsing 80 · intent_override 30 · boundary 10
+- `shasum -a 256 -c SHA256SUMS` → both assets **OK**
+- `catalog.jsonl` from the zip **hash-matches** the decompressed `catalog.jsonl.gz`
+- `catalog.jsonl` = 50,000 lines · `public_set.jsonl` = 200 lines
+- Scenario distribution: buying 80 · browsing 80 · intent_override 30 · boundary 10
 
-## Lưu ý quan trọng
+## Important note
 
-**README trong zip khác README trong repo** — bản repo mới hơn và đây là bản đang giữ:
+**The README in the zip differs from the one in the repo** — the repo version is newer and is the one kept here:
 
 > ~~The organizer may reimburse model costs through prizes instead of issuing API keys.~~
 > → **The organizer does not provide or reimburse model API credits; teams are responsible
 > for any costs incurred through optional external services.**
 
-Tức là **BTC không cấp và không hoàn tiền API credit**. Không bắt buộc dùng LLM trả phí.
+In other words, **the organizers neither provide nor reimburse API credits**. Using a paid LLM is not required.
 
-**Không bao giờ** đặt API key, private eval data, hay output của agent vào thư mục này.
+**Never** put API keys, private eval data, or agent output in this directory.
