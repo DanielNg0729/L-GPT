@@ -65,6 +65,14 @@ Run contract and safety tests:
 python -m unittest discover -s tests -v
 ```
 
+Run a demonstrated multi-turn intent-override session:
+
+```bash
+python -m submission.demo --sample-id public_0002
+```
+
+See the annotated [`demo transcript`](../docs/DEMO.md).
+
 The complete investigation history is available in the
 [experiment registry](../experiments/EXPERIMENT_INDEX.md) and
 [findings ledger](../experiments/EXPERIMENT_FINDINGS.md).
@@ -78,6 +86,8 @@ The official configuration is offline.
 | External network required | No |
 | External API calls | Zero |
 | External-model cost | $0.00 |
+| Public evaluation latency | 17.93 seconds for 200 sessions, including index construction, in the final local audit environment |
+| Public token usage | 0 prompt tokens and 0 completion tokens |
 | Local model | Fine-tuned `distilbert-base-uncased` token tagger |
 | Missing local model | Deterministic lexical fallback |
 | Optional Groq extraction | Disabled unless `LLM_EXTRACT=1` and `GROQ_API_KEY` are both present |
@@ -94,6 +104,23 @@ tested failure returns the deterministic result without raising. See
 
 Credentials must be supplied through the environment or a local ignored `.env` file. They
 must never be committed.
+
+Supported environment variables are documented in [`.env.example`](../.env.example):
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `BERT_EXTRACT` | `1` | Enables the gated local tagger on unrecognized messages |
+| `BERT_TAGGER_DIR` | bundled model directory | Overrides the local model path |
+| `BERT_KEEP` | `0.30` | Content-token retention threshold |
+| `LLM_EXTRACT` | `0` | Enables optional Groq extraction |
+| `LLM_RERANK` | `0` | Enables the rejected experimental Groq reranker |
+| `GROQ_API_KEY` | unset | Supplies optional API credentials |
+| `GROQ_MODEL` | `openai/gpt-oss-120b` | Selects the optional Groq model |
+| `LLM_RPM` | `25` | Optional extraction request-rate limit |
+| `LLM_TPM` | `5500` | Optional extraction token-rate limit |
+| `LLM_TIME_BUDGET` | `5400` | Optional extraction network-time budget in seconds |
+| `LLM_EXTRACT_CACHE` | submission-local cache | Overrides the extraction cache path |
+| `LLM_CACHE` | submission-local cache | Overrides the reranking cache path |
 
 ## Sequential disclosure
 
@@ -117,6 +144,13 @@ in the [findings ledger](../experiments/EXPERIMENT_FINDINGS.md).
   clarification confirmed that official testing will not paraphrase the disclosed values.
 - LLM reranking, cross-encoders, dense retrieval, and multiple learned rankers were rejected
   after negative held-out measurements. Their code and outputs remain versioned.
+- The optional local model is approximately 265 MB before dependencies. It is loaded lazily
+  and never loaded during official-form evaluation, but its package size remains a practical
+  deployment limitation.
+
+Given more time, we would quantize or distill the optional tagger, validate against an
+organizer-provided eligible-target pool, and collect independently authored paraphrase data.
+We would not continue optimizing against the consumed validation folds.
 
 See the [robustness benchmark](../robustness/README.md) and
 [robustness audit](../docs/validation/robustness_audit.md) for the full evidence.

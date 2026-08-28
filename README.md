@@ -56,6 +56,17 @@ Start with the [experiment registry](experiments/EXPERIMENT_INDEX.md) for a conc
 of every investigation. The [complete findings ledger](experiments/EXPERIMENT_FINDINGS.md)
 contains methods, measurements, corrections, and negative results.
 
+## Technology and data
+
+- Python 3.10 or newer
+- SQLite FTS5 for in-process lexical retrieval
+- PyTorch and Hugging Face Transformers for the optional local DistilBERT tagger
+- Groq's OpenAI-compatible API for optional extraction and rejected reranking experiments
+- Amazon Reviews 2023 `Clothing_Shoes_and_Jewelry` metadata and organizer-released sessions
+
+All official scoring runs use the frozen organizer catalogue and released evaluator. No
+private labels, raw user histories, free-text reviews, or organizer-only files are included.
+
 ## Installation
 
 Python 3.10 or newer is required.
@@ -94,6 +105,14 @@ Run all automated tests:
 python -m unittest discover -s tests -v
 ```
 
+Run the demonstrated intent-override session:
+
+```bash
+python -m submission.demo --sample-id public_0002
+```
+
+The corresponding annotated transcript is in [`docs/DEMO.md`](docs/DEMO.md).
+
 The evaluator imports `starter.agent`. `starter/agent.py` and `submission/agent.py` must
 remain byte-identical for a release.
 
@@ -101,6 +120,9 @@ remain byte-identical for a release.
 
 - Required external API: none.
 - Default external-model cost: $0.00.
+- Measured public evaluation latency: 17.93 seconds for 200 sessions in the final local
+  audit environment, including one-time index construction.
+- Reported public token usage: 0 prompt tokens and 0 completion tokens.
 - Local model: fine-tuned `distilbert-base-uncased`, stored through Git LFS.
 - Optional API: Groq extraction or reranking requires both `GROQ_API_KEY` and an explicit
   feature flag.
@@ -122,6 +144,12 @@ The agent benefits from the confirmed literal relationship between disclosed con
 and target catalogue text. The repository also retains paraphrase and population-shift
 tests as robustness characterization, even though paraphrasing was confirmed absent from
 the official evaluation.
+
+Given more time, the highest-value improvements would be reducing the optional tagger's
+package size, validating on an organizer-provided eligibility pool, and replacing
+template-family stress tests with independently authored language variations. Additional
+public-only tuning would not be justified because the measured gains are already smaller
+than fold variance.
 
 Catalogue and sessions derive from Amazon Reviews 2023 by McAuley Lab, UCSD. See
 [`DATA_ATTRIBUTION.md`](DATA_ATTRIBUTION.md).

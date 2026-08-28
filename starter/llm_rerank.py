@@ -113,6 +113,7 @@ class LLMReranker:
             except Exception:
                 self.cache = {}
         self.calls = self.cache_hits = self.failures = 0
+        self.prompt_tokens = self.completion_tokens = 0
         self._dirty = 0
         # Read once; the VALUE is never stored on the instance, logged, or transmitted
         # anywhere except the Authorization header of the request itself.
@@ -168,6 +169,9 @@ class LLMReranker:
                 )
                 with urlopen(request, timeout=self.TIMEOUT) as response:
                     body = json.loads(response.read().decode("utf-8"))
+                usage = body.get("usage") or {}
+                self.prompt_tokens += max(0, int(usage.get("prompt_tokens") or 0))
+                self.completion_tokens += max(0, int(usage.get("completion_tokens") or 0))
                 return body["choices"][0]["message"]["content"]
             except HTTPError as error:
                 if error.code == 429:
@@ -230,4 +234,6 @@ class LLMReranker:
         self._flush(force=True)
         return {"enabled": self._enabled, "model": self.model, "api_calls": self.calls,
                 "cache_hits": self.cache_hits, "failures": self.failures,
-                "cached_entries": len(self.cache)}
+                "cached_entries": len(self.cache),
+                "prompt_tokens": self.prompt_tokens,
+                "completion_tokens": self.completion_tokens}

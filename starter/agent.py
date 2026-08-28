@@ -739,6 +739,17 @@ class Agent:
             start = end
         return output
 
+    def _model_usage(self) -> tuple[int, int]:
+        """Cumulative token totals across optional external model components."""
+        prompt = completion = 0
+        for component in (getattr(self, "llm", None),
+                          getattr(self, "llm_extract", None)):
+            if component is None:
+                continue
+            prompt += max(0, int(getattr(component, "prompt_tokens", 0) or 0))
+            completion += max(0, int(getattr(component, "completion_tokens", 0) or 0))
+        return prompt, completion
+
     # -- Layer 0 ------------------------------------------------------------
     def respond(self, session_id: str, user_message: str, turn: int, top_k: int) -> dict:
         """Contract-shaped response. This method must never raise: the harness treats an
@@ -748,6 +759,7 @@ class Agent:
         st.turn += 1
         msg = user_message or ""
         probe = "other"
+        usage_before = self._model_usage()
 
         # --- Rejection feedback (the Reflection stage of EAR, WSDM 2020) --------------
         # Reaching this turn at all proves everything we showed previously was wrong:
@@ -794,11 +806,15 @@ class Agent:
         ranked = ranked[:max(1, min(self._width(turn or st.turn), top_k))]
         st.rejected.update(ranked)
         st.asked.append(probe)
+        usage_after = self._model_usage()
         return {
             "message": self._question_text(probe, narrow=len(ranked) <= 1),
             "ask_attribute": probe,
             "recommendations": [{"parent_asin": a} for a in ranked],
-            "usage": {"prompt_tokens": 0, "completion_tokens": 0},
+            "usage": {
+                "prompt_tokens": max(0, usage_after[0] - usage_before[0]),
+                "completion_tokens": max(0, usage_after[1] - usage_before[1]),
+            },
         }
 
     def paraphrase_rate(self) -> dict:
