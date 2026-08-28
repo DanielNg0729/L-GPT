@@ -9,8 +9,8 @@ validation requires `starter/agent.py` and `submission/agent.py` to be byte-iden
 | Evaluation | Sessions | HitRate@10 | MRR | MTTC | TechnicalScore |
 |---|---:|---:|---:|---:|---:|
 | Official public development set | 200 | 0.9950 | 0.9950 | 2.3200 | **0.969600** |
-| Fixed Optuna v2 proxy fold | 800 | 0.9775 | 0.976875 | 2.94875 | **0.942837** |
-| Four untouched proxy folds, mean | 3,200 | 0.983438 | 0.981563 | 2.81469 | **0.949894** |
+| Tune800 fixed selection fold | 800 | 0.9775 | 0.976875 | 2.94875 | **0.942837** |
+| Unseen4x800 independent mean | 3,200 | 0.983438 | 0.981563 | 2.81469 | **0.949894** |
 
 Balanced trial 38 was frozen before independent evaluation. It preserved the public score
 and improved the untouched-fold mean by `+0.001213` over the preceding configuration. See

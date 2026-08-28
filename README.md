@@ -13,8 +13,8 @@ The shipped path is offline, deterministic, and costs $0.00 per evaluation.
 | Evaluation | Sessions | HitRate@10 | MRR | MTTC | TechnicalScore |
 |---|---:|---:|---:|---:|---:|
 | Official public development set | 200 | 0.9950 | 0.9950 | 2.3200 | **0.969600** |
-| Fixed Optuna v2 proxy fold | 800 | 0.9775 | 0.976875 | 2.94875 | **0.942837** |
-| Untouched same-population folds, mean | 4 x 800 | 0.983438 | 0.981563 | 2.81469 | **0.949894** |
+| Tune800 fixed selection fold | 800 | 0.9775 | 0.976875 | 2.94875 | **0.942837** |
+| Unseen4x800 independent mean | 4 x 800 | 0.983438 | 0.981563 | 2.81469 | **0.949894** |
 | Published weak BM25 baseline | 200 | 0.1250 | 0.068034 | 9.8100 | 0.106710 |
 
 Trial 38 was frozen before the four independent folds were evaluated. It preserved the
@@ -172,12 +172,65 @@ Run the official public evaluator:
 python -m evaluator.local_evaluator
 ```
 
-Run the internal robustness suite:
+Run the custom four-condition population stress suite:
 
 ```bash
 python -m robustness.build_sets
 python -m robustness.run_benchmark
 ```
+
+Run only its organizer-aligned anchor condition:
+
+```bash
+python -m robustness.run_benchmark --only organizer_proxy_800
+```
+
+## Evaluation and robustness tests
+
+The following memorable labels are used throughout the documentation. They describe fixed,
+versioned data sets; the historical filenames are retained for reproducibility.
+
+| Name | Current contents | Purpose | Interpretation |
+|---|---|---|---|
+| **Official200** | 200 organizer-released public sessions | Official local score | The only published-score reproduction. |
+| **Tune800** | One fixed, stratified organizer-statistics proxy fold | Parameter search | Used by Optuna only. It is not independent validation. |
+| **Unseen800** | One independent 800-session draw from the same proxy population | Ordinary sample-variance check | A single fold is diagnostic only. |
+| **Unseen4x800** | Four frozen, independently seeded `Unseen800` folds | Independent same-population validation | The candidate-selection check used to choose trial 38. |
+| **Shifted4x800** | Four 800-session conditions: organizer proxy, broad review-weighted, uniform, and inverse-popularity | Fast population-assumption stress test | The last three are deliberately non-private-like stress conditions. |
+| **Shifted12x800** | Twelve controlled shifts: 5%, 10%, and 20% total-variation movement toward less or more popular products, each with two replicates | Final population-generalization characterization | Measures sensitivity to a changed popularity distribution, not expected private score. |
+| **ParaphraseT1-T5** | Historical controlled wording disturbances | Organizer-choice stress characterization | Not an official-score proxy because paraphrasing is not stated in the written rules. |
+| **Contract25** | 25 automated unit, contract, determinism, dataset-invariant, optional-API, and model-gate checks | Release safety | Validates behavior and failure handling, not ranking quality. |
+
+`Unseen800` is the unit of same-population validation. `Unseen4x800` is the complete
+four-fold validation suite. `Shifted4x800` is the rapid four-condition stress suite. The
+more rigorous final disturbance suite contains twelve folds, so it is called
+`Shifted12x800` rather than `Shifted4x800`.
+
+### How to use the custom robustness suites
+
+Prerequisite: download the released frozen catalogue as described above. All suites use the
+official simulator and disable optional network models by default.
+
+```bash
+# Build and score the rapid Shifted4x800 suite.
+python -m robustness.build_sets
+python -m robustness.run_benchmark
+
+# Rebuild the fixed Tune800 and Unseen4x800 data sets from their recorded seeds.
+python -m robustness.build_optuna_v2_sets
+
+# Rebuild the controlled Shifted12x800 data sets from their recorded seeds.
+python -m robustness.build_independent_validation_sets
+
+# Score the frozen candidate registry on Unseen4x800 plus Shifted12x800.
+python experiments/scripts/57_independent_validation.py
+```
+
+Do not use `Tune800`, `Unseen4x800`, or `Shifted12x800` for additional parameter tuning.
+Their recorded evaluations are already consumed validation evidence. For a new candidate,
+create a new seeded suite and keep it separate from final reporting. Detailed construction,
+invariants, and historical outputs are in [robustness/README.md](robustness/README.md) and
+[the independent-validation report](docs/validation/independent_validation.md).
 
 Run all automated tests:
 

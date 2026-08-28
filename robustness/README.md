@@ -3,7 +3,23 @@
 This directory contains a participant-safe benchmark for testing population shift without
 claiming access to organizer-private labels.
 
-## Why the previous unseen-800 was revised
+## Naming and suite map
+
+The project uses the following documentation names. Historical filenames are deliberately
+unchanged because their manifests, checksums, and experiment records depend on them.
+
+| Documentation name | Files or folds | Meaning |
+|---|---|---|
+| `Tune800` | `optuna_v2_sets/primary_800.jsonl` | Fixed parameter-selection proxy fold. |
+| `Unseen800` | One `optuna_v2_sets/population_shift_XX_800.jsonl` file | Independent same-population validation fold. |
+| `Unseen4x800` | The four files named `population_shift_01_800` through `04_800` | Complete independent same-population validation suite. The filename predates the final terminology. |
+| `Shifted4x800` | `organizer_proxy_800`, `catalog_review_distinct_800`, `catalog_uniform_800`, `catalog_inverse_800` | Rapid four-condition population stress suite. |
+| `Shifted12x800` | `independent_validation_sets/tv*.jsonl` | Controlled 5%, 10%, and 20% popularity-distribution disturbances in both directions, with two replicates. |
+
+`Shifted4x800` is a broad stress suite. `Shifted12x800` is the controlled final
+generalization suite. Neither is an organizer-private score estimate.
+
+## Why the earlier broad unseen-800 proxy was revised
 
 The original research benchmark sampled targets with replacement from all approximately
 49,800 non-public catalogue products. It was useful as a different generalization test, but it

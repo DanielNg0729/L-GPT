@@ -16,7 +16,7 @@ total-variation probability mass between the lower and upper five popularity dec
 both directions, with two independent replicates per condition. Target count, distinctness,
 candidate-pool size and behavior mix remain fixed.
 
-## Stage 1: same population, different samples
+## Stage 1: Unseen4x800, same population and different samples
 
 | Candidate | Primary-fold delta | Held-out mean score | Held-out paired delta | Delta stdev | Worst fold |
 |---|---:|---:|---:|---:|---:|
@@ -32,7 +32,7 @@ high-confidence statistical proof; it is a candidate-selection signal.
 
 Trial 38 fold deltas were `+0.003063`, `−0.000237`, `+0.000025`, and `+0.001999`.
 
-## Stage 2: controlled population disturbance
+## Stage 2: Shifted12x800, controlled population disturbance
 
 Mean paired TechnicalScore delta versus shipped:
 
