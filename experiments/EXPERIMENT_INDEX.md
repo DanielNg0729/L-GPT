@@ -112,6 +112,7 @@ Status definitions:
 | [`60_override_focus_contradiction.py`](scripts/60_override_focus_contradiction.py) | Built OverrideFocus800 and saturated its initial old-value slot with incompatible, catalogue-attested materials. Retaining stale evidence lost 0.058669 versus source-faithful overrides; no safe semantic conflict detector is available from released wording alone. | Supported diagnostic |
 | [`61_catalog_conflict_guard.py`](scripts/61_catalog_conflict_guard.py) | Required same attribute family and zero catalogue co-occurrence before removal. It made zero removals in all 800 adversarial material collisions because incompatible materials commonly co-occur in unrelated products. | Rejected |
 | [`62_same_family_override_replace.py`](scripts/62_same_family_override_replace.py) | Replaced only unconfirmed opening values when the later override named the same high-confidence family. It removed 589 of 800 adversarial values and recovered 0.028994, but regressed Official200 by 0.000100. | Rejected for shipment; retained diagnostic |
+| [`63_gated_paraphrase_override.py`](scripts/63_gated_paraphrase_override.py) | Tested a strict unfamiliar-wording replacement gate. It triggered 0 times on all 464 Official200 and all 2,262 Unseen800 recognised messages, but an aggressive evidence reset reduced compatible and contradictory paraphrase scores. | Rejected |
 
 ## Final selection rule
 

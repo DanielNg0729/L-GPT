@@ -1522,3 +1522,23 @@ private-score estimate.
 
 **Decision:** retain accumulated positive evidence and reset only rejected recommendations.
 The agent should not be presented as solving arbitrary semantic intent replacement.
+
+## §30 Strictly gated paraphrase replacement probe (pass 63)
+
+Pass 63 tested the requested high-confidence controller: it can only activate when a
+message is outside every recognised organizer form and contains both an explicit replacement
+cue and an explicit new preference. The gate was structurally blocked on every released-form
+message: **464/464 Official200 messages** and **2,262/2,262 Unseen800 messages** were
+recognised and produced **zero triggers**. The released metrics consequently remain
+Official200 **0.969600** and Unseen800 **0.943250**.
+
+The controller itself is rejected. On a fixed 800-session override-only set rewritten as
+“I changed my mind. Instead, I need {new value}.”, resetting accumulated non-category
+evidence reduced the compatible case from **0.917181 to 0.798482**. It also reduced the
+deliberately contradictory case from **0.852800 to 0.761347**. A trustworthy gate prevents
+clean-format regressions, but it cannot make an incorrect reset rule useful.
+
+**Decision:** do not ship an unfamiliar-wording override reset. The released agent keeps
+source-derived evidence and clears only recommendation rejection state. A future semantic
+replacement module must be evaluated as a separate new capability, not inferred from these
+negative results.

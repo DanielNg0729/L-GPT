@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import unittest
 
-from submission.agent import Agent, CAT, CONSTRAINT
+from submission.agent import Agent, CAT, CONSTRAINT, SessionState
 
 
 class _Index:
@@ -14,11 +14,16 @@ class OverrideOpeningEvidenceTest(unittest.TestCase):
     def test_released_override_opening_keeps_target_old_value(self) -> None:
         agent = object.__new__(Agent)
         agent.ix = _Index()
-        extracted = agent._extract_templated(
+        message = (
             "I'm looking for Accessories Belts. Buckle closure"
         )
+        extracted = agent._extract_templated(message)
         self.assertIn(("Accessories Belts", CAT), extracted)
-        self.assertIn(("Buckle closure", CONSTRAINT), extracted)
+        self.assertNotIn(("Buckle closure", CONSTRAINT), extracted)
+        state = SessionState()
+        agent._recover_override_opening(state, message)
+        self.assertIn("buckle closure", state.evidence)
+        self.assertEqual(state.evidence["buckle closure"][1], CONSTRAINT)
 
     def test_buying_opening_is_not_double_parsed(self) -> None:
         agent = object.__new__(Agent)

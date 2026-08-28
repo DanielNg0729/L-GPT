@@ -1,0 +1,81 @@
+{
+  "purpose": "aggressive replacement branch structurally unreachable on released message forms",
+  "gate": "not recognised(message) AND explicit replacement cue AND explicit need/want/prefer value",
+  "paraphrased_override_template": "I changed my mind. Instead, I need {new_value}.",
+  "variants": {
+    "shipped": {
+      "paraphrased_compatible_override_800": {
+        "sample_count": 800,
+        "hit_rate_at_10": 0.975,
+        "mrr": 0.971771,
+        "mttc": 4.0925,
+        "efficiency": 0.69075,
+        "recommended_technical_score": 0.917181,
+        "wall_seconds": 246.45483810000587
+      },
+      "paraphrased_contradictory_override_800": {
+        "sample_count": 800,
+        "hit_rate_at_10": 0.92125,
+        "mrr": 0.908583,
+        "mttc": 5.02,
+        "efficiency": 0.598,
+        "recommended_technical_score": 0.8528,
+        "wall_seconds": 132.4364304000046
+      },
+      "official200": {
+        "sample_count": 200,
+        "hit_rate_at_10": 0.995,
+        "mrr": 0.995,
+        "mttc": 2.325,
+        "efficiency": 0.8675,
+        "recommended_technical_score": 0.9695
+      }
+    },
+    "gated_paraphrase_replacement": {
+      "paraphrased_compatible_override_800": {
+        "sample_count": 800,
+        "hit_rate_at_10": 0.87,
+        "mrr": 0.853524,
+        "mttc": 5.62875,
+        "efficiency": 0.537125,
+        "recommended_technical_score": 0.798482,
+        "wall_seconds": 257.8626802999934
+      },
+      "paraphrased_contradictory_override_800": {
+        "sample_count": 800,
+        "hit_rate_at_10": 0.8325,
+        "mrr": 0.811741,
+        "mttc": 5.92125,
+        "efficiency": 0.507875,
+        "recommended_technical_score": 0.761347,
+        "wall_seconds": 134.00446970001212
+      },
+      "official200": {
+        "sample_count": 200,
+        "hit_rate_at_10": 0.995,
+        "mrr": 0.995,
+        "mttc": 2.325,
+        "efficiency": 0.8675,
+        "recommended_technical_score": 0.9695
+      },
+      "compatible_gate": {
+        "seen": 4399,
+        "recognised_blocked": 3599,
+        "triggered": 800,
+        "no_explicit_value": 0
+      },
+      "contradictory_gate": {
+        "seen": 4603,
+        "recognised_blocked": 3803,
+        "triggered": 800,
+        "no_explicit_value": 0
+      },
+      "official_gate": {
+        "seen": 464,
+        "recognised_blocked": 464,
+        "triggered": 0,
+        "no_explicit_value": 0
+      }
+    }
+  }
+}

@@ -512,14 +512,27 @@ class Agent:
             if mm:
                 out.extend((p.strip(), CONSTRAINT)
                            for p in mm.group(1).split(";") if p.strip())
-        # Unlike a browsing opening, the released intent-override opening carries its
-        # prior value in an unlabelled second slot. Organizer source defines that value
-        # as `soft_preferences[-1]` from the target card, so preserving it as evidence
-        # is grounded rather than heuristic.
-        opening = PAT_OVERRIDE_OPENING.match(msg.strip())
-        if opening and opening.group(1).strip():
-            out.append((opening.group(1).strip(), CONSTRAINT))
         return out
+
+    def _recover_override_opening(self, st: SessionState, msg: str) -> None:
+        """Add the released override opening's target-derived old-value slot.
+
+        This deliberately runs after ordinary observation.  The slot is grounded
+        evidence, but it is not a labelled constraint in the surface template and
+        must not alter first-turn classification or mining control flow.
+        """
+        opening = PAT_OVERRIDE_OPENING.match(msg.strip())
+        if not opening:
+            return
+        old_value = opening.group(1).strip()
+        if not old_value or not raw_toks(old_value):
+            return
+        for phrase in self._resolve(old_value):
+            if not phrase or phrase in st.evidence:
+                continue
+            df = self.ix.df(phrase)
+            if df > 0:
+                st.evidence[phrase] = (df, CONSTRAINT)
 
     def _resolve(self, text: str, cap: int | None = None) -> list[str]:
         """Resolve a constraint to phrases the catalogue actually attests.
@@ -625,6 +638,7 @@ class Agent:
             # ranking but still contributes recall and coverage tie-breaking. The idf
             # term already discounts them.
             st.evidence[ph] = (df if df > 0 else self.ix.DF_CAP * 2, tier)
+        self._recover_override_opening(st, msg)
 
     # -- Layer 3 ------------------------------------------------------------
     def _next_probe(self, st: SessionState) -> str:
