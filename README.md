@@ -246,6 +246,16 @@ python -m submission.demo --sample-id public_0002
 
 The corresponding annotated transcript is in [`docs/DEMO.md`](docs/DEMO.md).
 
+Inspect every internal input and output for that same released session:
+
+```bash
+python tools/trace_public_session.py --sample-id public_0002
+```
+
+The trace emits the exact recognition result, template matches, resolved evidence,
+candidate-pool summary, top-ten ranking, rejection state, and contract response for each
+turn. It is a one-session diagnostic, not an evaluation run.
+
 The evaluator imports `starter.agent`. `starter/agent.py` and `submission/agent.py` must
 remain byte-identical for a release.
 
