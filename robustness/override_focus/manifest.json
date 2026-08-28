@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "truth_status": "internal dialogue-policy stress set; not organizer private data",
+  "source": "robustness\\optuna_v2_sets\\population_shift_01_800.jsonl",
+  "source_sha256": "5c59bf3cd81206be165e5e97676d075e785270b69f597e0548e2b1bd9ac72db0",
+  "rows": 800,
+  "scenario_type": "intent_override",
+  "distinct_targets": 800,
+  "public_target_overlap": 0,
+  "output": "override_focus_800.jsonl",
+  "output_sha256": "a38a89f092c5363c38eec8fcb3c2a42fe547b1d2258cdb8636d1c098e3c0ba23"
+}

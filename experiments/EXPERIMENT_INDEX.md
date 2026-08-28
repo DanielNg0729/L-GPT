@@ -108,6 +108,8 @@ Status definitions:
 | Program | Question and primary result | Decision |
 |---|---|---|
 | [`58_override_replacement.py`](scripts/58_override_replacement.py) | Tested category-preserving prior-evidence reset on an override. It reduced Official200 intent-override HitRate from 1.000 to 0.933 and Unseen800 from 0.983 to 0.858. | Rejected |
+| [`59_override_opening_evidence.py`](scripts/59_override_opening_evidence.py) | Recovered the organizer-confirmed target-derived old-value slot from intent-override openings. Full constraint treatment was exactly neutral on Official200 and Unseen800; weaker treatment regressed Unseen800 by 0.000456. | Shipped |
+| [`60_override_focus_contradiction.py`](scripts/60_override_focus_contradiction.py) | Built OverrideFocus800 and saturated its initial old-value slot with incompatible, catalogue-attested materials. Retaining stale evidence lost 0.058669 versus source-faithful overrides; no safe semantic conflict detector is available from released wording alone. | Supported diagnostic |
 
 ## Final selection rule
 

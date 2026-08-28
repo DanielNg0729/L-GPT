@@ -93,6 +93,41 @@ Efficiency is linear and gently weighted. Optimise ranking before speed.
 
 ---
 
+## Post-selection update: intent-override opening evidence and contradiction stress
+
+The released simulator’s intent-override opening has a previously unparsed second slot:
+
+```text
+I'm looking for {category}. {old_value}
+```
+
+Organizer source defines `old_value = soft_preferences[-1]`, where `soft_preferences` is
+derived from the hidden target’s catalogue record. This is target provenance, not profile
+or conversational filler. Experiment 59 added it as ordinary constraint evidence. It was
+exactly neutral on Official200 (0.969600) and the fixed Unseen800 fold (0.943250); a weaker
+treatment regressed Unseen800 by 0.000456. The full grounded interpretation is shipped.
+
+Experiment 60 then separated source-faithful behavior from genuine semantic replacement.
+`OverrideFocus800` reuses the fixed Unseen800 target population but makes all 800 sessions
+intent overrides. Under the released source, full opening evidence scored 0.918631. In a
+counterfactual probe, all 800 old-value slots were replaced with a catalogue-attested
+material absent from the target and that value was not re-disclosed later; target-derived
+new intent and override timing were unchanged. Retaining the stale opening value then fell
+to 0.859962, a 0.058669 loss.
+
+| Policy | Source-faithful OverrideFocus800 | Contradictory-opening probe | Interpretation |
+|---|---:|---:|---|
+| Full opening evidence | 0.918631 | 0.859962 | Best on released semantics; vulnerable when the old value is truly incompatible. |
+| Ignore opening value | 0.918156 | 0.892825 | Avoids most contradiction damage but discards confirmed source evidence. |
+| Clear unconfirmed opening value at override | 0.915956 | 0.892125 | Better than retaining contradiction, but worse than ignoring it and non-neutral on source-faithful sessions. |
+
+Decision: retain the full evidence path for the released evaluator. The correct future
+addition is a semantic conflict detector that can identify a replacement relation, not a
+blind reset of prior evidence. This counterfactual is a stress probe, not an
+organizer-private performance estimate.
+
+---
+
 ## 2. The simulator is a deterministic function of the target product
 
 `intent_card()` builds the hidden intent by reading the target's **own catalogue fields**  -

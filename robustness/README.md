@@ -15,6 +15,7 @@ unchanged because their manifests, checksums, and experiment records depend on t
 | `Unseen4x800` | The four files named `population_shift_01_800` through `04_800` | Complete independent same-population validation suite. The filename predates the final terminology. |
 | `Shifted4x800` | `organizer_proxy_800`, `catalog_review_distinct_800`, `catalog_uniform_800`, `catalog_inverse_800` | Rapid four-condition population stress suite. |
 | `Shifted12x800` | `independent_validation_sets/tv*.jsonl` | Controlled 5%, 10%, and 20% popularity-distribution disturbances in both directions, with two replicates. |
+| `OverrideFocus800` | `override_focus/override_focus_800.jsonl` | All-intent-override replay of the fixed Unseen800 target population for dialogue-policy stress. |
 
 `Shifted4x800` is a broad stress suite. `Shifted12x800` is the controlled final
 generalization suite. Neither is an organizer-private score estimate.
