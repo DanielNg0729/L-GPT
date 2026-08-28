@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "truth_status": "target-disjoint internal semantic robustness data; not organizer private data",
+  "format": "released evaluator message templates with attribute values semantically rephrased",
+  "selection": "uniform sample without replacement from catalogue products with at least three manually mapped semantic attributes",
+  "public_target_overlap": 0,
+  "development_holdout_target_overlap": 0,
+  "eligible_products": 22515,
+  "sets": {
+    "SemanticShift-Dev200": {
+      "path": "semantic_attribute_development_200.jsonl",
+      "rows": 200,
+      "distinct_targets": 200,
+      "scenario_counts": {
+        "buying": 80,
+        "browsing": 80,
+        "intent_override": 30,
+        "boundary": 10
+      },
+      "sha256": "989c58685fa2d9baa1b24c340d8a3043cb3bc857a669d6c52b949b15fae9aa91"
+    },
+    "SemanticShift-Holdout800": {
+      "path": "semantic_attribute_holdout_800.jsonl",
+      "rows": 800,
+      "distinct_targets": 800,
+      "scenario_counts": {
+        "buying": 320,
+        "browsing": 320,
+        "intent_override": 120,
+        "boundary": 40
+      },
+      "sha256": "b5b1a1622218e9de75ebf85efec8323147824d4282d0acbc42a06080cb58f942"
+    }
+  }
+}
