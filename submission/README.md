@@ -8,18 +8,17 @@ Published weak-BM25 baseline: 0.1067. **9.09x**, and **97.7% of the 0.9922 achie
 **MRR equals HitRate exactly** - every hit lands at rank 1, the mathematical ceiling for
 that metric. See "Sequential disclosure" below.
 
-**Generalisation, measured rather than assumed.** On the revised 800-session internal
-proxy—with distinct targets drawn from a disclosed-size 1,206-product unseen candidate
-pool—the agent scores **0.950725**. This replaces an earlier with-replacement test that did
-not model private-target uniqueness. Every component is graded for
-population and organizer-choice exposure in [`notes/robustness_audit.md`](../notes/robustness_audit.md);
-that audit is also what found the configuration defects fixed below.
+**Generalisation, measured rather than assumed.** Balanced Optuna trial 38 was frozen
+before independent evaluation. It scores **0.942837** on the primary 800-session proxy and
+**0.949894 mean** across four untouched same-population 800-session folds, a paired
+`+0.001213` over the prior shipped configuration. See
+[`notes/independent_validation_report.md`](../notes/independent_validation_report.md).
 
 **The popularity prior calibrates itself.** It was the single component resting on an
 assumption about the private population. Rather than hard-code one regime, the agent estimates the target
 population from the mean popularity of its own retrieved pools — a statistic that involves
 no product identity and no ground truth — and scales the prior accordingly. The shipped
-configuration scores 0.96960 publicly and 0.950725 on the revised organizer-aligned proxy;
+configuration scores 0.96960 publicly and 0.949894 across the independent proxy folds;
 an earlier adversarial-population ablation measured a **+0.034** gain. If the organizer constructs a
 fresh `Agent` per session the detector never engages and behaviour is identical to a fixed
 prior. The robustness register now contains **no component graded P3**.

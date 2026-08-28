@@ -173,24 +173,12 @@ class CatalogIndex:
     otherwise need a second index pass per candidate per phrase.
     """
 
-    BM25 = "bm25(p, 0.0, 6.0, 4.0, 2.5, 2.5, 1.5, 1.0)"
+    # Frozen trial 38 values. SQLite received these rounded values during validation.
+    BM25 = "bm25(p, 0.0, 3.264, 1.202, 1.869, 2.561, 1.659, 2.153)"
 
-    # DF_CAP bounds the document-frequency scan AND gates n-gram mining, which only keeps
-    # an n-gram when `0 < df <= DF_CAP`. That second role is the load-bearing one: mining
-    # is the paraphrase floor -- it is what holds the score at 0.838 instead of 0.164 when
-    # the templates stop firing -- and a tight cap silently discards broad-but-real
-    # evidence exactly when the precise channel is unavailable.
-    #
-    # Raised 4000 -> 12000 (pass 42), which is free where it does not help and helps where
-    # nothing else can:
-    #     clean +0.00000   unseen-800 +0.00000   T1 +0.00560   T2 -0.00015   T5 +0.00970
-    #
-    # The rest of the sweep is recorded because it maps the trade-off cleanly: `minn=2`
-    # buys +0.036 on T1 but costs 0.016 on the CLEAN score and 0.095 on T5, and `minn=4`
-    # holds clean while losing 0.084 on T1. So the deterministic floor is at its optimum
-    # and further paraphrase robustness has to come from a new channel, not from tuning
-    # this one -- which is the argument for the gated LLM extractor.
-    DF_CAP = 12000
+    # Bounds document-frequency scans and gates n-gram mining. This value, along with
+    # maxn=12/minn=4 below, is part of frozen trial 38.
+    DF_CAP = 2715
 
     def __init__(self, catalog_path: str | Path) -> None:
         self.con = sqlite3.connect(":memory:", check_same_thread=False)
@@ -260,7 +248,7 @@ class CatalogIndex:
     def in_title(self, asin: str, phrase: str) -> bool:
         return f" {phrase} " in self.title.get(asin, "")
 
-    def mine(self, text: str, maxn: int = 9, minn: int = 3) -> list[tuple[str, int]]:
+    def mine(self, text: str, maxn: int = 12, minn: int = 4) -> list[tuple[str, int]]:
         """Greedy longest-match segmentation with the catalogue as the dictionary.
 
         For each start position take the longest n-gram the catalogue attests at usable
@@ -310,15 +298,15 @@ class SessionState:
 # --------------------------------------------------------------------------- agent
 
 class Agent:
-    """Weights below are the argmax of a coordinate-ascent sweep over the 200 public
-    sessions (notes/eda/07_rank_refinement.py). Fold stdev at this configuration is
-    0.0168 across five disjoint 40-session folds, so differences smaller than ~0.017
-    are NOT distinguishable from noise and were not chased.
+    """Frozen balanced trial 38, selected before independent validation.
+
+    It preserves the official public score and improved the mean of four untouched
+    same-population folds. See notes/independent_validation_report.md.
     """
 
     W_CONSTRAINT = 1.00
-    W_CATEGORY = 0.75    # sweep 0.20-1.00, spread 0.016 -- broad optimum
-    W_MINED = 0.15       # sweep spread 0.003 -- FLAT, low overfit risk
+    W_CATEGORY = 0.4541399437579685
+    W_MINED = 0.47960403849856215
 
     # Weight for spans recovered by the optional LLM extraction channel. Deliberately set
     # BELOW W_CONSTRAINT: an LLM span is a reconstruction of what the customer said, while
@@ -327,23 +315,10 @@ class Agent:
     # run regardless of its value.
     W_LLM = 0.60
 
-    # IDF_POW: 0 = pure weighted coverage count; higher = rarer phrases dominate.
-    #
-    # This was 0.35, fitted by coordinate ascent over the public 200 (pass 07). The
-    # robustness benchmark (pass 30) re-swept it on 800 sessions whose targets appear in
-    # NO public session and found 0.35 was not merely suboptimal but actively harmful,
-    # and harmful on every stress axis at once (pass 34, delta vs 0.35):
-    #
-    #     public-tune +0.0033   public-hold +0.0008   synth-A +0.0078   synth-B +0.0055
-    #     uniform-population +0.0386      paraphrase-T1 +0.0335      paraphrase-T5 +0.0406
-    #
-    # Why the original fit went wrong: rarity weighting is a bet that a rare matched
-    # phrase is more diagnostic than a common one. Under this generator the constraints
-    # are lifted verbatim from the target, so a MATCH is already strong evidence and
-    # rarity adds little -- while the exponent's variance across 200 sessions was large
-    # enough for coordinate ascent to read that noise as signal. Setting it to 0 removes
-    # a whole weighting mechanism and scores better everywhere measured.
-    IDF_POW = 0.00
+    # Small rarity correction selected by trial 38. Earlier public-only tuning chose a
+    # much larger exponent and failed robustness; independent validation consumed here
+    # was performed only after this value was frozen.
+    IDF_POW = 0.08825136552256256
 
     # MEASURED HARMFUL, kept at zero and retained as parameters so the result is
     # reproducible rather than merely asserted:
@@ -358,31 +333,10 @@ class Agent:
     W_TITLE = 0.0
     W_PROFILE = 0.0
 
-    # The target is a REAL purchase record, so purchase-likelihood is a legitimate prior
-    # rather than a hack. Largest single tuning gain: +0.065.
-    #
-    # THIS IS THE PIPELINE'S ONLY POPULATION BET, and it is worth being explicit about.
-    # Pass 32 minted 800 unseen sessions under three target distributions and measured
-    # what the prior is worth in each:
-    #
-    #     targets ~ review count (the real split)   prior worth  +0.051
-    #     targets ~ uniform                         prior worth  -0.059
-    #     targets ~ 1/review count                  prior worth  -0.086
-    #
-    # With the prior OFF the agent scores 0.9009 / 0.8999 / 0.8965 on those three -- i.e.
-    # everything else in the pipeline is population-invariant to within 0.004, and this
-    # one coefficient carries all of the exposure. The bet is well founded: the spec says
-    # the target "is based on a real purchase record", the split is 5-core leave-last-out,
-    # and pass 21 confirmed P(target) ~ review count (real median 8.80 vs minted 8.84).
-    #
-    # Lowered 0.35 -> 0.25 by pass 34: it scores at least as well on all seven stress
-    # conditions AND reduces the size of the bet. The prior's value also RISES under
-    # paraphrase (+0.053 nominal -> +0.158 at T5), because when evidence degrades the
-    # prior carries more of the ranking -- so it cannot simply be removed for safety.
-    #
-    # It is also not a constant any more: `_w_pop_effective()` scales it by an observed
-    # estimate of the target population. See "Population self-calibration" below.
-    W_POP = 0.25
+    # Purchase likelihood is the pipeline's main population bet. Trial 38 selected the
+    # maximum value below; `_w_pop_effective()` still scales it from label-free candidate
+    # pool statistics. Controlled validation is recorded in the independent report.
+    W_POP = 0.5114555220952501
 
     # ---- Population self-calibration --------------------------------------------------
     #
@@ -419,15 +373,9 @@ class Agent:
     # NO CIRCULARITY: the pool comes from `_candidates()`, which is FTS5/BM25 and does not
     # consult W_POP. The statistic cannot be moved by the parameter it sets.
     #
-    # MEASURED (pass 40), against the fixed W_POP=0.25 it replaces:
-    #     public 200   +0.00000     review-weighted  +0.00000     paraphrase-T1  +0.00165
-    #     uniform      +0.00020     inverse          +0.03428     worst-population +0.02549
-    # Zero cost on the populations we expect, +0.034 where the bet would have failed.
-    #
     # FAILURE IS INERT. Below POP_WARMUP observations the full prior is used unchanged, so
     # if the organizer constructs a fresh Agent per session this never engages and the
-    # agent behaves exactly as the static version. The score is also flat in W_POP over
-    # [0.10, 0.25] on real populations, so even a mis-estimate costs nothing there.
+    # agent behaves exactly as the static version.
     POP_LO = 2.70          # observed pool popularity at which the prior carries no signal
     POP_HI = 3.10          # observed value matching the public set / real population
     POP_WARMUP = 40        # sessions observed before the estimate is trusted
@@ -449,8 +397,12 @@ class Agent:
         frac = (mean - self.POP_LO) / span if span > 0 else 1.0
         return self.W_POP * max(0.0, min(1.0, frac))
 
-    POOL = 400
-    STRONG_DF = 500      # phrases at or below this drive the conjunctive rungs
+    MINED_LEN_DIV = 7.067577463426672
+    POOL = 1200
+    STRONG_DF = 400      # phrases at or below this drive the conjunctive rungs
+    STRONG_CAP = 13
+    OR_CAP = 8
+    RESOLVE_CAP = 22
 
     # ---- Disclosure schedule: how many recommendations to return on turn i -----------
     #
@@ -556,7 +508,7 @@ class Agent:
                            for p in mm.group(1).split(";") if p.strip())
         return out
 
-    def _resolve(self, text: str, cap: int = 12) -> list[str]:
+    def _resolve(self, text: str, cap: int | None = None) -> list[str]:
         """Resolve a constraint to phrases the catalogue actually attests.
 
         Not every constraint is verbatim product text: `intent_card` SYNTHESISES some of
@@ -569,7 +521,7 @@ class Agent:
         longest contiguous substring it HAS seen. Handles synthesised prefixes without
         needing to know which prefixes exist. Measured +0.0081 on a held-out half.
         """
-        t = raw_toks(text)[:cap]
+        t = raw_toks(text)[:self.RESOLVE_CAP if cap is None else cap]
         if not t:
             return []
         whole = " ".join(t)
@@ -675,7 +627,7 @@ class Agent:
         base = {CONSTRAINT: self.W_CONSTRAINT, CAT: self.W_CATEGORY,
                 LLM: self.W_LLM, MINED: self.W_MINED}.get(tier, self.W_MINED)
         if tier == MINED:
-            base *= min(1.0, len(phrase.split()) / 8.0)
+            base *= min(1.0, len(phrase.split()) / self.MINED_LEN_DIV)
         return base / (1.0 + df) ** self.IDF_POW
 
     # -- Layer 4 ------------------------------------------------------------
@@ -691,7 +643,7 @@ class Agent:
                     seen.add(asin)
                     pool.append(asin)
 
-        quoted = [f'"{p}"' for p in strong[:8]]
+        quoted = [f'"{p}"' for p in strong[:self.STRONG_CAP]]
         if quoted:
             add(" AND ".join(quoted), self.POOL)                        # most constrained
             for k in range(len(quoted) - 1, 0, -1):                     # graceful backoff
@@ -700,7 +652,7 @@ class Agent:
                 add(" AND ".join(quoted[:k]), self.POOL)
             add(" OR ".join(quoted), self.POOL)
         if len(pool) < self.POOL and ev:
-            add(" OR ".join(f'"{p}"' for p, _ in ev[:14]), self.POOL)
+            add(" OR ".join(f'"{p}"' for p, _ in ev[:self.OR_CAP]), self.POOL)
         if not pool:                                                    # never return empty
             terms = list(dict.fromkeys(content_toks(message)))[:40]
             if terms:

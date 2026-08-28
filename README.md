@@ -10,15 +10,14 @@ overrides, and returns ranked `parent_asin` values through the official Python i
 | Evaluation | Sessions | HitRate@10 | MRR | MTTC | TechnicalScore |
 |---|---:|---:|---:|---:|---:|
 | Public development set | 200 | 0.995 | 0.995 | 2.320 | **0.96960** |
-| Organizer-aligned internal proxy | 800 | 0.985 | 0.982917 | 2.8325 | **0.950725** |
-| Review-weighted distinct stress | 800 | 0.97875 | 0.975833 | 2.870 | **0.944725** |
-| Uniform-catalogue stress | 800 | 0.920 | 0.913125 | 3.710 | **0.879738** |
-| Inverse-popularity stress | 800 | 0.8975 | 0.894792 | 3.79875 | **0.861213** |
+| Optuna v2 primary proxy | 800 | 0.9775 | 0.976875 | 2.94875 | **0.942837** |
+| Independent same-population mean | 4 × 800 | 0.983438 | 0.981563 | 2.81469 | **0.949894** |
 | Published weak BM25 starter | 200 | 0.125 | 0.068034 | 9.81 | 0.10671 |
 
 The internal results are not private-score claims. Their targets are participant-safe proxies
 that match the disclosed 1,406-target universe and 800-target distinctness constraints.
-See [robustness/README.md](robustness/README.md) and the generated manifest.
+Trial 38 was frozen before the four independent folds were evaluated. See
+[notes/independent_validation_report.md](notes/independent_validation_report.md).
 
 ## Architecture
 
