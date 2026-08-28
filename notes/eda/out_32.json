@@ -1,0 +1,57 @@
+{
+  "Q1_population": {
+    "reviews": {
+      "shipped": 0.9523,
+      "no_pop": 0.900863,
+      "delta": -0.051437000000000066,
+      "hr_shipped": 0.98,
+      "hr_nopop": 0.94375
+    },
+    "uniform": {
+      "shipped": 0.840806,
+      "no_pop": 0.899869,
+      "delta": 0.05906299999999998,
+      "hr_shipped": 0.87875,
+      "hr_nopop": 0.9375
+    },
+    "inverse": {
+      "shipped": 0.8103,
+      "no_pop": 0.896488,
+      "delta": 0.08618799999999993,
+      "hr_shipped": 0.845,
+      "hr_nopop": 0.93125
+    }
+  },
+  "Q2_conditional": {
+    "shipped": {
+      "T0 identity (control)": 0.96755,
+      "T1 scaffold reworded": 0.8020499999999999,
+      "T2 scaffold stripped": 0.8175249,
+      "T5 realistic (T1+T3)": 0.7871999999999999
+    },
+    "-- n-gram mining": {
+      "T0 identity (control)": 0.96745,
+      "T1 scaffold reworded": 0.21730000000000002,
+      "T2 scaffold stripped": 0.4936453,
+      "T5 realistic (T1+T3)": 0.1637
+    },
+    "-- session ledger": {
+      "T0 identity (control)": 0.7145,
+      "T1 scaffold reworded": 0.6479,
+      "T2 scaffold stripped": 0.7455666,
+      "T5 realistic (T1+T3)": 0.64
+    },
+    "-- popularity prior": {
+      "T0 identity (control)": 0.914125,
+      "T1 scaffold reworded": 0.6727,
+      "T2 scaffold stripped": 0.72255,
+      "T5 realistic (T1+T3)": 0.6295001
+    },
+    "-- sequential disclose": {
+      "T0 identity (control)": 0.9096201,
+      "T1 scaffold reworded": 0.770794,
+      "T2 scaffold stripped": 0.7958791000000001,
+      "T5 realistic (T1+T3)": 0.7599388
+    }
+  }
+}

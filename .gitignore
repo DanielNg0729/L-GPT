@@ -2,8 +2,21 @@ __pycache__/
 *.py[cod]
 .DS_Store
 .env
+submission/.llm_cache.json
+submission/.llm_extract_cache.json
+notes/eda/.llm_extraction_cache.json
+notes/eda/.ltr_feats.npz
+notes/eda/.retr_pairs.pkl
+notes/eda/.tie_groups.pkl
+notes/eda/.tie_groups_v2.pkl
+notes/eda/.mlm_adapted/
+notes/eda/*.db
+notes/.ml_deps/
 results.json
+robustness/results.json
+robustness/stress_results.json
 data/catalog.jsonl
+data/catalog.jsonl.gz
 data/releases/
 # Organizer-only code, private evaluation data, manifests, and build reports.
 organizer/

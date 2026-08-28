@@ -1,0 +1,189 @@
+{
+  "null": {
+    "mean": 0.4994718376233053,
+    "sd": 0.00478230353137723,
+    "lo": 0.48751607879486225,
+    "hi": 0.5114275964517484
+  },
+  "n_groups": 5410,
+  "marginal": [
+    {
+      "feature": "avg_rating",
+      "auc": 0.5993618375753703,
+      "first": 0.1567467652495379,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "bayes_rating",
+      "auc": 0.742524988788696,
+      "first": 0.40036968576709797,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "completeness",
+      "auc": 0.5768248726472209,
+      "first": 0.12273567467652495,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "doc_words",
+      "auc": 0.5382262906407798,
+      "first": 0.20757855822550833,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "has_price",
+      "auc": 0.6309724907486974,
+      "first": 0.1378927911275416,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "log_price",
+      "auc": 0.627761507561459,
+      "first": 0.20961182994454713,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "log_store_size",
+      "auc": 0.5496675601392782,
+      "first": 0.12624768946395565,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "n_categories",
+      "auc": 0.4801610184573442,
+      "first": 0.005730129390018484,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "n_desc_chars",
+      "auc": 0.4719246823520212,
+      "first": 0.13068391866913123,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "n_details_keys",
+      "auc": 0.4617623891678489,
+      "first": 0.0866913123844732,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "n_feature_bullets",
+      "auc": 0.5387697908000916,
+      "first": 0.1066543438077634,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "pop_log_reviews",
+      "auc": 0.8696833234035448,
+      "first": 0.5963031423290204,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "price",
+      "auc": 0.627761507561459,
+      "first": 0.20961182994454713,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "rating_x_log_reviews",
+      "auc": 0.8684600451962736,
+      "first": 0.58909426987061,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "store_size",
+      "auc": 0.5496675601392782,
+      "first": 0.12624768946395565,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "title_words",
+      "auc": 0.526352407977452,
+      "first": 0.15120147874306838,
+      "verdict": "SIGNAL"
+    }
+  ],
+  "conditional": [
+    {
+      "feature": "avg_rating",
+      "auc": 0.5994332326042945,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "bayes_rating",
+      "auc": 0.7435377293041612,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "completeness",
+      "auc": 0.5773082768908913,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "doc_words",
+      "auc": 0.5382260959241564,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "has_price",
+      "auc": 0.6315908848834315,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "log_price",
+      "auc": 0.6281122597069756,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "log_store_size",
+      "auc": 0.5501027333785399,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "n_categories",
+      "auc": 0.48045346234664754,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "n_desc_chars",
+      "auc": 0.4716896968533256,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "n_details_keys",
+      "auc": 0.4614492217135421,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "n_feature_bullets",
+      "auc": 0.5395963074798824,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "pop_log_reviews",
+      "auc": 0.8721789731439719,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "price",
+      "auc": 0.6281122597069756,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "rating_x_log_reviews",
+      "auc": 0.8708768101828573,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "store_size",
+      "auc": 0.5501027333785399,
+      "verdict": "SIGNAL"
+    },
+    {
+      "feature": "title_words",
+      "auc": 0.5254006619159597,
+      "verdict": "SIGNAL"
+    }
+  ]
+}

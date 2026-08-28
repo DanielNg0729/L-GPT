@@ -1,0 +1,70 @@
+{
+  "reconstruction": {
+    "exact": 200,
+    "partial": 0,
+    "none": 0
+  },
+  "tune": {
+    "baseline": {
+      "hr": 0.99,
+      "mrr": 0.750667,
+      "mttc": 1.81,
+      "score": 0.904
+    },
+    "verify_1.0": {
+      "hr": 0.99,
+      "mrr": 0.739552,
+      "mttc": 1.79,
+      "score": 0.901066
+    },
+    "verify_3.0": {
+      "hr": 0.99,
+      "mrr": 0.740052,
+      "mttc": 1.79,
+      "score": 0.901216
+    },
+    "verify_8.0": {
+      "hr": 0.99,
+      "mrr": 0.740052,
+      "mttc": 1.79,
+      "score": 0.901216
+    },
+    "verify_20.0": {
+      "hr": 0.99,
+      "mrr": 0.740052,
+      "mttc": 1.79,
+      "score": 0.901216
+    },
+    "verify_noslot": {
+      "hr": 0.99,
+      "mrr": 0.762333,
+      "mttc": 1.77,
+      "score": 0.9083
+    }
+  },
+  "holdout": {
+    "baseline": {
+      "hr": 0.99,
+      "mrr": 0.801456,
+      "mttc": 1.92,
+      "score": 0.917037
+    },
+    "verified": {
+      "hr": 0.99,
+      "mrr": 0.798401,
+      "mttc": 1.86,
+      "score": 0.91732
+    },
+    "delta": 0.0002830000000000332,
+    "cfg": {
+      "W_VERIFY": 8.0,
+      "SLOT_BONUS": 0.0
+    }
+  },
+  "full": {
+    "score": 0.91281,
+    "hr": 0.99,
+    "mrr": 0.780367,
+    "mttc": 1.815
+  }
+}

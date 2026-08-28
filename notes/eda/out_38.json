@@ -1,0 +1,197 @@
+{
+  "static W_POP .25 (shipped)": {
+    "scores": {
+      "public200": 0.9696,
+      "real-pop": 0.957225,
+      "uniform-pop": 0.883556,
+      "inverse-pop": 0.858262
+    },
+    "worst": 0.858262
+  },
+  "static W_POP 0 (no prior)": {
+    "scores": {
+      "public200": 0.91625,
+      "real-pop": 0.894812,
+      "uniform-pop": 0.89925,
+      "inverse-pop": 0.906956
+    },
+    "worst": 0.894812
+  },
+  "adaptive (explore 40)": {
+    "scores": {
+      "public200": 0.9683,
+      "real-pop": 0.9544,
+      "uniform-pop": 0.882381,
+      "inverse-pop": 0.905756
+    },
+    "worst": 0.882381,
+    "control": {
+      "public200": {
+        "committed_to": 0.25,
+        "sessions": 200,
+        "mean_turns": {
+          "0.25": 2.335,
+          "0.0": 2.8
+        },
+        "n_per_arm": {
+          "0.25": 179,
+          "0.0": 20
+        }
+      },
+      "real-pop": {
+        "committed_to": 0.25,
+        "sessions": 800,
+        "mean_turns": {
+          "0.25": 2.597,
+          "0.0": 3.95
+        },
+        "n_per_arm": {
+          "0.25": 779,
+          "0.0": 20
+        }
+      },
+      "uniform-pop": {
+        "committed_to": 0.25,
+        "sessions": 800,
+        "mean_turns": {
+          "0.25": 3.548,
+          "0.0": 3.85
+        },
+        "n_per_arm": {
+          "0.25": 779,
+          "0.0": 20
+        }
+      },
+      "inverse-pop": {
+        "committed_to": 0.0,
+        "sessions": 800,
+        "mean_turns": {
+          "0.25": 4.0,
+          "0.0": 3.228
+        },
+        "n_per_arm": {
+          "0.25": 20,
+          "0.0": 779
+        }
+      }
+    }
+  },
+  "adaptive (explore 60)": {
+    "scores": {
+      "public200": 0.9675,
+      "real-pop": 0.954225,
+      "uniform-pop": 0.882556,
+      "inverse-pop": 0.905606
+    },
+    "worst": 0.882556,
+    "control": {
+      "public200": {
+        "committed_to": 0.25,
+        "sessions": 200,
+        "mean_turns": {
+          "0.25": 2.343,
+          "0.0": 2.867
+        },
+        "n_per_arm": {
+          "0.25": 169,
+          "0.0": 30
+        }
+      },
+      "real-pop": {
+        "committed_to": 0.25,
+        "sessions": 800,
+        "mean_turns": {
+          "0.25": 2.592,
+          "0.0": 3.867
+        },
+        "n_per_arm": {
+          "0.25": 769,
+          "0.0": 30
+        }
+      },
+      "uniform-pop": {
+        "committed_to": 0.25,
+        "sessions": 800,
+        "mean_turns": {
+          "0.25": 3.546,
+          "0.0": 3.567
+        },
+        "n_per_arm": {
+          "0.25": 769,
+          "0.0": 30
+        }
+      },
+      "inverse-pop": {
+        "committed_to": 0.0,
+        "sessions": 800,
+        "mean_turns": {
+          "0.25": 3.633,
+          "0.0": 3.241
+        },
+        "n_per_arm": {
+          "0.25": 30,
+          "0.0": 769
+        }
+      }
+    }
+  },
+  "adaptive (explore 100)": {
+    "scores": {
+      "public200": 0.9615,
+      "real-pop": 0.952775,
+      "uniform-pop": 0.883781,
+      "inverse-pop": 0.904406
+    },
+    "worst": 0.883781,
+    "control": {
+      "public200": {
+        "committed_to": 0.25,
+        "sessions": 200,
+        "mean_turns": {
+          "0.25": 2.315,
+          "0.0": 3.12
+        },
+        "n_per_arm": {
+          "0.25": 149,
+          "0.0": 50
+        }
+      },
+      "real-pop": {
+        "committed_to": 0.25,
+        "sessions": 800,
+        "mean_turns": {
+          "0.25": 2.589,
+          "0.0": 3.74
+        },
+        "n_per_arm": {
+          "0.25": 749,
+          "0.0": 50
+        }
+      },
+      "uniform-pop": {
+        "committed_to": 0.25,
+        "sessions": 800,
+        "mean_turns": {
+          "0.25": 3.543,
+          "0.0": 3.44
+        },
+        "n_per_arm": {
+          "0.25": 749,
+          "0.0": 50
+        }
+      },
+      "inverse-pop": {
+        "committed_to": 0.0,
+        "sessions": 800,
+        "mean_turns": {
+          "0.25": 3.7,
+          "0.0": 3.235
+        },
+        "n_per_arm": {
+          "0.25": 50,
+          "0.0": 749
+        }
+      }
+    }
+  }
+}

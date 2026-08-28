@@ -1,0 +1,54 @@
+{
+  "tune": {
+    "baseline": {
+      "hr": 0.99,
+      "mrr": 0.70469,
+      "mttc": 1.81,
+      "score": 0.890207
+    },
+    "field_restricted": {
+      "hr": 0.99,
+      "mrr": 0.70969,
+      "mttc": 1.81,
+      "score": 0.891707
+    },
+    "sparse_ensemble": {
+      "hr": 0.99,
+      "mrr": 0.70425,
+      "mttc": 1.8,
+      "score": 0.890275
+    },
+    "full_category": {
+      "hr": 0.99,
+      "mrr": 0.704929,
+      "mttc": 1.81,
+      "score": 0.890279
+    }
+  },
+  "holdout": {
+    "baseline": {
+      "hr": 0.99,
+      "mrr": 0.778956,
+      "mttc": 1.92,
+      "score": 0.910287
+    },
+    "field_restricted": {
+      "hr": 0.99,
+      "mrr": 0.778956,
+      "mttc": 1.92,
+      "score": 0.910287
+    },
+    "sparse_ensemble": {
+      "hr": 0.99,
+      "mrr": 0.775123,
+      "mttc": 1.92,
+      "score": 0.909137
+    },
+    "full_category": {
+      "hr": 0.99,
+      "mrr": 0.778956,
+      "mttc": 1.92,
+      "score": 0.910287
+    }
+  }
+}

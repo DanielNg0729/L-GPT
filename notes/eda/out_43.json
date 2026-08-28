@@ -1,0 +1,82 @@
+{
+  "T0 identity (control)": {
+    "deterministic": 0.9588,
+    "llm": 0.9588,
+    "delta": 0.0,
+    "extractor": {
+      "enabled": true,
+      "model": "openai/gpt-oss-120b",
+      "api_calls": 0,
+      "cache_hits": 0,
+      "failures": 0,
+      "cached_entries": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0
+    },
+    "gate": {
+      "messages": 100,
+      "unrecognised": 0,
+      "rate": 0.0
+    }
+  },
+  "T1 scaffold reworded": {
+    "deterministic": 0.8695999999999999,
+    "llm": 0.9384,
+    "delta": 0.06880000000000008,
+    "extractor": {
+      "enabled": true,
+      "model": "openai/gpt-oss-120b",
+      "api_calls": 102,
+      "cache_hits": 20,
+      "failures": 0,
+      "cached_entries": 102,
+      "prompt_tokens": 24612,
+      "completion_tokens": 6672
+    },
+    "gate": {
+      "messages": 122,
+      "unrecognised": 122,
+      "rate": 1.0
+    }
+  },
+  "T2 scaffold stripped": {
+    "deterministic": 0.8603999999999999,
+    "llm": 0.8856572,
+    "delta": 0.02525720000000009,
+    "extractor": {
+      "enabled": true,
+      "model": "openai/gpt-oss-120b",
+      "api_calls": 102,
+      "cache_hits": 72,
+      "failures": 0,
+      "cached_entries": 204,
+      "prompt_tokens": 23883,
+      "completion_tokens": 6969
+    },
+    "gate": {
+      "messages": 174,
+      "unrecognised": 174,
+      "rate": 1.0
+    }
+  },
+  "T5 realistic (T1+T3)": {
+    "deterministic": 0.8528,
+    "llm": 0.878,
+    "delta": 0.0252,
+    "extractor": {
+      "enabled": true,
+      "model": "openai/gpt-oss-120b",
+      "api_calls": 110,
+      "cache_hits": 40,
+      "failures": 35,
+      "cached_entries": 279,
+      "prompt_tokens": 18810,
+      "completion_tokens": 4706
+    },
+    "gate": {
+      "messages": 150,
+      "unrecognised": 150,
+      "rate": 1.0
+    }
+  }
+}

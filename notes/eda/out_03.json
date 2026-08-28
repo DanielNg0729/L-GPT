@@ -1,0 +1,160 @@
+{
+  "channel_selectivity": {
+    "coarse_category": 145.0,
+    "hard[0]": 8675.0,
+    "hard[1]": 229.5,
+    "soft[0]": 5034,
+    "soft[1]": 241
+  },
+  "conjunctive_stages": {
+    "turn1 browsing (category only)": {
+      "median": 145.0,
+      "mean": 348.595,
+      "pct_empty": 0.015,
+      "pct_unique": 0.02,
+      "pct_le_10": 0.05
+    },
+    "turn1 buying (category + hard[0])": {
+      "median": 38.0,
+      "mean": 97.65,
+      "pct_empty": 0.025,
+      "pct_unique": 0.1,
+      "pct_le_10": 0.24
+    },
+    "after 1 probe (cat + hard[0..1])": {
+      "median": 1.0,
+      "mean": 13.9,
+      "pct_empty": 0.155,
+      "pct_unique": 0.385,
+      "pct_le_10": 0.6
+    },
+    "after 2 probes (cat + hard + soft[0])": {
+      "median": 1.0,
+      "mean": 4.425,
+      "pct_empty": 0.195,
+      "pct_unique": 0.485,
+      "pct_le_10": 0.68
+    },
+    "after 3 probes (cat + ALL 4 constraints)": {
+      "median": 1.0,
+      "mean": 2.025,
+      "pct_empty": 0.205,
+      "pct_unique": 0.635,
+      "pct_le_10": 0.76
+    },
+    "ALL constraints, no category": {
+      "median": 1.0,
+      "mean": 35.74,
+      "pct_empty": 0.095,
+      "pct_unique": 0.54,
+      "pct_le_10": 0.69
+    }
+  },
+  "bm25_progressive": {
+    "token_or | cat only (browsing turn1)": {
+      "hit@10": 0.03,
+      "hit@200": 0.57,
+      "mrr": 0.02867591103146485,
+      "mrr@10": 0.01513888888888889,
+      "median_rank_when_found": 65.5
+    },
+    "token_or | cat + hard[0] (buying turn1)": {
+      "hit@10": 0.26,
+      "hit@200": 0.84,
+      "mrr": 0.1511323156124254,
+      "mrr@10": 0.13518849206349207,
+      "median_rank_when_found": 27.0
+    },
+    "token_or | cat + hard[0:2]": {
+      "hit@10": 0.65,
+      "hit@200": 0.985,
+      "mrr": 0.44699239131422064,
+      "mrr@10": 0.43420436507936505,
+      "median_rank_when_found": 4
+    },
+    "token_or | cat + ALL 4 constraints": {
+      "hit@10": 0.87,
+      "hit@200": 0.995,
+      "mrr": 0.7282108735170127,
+      "mrr@10": 0.7231031746031746,
+      "median_rank_when_found": 1
+    },
+    "token_or | ALL 4 constraints (no cat)": {
+      "hit@10": 0.7,
+      "hit@200": 0.925,
+      "mrr": 0.5834881325327123,
+      "mrr@10": 0.5763194444444444,
+      "median_rank_when_found": 1
+    },
+    "phrase_or | cat only (browsing turn1)": {
+      "hit@10": 0.045,
+      "hit@200": 0.55,
+      "mrr": 0.028073127273775998,
+      "mrr@10": 0.012686507936507935,
+      "median_rank_when_found": 36.5
+    },
+    "phrase_or | cat + hard[0] (buying turn1)": {
+      "hit@10": 0.28,
+      "hit@200": 0.835,
+      "mrr": 0.17443596890975838,
+      "mrr@10": 0.15649603174603174,
+      "median_rank_when_found": 20
+    },
+    "phrase_or | cat + hard[0:2]": {
+      "hit@10": 0.715,
+      "hit@200": 0.945,
+      "mrr": 0.5201968476359058,
+      "mrr@10": 0.5117222222222222,
+      "median_rank_when_found": 2
+    },
+    "phrase_or | cat + ALL 4 constraints": {
+      "hit@10": 0.92,
+      "hit@200": 0.99,
+      "mrr": 0.8140117601740233,
+      "mrr@10": 0.8109861111111111,
+      "median_rank_when_found": 1.0
+    },
+    "phrase_or | ALL 4 constraints (no cat)": {
+      "hit@10": 0.77,
+      "hit@200": 0.94,
+      "mrr": 0.6765396368129143,
+      "mrr@10": 0.6713928571428572,
+      "median_rank_when_found": 1.0
+    },
+    "phrase_and_backoff | cat only (browsing turn1)": {
+      "hit@10": 0.045,
+      "hit@200": 0.55,
+      "mrr": 0.028073127273775998,
+      "mrr@10": 0.012686507936507935,
+      "median_rank_when_found": 36.5
+    },
+    "phrase_and_backoff | cat + hard[0] (buying turn1)": {
+      "hit@10": 0.295,
+      "hit@200": 0.86,
+      "mrr": 0.180896720779611,
+      "mrr@10": 0.16150198412698413,
+      "median_rank_when_found": 18.5
+    },
+    "phrase_and_backoff | cat + hard[0:2]": {
+      "hit@10": 0.715,
+      "hit@200": 0.9,
+      "mrr": 0.5315847891143918,
+      "mrr@10": 0.523827380952381,
+      "median_rank_when_found": 2.0
+    },
+    "phrase_and_backoff | cat + ALL 4 constraints": {
+      "hit@10": 0.925,
+      "hit@200": 0.96,
+      "mrr": 0.8302093851779206,
+      "mrr@10": 0.8284285714285714,
+      "median_rank_when_found": 1.0
+    },
+    "phrase_and_backoff | ALL 4 constraints (no cat)": {
+      "hit@10": 0.785,
+      "hit@200": 0.92,
+      "mrr": 0.7069062865440645,
+      "mrr@10": 0.701547619047619,
+      "median_rank_when_found": 1.0
+    }
+  }
+}

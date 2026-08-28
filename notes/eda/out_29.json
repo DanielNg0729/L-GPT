@@ -1,0 +1,208 @@
+{
+  "census": {
+    "p2_broken": 2441,
+    "p2_total": 50000,
+    "p1_broken": 17827,
+    "p1_total": 19810
+  },
+  "baseline (shipped)": {
+    "tune": {
+      "score": 0.9622,
+      "hr": 0.99,
+      "mrr": 0.99,
+      "mttc": 2.49,
+      "miss": [
+        "public_0037"
+      ]
+    },
+    "hold": {
+      "score": 0.9644,
+      "hr": 0.99,
+      "mrr": 0.99,
+      "mttc": 2.38,
+      "miss": [
+        "public_0020"
+      ]
+    }
+  },
+  "P1 colour-prefix strip": {
+    "tune": {
+      "score": 0.9622,
+      "hr": 0.99,
+      "mrr": 0.99,
+      "mttc": 2.49,
+      "miss": [
+        "public_0037"
+      ]
+    },
+    "hold": {
+      "score": 0.9644,
+      "hr": 0.99,
+      "mrr": 0.99,
+      "mttc": 2.38,
+      "miss": [
+        "public_0020"
+      ]
+    },
+    "full200": {
+      "score": 0.9633,
+      "hr": 0.99,
+      "mrr": 0.99,
+      "mttc": 2.435,
+      "miss": [
+        "public_0020",
+        "public_0037"
+      ]
+    }
+  },
+  "P2 category parts (+phrase)": {
+    "tune": {
+      "score": 0.9707,
+      "hr": 1.0,
+      "mrr": 0.995,
+      "mttc": 2.39,
+      "miss": []
+    },
+    "hold": {
+      "score": 0.9644,
+      "hr": 0.99,
+      "mrr": 0.99,
+      "mttc": 2.38,
+      "miss": [
+        "public_0020"
+      ]
+    },
+    "full200": {
+      "score": 0.96755,
+      "hr": 0.995,
+      "mrr": 0.9925,
+      "mttc": 2.385,
+      "miss": [
+        "public_0020"
+      ]
+    }
+  },
+  "P2 category parts (only)": {
+    "tune": {
+      "score": 0.9697,
+      "hr": 1.0,
+      "mrr": 0.995,
+      "mttc": 2.44,
+      "miss": []
+    },
+    "hold": {
+      "score": 0.9618,
+      "hr": 0.99,
+      "mrr": 0.99,
+      "mttc": 2.51,
+      "miss": [
+        "public_0020"
+      ]
+    }
+  },
+  "P1+P2 (+phrase)": {
+    "tune": {
+      "score": 0.9707,
+      "hr": 1.0,
+      "mrr": 0.995,
+      "mttc": 2.39,
+      "miss": []
+    },
+    "hold": {
+      "score": 0.9644,
+      "hr": 0.99,
+      "mrr": 0.99,
+      "mttc": 2.38,
+      "miss": [
+        "public_0020"
+      ]
+    },
+    "full200": {
+      "score": 0.96755,
+      "hr": 0.995,
+      "mrr": 0.9925,
+      "mttc": 2.385,
+      "miss": [
+        "public_0020"
+      ]
+    }
+  },
+  "P1+P2 (parts only)": {
+    "tune": {
+      "score": 0.9697,
+      "hr": 1.0,
+      "mrr": 0.995,
+      "mttc": 2.44,
+      "miss": []
+    },
+    "hold": {
+      "score": 0.9618,
+      "hr": 0.99,
+      "mrr": 0.99,
+      "mttc": 2.51,
+      "miss": [
+        "public_0020"
+      ]
+    }
+  },
+  "POOL 1000": {
+    "tune": {
+      "score": 0.9616,
+      "hr": 0.99,
+      "mrr": 0.99,
+      "mttc": 2.52,
+      "miss": [
+        "public_0161"
+      ]
+    },
+    "hold": {
+      "score": 0.9617,
+      "hr": 0.99,
+      "mrr": 0.985,
+      "mttc": 2.44,
+      "miss": [
+        "public_0020"
+      ]
+    }
+  },
+  "POOL 2000": {
+    "tune": {
+      "score": 0.9448,
+      "hr": 0.97,
+      "mrr": 0.97,
+      "mttc": 2.56,
+      "miss": [
+        "public_0037",
+        "public_0161",
+        "public_0175"
+      ]
+    },
+    "hold": {
+      "score": 0.9611,
+      "hr": 0.99,
+      "mrr": 0.985,
+      "mttc": 2.47,
+      "miss": [
+        "public_0020"
+      ]
+    }
+  },
+  "P1+P2 + POOL 1000": {
+    "tune": {
+      "score": 0.9713,
+      "hr": 1.0,
+      "mrr": 0.995,
+      "mttc": 2.36,
+      "miss": []
+    },
+    "hold": {
+      "score": 0.9638,
+      "hr": 0.99,
+      "mrr": 0.99,
+      "mttc": 2.41,
+      "miss": [
+        "public_0020"
+      ]
+    }
+  }
+}

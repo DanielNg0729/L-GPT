@@ -1,0 +1,17 @@
+{
+  "miss_causes": {
+    "constraint not verbatim in own text (truncation/normalisation drift)": 8,
+    "constraints non-selective (huge conjunction pool)": 3,
+    "evidence present & selective -> RANKING failure, not recall": 2,
+    "category string absent from own text": 2
+  },
+  "misses_recoverable_by_rerank": "13/15",
+  "robustness": {
+    "clean (reference)": 0.82571,
+    "light paraphrase": 0.509154,
+    "heavy paraphrase": 0.588321,
+    "no 'other' (typed rotation)": 0.828452,
+    "no templates (bag of tokens)": 0.77359,
+    "no templates + heavy para": 0.745561
+  }
+}
