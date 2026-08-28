@@ -31,6 +31,20 @@ No semantic-retrieval model is used to create the set. The transformation bank i
 versioned, and auditable. It is a fixed synthetic benchmark, not a claim that private users
 will use these exact phrases.
 
+## Experimental semantic dependencies
+
+The semantic-grounding candidate is isolated from V1 and uses the pinned dependencies in
+`requirements-v2-semantic.txt`. Install them with:
+
+```bash
+python -m pip install -r requirements-v2-semantic.txt
+```
+
+The runner downloads the pinned encoder only into `.v2_model_cache/`, which is deliberately
+ignored by Git. V1 neither imports this encoder nor requires its dependencies. The lexical
+control and development-only phrase-map control remain mandatory comparisons for every
+semantic-node experiment.
+
 Build the data from the released catalogue:
 
 ```bash
@@ -58,3 +72,26 @@ python -m robustness.v2.run_semantic_attribute --candidate development-lexicon -
 `semantic_gate_after_public.semantic_triggered` must remain zero. This verifies that the
 semantic path is unreachable when released public constraints already have literal
 catalogue evidence.
+
+## Node 1: semantic feature grounding
+
+`semantic-feature` is the first model-based V2 node. It compares an unfamiliar complete
+phrase with visible catalogue feature strings using the pinned local encoder. It cannot
+change dialogue intent, probing, state removal, or product scoring. It returns a phrase only
+after all of these checks succeed:
+
+1. the complete normalised customer phrase has zero literal catalogue matches;
+2. the existing lexical resolver cannot recover any attested phrase or substring;
+3. the nearest candidate is a visible feature string from the frozen catalogue; and
+4. cosine similarity is at least 0.52.
+
+Run it only after the two controls:
+
+```bash
+python -m robustness.v2.run_semantic_attribute --candidate literal --public-control
+python -m robustness.v2.run_semantic_attribute --candidate development-lexicon --public-control
+python -m robustness.v2.run_semantic_attribute --candidate semantic-feature --public-control
+```
+
+The development result may inform implementation, but the target-disjoint 800-session
+semantic holdout remains sealed until the candidate and threshold are frozen.

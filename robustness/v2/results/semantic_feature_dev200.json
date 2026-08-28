@@ -1,0 +1,34 @@
+{
+  "candidate": "semantic-feature",
+  "dataset": "D:\\Coding\\Models\\TiktokTechJam\\robustness\\v2\\sets\\semantic_attribute_development_200.jsonl",
+  "semantic_shift": {
+    "sample_count": 200,
+    "hit_rate_at_10": 0.085,
+    "mrr": 0.085,
+    "mttc": 10.465,
+    "efficiency": 0.0535,
+    "recommended_technical_score": 0.0787
+  },
+  "semantic_grounding_after_shift": {
+    "literal_present": 0,
+    "literal_absent": 623,
+    "semantic_accepted": 618,
+    "below_threshold": 5,
+    "load_failure": 0
+  },
+  "official200": {
+    "sample_count": 200,
+    "hit_rate_at_10": 0.995,
+    "mrr": 0.995,
+    "mttc": 2.37,
+    "efficiency": 0.863,
+    "recommended_technical_score": 0.9686
+  },
+  "semantic_grounding_after_public": {
+    "literal_present": 0,
+    "literal_absent": 14,
+    "semantic_accepted": 13,
+    "below_threshold": 1,
+    "load_failure": 0
+  }
+}

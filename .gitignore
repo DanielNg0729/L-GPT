@@ -19,6 +19,8 @@ experiments/results/out_54.json
 results.json
 robustness/results.json
 robustness/stress_results.json
+.v2_model_cache/
+.venv-v2/
 data/catalog.jsonl
 data/catalog.jsonl.gz
 data/releases/

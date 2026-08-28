@@ -34,6 +34,7 @@ from evaluator.local_evaluator import (  # noqa: E402
     normalize_recommendations,
 )
 from submission.agent import Agent, raw_toks  # noqa: E402
+from robustness.v2.semantic_grounding import SemanticFeatureGrounder  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -128,6 +129,30 @@ class ExactAbsentLexiconAgent(Agent):
         return super()._resolve(canonical, cap)
 
 
+class SemanticFeatureAgent(Agent):
+    """V2-only semantic grounding node, guarded after complete literal absence."""
+
+    def __init__(self, catalog_path: str | Path) -> None:
+        super().__init__(catalog_path)
+        self.grounder = SemanticFeatureGrounder(Path(catalog_path), self.ix.df)
+
+    def _resolve(self, text: str, cap: int | None = None) -> list[str]:
+        phrase = normalise(text)
+        # The existing resolver may safely recover an attested substring even when the
+        # complete surface phrase is synthetic (for example, a generated colour label).
+        # That lexical result is stronger provenance than a semantic neighbour, so it is
+        # an independent hard gate for this node.
+        lexical = super()._resolve(text, cap)
+        if lexical:
+            return lexical
+        if not phrase:
+            return lexical
+        grounded = self.grounder.resolve(text)
+        if grounded is None:
+            return lexical
+        return super()._resolve(grounded, cap)
+
+
 def development_lexicon(rows: Iterable[dict]) -> dict[str, str]:
     """Build a resolver from development data only, rejecting inconsistent mappings."""
     candidates: dict[str, set[str]] = defaultdict(set)
@@ -210,6 +235,8 @@ def make_agent(candidate: str, catalog: Path, development_rows: list[dict]) -> A
         return Agent(catalog)
     if candidate == "development-lexicon":
         return ExactAbsentLexiconAgent(catalog, development_lexicon(development_rows))
+    if candidate == "semantic-feature":
+        return SemanticFeatureAgent(catalog)
     raise ValueError(f"unknown candidate: {candidate}")
 
 
@@ -217,7 +244,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="V2 semantic-attribute robustness runner")
     parser.add_argument("--dataset", type=Path,
                         default=ROOT / "robustness" / "v2" / "sets" / "semantic_attribute_development_200.jsonl")
-    parser.add_argument("--candidate", choices=("literal", "development-lexicon"), default="literal")
+    parser.add_argument("--candidate", choices=("literal", "development-lexicon", "semantic-feature"), default="literal")
     parser.add_argument("--public-control", action="store_true",
                         help="also score the candidate on official public data to verify the semantic gate")
     parser.add_argument("--output", type=Path, default=None)
@@ -231,12 +258,16 @@ def main() -> None:
     result = {"candidate": args.candidate, "dataset": str(args.dataset), "semantic_shift": compact(evaluate_v2(agent, rows, ids, categories))}
     if isinstance(agent, ExactAbsentLexiconAgent):
         result["semantic_gate_after_shift"] = dict(agent.semantic_gate)
+    if isinstance(agent, SemanticFeatureAgent):
+        result["semantic_grounding_after_shift"] = dict(agent.grounder.calls)
     if args.public_control:
         public_agent = make_agent(args.candidate, catalog, development_rows)
         public = evaluate(public_agent, load_jsonl(ROOT / "data" / "public_set.jsonl"), ids, categories, products)
         result["official200"] = compact(public)
         if isinstance(public_agent, ExactAbsentLexiconAgent):
             result["semantic_gate_after_public"] = dict(public_agent.semantic_gate)
+        if isinstance(public_agent, SemanticFeatureAgent):
+            result["semantic_grounding_after_public"] = dict(public_agent.grounder.calls)
     text = json.dumps(result, indent=2) + "\n"
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)

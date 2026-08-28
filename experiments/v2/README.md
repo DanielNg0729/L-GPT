@@ -91,3 +91,9 @@ A V2 candidate is admissible only when it:
 The V1 result ledger remains evidence about literal-provenance behavior. V2 reruns only the
 experiments whose premise changes under semantic language, beginning with retrieval recall,
 candidate generation, grounding, and override state.
+
+## Experiment registry
+
+| Experiment | Node | Outcome |
+|---|---|---|
+| [V2.01](01_semantic_feature_grounding.md) | Broad semantic phrase grounding | Rejected. A development phrase-map control confirms recovery opportunity, but nearest visible-feature retrieval is not precise enough and cannot meet the clean-score gate. |
