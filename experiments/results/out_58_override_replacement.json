@@ -1,0 +1,144 @@
+{
+  "purpose": "isolated override replacement comparison; no shipped-agent change",
+  "datasets": {
+    "Official200": "data/public_set.jsonl",
+    "Unseen800": "robustness\\optuna_v2_sets\\population_shift_01_800.jsonl"
+  },
+  "manual_cue_diagnostic": [
+    {
+      "label": "official",
+      "message": "Actually, ignore my earlier preference. What I need is: cotton.",
+      "recognised_official_form": true,
+      "current_cue": true,
+      "broad_cue": true
+    },
+    {
+      "label": "slide_example",
+      "message": "Actually, make them casual white sneakers.",
+      "recognised_official_form": false,
+      "current_cue": true,
+      "broad_cue": true
+    },
+    {
+      "label": "reworded",
+      "message": "Hmm, scratch all that. What I actually need is cotton.",
+      "recognised_official_form": false,
+      "current_cue": true,
+      "broad_cue": true
+    },
+    {
+      "label": "reworded",
+      "message": "Forget the earlier style. I would rather have white casual sneakers.",
+      "recognised_official_form": false,
+      "current_cue": false,
+      "broad_cue": true
+    },
+    {
+      "label": "reworded",
+      "message": "I changed my mind. Please switch to white casual sneakers.",
+      "recognised_official_form": false,
+      "current_cue": false,
+      "broad_cue": true
+    },
+    {
+      "label": "non_override",
+      "message": "Actually, I need cotton.",
+      "recognised_official_form": false,
+      "current_cue": true,
+      "broad_cue": true
+    },
+    {
+      "label": "non_override",
+      "message": "Can you show white casual sneakers?",
+      "recognised_official_form": false,
+      "current_cue": false,
+      "broad_cue": false
+    }
+  ],
+  "variants": {
+    "shipped_accumulate": {
+      "Official200": {
+        "technical_score": 0.9696,
+        "hit_rate_at_10": 0.995,
+        "mrr": 0.995,
+        "mttc": 2.32,
+        "intent_override": {
+          "sample_count": 30,
+          "hit_rate_at_10": 1.0,
+          "mrr": 1.0,
+          "mttc": 3.866667
+        },
+        "wall_seconds": 14.399706199998036
+      },
+      "Unseen800": {
+        "technical_score": 0.94325,
+        "hit_rate_at_10": 0.97625,
+        "mrr": 0.97375,
+        "mttc": 2.85,
+        "intent_override": {
+          "sample_count": 120,
+          "hit_rate_at_10": 0.983333,
+          "mrr": 0.979167,
+          "mttc": 4.025
+        },
+        "wall_seconds": 75.97499069999321
+      }
+    },
+    "category_reset_current_cue": {
+      "Official200": {
+        "technical_score": 0.9587,
+        "hit_rate_at_10": 0.985,
+        "mrr": 0.985,
+        "mttc": 2.465,
+        "intent_override": {
+          "sample_count": 30,
+          "hit_rate_at_10": 0.933333,
+          "mrr": 0.933333,
+          "mttc": 4.833333
+        },
+        "wall_seconds": 13.883357099999557
+      },
+      "Unseen800": {
+        "technical_score": 0.923013,
+        "hit_rate_at_10": 0.9575,
+        "mrr": 0.953125,
+        "mttc": 3.08375,
+        "intent_override": {
+          "sample_count": 120,
+          "hit_rate_at_10": 0.858333,
+          "mrr": 0.841667,
+          "mttc": 5.583333
+        },
+        "wall_seconds": 77.56794949999312
+      }
+    },
+    "category_reset_broad_cue": {
+      "Official200": {
+        "technical_score": 0.9587,
+        "hit_rate_at_10": 0.985,
+        "mrr": 0.985,
+        "mttc": 2.465,
+        "intent_override": {
+          "sample_count": 30,
+          "hit_rate_at_10": 0.933333,
+          "mrr": 0.933333,
+          "mttc": 4.833333
+        },
+        "wall_seconds": 13.994198600004893
+      },
+      "Unseen800": {
+        "technical_score": 0.923013,
+        "hit_rate_at_10": 0.9575,
+        "mrr": 0.953125,
+        "mttc": 3.08375,
+        "intent_override": {
+          "sample_count": 120,
+          "hit_rate_at_10": 0.858333,
+          "mrr": 0.841667,
+          "mttc": 5.583333
+        },
+        "wall_seconds": 75.05261260000407
+      }
+    }
+  }
+}

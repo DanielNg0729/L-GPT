@@ -1437,3 +1437,29 @@ Innovation and Feasibility as much as for Technical.
   the public 200 and private 800  -  a third split not described in the specification.
 - Slide 14 confirms the weak baseline: HR@10 12.5%, MRR 0.068034, MTTC 9.81, matching
   `docs/baseline_results.json`.
+
+## §29 Override evidence replacement probe (pass 58)
+
+The slides illustrate a genuine semantic replacement, such as black running shoes changing
+to casual white sneakers. The released evaluator instead emits an earlier soft value and a
+later hard value from the same target document. The shipped agent therefore clears only the
+rejection set on an override, preserving prior positive evidence.
+
+Pass 58 tested the strongest simple alternative: when an override cue arrives, preserve only
+category evidence and discard every earlier constraint or mined phrase before extracting the
+new value. It used Official200 and the first fixed same-population `Unseen800` fold.
+
+| Variant | Official200 score | Official override HR | Unseen800 score | Unseen override HR |
+|---|---:|---:|---:|---:|
+| Shipped accumulation | 0.969600 | 1.000 | 0.943250 | 0.983333 |
+| Category-only reset, released cue | 0.958700 | 0.933 | 0.923013 | 0.858333 |
+| Category-only reset, broader cue | 0.958700 | 0.933 | 0.923013 | 0.858333 |
+
+The reset loses compatible target-derived evidence under the released generator. It is
+rejected for the final agent. The broader English cue detects phrases such as “forget the
+earlier style” and “changed my mind”, but it also fires on “Actually, I need cotton”, which
+is not necessarily a replacement. This hand-authored cue check is diagnostic, not a
+private-score estimate.
+
+**Decision:** retain accumulated positive evidence and reset only rejected recommendations.
+The agent should not be presented as solving arbitrary semantic intent replacement.

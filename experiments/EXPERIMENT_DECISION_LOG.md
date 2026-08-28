@@ -105,6 +105,12 @@ claims about the final trial 38 agent unless the row explicitly says so.
 | [`56_optuna_exploit_v2.py`](scripts/56_optuna_exploit_v2.py) | Ran a separate 50/50 public-proxy reward to expose the exploration versus exploitation tradeoff. | Infrastructure | Prevented the two objectives from being silently mixed during selection. |
 | [`57_independent_validation.py`](scripts/57_independent_validation.py) | Frozen candidates were tested on four untouched same-population folds and controlled population disturbances; trial 38 had a `+0.001213` mean delta. | Adopted | Selected balanced trial 38 and consumed these folds as validation evidence, not further tuning data. |
 
+## F. Post-selection override robustness probe
+
+| Experiment | Recorded result | Ruling | Effect on final design |
+|---|---|---|---|
+| [`58_override_replacement.py`](scripts/58_override_replacement.py) | Category-preserving evidence reset reduced intent-override HitRate from 1.000 to 0.933 on Official200 and from 0.983 to 0.858 on Unseen800. A broader cue catches more rewordings but also falsely fires on “Actually, I need cotton.” | Rejected | Keep accumulated target-derived evidence and clear only rejection state. Do not claim support for true semantic preference replacement. |
+
 ## Final decision synthesis
 
 The final agent is not a collection of individually optimized features. It is the smallest

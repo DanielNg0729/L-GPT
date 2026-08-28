@@ -103,6 +103,12 @@ Status definitions:
 | [`56_optuna_exploit_v2.py`](scripts/56_optuna_exploit_v2.py) | Ran a separate 50/50 public-proxy objective to expose the exploration versus exploitation tradeoff. | Infrastructure |
 | [`57_independent_validation.py`](scripts/57_independent_validation.py) | Evaluated frozen Pareto candidates on four untouched folds and controlled population disturbances; trial 38 was selected. | Shipped |
 
+## Post-selection robustness probes
+
+| Program | Question and primary result | Decision |
+|---|---|---|
+| [`58_override_replacement.py`](scripts/58_override_replacement.py) | Tested category-preserving prior-evidence reset on an override. It reduced Official200 intent-override HitRate from 1.000 to 0.933 and Unseen800 from 0.983 to 0.858. | Rejected |
+
 ## Final selection rule
 
 The final agent uses balanced Optuna trial 38. Selection followed this order:
