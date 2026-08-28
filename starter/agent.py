@@ -301,7 +301,7 @@ class Agent:
     """Frozen balanced trial 38, selected before independent validation.
 
     It preserves the official public score and improved the mean of four untouched
-    same-population folds. See notes/independent_validation_report.md.
+    same-population folds. See docs/validation/independent_validation.md.
     """
 
     W_CONSTRAINT = 1.00
@@ -513,7 +513,7 @@ class Agent:
 
         Not every constraint is verbatim product text: `intent_card` SYNTHESISES some of
         them. `f"color: {colour}"` is assembled from a regex hit, so "color black" may
-        never appear in the target even though "black" does — while 918 *other* products
+        never appear in the target even though "black" does  -  while 918 *other* products
         do carry "Color Black" in their `details`. A synthesised phrase is therefore worse
         than useless: it withholds weight from the target and hands it to the field.
 

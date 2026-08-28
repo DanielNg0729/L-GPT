@@ -7,7 +7,7 @@ one fails the suite rather than the private run:
      LLM is unreachable at zero paraphrase and the clean score cannot move.
   2. TOTALITY OF `extract()`. No network state, credential state, or response body causes
      it to raise or to return anything but verbatim spans -- and it gives up quickly when
-     the endpoint is sick, because a private run makes ~1,500 calls and an unbounded retry
+     the endpoint is unhealthy, because a private run makes ~1,500 calls and an unbounded retry
      path would never finish.
 """
 from __future__ import annotations

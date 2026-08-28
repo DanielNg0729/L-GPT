@@ -231,7 +231,7 @@ class LLMExtractor:
             # The rate limiter's sleep is deliberately NOT charged to TIME_BUDGET. At
             # 25 RPM a healthy 1,500-call run spends ~60 minutes waiting on our OWN
             # throttle, which would exhaust any sane budget and trip the breaker on a
-            # perfectly working endpoint -- the budget exists to bound time lost to a SICK
+            # perfectly working endpoint -- the budget exists to bound time lost to an unhealthy
             # endpoint, so it must measure only time spent waiting on the network.
             self.limiter.acquire(est)
             started = time.time()

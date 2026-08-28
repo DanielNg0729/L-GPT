@@ -83,7 +83,7 @@ class RobustnessBuilderTest(unittest.TestCase):
                 self.assertEqual(scenarios.count("boundary"), 4)
 
     def test_optuna_v2_aggregate_matches_official_efficiency_formula(self) -> None:
-        sys.path.insert(0, str(ROOT / "notes" / "eda"))
+        sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
         module = importlib.import_module("55_optuna_official_v2")
         public = {"sample_count": 200, "hit_rate_at_10": .995, "mrr": .995, "mttc": 2.32}
         private = {"sample_count": 800, "hit_rate_at_10": .9725,
