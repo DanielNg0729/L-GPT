@@ -1,9 +1,10 @@
 # Experiment Registry
 
-This registry lists every versioned experiment program, its research question, its primary
-result, and the resulting decision. Detailed measurements and methodological corrections
-are retained in [`EXPERIMENT_FINDINGS.md`](EXPERIMENT_FINDINGS.md); raw outputs are in
-[`results/`](results/).
+This registry is the compact navigator for every versioned experiment program. The complete
+one-by-one result, ruling, and final-design impact is in
+[`EXPERIMENT_DECISION_LOG.md`](EXPERIMENT_DECISION_LOG.md). Detailed measurements and
+methodological corrections are retained in [`EXPERIMENT_FINDINGS.md`](EXPERIMENT_FINDINGS.md);
+raw outputs are in [`results/`](results/).
 
 Status definitions:
 

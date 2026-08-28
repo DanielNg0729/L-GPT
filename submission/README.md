@@ -75,7 +75,9 @@ See the annotated [`demo transcript`](../docs/DEMO.md).
 
 The complete investigation history is available in the
 [experiment registry](../experiments/EXPERIMENT_INDEX.md) and
-[findings ledger](../experiments/EXPERIMENT_FINDINGS.md).
+[experiment-by-experiment decision log](../experiments/EXPERIMENT_DECISION_LOG.md).
+The root [README](../README.md#final-shipped-pipeline) specifies the complete final
+execution path, including the gated BERT fallback and disabled optional API paths.
 
 ## Network, model, and cost disclosure
 
@@ -140,8 +142,9 @@ in the [findings ledger](../experiments/EXPERIMENT_FINDINGS.md).
 - The popularity prior is the only component with meaningful population dependence. It is
   calibrated from aggregate retrieved-pool statistics without using labels or product
   identity.
-- Message and constraint rewrite tests are retained as stress characterization. Organizer
-  clarification confirmed that official testing will not paraphrase the disclosed values.
+- Message and constraint rewrite tests are retained as stress characterization. Project Q&A
+  notes report that official testing will not paraphrase disclosed values; this statement is
+  not reproduced in the written specification, so it is not used as an official-score claim.
 - LLM reranking, cross-encoders, dense retrieval, and multiple learned rankers were rejected
   after negative held-out measurements. Their code and outputs remain versioned.
 - The optional local model is approximately 265 MB before dependencies. It is loaded lazily

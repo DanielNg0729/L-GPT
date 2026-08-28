@@ -8,6 +8,7 @@ organized as a reproducible research package rather than as exploratory analysis
 | Path | Purpose |
 |---|---|
 | [`EXPERIMENT_INDEX.md`](EXPERIMENT_INDEX.md) | One-line question, result, and decision for every experiment |
+| [`EXPERIMENT_DECISION_LOG.md`](EXPERIMENT_DECISION_LOG.md) | Full one-by-one result, ruling, and final-design impact for every experiment |
 | [`EXPERIMENT_FINDINGS.md`](EXPERIMENT_FINDINGS.md) | Detailed methods, measurements, corrections, and interpretation |
 | [`scripts/`](scripts/) | Runnable experiment and validation programs |
 | [`results/`](results/) | Versioned raw JSON outputs used by the reports |
