@@ -1,0 +1,31 @@
+{
+  "candidate": "development-lexicon",
+  "dataset": "D:\\Coding\\Models\\TiktokTechJam\\robustness\\v2\\sets\\semantic_attribute_development_200.jsonl",
+  "semantic_shift": {
+    "sample_count": 200,
+    "hit_rate_at_10": 0.68,
+    "mrr": 0.639306,
+    "mttc": 6.91,
+    "efficiency": 0.409,
+    "recommended_technical_score": 0.613592
+  },
+  "semantic_gate_after_shift": {
+    "literal_present": 945,
+    "literal_absent": 547,
+    "semantic_triggered": 516,
+    "unmapped_absent": 31
+  },
+  "official200": {
+    "sample_count": 200,
+    "hit_rate_at_10": 0.995,
+    "mrr": 0.995,
+    "mttc": 2.32,
+    "efficiency": 0.868,
+    "recommended_technical_score": 0.9696
+  },
+  "semantic_gate_after_public": {
+    "literal_present": 1204,
+    "literal_absent": 11,
+    "unmapped_absent": 11
+  }
+}

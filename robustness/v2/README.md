@@ -6,7 +6,9 @@ format variation or an estimate of the organizer's private target distribution.
 
 The data builder selects target-disjoint catalogue products that have at least three visible
 attributes from a manually curated semantic rewrite bank. Each card stores the original
-catalogue phrase, its attribute bucket, and separate development and holdout paraphrases.
+catalogue phrase, its attribute bucket, and only the paraphrase active for that split.
+The runner must use development rows for design and tuning. It must not derive a resolver
+from the holdout rows before the final frozen evaluation.
 
 The eventual V2 runner keeps the released message wrappers verbatim. It substitutes only
 the value represented by `<attribute paraphrase>` below:
@@ -37,3 +39,22 @@ python -m robustness.v2.build_semantic_attribute_sets
 
 The generated files are placed in `robustness/v2/sets/` and record their checksums in a
 manifest. The development and holdout rewrite families are disjoint by construction.
+
+Run the V2 harness with its lexical control:
+
+```bash
+python -m robustness.v2.run_semantic_attribute --candidate literal
+```
+
+The first semantic candidate is intentionally transparent and development-only. It maps
+a development paraphrase to an attested catalogue phrase only after the complete
+normalised paraphrase has zero FTS5 matches. This is a control-flow test, not the final
+semantic system:
+
+```bash
+python -m robustness.v2.run_semantic_attribute --candidate development-lexicon --public-control
+```
+
+`semantic_gate_after_public.semantic_triggered` must remain zero. This verifies that the
+semantic path is unreachable when released public constraints already have literal
+catalogue evidence.

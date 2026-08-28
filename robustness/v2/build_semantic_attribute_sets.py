@@ -161,13 +161,25 @@ def write_set(name: str, targets: list[tuple[str, dict, dict]], profiles: list[d
     scenarios = scenario_sequence(len(targets), seed + 91)
     rows = []
     for index, ((asin, product, card), scenario) in enumerate(zip(targets, scenarios), start=1):
+        active_card = {
+            group: [
+                {
+                    "rule": atom["rule"],
+                    "canonical": atom["canonical"],
+                    "attribute": atom["attribute"],
+                    "paraphrase": atom[f"{family}_paraphrase"],
+                }
+                for atom in values
+            ]
+            for group, values in card.items()
+        }
         rows.append({
             "sample_id": f"{name}_{index:04d}",
             "scenario_type": scenario,
             "ground_truth": {"parent_asin": asin},
             "user_profile": profiles[(index - 1) % len(profiles)],
             "category": coarse_category([str(value) for value in product.get("categories") or []]),
-            "semantic_card": card,
+            "semantic_card": active_card,
             "paraphrase_family": family,
         })
     path = out / f"{name}.jsonl"
