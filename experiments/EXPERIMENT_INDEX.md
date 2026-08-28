@@ -110,6 +110,8 @@ Status definitions:
 | [`58_override_replacement.py`](scripts/58_override_replacement.py) | Tested category-preserving prior-evidence reset on an override. It reduced Official200 intent-override HitRate from 1.000 to 0.933 and Unseen800 from 0.983 to 0.858. | Rejected |
 | [`59_override_opening_evidence.py`](scripts/59_override_opening_evidence.py) | Recovered the organizer-confirmed target-derived old-value slot from intent-override openings. Full constraint treatment was exactly neutral on Official200 and Unseen800; weaker treatment regressed Unseen800 by 0.000456. | Shipped |
 | [`60_override_focus_contradiction.py`](scripts/60_override_focus_contradiction.py) | Built OverrideFocus800 and saturated its initial old-value slot with incompatible, catalogue-attested materials. Retaining stale evidence lost 0.058669 versus source-faithful overrides; no safe semantic conflict detector is available from released wording alone. | Supported diagnostic |
+| [`61_catalog_conflict_guard.py`](scripts/61_catalog_conflict_guard.py) | Required same attribute family and zero catalogue co-occurrence before removal. It made zero removals in all 800 adversarial material collisions because incompatible materials commonly co-occur in unrelated products. | Rejected |
+| [`62_same_family_override_replace.py`](scripts/62_same_family_override_replace.py) | Replaced only unconfirmed opening values when the later override named the same high-confidence family. It removed 589 of 800 adversarial values and recovered 0.028994, but regressed Official200 by 0.000100. | Rejected for shipment; retained diagnostic |
 
 ## Final selection rule
 

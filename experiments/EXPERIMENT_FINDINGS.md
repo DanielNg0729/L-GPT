@@ -126,6 +126,30 @@ addition is a semantic conflict detector that can identify a replacement relatio
 blind reset of prior evidence. This counterfactual is a stress probe, not an
 organizer-private performance estimate.
 
+### Follow-up: why catalogue pair search cannot identify a withdrawn preference
+
+Experiment 61 tested the literal compatibility idea directly. At an override it considered
+an opening value removable only if old and new values had the same high-confidence family,
+both were catalogue-attested, and no catalogue document contained both. This preserved the
+source-faithful score exactly, but removed **0 of 800** counterfactual material collisions.
+Every incompatible material pair occurred together in at least one unrelated catalogue
+product. Catalogue co-occurrence is a product-property relation, not evidence that the
+customer kept both preferences.
+
+Experiment 62 instead treated a later explicit override as authoritative only within the
+same recognized material, colour, or closure family, and only for an opening value that
+the customer had not subsequently reconfirmed. It removed 589 of 800 counterfactual
+values and improved the contradiction score from 0.859962 to 0.888956. The cost was small
+but real: source-faithful OverrideFocus800 fell from 0.918631 to 0.917956, and Official200
+fell from 0.969600 to 0.969500 after one legitimate opening value was replaced.
+
+The outcome answers the design question precisely. A deterministic family rule can recover
+many explicit same-attribute contradictions, but cannot satisfy the no-regression rule
+because the released generator sometimes places two compatible target facts in the same
+family. A future solution needs semantic replacement evidence, such as a reliable statement
+that a named old value is being withdrawn, rather than catalogue co-occurrence or a blind
+same-family deletion.
+
 ---
 
 ## 2. The simulator is a deterministic function of the target product
