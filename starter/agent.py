@@ -69,6 +69,12 @@ STOP = {
 PAT_REQUIREMENT = re.compile(r"key requirement is:\s*(.+?)\.?$", re.I)
 PAT_MATTERS = re.compile(r"what matters is:\s*(.+?)\.?$", re.I)
 PAT_OVERRIDE = re.compile(r"what i need is:\s*(.+?)\.?$", re.I)
+# Released intent-override opening: "I'm looking for {category}. {old_value}".
+# `old_value` is target-derived `soft_preferences[-1]`, not profile prose. It is
+# therefore grounded evidence, while the later override still clears rejection state.
+PAT_OVERRIDE_OPENING = re.compile(
+    r"^I'm looking for .+?\. (?!A key requirement is:)(.+)$", re.I
+)
 PAT_LOOKING = re.compile(r"looking for\s+(.+?)(?:[,.]|$)", re.I)
 PAT_NOINFO = re.compile(r"don'?t have (?:an? )?(?:additional )?preference", re.I)
 # Broader cue for "the customer just changed their mind", used only to reset rejection
@@ -506,6 +512,13 @@ class Agent:
             if mm:
                 out.extend((p.strip(), CONSTRAINT)
                            for p in mm.group(1).split(";") if p.strip())
+        # Unlike a browsing opening, the released intent-override opening carries its
+        # prior value in an unlabelled second slot. Organizer source defines that value
+        # as `soft_preferences[-1]` from the target card, so preserving it as evidence
+        # is grounded rather than heuristic.
+        opening = PAT_OVERRIDE_OPENING.match(msg.strip())
+        if opening and opening.group(1).strip():
+            out.append((opening.group(1).strip(), CONSTRAINT))
         return out
 
     def _resolve(self, text: str, cap: int | None = None) -> list[str]:
