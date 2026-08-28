@@ -44,15 +44,15 @@ def normalise(text: str) -> str:
     return " ".join(raw_toks(text))
 
 
-def values(sample: dict) -> tuple[list[str], list[str]]:
+def values(sample: dict, value_key: str = "paraphrase") -> tuple[list[str], list[str]]:
     card = sample["semantic_card"]
-    hard = [str(atom["paraphrase"]) for atom in card.get("hard_constraints", [])]
-    soft = [str(atom["paraphrase"]) for atom in card.get("soft_preferences", [])]
+    hard = [str(atom[value_key]) for atom in card.get("hard_constraints", [])]
+    soft = [str(atom[value_key]) for atom in card.get("soft_preferences", [])]
     return hard, soft
 
 
-def v2_initial_message(sample: dict, category: str, disclosed: set[str]) -> str:
-    hard, soft = values(sample)
+def v2_initial_message(sample: dict, category: str, disclosed: set[str], value_key: str) -> str:
+    hard, soft = values(sample, value_key)
     if sample["scenario_type"] == "buying" and hard:
         disclosed.add(hard[0])
         return f"I'm looking for {category}. A key requirement is: {hard[0]}."
@@ -63,7 +63,7 @@ def v2_initial_message(sample: dict, category: str, disclosed: set[str]) -> str:
 
 
 def v2_customer_reply(sample: dict, ask_attribute: object, disclosed: set[str],
-                      boundary_used: bool) -> tuple[str, bool]:
+                      boundary_used: bool, value_key: str) -> tuple[str, bool]:
     """Released reply wrappers, with only semantic attribute values replaced.
 
     Attribute routing intentionally uses the released evaluator classifier on the
@@ -75,7 +75,7 @@ def v2_customer_reply(sample: dict, ask_attribute: object, disclosed: set[str],
         return f"I don't have a preference for {attribute}; please use your judgment.", True
     if not attribute:
         return "Those options are not quite right yet. Ask me about one specific attribute.", boundary_used
-    hard, soft = values(sample)
+    hard, soft = values(sample, value_key)
     constraints = [*hard, *soft]
     matches = [
         value for value in constraints
@@ -87,8 +87,8 @@ def v2_customer_reply(sample: dict, ask_attribute: object, disclosed: set[str],
     return "For that, what matters is: " + "; ".join(matches) + ".", boundary_used
 
 
-def v2_behavior(sample: dict) -> dict:
-    hard, soft = values(sample)
+def v2_behavior(sample: dict, value_key: str) -> dict:
+    hard, soft = values(sample, value_key)
     # `behavior_for` chooses the released deterministic override turn. Replace its two
     # values only; the message wrapper and timing are otherwise identical.
     seed = f"{sample.get('sample_id', '')}\0{sample.get('scenario_type', '')}"
@@ -169,7 +169,7 @@ def compact(result: dict) -> dict:
 
 
 def evaluate_v2(agent: Agent, samples: list[dict], catalog_ids: set[str],
-                categories: dict[str, list[str]]) -> dict:
+                categories: dict[str, list[str]], value_key: str = "paraphrase") -> dict:
     sessions: list[dict] = []
     for sample in samples:
         session_id = f"semantic_v2_{uuid.uuid4().hex}"
@@ -178,8 +178,8 @@ def evaluate_v2(agent: Agent, samples: list[dict], catalog_ids: set[str],
         disclosed: set[str] = set()
         boundary_used = False
         override_applied = sample["scenario_type"] != "intent_override"
-        user_message = v2_initial_message(sample, str(sample["category"]), disclosed)
-        behavior = v2_behavior(sample)
+        user_message = v2_initial_message(sample, str(sample["category"]), disclosed, value_key)
+        behavior = v2_behavior(sample, value_key)
         hit_turn: int | None = None
         best_rank: int | None = None
         for turn in range(1, MAX_TURNS + 1):
@@ -205,7 +205,7 @@ def evaluate_v2(agent: Agent, samples: list[dict], catalog_ids: set[str],
                 user_message = str(override.get("message", "Actually, please ignore my earlier preference."))
             else:
                 user_message, boundary_used = v2_customer_reply(
-                    sample, response.get("ask_attribute"), disclosed, boundary_used
+                    sample, response.get("ask_attribute"), disclosed, boundary_used, value_key
                 )
         sessions.append({
             "sample_id": sample["sample_id"],
@@ -245,6 +245,8 @@ def main() -> None:
     parser.add_argument("--dataset", type=Path,
                         default=ROOT / "robustness" / "v2" / "sets" / "semantic_attribute_development_200.jsonl")
     parser.add_argument("--candidate", choices=("literal", "development-lexicon", "semantic-feature"), default="literal")
+    parser.add_argument("--value-mode", choices=("paraphrase", "canonical"), default="paraphrase",
+                        help="Use semantic rewrites or replay canonical values on the same rows.")
     parser.add_argument("--public-control", action="store_true",
                         help="also score the candidate on official public data to verify the semantic gate")
     parser.add_argument("--output", type=Path, default=None)
@@ -255,7 +257,12 @@ def main() -> None:
     catalog = ROOT / "data" / "catalog.jsonl"
     ids, categories, products = catalog_index(catalog)
     agent = make_agent(args.candidate, catalog, development_rows)
-    result = {"candidate": args.candidate, "dataset": str(args.dataset), "semantic_shift": compact(evaluate_v2(agent, rows, ids, categories))}
+    result = {
+        "candidate": args.candidate,
+        "dataset": str(args.dataset),
+        "value_mode": args.value_mode,
+        "semantic_shift": compact(evaluate_v2(agent, rows, ids, categories, args.value_mode)),
+    }
     if isinstance(agent, ExactAbsentLexiconAgent):
         result["semantic_gate_after_shift"] = dict(agent.semantic_gate)
     if isinstance(agent, SemanticFeatureAgent):

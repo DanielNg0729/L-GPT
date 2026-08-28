@@ -54,6 +54,19 @@ python -m robustness.v2.build_semantic_attribute_sets
 The generated files are placed in `robustness/v2/sets/` and record their checksums in a
 manifest. The development and holdout rewrite families are disjoint by construction.
 
+### Canonical-value replay control
+
+Every semantic experiment first replays the exact same rows with only `paraphrase`
+substituted back to `canonical`. Target selection, message wrappers, scenario type, turn
+timing, user profile, candidate generation, ranking, and population prior remain unchanged.
+The gap between canonical replay and semantic rewrite is therefore semantic-value loss on a
+fixed dataset, not a comparison with Official200.
+
+```bash
+python -m robustness.v2.run_semantic_attribute --candidate literal --value-mode canonical
+python -m robustness.v2.run_semantic_attribute --candidate literal --value-mode paraphrase
+```
+
 Run the V2 harness with its lexical control:
 
 ```bash

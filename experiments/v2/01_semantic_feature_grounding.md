@@ -29,17 +29,26 @@ because no candidate met the development and clean-control requirements.
 
 | Candidate | SemanticShift-Dev200 | Official200 | Clean semantic activations |
 |---|---:|---:|---:|
+| Literal V1, canonical-value replay | 0.780750 | Not applicable | 0 |
 | Literal V1 | 0.063100 | 0.969600 | 0 |
 | Development phrase map | 0.616667 | 0.969600 | 0 |
 | Semantic feature, full-phrase gate | 0.078700 | 0.968600 | 13 |
 | Semantic feature, strict lexical-fallback gate | 0.063100 | 0.969600 | 0 |
 
-The phrase map demonstrates that semantic attribute recovery can materially improve this
-synthetic task, but it is intentionally built from development answers and is therefore only a
-control. The genuine encoder is not competitive: with a full-phrase gate it accepts 618 of 623
-unresolved development phrases, mostly incorrectly, and causes a clean-score regression. With
-the strict gate it correctly preserves Official200 but never activates because the lexical
-resolver finds incidental globally-attested n-grams in every paraphrase.
+The canonical-value replay uses the exact same Dev200 targets, profile, scenario type, message
+wrappers, turn timing, probe sequence, candidate generation, ranking, and popularity prior. It
+changes only `paraphrase` back to `canonical`, producing 0.780750. This is the relevant
+upper reference for the present card construction. It is lower than Official200 because these
+are broad target-disjoint targets with a deliberately reduced semantic card, not the released
+review-weighted target distribution with its full organiser card.
+
+The phrase map recovers 0.553567 of the 0.717650 semantic-loss gap, or 77.1 percent, which
+demonstrates that semantic attribute recovery can materially improve this synthetic task. It is
+intentionally built from development answers and is therefore only a control. The genuine
+encoder is not competitive: with a full-phrase gate it accepts 618 of 623 unresolved development
+phrases, mostly incorrectly, and causes a clean-score regression. With the strict gate it
+correctly preserves Official200 but never activates because the lexical resolver finds
+incidental globally-attested n-grams in every paraphrase.
 
 ## Diagnosis
 
