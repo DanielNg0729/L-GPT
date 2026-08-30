@@ -37,12 +37,12 @@ def new_session_graph(session_id: str, user_profile: dict) -> dict:
     }
 
 
-def record_turn(graph: dict, turn: int, user_message: str, track: str,
+def record_turn(graph: dict, turn: int, user_message: str, opening_type: str,
                 constraints_added: list[dict]) -> None:
     graph["turns"].append({
         "turn": turn,
         "user_message": user_message,
-        "track": track,
+        "opening_type": opening_type,
         "constraints_added": [c["text"] for c in constraints_added],
     })
 

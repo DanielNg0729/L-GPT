@@ -53,17 +53,17 @@ BITS_PER_CONSTRAINT = {
 }
 
 
-def _remaining_estimate(structured: dict) -> float:
+def _remaining_estimate(intent: dict) -> float:
     """How many card constraints are probably still undisclosed."""
-    if structured.get("end_of_card"):
+    if intent.get("nothing_left_to_learn"):
         return 0.0
-    known = len(structured["constraints"])
+    known = len(intent["constraints"])
     return max(0.0, EXPECTED_CARD_SIZE - known)
 
 
-def expected_information_gain(structured: dict, cfg: AskConfig) -> dict[str, float]:
-    remaining = _remaining_estimate(structured)
-    exhausted = set(structured.get("exhausted") or [])
+def expected_information_gain(intent: dict, cfg: AskConfig) -> dict[str, float]:
+    remaining = _remaining_estimate(intent)
+    exhausted = set(intent.get("exhausted") or [])
     gains: dict[str, float] = {}
     for attribute in ("other", *cfg.prior):
         if remaining <= 0.0:
@@ -78,14 +78,14 @@ def expected_information_gain(structured: dict, cfg: AskConfig) -> dict[str, flo
     return gains
 
 
-def choose(structured: dict, session_graph: dict, pool_size: int, cfg: AskConfig) -> str | None:
+def choose(intent: dict, session_graph: dict, pool_size: int, cfg: AskConfig) -> str | None:
     """Pick the next `ask_attribute`.
 
     `pool_size` is the size of the conjunctive candidate pool. Once it fits inside the
     scored top 10 there is nothing left for a question to buy, and the slate itself is
     the answer.
     """
-    if cfg.allow_null_ask and structured.get("end_of_card") and 0 < pool_size <= cfg.stop_asking_pool:
+    if cfg.allow_null_ask and intent.get("nothing_left_to_learn") and 0 < pool_size <= cfg.stop_asking_pool:
         return None
 
     # Otherwise always ask. A small pool is *not* evidence that the target is in it —
@@ -96,14 +96,14 @@ def choose(structured: dict, session_graph: dict, pool_size: int, cfg: AskConfig
     # turn 10. Asking is free here (a turn carries recommendations *and* a question,
     # and the hit is checked before the customer replies), so there is never a reason
     # to spend a turn on silence.
-    gains = expected_information_gain(structured, cfg)
+    gains = expected_information_gain(intent, cfg)
     best = max(gains, key=lambda a: gains[a]) if gains else "other"
     if gains.get(best, 0.0) > 0.0:
         return best
 
     # The card is drained but we still have not converged. A typed ask may whiff, but
     # `null` whiffs with certainty, so spend the turn on the least-explored attribute.
-    exhausted = set(structured.get("exhausted") or [])
+    exhausted = set(intent.get("exhausted") or [])
     asked = set(session_graph.get("asked") or [])
     for attribute in sorted(cfg.prior, key=lambda a: -cfg.prior[a]):
         if attribute not in exhausted and attribute not in asked:

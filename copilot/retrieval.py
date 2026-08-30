@@ -18,7 +18,7 @@ The remaining channels carry the early turns and the paraphrase risk:
 
     phrase      union of per-constraint exact matches, scored by weighted coverage
     bm25        field-weighted BM25 over constraint + category tokens
-    facet       structured filters: material / colour / price / department
+    facet       intent filters: material / colour / price / department
     category    category-path match ranked by a popularity prior (browsing cold start)
     lsa         optional TF-IDF + SVD cosine; ships no model weights
 """
@@ -56,7 +56,7 @@ def _rrf(channels: dict[str, list[int]], weights: dict[str, float], k: int) -> l
 
 
 def conjunctive_pool(
-    kg: KnowledgeGraph, structured: dict, cfg: RetrievalConfig
+    kg: KnowledgeGraph, intent: dict, cfg: RetrievalConfig
 ) -> tuple[np.ndarray, list[dict], list[dict]]:
     """AND every disclosed constraint, dropping the least selective one when empty.
 
@@ -66,7 +66,7 @@ def conjunctive_pool(
     is the cheapest thing to give up.
     """
     entries: list[dict] = []
-    for constraint in active_constraints(structured):
+    for constraint in active_constraints(intent):
         docs = kg.phrase_docs(constraint["norm"])
         if docs.size == 0:
             continue
@@ -82,7 +82,7 @@ def conjunctive_pool(
     # "budget around $12.99" — so they never match as phrases, but they are exactly the
     # kind of constraint a filter handles. Folding them in is worth a lot: the exact
     # price alone collapses most pools to a single row.
-    for name, docs in (facet_members(kg, structured, stated_only=True)
+    for name, docs in (facet_members(kg, intent, stated_only=True)
                        if cfg.fold_facets_into_and else []):
         entries.append({
             "constraint": {"text": name, "norm": name, "attribute": "facet",
@@ -120,11 +120,11 @@ def conjunctive_pool(
     return _EMPTY, [], [e["constraint"] for e in dropped]
 
 
-def coverage_vector(kg: KnowledgeGraph, structured: dict) -> tuple[np.ndarray, float]:
+def coverage_vector(kg: KnowledgeGraph, intent: dict) -> tuple[np.ndarray, float]:
     """Per-document weighted count of satisfied constraints, and the achievable max."""
     coverage = np.zeros(len(kg), dtype=np.float32)
     total = 0.0
-    for constraint in structured["constraints"]:
+    for constraint in intent["constraints"]:
         weight = float(constraint["weight"])
         total += weight
         docs = kg.phrase_docs(constraint["norm"])
@@ -133,9 +133,9 @@ def coverage_vector(kg: KnowledgeGraph, structured: dict) -> tuple[np.ndarray, f
     return coverage, total
 
 
-def facet_members(kg: KnowledgeGraph, structured: dict,
+def facet_members(kg: KnowledgeGraph, intent: dict,
                   stated_only: bool = False) -> list[tuple[str, np.ndarray]]:
-    """Each structured filter as its own droppable posting list.
+    """Each intent filter as its own droppable posting list.
 
     These are kept separate rather than pre-intersected so the conjunctive backoff can
     give up one filter at a time instead of all of them at once.
@@ -146,8 +146,8 @@ def facet_members(kg: KnowledgeGraph, structured: dict,
     produced them and measurably noisier, so they stay out of the AND and are used only
     for ranking and for the facet channel.
     """
-    facets = structured["facets"]
-    stated = set(structured.get("stated_facets") or [])
+    facets = intent["facets"]
+    stated = set(intent.get("stated_facets") or [])
     members: list[tuple[str, np.ndarray]] = []
 
     price = facets.get("price")
@@ -180,9 +180,9 @@ def facet_members(kg: KnowledgeGraph, structured: dict,
     return members
 
 
-def facet_pool(kg: KnowledgeGraph, structured: dict) -> np.ndarray:
-    """Intersection of the structured filters, relaxed rather than emptied."""
-    members = facet_members(kg, structured)
+def facet_pool(kg: KnowledgeGraph, intent: dict) -> np.ndarray:
+    """Intersection of the intent filters, relaxed rather than emptied."""
+    members = facet_members(kg, intent)
     if not members:
         return _EMPTY
     members.sort(key=lambda kv: len(kv[1]))
@@ -195,20 +195,20 @@ def facet_pool(kg: KnowledgeGraph, structured: dict) -> np.ndarray:
     return pool
 
 
-def query_terms(structured: dict) -> list[str]:
+def query_terms(intent: dict) -> list[str]:
     terms: list[str] = []
-    for constraint in active_constraints(structured):
+    for constraint in active_constraints(intent):
         if constraint["superseded"]:
             continue
         terms.extend(tokens(constraint["text"]))
-    terms.extend(structured.get("category_terms") or [])
+    terms.extend(intent.get("category_terms") or [])
     return unique(terms)[:64]
 
 
-def retrieve(kg: KnowledgeGraph, structured: dict, cfg: RetrievalConfig) -> RetrievalResult:
+def retrieve(kg: KnowledgeGraph, intent: dict, cfg: RetrievalConfig) -> RetrievalResult:
     """Run every channel and fuse. `pool` is the authoritative narrow candidate set."""
-    pool, used, dropped = conjunctive_pool(kg, structured, cfg)
-    coverage, coverage_max = coverage_vector(kg, structured)
+    pool, used, dropped = conjunctive_pool(kg, intent, cfg)
+    coverage, coverage_max = coverage_vector(kg, intent)
 
     result = RetrievalResult(
         pool=pool,
@@ -237,16 +237,16 @@ def retrieve(kg: KnowledgeGraph, structured: dict, cfg: RetrievalConfig) -> Retr
         order = hit_docs[np.argsort(-coverage[hit_docs])][: cfg.candidate_pool]
         channels["phrase"] = order.tolist()
 
-    terms = query_terms(structured)
+    terms = query_terms(intent)
     if terms:
         channels["bm25"] = [d for d, _ in kg.bm25(terms, restrict=restrict, top_n=cfg.candidate_pool)]
 
-    facets = facet_pool(kg, structured)
+    facets = facet_pool(kg, intent)
     if facets.size:
         ordered = facets[np.argsort(-(coverage[facets] * 5.0 + kg.popularity[facets]))]
         channels["facet"] = ordered[: cfg.candidate_pool].tolist()
 
-    category_terms = structured.get("category_terms") or []
+    category_terms = intent.get("category_terms") or []
     if category_terms:
         cats = kg.category_docs(category_terms)
         if cats.size:
@@ -254,8 +254,8 @@ def retrieve(kg: KnowledgeGraph, structured: dict, cfg: RetrievalConfig) -> Retr
             channels["category"] = ordered[: cfg.candidate_pool].tolist()
 
     if kg._lsa is not None:
-        query = " ".join([structured.get("category_raw", "")]
-                         + [c["text"] for c in active_constraints(structured) if not c["superseded"]])
+        query = " ".join([intent.get("category_raw", "")]
+                         + [c["text"] for c in active_constraints(intent) if not c["superseded"]])
         if query.strip():
             channels["lsa"] = [d for d, _ in kg.lsa_docs(query, top_n=cfg.candidate_pool)]
 

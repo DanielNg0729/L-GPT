@@ -6,7 +6,7 @@ only thing downstream stages read — never the raw user text.
 The original design put an LLM *Query expansion* step and a *COSMO* commonsense
 enrichment step in front of it. Both are removed here, deliberately:
 
-  * the customer's utterances are already structured — they are generated from a
+  * the customer's utterances are already intent — they are generated from a
     small set of fixed templates and their payload is verbatim catalog text
     (measured: 760/760 revealed constraints are punctuation-insensitive substrings
     of the target row), so there is nothing for an expander to recover; and
@@ -66,11 +66,13 @@ def classify(value: str) -> str:
     return "feature"
 
 
-def new_structured(track: str = "browsing") -> dict:
-    """The empty Structured Response, created once per session."""
+def new_intent(opening_type: str = "browsing") -> dict:
+    """The empty intent object, created once per conversation."""
     return {
-        "kind": "structured_response",
-        "track": track,
+        "kind": "shopper_intent",
+        # What the opening line looked like: buying / browsing / override. Recorded for
+        # the session graph only - the search mode is decided separately, every turn.
+        "opening_type": opening_type,
         "category_raw": "",
         "category_terms": [],
         "constraints": [],       # [{text, norm, attribute, weight, turn, superseded}]
@@ -79,14 +81,14 @@ def new_structured(track: str = "browsing") -> dict:
         # wording of a feature bullet. Only stated ones are trusted as hard filters.
         "stated_facets": [],
         "boundary": False,
-        "end_of_card": False,
+        "nothing_left_to_learn": False,
         "exhausted": [],
-        "pivot": False,
+        "changed_mind": False,
         "last_reply_kind": None,
     }
 
 
-def _add_constraint(structured: dict, text: str, turn: int, weight: float = 1.0) -> dict | None:
+def _add_constraint(intent: dict, text: str, turn: int, weight: float = 1.0) -> dict | None:
     """Add one constraint, splitting synthesised ones off into facets instead."""
     text = re.sub(r"\s+", " ", text).strip(" -;,.\t\n")
     if not text:
@@ -95,23 +97,23 @@ def _add_constraint(structured: dict, text: str, turn: int, weight: float = 1.0)
     color = RE_COLOR_C.match(text)
     if color:
         value = color.group("value").strip().lower()
-        if value not in structured["facets"]["color"]:
-            structured["facets"]["color"].append(value)
-        if "color:%s" % value not in structured["stated_facets"]:
-            structured["stated_facets"].append("color:%s" % value)
+        if value not in intent["facets"]["color"]:
+            intent["facets"]["color"].append(value)
+        if "color:%s" % value not in intent["stated_facets"]:
+            intent["stated_facets"].append("color:%s" % value)
         return None
 
     budget = RE_BUDGET_C.match(text)
     if budget:
         try:
-            structured["facets"]["price"] = float(budget.group("value").replace(",", ""))
-            structured["stated_facets"].append("price")
+            intent["facets"]["price"] = float(budget.group("value").replace(",", ""))
+            intent["stated_facets"].append("price")
         except ValueError:
             pass
         return None
 
     norm = normalize_phrase(text)
-    for existing in structured["constraints"]:
+    for existing in intent["constraints"]:
         if existing["norm"] == norm:
             existing["weight"] = max(existing["weight"], weight)
             existing["superseded"] = False
@@ -125,72 +127,72 @@ def _add_constraint(structured: dict, text: str, turn: int, weight: float = 1.0)
         "turn": turn,
         "superseded": False,
     }
-    structured["constraints"].append(entry)
+    intent["constraints"].append(entry)
 
     # opportunistic facet harvest — a feature bullet often names its own material
     for material in {m.lower() for m in MATERIAL_RE.findall(text)}:
-        if material not in structured["facets"]["material"]:
-            structured["facets"]["material"].append(material)
+        if material not in intent["facets"]["material"]:
+            intent["facets"]["material"].append(material)
     for colour in {c.lower() for c in COLOR_RE.findall(text)}:
-        if colour not in structured["facets"]["color"]:
-            structured["facets"]["color"].append(colour)
+        if colour not in intent["facets"]["color"]:
+            intent["facets"]["color"].append(colour)
     return entry
 
 
-def _set_category(structured: dict, raw: str) -> None:
+def _set_category(intent: dict, raw: str) -> None:
     raw = raw.strip().strip(".,")
-    structured["category_raw"] = raw
-    structured["category_terms"] = unique(tokens(raw))
+    intent["category_raw"] = raw
+    intent["category_terms"] = unique(tokens(raw))
 
 
-def bootstrap(user_message: str, turn: int) -> tuple[dict, list[dict]]:
+def read_first_message(user_message: str, turn: int) -> tuple[dict, list[dict]]:
     """First turn: create the Structured Response from the opening utterance.
 
-    Returns the structured response and the constraints it learned.
+    Returns the intent response and the constraints it learned.
     """
     message = user_message.strip()
 
     match = RE_BUYING.match(message)
     if match:
-        structured = new_structured("buying")
-        _set_category(structured, match.group("category"))
-        added = _add_constraint(structured, match.group("constraint"), turn)
-        structured["last_reply_kind"] = "buying_open"
-        return structured, [c for c in (added,) if c]
+        intent = new_intent("buying")
+        _set_category(intent, match.group("category"))
+        added = _add_constraint(intent, match.group("constraint"), turn)
+        intent["last_reply_kind"] = "buying_open"
+        return intent, [c for c in (added,) if c]
 
     match = RE_BROWSING.match(message)
     if match:
-        structured = new_structured("browsing")
-        _set_category(structured, match.group("category"))
-        structured["last_reply_kind"] = "browsing_open"
-        return structured, []
+        intent = new_intent("browsing")
+        _set_category(intent, match.group("category"))
+        intent["last_reply_kind"] = "browsing_open"
+        return intent, []
 
     match = RE_OVERRIDE_OPEN.match(message)
     if match and match.group("constraint").strip():
         # "I'm looking for {category}. {old_value}" — the override opener. The payload
         # is a full feature bullet, which is the richest turn-1 signal in the whole set.
-        structured = new_structured("override")
-        _set_category(structured, match.group("category"))
-        added = _add_constraint(structured, match.group("constraint"), turn)
-        structured["last_reply_kind"] = "override_open"
-        return structured, [c for c in (added,) if c]
+        intent = new_intent("override")
+        _set_category(intent, match.group("category"))
+        added = _add_constraint(intent, match.group("constraint"), turn)
+        intent["last_reply_kind"] = "override_open"
+        return intent, [c for c in (added,) if c]
 
     # Paraphrase fallback: keep the whole utterance as a low-weight span.
-    structured = new_structured("browsing")
+    intent = new_intent("browsing")
     opening = RE_OPENING.match(message)
     if opening:
-        _set_category(structured, opening.group("category"))
+        _set_category(intent, opening.group("category"))
     else:
-        _set_category(structured, message)
-    added = _add_constraint(structured, message, turn, weight=0.4)
-    structured["last_reply_kind"] = "fallback_open"
-    return structured, [c for c in (added,) if c]
+        _set_category(intent, message)
+    added = _add_constraint(intent, message, turn, weight=0.4)
+    intent["last_reply_kind"] = "fallback_open"
+    return intent, [c for c in (added,) if c]
 
 
-def patch(structured: dict, user_message: str, turn: int) -> tuple[dict, list[dict], dict]:
+def update_with_new_info(intent: dict, user_message: str, turn: int) -> tuple[dict, list[dict], dict]:
     """Later turns: apply a patch to the existing Structured Response.
 
-    Never rebuilds. Returns (structured, newly-learned constraints, signals).
+    Never rebuilds. Returns (intent, newly-learned constraints, signals).
     `signals` reports what the utterance was, so the ask policy can react:
     `reveal`, `exhausted`, `boundary`, `nudge`, `override`, `fallback`.
     """
@@ -204,48 +206,48 @@ def patch(structured: dict, user_message: str, turn: int) -> tuple[dict, list[di
         # "X; X" means the card had fewer than three usable items and the simulator
         # padded soft_preferences with a copy of hard_constraints[0]: nothing is left.
         if len(parts) >= 2 and len({normalize_phrase(p) for p in parts}) == 1:
-            structured["end_of_card"] = True
+            intent["nothing_left_to_learn"] = True
             signals["duplicate"] = True
         for part in parts:
-            added = _add_constraint(structured, part, turn)
+            added = _add_constraint(intent, part, turn)
             if added:
                 learned.append(added)
         if not learned and not signals["duplicate"]:
-            structured["end_of_card"] = True
+            intent["nothing_left_to_learn"] = True
         signals["kind"] = "reveal"
-        structured["last_reply_kind"] = "reveal"
-        return structured, learned, signals
+        intent["last_reply_kind"] = "reveal"
+        return intent, learned, signals
 
     match = RE_NO_MORE.match(message)
     if match:
         attribute = match.group("attr").lower()
-        if attribute not in structured["exhausted"]:
-            structured["exhausted"].append(attribute)
+        if attribute not in intent["exhausted"]:
+            intent["exhausted"].append(attribute)
         if attribute == "other":
             # The unrestricted ask returned nothing, so the card is empty.
-            structured["end_of_card"] = True
+            intent["nothing_left_to_learn"] = True
         signals.update(kind="exhausted", attribute=attribute)
-        structured["last_reply_kind"] = "exhausted"
-        return structured, [], signals
+        intent["last_reply_kind"] = "exhausted"
+        return intent, [], signals
 
     match = RE_BOUNDARY.match(message)
     if match:
-        structured["boundary"] = True
+        intent["boundary"] = True
         signals.update(kind="boundary", attribute=match.group("attr").lower())
-        structured["last_reply_kind"] = "boundary"
-        return structured, [], signals
+        intent["last_reply_kind"] = "boundary"
+        return intent, [], signals
 
     if RE_NUDGE.search(message):
         # We sent ask_attribute=null and burned a turn. Never do that again.
         signals["kind"] = "nudge"
-        structured["last_reply_kind"] = "nudge"
-        return structured, [], signals
+        intent["last_reply_kind"] = "nudge"
+        return intent, [], signals
 
     match = RE_OVERRIDE.match(message)
     if match:
         value = match.group("value").strip()
         norm = normalize_phrase(value)
-        known = {c["norm"] for c in structured["constraints"]}
+        known = {c["norm"] for c in intent["constraints"]}
         # Is this a real pivot, or the same intent restated?
         #
         # The public simulator builds the "new" intent from `hard_constraints[0]` of the
@@ -261,36 +263,36 @@ def patch(structured: dict, user_message: str, turn: int) -> tuple[dict, list[di
         # say which one.
         genuine_pivot = norm not in known
         if genuine_pivot:
-            for existing in structured["constraints"]:
+            for existing in intent["constraints"]:
                 if existing["turn"] < turn:
                     existing["superseded"] = True
                     existing["weight"] = min(existing["weight"], 0.35)
-        added = _add_constraint(structured, value, turn, weight=1.3)
+        added = _add_constraint(intent, value, turn, weight=1.3)
         if added:
             learned.append(added)
         else:
-            for existing in structured["constraints"]:
+            for existing in intent["constraints"]:
                 if existing["norm"] == norm:
                     existing["weight"] = 1.3
                     existing["superseded"] = False
-        structured["pivot"] = genuine_pivot
+        intent["changed_mind"] = genuine_pivot
         signals["kind"] = "override"
         signals["genuine_pivot"] = genuine_pivot
-        structured["last_reply_kind"] = "override"
-        return structured, learned, signals
+        intent["last_reply_kind"] = "override"
+        return intent, learned, signals
 
     # Unrecognised utterance (a paraphrased private set lands here): treat the whole
     # thing as a low-weight span so BM25 and LSA still get something to work with.
-    added = _add_constraint(structured, message, turn, weight=0.4)
+    added = _add_constraint(intent, message, turn, weight=0.4)
     if added:
         learned.append(added)
-    structured["last_reply_kind"] = "fallback"
-    return structured, learned, signals
+    intent["last_reply_kind"] = "fallback"
+    return intent, learned, signals
 
 
-def active_constraints(structured: dict) -> list[dict]:
+def active_constraints(intent: dict) -> list[dict]:
     """Constraints ordered strongest-first: live before superseded, recent before old."""
     return sorted(
-        structured["constraints"],
+        intent["constraints"],
         key=lambda c: (c["superseded"], -c["weight"], -c["turn"]),
     )

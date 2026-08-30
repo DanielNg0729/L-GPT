@@ -14,45 +14,49 @@ the retrieval design.
 
 ```mermaid
 flowchart TD
-    UI([User input]) --> R{Router}
-    FP[/Fixed ask-attribute prompts/] -. message text .-> COMPOSE
+    UI([Shopper message]) --> ROUTE{route}
+    FP[/Fixed question wording/] -. text .-> WRITE
 
-    R -->|first turn| BOOT[Bootstrap]
-    R -->|later turns| PATCH[Override / patch]
+    ROUTE -->|first message| READ[read_first_message]
+    ROUTE -->|follow-up| UPDATE[update_with_new_info]
 
-    BOOT --> SR[["Structured response"]]
-    PATCH --> SR
+    READ --> INTENT[["shopper_intent"]]
+    UPDATE --> INTENT
 
-    SR --> TRACK{Constraints held?}
-    TRACK -->|yes| BU[Buying track<br/>exact + conjunctive]
-    TRACK -->|no| BR[Browse track<br/>category + popularity]
+    INTENT --> MODE{Any requirements yet?}
+    MODE -->|yes| NARROW[narrow_search]
+    MODE -->|no| BROAD[broad_search]
 
-    BU --> RAG[Multi-route retrieval]
-    BR --> RAG
-    RAG --> KG[(Knowledge graph<br/>read-only, JSON)]
-    KG --> SG[(Session graph<br/>merged each turn, JSON)]
-    SG --> S10[Select 10]
-    S10 --> ASK[Ask policy<br/>expected information gain]
-    ASK --> COMPOSE[Compose response]
-    COMPOSE --> RESP([message + ask_attribute + 10 ASINs])
+    NARROW --> SEARCH[search_catalog]
+    BROAD --> SEARCH
+    SEARCH --> KG[(Product index<br/>built once, read-only)]
+    KG --> REMEMBER[remember_turn]
+    REMEMBER --> SG[(Session graph<br/>this conversation only)]
+    SG --> PICK[pick_top_10]
+    PICK --> ASK[choose_question]
+    ASK --> WRITE[write_reply]
+    WRITE --> RESP([message + ask_attribute + 10 ASINs])
 
-    SG -. shown / provably-wrong .-> S10
-    RESP -.->|next turn| R
+    SG -. already shown / proven wrong .-> PICK
+    RESP -.->|next turn| ROUTE
 ```
 
 Implemented as a LangGraph `StateGraph` in [`copilot/graph.py`](../copilot/graph.py):
 
 | Node | File | Does |
 |---|---|---|
-| `router` | `graph.py` | first turn vs. follow-up |
-| `bootstrap` | `understanding.py` | create the Structured Response |
-| `patch` | `understanding.py` | JSON-patch it; handle override, boundary, exhaustion |
-| `buying_track` / `browse_track` | `graph.py` | dual-track routing |
-| `rag` | `retrieval.py` | run every channel, fuse with RRF |
-| `session_update` | `session_graph.py` | merge the turn into the session graph |
-| `select_10` | `select10.py` | rank and emit 10 ASINs |
-| `ask` | `ask_policy.py` | choose `ask_attribute` |
-| `compose` | `graph.py` | customer-facing text |
+| `route` | `graph.py` | first message vs. follow-up |
+| `read_first_message` | `understanding.py` | build `shopper_intent` from the opening line |
+| `update_with_new_info` | `understanding.py` | update it; handle change-of-mind, no-preference, nothing-left |
+| `narrow_search` / `broad_search` | `graph.py` | pick the search mode for this turn |
+| `search_catalog` | `retrieval.py` | run every search, merge with RRF |
+| `remember_turn` | `session_graph.py` | add this turn to the session graph |
+| `pick_top_10` | `select10.py` | rank and emit 10 ASINs |
+| `choose_question` | `ask_policy.py` | choose `ask_attribute` |
+| `write_reply` | `graph.py` | the sentence the shopper sees |
+
+Node names are the plain-English version of what each step does; the state fields
+follow the same rule (`shopper_intent`, `search_summary`, `search_mode`, `next_step`).
 
 ### Memory
 

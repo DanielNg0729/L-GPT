@@ -34,7 +34,7 @@ def _profile_terms(user_profile: dict) -> list[str]:
 
 def select(
     kg: KnowledgeGraph,
-    structured: dict,
+    intent: dict,
     retrieval: dict,
     session_graph: dict,
     user_profile: dict,
@@ -47,7 +47,7 @@ def select(
         # Nothing matched at all: fall back to the most popular rows in the stated
         # category, then to the most popular rows overall. Never return an empty list —
         # every turn is scored, so an empty slate throws away a free shot.
-        category_terms = structured.get("category_terms") or []
+        category_terms = intent.get("category_terms") or []
         pool = kg.category_docs(category_terms) if category_terms else np.zeros(0, dtype=np.int32)
         if pool.size:
             candidates = pool[np.argsort(-kg.popularity[pool])][: top_k * 20].tolist()
@@ -60,8 +60,8 @@ def select(
     demoted = demoted_asins(session_graph)
     profile = _profile_terms(user_profile)
 
-    category_terms = set(structured.get("category_terms") or [])
-    facets = structured["facets"]
+    category_terms = set(intent.get("category_terms") or [])
+    facets = intent["facets"]
     want_colors = [c.lower() for c in (facets.get("color") or [])]
     want_materials = [m.lower() for m in (facets.get("material") or [])]
     want_departments = [d.lower() for d in (facets.get("department") or [])]
