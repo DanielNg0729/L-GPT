@@ -36,7 +36,7 @@ from typing import Annotated, Any, TypedDict
 from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.graph import END, START, StateGraph
 
-from . import ask_policy, retrieval, select10, session_graph as sg, understanding
+from . import ask_policy, llm_rescue, retrieval, select10, session_graph as sg, understanding
 from .config import MAX_TURNS, CopilotConfig
 from .knowledge_graph import KnowledgeGraph
 
@@ -154,6 +154,44 @@ def build_graph(kg: KnowledgeGraph, config: CopilotConfig, scratch: dict):
             "steps": [("update_with_new_info", signals["kind"])],
         }
 
+    # --------------------------------------------------------- the LLM rescue
+    # Built once, lazily, and only if enabled — importing a provider is not free.
+    rescue_model: list = [None]
+
+    def needs_rescue(state: CopilotState) -> str:
+        """Has the deterministic path stalled far enough to be worth a model call?"""
+        if not config.enable_llm_rescue:
+            return choose_search_mode(state)
+        if state["turn"] < config.llm_rescue_turn:
+            return choose_search_mode(state)
+        if state["shopper_intent"].get("rescued_at_turn"):
+            return choose_search_mode(state)     # one rescue per conversation
+        return "llm_rescue"
+
+    def llm_rescue_node(state: CopilotState) -> dict:
+        """Re-read the shopper's own words and fold anything new into the intent."""
+        if rescue_model[0] is None and config.rescue_fn is None:
+            try:
+                rescue_model[0] = llm_rescue.build_model(config)
+            except Exception:  # noqa: BLE001 - no model reachable is not an error
+                rescue_model[0] = False
+        intent = dict(state["shopper_intent"])
+        rescued = llm_rescue.rescue(
+            state["session_graph"], intent, config,
+            model=rescue_model[0] or None,
+        )
+        usage = {"prompt_tokens": 0, "completion_tokens": 0}
+        if rescued:
+            usage = rescued.pop("usage", None) or usage
+            intent = llm_rescue.apply(intent, rescued, state["turn"])
+        else:
+            intent["rescued_at_turn"] = state["turn"]   # do not retry every turn
+        return {
+            "shopper_intent": intent,
+            "usage": usage,
+            "steps": [("llm_rescue", "hit" if rescued else "unavailable")],
+        }
+
     # ----------------------------------------------------------- search mode
     def choose_search_mode(state: CopilotState) -> str:
         """Do we have anything concrete to search with right now?
@@ -260,6 +298,7 @@ def build_graph(kg: KnowledgeGraph, config: CopilotConfig, scratch: dict):
     builder.add_node("route", route)
     builder.add_node("read_first_message", read_first_message)
     builder.add_node("update_with_new_info", update_with_new_info)
+    builder.add_node("llm_rescue", llm_rescue_node)
     builder.add_node("narrow_search", narrow_search)
     builder.add_node("broad_search", broad_search)
     builder.add_node("search_catalog", search_catalog)
@@ -274,11 +313,20 @@ def build_graph(kg: KnowledgeGraph, config: CopilotConfig, scratch: dict):
         {"read_first_message": "read_first_message",
          "update_with_new_info": "update_with_new_info"},
     )
-    for node in ("read_first_message", "update_with_new_info"):
-        builder.add_conditional_edges(
-            node, choose_search_mode,
-            {"narrow_search": "narrow_search", "broad_search": "broad_search"},
-        )
+    builder.add_conditional_edges(
+        "read_first_message", choose_search_mode,
+        {"narrow_search": "narrow_search", "broad_search": "broad_search"},
+    )
+    # A follow-up turn may first divert through the LLM rescue.
+    builder.add_conditional_edges(
+        "update_with_new_info", needs_rescue,
+        {"llm_rescue": "llm_rescue",
+         "narrow_search": "narrow_search", "broad_search": "broad_search"},
+    )
+    builder.add_conditional_edges(
+        "llm_rescue", choose_search_mode,
+        {"narrow_search": "narrow_search", "broad_search": "broad_search"},
+    )
     builder.add_edge("narrow_search", "search_catalog")
     builder.add_edge("broad_search", "search_catalog")
     builder.add_edge("search_catalog", "remember_turn")

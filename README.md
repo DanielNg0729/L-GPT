@@ -4,8 +4,9 @@ A conversational shopping agent over a frozen Amazon catalog (50,000 products,
 `Clothing_Shoes_and_Jewelry`). It has at most **10 turns** to surface the customer's
 hidden target product inside a top-10 list.
 
-Runs fully offline and deterministically. No LLM API, no network, no model weights,
-no vector service — the whole index is built in memory at startup in ~17 seconds.
+Runs fully offline and deterministically by default: no LLM API, no network, no model
+weights, no vector service — the whole index is built in memory at startup in ~17 seconds.
+An optional LLM rescue exists purely for robustness and is switched off; see below.
 
 ---
 
@@ -128,6 +129,15 @@ What we get for it: 0 tokens, 19 ms per turn, no API key, and the same answer ev
 which matters because `submission_rules.md` warns that *"organizer policy may disable
 network access"* during final scoring.
 
+**The one place a model does earn its keep** is `copilot/llm_rescue.py`, and it is off by
+default. From turn 5, if the deterministic path has not converged, it re-reads the
+shopper's own messages out of the session graph and returns their requirements as
+structured JSON. It never ranks, never picks the question, and never produces a
+`parent_asin`; a failure returns `None` and the turn continues untouched. On the clean
+public set it fires 3 times in 200 conversations and changes nothing at all. Its value is
+insurance: on a reworded set it lifts 0.8430 -> 0.8573 and restores hit@10 to 0.995, for
+about 10k tokens across all 200 conversations.
+
 ---
 
 ## Setup
@@ -204,12 +214,23 @@ at rank 1, and we cannot choose to withhold a correct answer.
 weight 0.0 → 0.8856, 0.3 → 0.8811, 1.2 → 0.8300. It is switched off, and the code path
 is kept in case the private set ships sharper tags.
 
-**Robustness to a paraphrased private set.** The simulator's reveal policy lives in the
-evaluator, not in any paraphraser, so the *information* would still arrive; only exact
-matching would degrade. Three hedges are in place: a span-extraction fallback in the
-parser, the BM25F channel, and the latent-semantic channel (`enable_lsa=True`, ships no
-model weights). LSA measures neutral on the public set — 0.8861 vs 0.8862, which is
-itself the evidence that the public set carries no semantic content at all.
+**Robustness to a paraphrased private set — now measured, not assumed.**
+`harness/paraphrase_stress.py` keeps the evaluator's simulator exactly as it is (the
+reveal policy lives in `customer_reply()`, not in any paraphraser) and rewrites only the
+text it emits:
+
+| | score | hit@10 |
+|---|---|---|
+| clean (control) | 0.8907 | 0.995 |
+| carrier sentence reworded, quoted text intact | 0.8430 | 0.985 |
+| + LLM rescue from turn 5 (`openai/gpt-oss-20b`) | **0.8573** | **0.995** |
+| heavily reworded incl. synonym swaps | 0.8126 | 0.950 |
+
+Recall barely moves — we still *find* the product, we just rank it lower and take a turn
+longer. The loss is MRR, not misses.
+
+The hedge that does the work is **BM25F**, not the latent-semantic channel: with LSA on,
+the reworded score is 0.8403 against 0.8430 with it off.
 
 **Cross-session learning is out of scope.** Both graphs are per-run: the knowledge graph
 is read-only, the session graph dies with the session. Nothing a customer says is

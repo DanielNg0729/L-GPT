@@ -41,3 +41,4 @@ cache/
 # Bản tóm tắt tự viết (*.md) thì vẫn commit bình thường.
 TikTok_TechJam_2026_Tracks_and_Problem_Statements.pdf
 TikTok_TechJam_2026_Tracks_and_Problem_Statements.html
+!.env.example

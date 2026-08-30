@@ -7,6 +7,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Callable
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 KIT_ROOT = REPO_ROOT / "provided" / "techjam-conversational-search"
@@ -121,6 +122,23 @@ class CopilotConfig:
     # rewrites the simulator's utterances.
     enable_lsa: bool = False
     lsa_components: int = 192
+
+    # --- optional LLM rescue (copilot/llm_rescue.py) ---------------------------------
+    # Off by default. When on, and only from `llm_rescue_turn` onward, the conversation
+    # is re-read by a language model to recover requirements our regex parser missed.
+    # It never ranks, never picks the question, and never produces a parent_asin; a
+    # failure returns None and the turn proceeds exactly as it would have. Credentials
+    # come from the environment - see .env.example - and are never committed.
+    enable_llm_rescue: bool = False
+    llm_rescue_turn: int = 5
+    llm_provider: str = "groq"                 # "groq" | "ollama"
+    llm_model: str = "openai/gpt-oss-20b"
+    llm_base_url: str = "http://localhost:11434"   # ollama only
+    llm_max_tokens: int = 3072                     # reasoning models need headroom
+
+    # Test seam: substitutes for the model call, so the ceiling of this approach can be
+    # measured with an oracle and no model running. Never set in production.
+    rescue_fn: Callable | None = None
 
     # Optional LLM polish of the customer-facing `message` string only. Never touches
     # ranking, so the scored path stays deterministic and offline.
