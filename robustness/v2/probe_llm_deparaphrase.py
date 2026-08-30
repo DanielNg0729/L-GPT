@@ -1,4 +1,4 @@
-"""V2.45: can an LLM do what the encoders could not -- name the catalogue value?
+"""V2.45: can an LLM DEPARAPHRASE -- name the catalogue value behind a rewording?
 
 WHY THIS PROBE, AFTER SEVEN FAILURES
 ------------------------------------
@@ -28,15 +28,28 @@ That check is deliberately provenance-only. Filtering proposals down to the set 
 suite's canonicals are emittable by construction, so the filter would be scoring the
 benchmark's construction rather than the model's knowledge. df > 0 is the honest gate.
 
-THREE ARMS, so the LLM is measured against the thing it has to beat
-  suppress   the shipped floor: unattested clause contributes nothing (attr-para 0.8330)
-  generate   LLM proposes a canonical, provenance-checked, no candidate list
-  choose     LLM picks from k retrieved candidates, or answers NONE
+THIS IS NOT RAG. Naming it that way was wrong and the correction matters, because the two
+designs fail differently. There is NO retrieval step anywhere here: the model never sees a
+catalogue string, generates the answer from parametric knowledge alone, and the catalogue
+is consulted afterwards as a FILTER rather than beforehand as CONTEXT. The shape is
+generate-then-verify -- paraphrase inversion against a provenance gate.
 
-`choose` exists because it is the arm that reuses the failed encoders honestly: their
-recall@k can be adequate even when their top-1 is 0/27, and the LLM supplies the
-precision they lack. It is only worth building if recall@k is actually there, which this
-reports before spending a single call.
+  what this is        phrase -> LLM (no context) -> proposal -> df(proposal) > 0 -> accept
+  what RAG would be   phrase -> retrieve k candidates -> LLM chooses among them -> accept
+
+WHAT THIS ARM SETTLES, AND WHAT IT LEAVES OPEN
+  suppress   the shipped floor: unattested clause contributes nothing (attr-para 0.8330)
+  generate   LLM proposes a canonical, provenance-checked, no candidate list  <- measured
+  choose     LLM picks from k retrieved candidates, or answers NONE           <- NOT BUILT
+
+`choose` is the genuinely retrieval-augmented arm and it has not been run. It is worth
+building precisely because it reuses the failed encoders honestly: their top-1 was 0/27,
+but top-1 precision is not what a candidate list needs -- RECALL@k is, and that was never
+measured. It is also the arm that could convert abstentions into answers, since a model
+that declines to name a value unprompted may well recognise it in a list.
+
+Do not read `generate`'s result as evidence about `choose`. They differ in where the
+catalogue enters, which is the whole design question.
 
 BASELINE TO BEAT IS SUPPRESSION, NOT THE PARAPHRASE BASELINE. Returning nothing already
 recovers +0.0560. An LLM that resolves a few phrases correctly and a few wrongly can
@@ -55,7 +68,7 @@ Three rules follow, and they are constraints on the design, not caveats on the r
   * whatever this motivates must be validated on an open-vocabulary suite before it can
     inform any shipping decision.
 
-Run:  PYTHONIOENCODING=utf-8 python -u robustness/v2/probe_llm_rag_resolver.py
+Run:  PYTHONIOENCODING=utf-8 python -u robustness/v2/probe_llm_deparaphrase.py
 """
 from __future__ import annotations
 
@@ -69,7 +82,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 V2 = ROOT / "robustness" / "v2"
-OUT = V2 / "results" / "llm_rag_resolver_probe_v2_45.json"
+OUT = V2 / "results" / "llm_deparaphrase_probe_v2_45.json"
 
 _s = ilu.spec_from_file_location("_v2_32", V2 / "evaluate_node4_cluster_aware.py")
 _m = ilu.module_from_spec(_s)
@@ -188,7 +201,7 @@ def main() -> None:
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(
-        {"experiment": "V2.45 LLM RAG resolver probe", "model": model, "n": n,
+        {"experiment": "V2.45 LLM deparaphrase probe (generate-then-verify, NOT RAG)", "model": model, "n": n,
          "accepted": acc, "correct": cor, "wrong": wrong, "abstained": absr,
          "rejected_by_provenance": df0, "failed_calls": fail, "rows": rows}, indent=2) + "\n",
         encoding="utf-8")

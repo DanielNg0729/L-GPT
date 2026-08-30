@@ -372,6 +372,26 @@ of magnitude inside the suite's bootstrap noise, and `inverse` is an adversarial
 "keep the debris" — a materially higher bar, because a confidently wrong canonical is
 worse than an absent one.
 
+### Naming correction: this is deparaphrasing, not RAG
+
+V2.45/V2.46 were first labelled an "LLM RAG resolver". That is wrong, and the distinction
+is a design question rather than a wording preference.
+
+| | where the catalogue enters | what the model sees |
+|---|---|---|
+| what was built | **after** generation, as a provenance filter (`df > 0`) | the paraphrase alone |
+| what RAG would be | **before** generation, as prompt context | k retrieved candidates |
+
+The measured arm is **generate-then-verify** — paraphrase inversion from parametric
+knowledge, gated on provenance. The model never sees a catalogue string.
+
+The genuinely retrieval-augmented arm (`choose`: retrieve k candidates, model picks one or
+answers NONE) was described in V2.45's plan and **never built**. It remains open, and it is
+the more interesting branch for two reasons. It reuses the failed encoders honestly — their
+top-1 was 0/27, but a candidate list needs RECALL@k, which was never measured. And it is
+the arm that could convert abstentions into answers, since a model that declines to name a
+value unprompted may recognise it in a list. V2.46's result says nothing about it.
+
 ### V2.45 — the probe, and a metric that was wrong in the model's favour
 
 Scored by string equality against the suite's canonicals, the LLM resolved 3/27. That

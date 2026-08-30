@@ -1,5 +1,5 @@
 {
-  "experiment": "V2.45 LLM RAG resolver probe",
+  "experiment": "V2.45 LLM deparaphrase probe (generate-then-verify, NOT RAG)",
   "model": "openai/gpt-oss-120b",
   "n": 27,
   "accepted": 21,

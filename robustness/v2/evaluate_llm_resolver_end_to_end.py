@@ -26,6 +26,16 @@ is right sometimes and wrong sometimes lands BELOW that bar, because a confident
 canonical is worse than an absent one: it withholds weight from the target AND hands it
 to the field.
 
+WHAT THE RESOLVER ACTUALLY IS. Generate-then-verify, not RAG. The model receives the
+paraphrase and NOTHING else -- no candidate list, no catalogue context -- and answers from
+parametric knowledge. The catalogue enters afterwards as a provenance FILTER, never as
+prompt CONTEXT. So this measures deparaphrasing (paraphrase inversion) gated on provenance.
+
+A true retrieval-augmented arm -- retrieve k candidates, let the model choose among them
+-- has NOT been built, and the arms below say nothing about it. It is a live branch: the
+encoders that would supply those candidates failed at top-1 (0/27), but a candidate list
+needs RECALL@k, which was never measured.
+
 THREE ARMS
   1 suppression       the shipped agent. The floor.
   2 LLM @ CONSTRAINT  proposals enter at full constraint weight, like any template value.
