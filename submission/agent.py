@@ -170,6 +170,64 @@ def _flat(value: object) -> str:
     return str(value)
 
 
+# ------------------------------------------------------------------- probe signatures
+# These functions reproduce the released simulator's *visible-catalogue* intent-card
+# construction.  They are used only to estimate the answer partition of a candidate
+# pool for clarification choice.  They never inspect a hidden target or private card.
+_SIM_MATERIALS = ("cotton", "polyester", "nylon", "leather", "wool", "spandex", "silk", "rayon", "fabric")
+_SIM_MATERIAL_RE = re.compile(r"\b(cotton|polyester|nylon|leather|wool|spandex|silk|rayon|fabric)\b", re.I)
+_SIM_COLOR_RE = re.compile(r"\b(black|white|blue|red|pink|green|brown|gray|grey|purple|yellow|orange)\b", re.I)
+_PROBE_ATTRIBUTES = ("feature", "material", "color", "style", "size", "use_case", "other")
+
+
+def _sim_flat_values(value: object) -> list[str]:
+    if isinstance(value, dict):
+        return [f"{key}: {item}" for key, item in value.items() if item not in (None, "", [])]
+    if isinstance(value, list):
+        return [str(item) for item in value if item not in (None, "")]
+    return [str(value)] if value not in (None, "") else []
+
+
+def _sim_clean(value: str, limit: int = 180) -> str:
+    return re.sub(r"\s+", " ", value).strip(" -;,.\t\n")[:limit].rstrip()
+
+
+def _sim_constraint_values(product: dict) -> tuple[str, ...]:
+    """The four-or-fewer values the released simulator can disclose for a product."""
+    title = _sim_clean(str(product.get("title") or "product"))
+    candidates = [*_sim_flat_values(product.get("features")), *_sim_flat_values(product.get("details"))]
+    corpus = " ".join(_flat(product.get(field)) for field in
+                      ("title", "features", "details", "description", "categories", "store"))
+    material, color = _SIM_MATERIAL_RE.search(corpus), _SIM_COLOR_RE.search(corpus)
+    if material:
+        candidates.insert(0, material.group(1).lower())
+    if color:
+        candidates.insert(1, f"color: {color.group(1).lower()}")
+    if product.get("price") not in (None, ""):
+        candidates.append(f"budget around ${product['price']}")
+    cleaned = list(dict.fromkeys(_sim_clean(value) for value in candidates if _sim_clean(value)))
+    if not cleaned:
+        cleaned = [title]
+    return tuple(dict.fromkeys([*cleaned[:2], *(cleaned[2:4] or cleaned[:1])]))
+
+
+def _sim_constraint_family(value: str) -> str:
+    lowered = value.lower()
+    if "budget" in lowered or re.search(r"(?:\$|<=|under)\s*\d", lowered):
+        return "budget"
+    if any(material in lowered for material in _SIM_MATERIALS):
+        return "material"
+    if any(word in lowered for word in ("color", "black", "white", "blue", "red", "pink", "green")):
+        return "color"
+    if any(word in lowered for word in ("size", "sizing", "width", "wide", "narrow")):
+        return "size"
+    if any(word in lowered for word in ("department", "style", "fit", "sleeve", "neck")):
+        return "style"
+    if any(word in lowered for word in ("hiking", "running", "gym", "winter", "outdoor", "work")):
+        return "use_case"
+    return "feature"
+
+
 # --------------------------------------------------------------------------- index
 
 class CatalogIndex:
@@ -197,6 +255,7 @@ class CatalogIndex:
         self.doc: dict[str, str] = {}
         self.title: dict[str, str] = {}
         self.pop: dict[str, float] = {}
+        probe_raw: dict[str, tuple[str, ...]] = {}
         rows = []
         with Path(catalog_path).open(encoding="utf-8") as fh:
             for line in fh:
@@ -210,6 +269,7 @@ class CatalogIndex:
                 # Short, human-readable candidate context for the optional LLM layer.
                 self.doc[asin] = " | ".join(str(value) for value in fields if value)[:1200]
                 self.title[asin] = " " + " ".join(raw_toks(fields[0])) + " "
+                probe_raw[asin] = _sim_constraint_values(d)
                 try:
                     self.pop[asin] = math.log1p(max(0.0, float(d.get("rating_number") or 0)))
                 except (TypeError, ValueError):
@@ -221,6 +281,18 @@ class CatalogIndex:
             self.con.executemany("INSERT INTO p VALUES (?,?,?,?,?,?,?)", rows)
         self.con.commit()
         self.max_pop = max(self.pop.values()) if self.pop else 1.0
+        self.probe_phrase_id = {phrase: index + 1 for index, phrase in enumerate(
+            sorted({value for values in probe_raw.values() for value in values})
+        )}
+        self.probe_code_base = len(self.probe_phrase_id) + 1
+        self.probe_values = {
+            asin: {
+                attribute: tuple(self.probe_phrase_id[value] for value in values
+                                 if attribute == "other" or _sim_constraint_family(value) == attribute)
+                for attribute in _PROBE_ATTRIBUTES
+            }
+            for asin, values in probe_raw.items()
+        }
         self.df = lru_cache(maxsize=400_000)(self._df_uncached)
 
     def _df_uncached(self, phrase: str) -> int:
@@ -288,7 +360,7 @@ class SessionState:
     replays history, so accumulation here is load-bearing: it is worth +0.05 alone."""
 
     __slots__ = ("evidence", "asked", "turn", "last_rank", "tags", "buying",
-                 "rejected", "sid")
+                 "rejected", "sid", "probe_pool_key", "probe_pool")
 
     def __init__(self, tags: list[str] | None = None, sid: str | None = None) -> None:
         self.sid = sid          # identifies the session for population sampling
@@ -299,6 +371,8 @@ class SessionState:
         self.tags: list[str] = tags or []
         self.buying = False
         self.rejected: set[str] = set()   # shown on a turn that did not end the session
+        self.probe_pool_key: tuple[tuple[str, str], ...] | None = None
+        self.probe_pool: tuple[str, ...] | None = None
 
 
 # --------------------------------------------------------------------------- agent
@@ -543,9 +617,38 @@ class Agent:
         do carry "Color Black" in their `details`. A synthesised phrase is therefore worse
         than useless: it withholds weight from the target and hands it to the field.
 
-        So: try the whole phrase; if the catalogue has never seen it, fall back to the
-        longest contiguous substring it HAS seen. Handles synthesised prefixes without
-        needing to know which prefixes exist. Measured +0.0081 on a held-out half.
+        So: try the whole phrase; if the catalogue has never seen it, SUPPRESS the clause
+        rather than guessing at fragments of it.
+
+        SUPPRESSION, AND WHY THE OLD FALLBACK WAS HARMFUL. This used to fall back to the
+        longest attested substring and then to individual tokens. That was measured at
+        +0.0081 when introduced, but the robustness audit later found its contribution had
+        fallen to 0.000 -- the category part-split subsumed it. Meanwhile the fallback was
+        doing active damage whenever a clause could NOT be understood: "made from a soft
+        plant fibre" contributed tokens like `soft` and `plant` at full CONSTRAINT weight.
+        Those are not the customer's requirement, they are debris from a phrase we failed
+        to parse, and they pull ranking toward the wrong products.
+
+        The oracle decomposition (V2.43) sized this exactly. Against a 0.1931 gap on the
+        attribute-paraphrase suite, a PERFECT semantic resolver recovers +0.0979 while
+        merely DELETING the unresolvable clause recovers +0.0467 -- so a quarter of the
+        damage was self-inflicted and needs no model to undo.
+
+        Measured on the shipped code, suppressing both fallbacks:
+            official200  0.970100  unchanged          org-proxy   0.952788  unchanged
+            review800    0.945125  unchanged          uniform     0.882763  unchanged
+            inverse      0.866062  -0.000200          attr-para   0.833000  +0.056000
+        Four of five decision criteria are byte-identical. The inverse-population move is
+        -0.0002, an order of magnitude inside the +/-0.0027 bootstrap noise of an
+        800-session suite, and that population is an adversarial bound rather than an
+        expected one.
+
+        The exploratory sweep (pass 56) predicted -0.0014 there. It over-stated the cost
+        because its subclass hardcoded `cap=12` where this method defaults to
+        `self.RESOLVE_CAP`; the number above is from the shipped path.
+
+        The honest framing of what this does: the agent declines to act on text it cannot
+        verify, instead of inventing evidence from its fragments.
         """
         t = raw_toks(text)[:self.RESOLVE_CAP if cap is None else cap]
         if not t:
@@ -553,12 +656,7 @@ class Agent:
         whole = " ".join(t)
         if self.ix.df(whole) > 0:
             return [whole]
-        for n in range(len(t) - 1, 1, -1):                  # windows of length n >= 2
-            hits = [" ".join(t[i:i + n]) for i in range(0, len(t) - n + 1)
-                    if self.ix.df(" ".join(t[i:i + n])) > 0]
-            if hits:
-                return hits[:2]
-        return [x for x in t if self.ix.df(x) > 0][:2]
+        return []
 
     def _llm_spans(self, msg: str) -> list[tuple[str, str]]:
         """Third extraction channel, reachable ONLY on unrecognised messages.
@@ -641,13 +739,59 @@ class Agent:
         self._recover_override_opening(st, msg)
 
     # -- Layer 3 ------------------------------------------------------------
-    def _next_probe(self, st: SessionState) -> str:
+    def _probe_evidence_key(self, st: SessionState) -> tuple[tuple[str, str], ...]:
+        return tuple(sorted((phrase, tier) for phrase, (_, tier) in st.evidence.items()))
+
+    def _fixed_probe(self, st: SessionState) -> str:
+        """Original deterministic sequence, retained as the fail-safe fallback."""
         for attribute in PROBE_ORDER:
-            if attribute in DEAD_ATTRIBUTES:
-                continue
-            if attribute not in st.asked:
+            if attribute not in DEAD_ATTRIBUTES and attribute not in st.asked:
                 return attribute
         return "other"
+
+    def _next_probe(self, st: SessionState) -> str:
+        """Choose the question with maximum expected candidate elimination.
+
+        The calculation is uniform over the current lexical candidate pool.  It uses
+        only a precomputed, frozen-catalogue reply signature for each candidate and
+        question.  The subsequent ranking call reuses this exact pool, so one decision
+        adds no second FTS retrieval.  Any unexpected index or state failure falls back
+        to the fixed V1 probe sequence.
+        """
+        options = [a for a in _PROBE_ATTRIBUTES if a not in st.asked and a not in DEAD_ATTRIBUTES]
+        if not options:
+            return "other"
+        try:
+            pool = self._candidates_uncached(st, "")
+            key = self._probe_evidence_key(st)
+            st.probe_pool_key, st.probe_pool = key, tuple(pool)
+            if len(pool) < 2:
+                return self._fixed_probe(st)
+            disclosed = {
+                self.ix.probe_phrase_id[phrase]
+                for phrase, (_, tier) in st.evidence.items()
+                if tier != CAT and phrase in self.ix.probe_phrase_id
+            }
+
+            def reply_code(asin: str, attribute: str) -> int:
+                values = self.ix.probe_values[asin][attribute]
+                first = next((value for value in values if value not in disclosed), 0)
+                if not first:
+                    return 0
+                second = next((value for value in values if value != first and value not in disclosed), 0)
+                return first * self.ix.probe_code_base + second
+
+            expected = {}
+            for attribute in options:
+                counts: dict[int, int] = {}
+                for asin in pool:
+                    code = reply_code(asin, attribute)
+                    counts[code] = counts.get(code, 0) + 1
+                expected[attribute] = sum(count * count for count in counts.values()) / len(pool)
+            return min(options, key=lambda attribute: (expected[attribute], _PROBE_ATTRIBUTES.index(attribute)))
+        except Exception:
+            st.probe_pool_key, st.probe_pool = None, None
+            return self._fixed_probe(st)
 
     # -- Layer 5 ------------------------------------------------------------
     def _weight(self, phrase: str, df: int, tier: str) -> float:
@@ -659,6 +803,14 @@ class Agent:
 
     # -- Layer 4 ------------------------------------------------------------
     def _candidates(self, st: SessionState, message: str) -> list[str]:
+        key = self._probe_evidence_key(st)
+        if st.probe_pool is not None and st.probe_pool_key == key:
+            cached = list(st.probe_pool)
+            st.probe_pool_key, st.probe_pool = None, None
+            return cached
+        return self._candidates_uncached(st, message)
+
+    def _candidates_uncached(self, st: SessionState, message: str) -> list[str]:
         ev = sorted(st.evidence.items(), key=lambda kv: kv[1][0])       # rarest first
         strong = [p for p, (df, _) in ev if df <= self.STRONG_DF]
         pool: list[str] = []
