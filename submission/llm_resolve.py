@@ -113,10 +113,21 @@ class LLMResolver:
     "caller should suppress this clause", which is the shipped behaviour anyway.
     """
 
-    TRIP_AFTER = 6                       # consecutive failures before the circuit opens
+    # RETRY EXISTS BECAUSE ITS ABSENCE KILLED A MEASUREMENT. The research harness that
+    # produced this layer's numbers retried with backoff; when the module was hardened for
+    # shipping it gained a time budget, a zero-yield breaker and terminal-status handling,
+    # and silently LOST the retry loop. A pipeline grid then tripped the breaker nine calls
+    # in -- six consecutive transient rate-limit errors -- and both LLM arms measured
+    # nothing while reporting plausible-looking numbers.
+    #
+    # Backoff is deterministic (no jitter). This is a single-threaded client, so jitter
+    # buys nothing against self-contention, and a reproducible run is worth more here.
+    RETRIES = int(_num("LLM_RESOLVE_RETRIES", 3))
+    TRIP_AFTER = int(_num("LLM_RESOLVE_TRIP_AFTER", 6))
     ZERO_YIELD_TRIP = 60                 # calls yielding nothing before giving up entirely
     TIMEOUT = _num("LLM_RESOLVE_TIMEOUT", 20.0)
     TIME_BUDGET = _num("LLM_RESOLVE_TIME_BUDGET", 600.0)
+    BACKOFF = _num("LLM_RESOLVE_BACKOFF", 2.0)
     # 4xx that will never succeed on retry. Retrying these burns the time budget and the
     # rate limiter for a result that cannot change.
     TERMINAL_STATUS = frozenset({400, 401, 403, 404, 413, 422})
@@ -128,7 +139,8 @@ class LLMResolver:
         self.model = model
         self.cache_path = cache_path
         self.calls = self.accepted = self.abstained = 0
-        self.unattested = self.failures = 0
+        self.unattested = self.failures = self.retries = 0
+        self.cache_hits = self.cache_misses = 0
         self._consecutive = 0
         self._spent = 0.0
         self._open_reason: str | None = None
@@ -169,22 +181,30 @@ class LLMResolver:
             # Groq's edge answers Python's default `Python-urllib/*` identity with a
             # Cloudflare 403 (code 1010) despite valid credentials.
             "User-Agent": "Mozilla/5.0"})
-        started = time.time()
-        try:
-            with urlopen(request, timeout=self.TIMEOUT) as response:
-                body = json.loads(response.read().decode("utf-8"))
-            self._spent += time.time() - started
-            self._consecutive = 0
-            return body["choices"][0]["message"]["content"]
-        except HTTPError as exc:
-            self._spent += time.time() - started
-            self.failures += 1
-            if exc.code in self.TERMINAL_STATUS:
-                self._trip(f"HTTP {exc.code}")
+        for attempt in range(max(self.RETRIES, 1)):
+            if self._spent >= self.TIME_BUDGET:
+                self._trip("time budget exhausted")
                 return None
-        except Exception:
-            self._spent += time.time() - started
-            self.failures += 1
+            started = time.time()
+            try:
+                with urlopen(request, timeout=self.TIMEOUT) as response:
+                    body = json.loads(response.read().decode("utf-8"))
+                self._spent += time.time() - started
+                self._consecutive = 0
+                return body["choices"][0]["message"]["content"]
+            except HTTPError as exc:
+                self._spent += time.time() - started
+                self.failures += 1
+                if exc.code in self.TERMINAL_STATUS:
+                    # Will never succeed on retry; retrying burns the budget for nothing.
+                    self._trip(f"HTTP {exc.code}")
+                    return None
+            except Exception:
+                self._spent += time.time() - started
+                self.failures += 1
+            if attempt + 1 < max(self.RETRIES, 1):
+                self.retries += 1
+                time.sleep(min(self.BACKOFF ** attempt, 30.0))
         self._consecutive += 1
         if self._consecutive >= self.TRIP_AFTER:
             self._trip(f"{self._consecutive} consecutive failures")
@@ -195,7 +215,12 @@ class LLMResolver:
         if not self.enabled or self.circuit_open or not phrase:
             return None
         if phrase in self.cache:
+            # The cache is also the REPRODUCIBILITY mechanism: a fully cached run is exact,
+            # while a cache miss goes to a model that is not bit-reproducible even at
+            # temperature 0. `stats()` reports the hit rate so a run can say which it was.
+            self.cache_hits += 1
             return self.cache[phrase] or None
+        self.cache_misses += 1
         if self.calls >= self.ZERO_YIELD_TRIP and self.accepted == 0:
             self._trip(f"{self.calls} calls with zero accepted proposals")
             return None
@@ -249,7 +274,12 @@ class LLMResolver:
             pass
 
     def stats(self) -> dict:
+        total = self.cache_hits + self.cache_misses
         return {"enabled": self.enabled, "model": self.model, "calls": self.calls,
                 "accepted": self.accepted, "abstained": self.abstained,
                 "unattested": self.unattested, "failures": self.failures,
+                "retries": self.retries, "cache_hits": self.cache_hits,
+                "cache_misses": self.cache_misses,
+                "cache_hit_rate": round(self.cache_hits / total, 4) if total else None,
+                "fully_cached": total > 0 and self.cache_misses == 0,
                 "seconds": round(self._spent, 2), "circuit_reason": self._open_reason}

@@ -83,7 +83,23 @@ class ScaffoldingTagger:
         self._tok = None
         self._torch = None
         self._device = None
-        flag = os.environ.get("BERT_EXTRACT", "1").strip().lower()
+        # DEFAULT OFF, on measurement. The tagger was the unfamiliar-wrapper handler until
+        # the exact span node landed; beside the span node it buys almost nothing:
+        #
+        #     condition     +SPAN     +BERT+SPAN   the tagger buys
+        #     official200   0.970100    0.970100         +0.000000
+        #     unseen800     0.945125    0.945125         +0.000000
+        #     template      0.904841    0.906063         +0.001222
+        #     attribute     0.847103    0.847103         +0.000000
+        #     both          0.719805    0.728008         +0.008203
+        #
+        # HR@10 on template is identical either way (0.9812). The span node alone recovers
+        # +0.2466 of a -0.287 template gap -- 86% of it -- with no model at all, while the
+        # tagger costs 254 MB of shipped weights. An isolated audit had already shown the
+        # dictionary carries the whole recall story: value recall 1.0000 WITHOUT the tagger
+        # against 0.9992 with it, the tagger occasionally stripping a token the lookup
+        # needed. Set BERT_EXTRACT=1 to re-enable it.
+        flag = os.environ.get("BERT_EXTRACT", "0").strip().lower()
         self._flag = flag not in {"0", "false", "no", "off"}
 
     # ---------------------------------------------------------------- lifecycle

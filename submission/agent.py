@@ -57,6 +57,11 @@ try:
 except Exception:
     ExactCatalogueSpanNode = None  # type: ignore[assignment,misc]
 
+try:
+    from submission.route_node import StrictGatedRouteNode
+except Exception:
+    StrictGatedRouteNode = None  # type: ignore[assignment,misc]
+
 # --------------------------------------------------------------------------- constants
 
 TOKEN_RE = re.compile(r"[a-z0-9]+", re.I)
@@ -86,11 +91,48 @@ PAT_OVERRIDE_OPENING = re.compile(
     r"^I'm looking for .+?\. (?!A key requirement is:)(.+)$", re.I
 )
 PAT_LOOKING = re.compile(r"looking for\s+(.+?)(?:[,.]|$)", re.I)
-PAT_NOINFO = re.compile(r"don'?t have (?:an? )?(?:additional )?preference", re.I)
-# Broader cue for "the customer just changed their mind", used only to reset rejection
-# state. Deliberately loose: a false positive merely forgets some negatives (safe),
-# while a false negative could permanently exclude the true target (fatal).
-PAT_OVERRIDE_CUE = re.compile(r"ignore my earlier|instead|actually[, ]", re.I)
+# NO-PREFERENCE and OVERRIDE cues.
+#
+# WHY THEY WERE WIDENED. The recognition gate is a DETECTOR, not a router: it reports that
+# a message is unfamiliar, never what it MEANS. Measured on a held-out reworded-wrapper
+# bank, both original literal patterns fired 0/1600, so after a reworded intent override
+# the agent never cleared `st.rejected` and kept excluding products rejected under the OLD
+# intent. That is a hit-rate failure, not a ranking one.
+#
+# HOW FAR THAT ACTUALLY GOES -- and a correction. A first version of these patterns was
+# written after reading the TEST bank and scored 100% on it. That number was fitted, not
+# earned: seven of its override cues and eight of its no-preference cues were strings
+# occurring ONLY in the test set. Rebuilt from TRAIN-ATTESTED vocabulary alone, every token
+# below verified present in the training bank, the honest held-out result is:
+#
+#     signal                          train    TEST (held out)   false positives
+#     override -> clear rejection     100.0%             37.5%           0/6400
+#     no-preference -> skip turn       62.5%              0.0%           0/8000
+#
+# So the override cue transfers partially and is kept. The no-preference cue does NOT
+# transfer at all: the test bank says "indifferent", "nothing to add", "unspecified" where
+# training said "no further preference", "any choice is fine", "use your judgment". It is
+# still widened to the train vocabulary because that is a strict superset of the organizer's
+# literal wording at zero measured false positives, but 0.0% held-out recall means there is
+# NO evidence it generalises, and it must not be described as though there were.
+#
+# What that leaves for the trained six-route classifier: semantic no-evidence detection is
+# the one Node 1 function no lexical rule recovered. If reworded traffic ever becomes real,
+# that is what the 257 MB would be buying.
+#
+# The asymmetry in the two risks is unchanged and deliberate. A false OVERRIDE merely
+# forgets some negatives, which is safe. A false NO-PREFERENCE DISCARDS a real turn's
+# evidence, which is not -- so that pattern stays tight, and its false-positive count is
+# the number that had to be zero.
+PAT_NOINFO = re.compile(
+    r"(?:no (?:further |additional )?preference"
+    r"|don'?t have (?:an? )?(?:additional )?preference"
+    r"|any choice is fine|use your judgm?ent)", re.I)
+# Cue for "the customer just changed their mind", used ONLY to reset rejection state.
+# Deliberately loose, and safe because of the asymmetry above: a false positive merely
+# forgets some negatives, while a false negative can permanently exclude the true target.
+PAT_OVERRIDE_CUE = re.compile(
+    r"(?:actually|instead|earlier|replac\w*|chang\w*|going forward)", re.I)
 
 # `classify_constraint()` in the evaluator has no branch that emits these, so probing
 # them is a guaranteed wasted turn. `budget` is reachable in principle but never in
@@ -117,6 +159,24 @@ CAT, CONSTRAINT, MINED, LLM = "cat", "con", "mined", "llm"
 # correct evidence beside it. Measured: 81.5% of a perfect resolver at CONSTRAINT
 # weight against ~96% attenuated.
 SEM = "sem"
+# SPAN TIER: TRIED AND REVERTED. Span-node values were briefly given their own tier at
+# W_CONSTRAINT with no length penalty, on the argument that a dictionary-exact value and a
+# template-extracted value are the same object and the tier should encode the evidence
+# rather than the extractor. The argument is sound and the measurement still rejected it:
+#
+#     condition   at MINED weight   at CONSTRAINT weight     delta
+#     template          0.886392               0.906063   +0.0197
+#     both              0.786458               0.728008   -0.0585
+#
+# The asymmetry is the suppression lesson one level up. On `template` the VALUES are
+# canonical, so every span-node attribute is a real requirement and full weight is right.
+# On `both` the values are paraphrased, so the node also picks up incidental attested words
+# from the paraphrase -- debris -- and full weight multiplies that debris by roughly five.
+# Losing 0.0585 on the compound case to gain 0.0197 on the simpler one is a bad trade, so
+# span values stay at MINED weight where the length penalty attenuates short debris.
+#
+# Both configurations are +0.000000 on official200 and unseen800, so this was decided on
+# characterisation rather than on the decision criteria, and is recorded as such.
 
 # --------------------------------------------------------------------------- gate
 #
@@ -504,6 +564,22 @@ class Agent:
     STRONG_CAP = 13
     OR_CAP = 8
     RESOLVE_CAP = 22
+    # A WHOLE MESSAGE IS NOT AN ATTRIBUTE VALUE. The deparaphraser is asked to name the
+    # catalogue term behind one reworded VALUE; handing it a sentence asks a question it
+    # was not built for and mostly earns an abstention.
+    #
+    # This cap exists because its absence produced a runaway. On the unfamiliar-wrapper
+    # path the layer is offered whatever text survived cleaning, and in a configuration
+    # with no tagger and no span node that is the raw message. Every message then looked
+    # like an unresolved value, every span was unique so nothing cached, and a run with
+    # the circuit breaker deliberately disabled for a reproducibility test made thousands
+    # of pointless calls before it was killed.
+    #
+    # 8 tokens is the bound: the attribute dictionary is 1-3 tokens and the paraphrases
+    # measured against it run to about six ("made from a durable synthetic polyamide" is
+    # five). Anything longer is a sentence, and the correct behaviour for a sentence is to
+    # leave the clause suppressed.
+    DEPARAPHRASE_MAX_TOKENS = 8
 
     # ---- Disclosure schedule: how many recommendations to return on turn i -----------
     #
@@ -563,6 +639,10 @@ class Agent:
                          if LLMResolver is not None else None)
         # The other half of the tagger. Built once; degrades to inert if its frozen
         # dictionary is missing rather than breaking the agent.
+        # Node 1. Constructed eagerly, LOADED lazily: the checkpoint is never read and
+        # torch is never imported unless an unrecognised message actually arrives.
+        self.route_node = (StrictGatedRouteNode()
+                           if StrictGatedRouteNode is not None else None)
         self.span_node = None
         if ExactCatalogueSpanNode is not None:
             try:
@@ -725,6 +805,20 @@ class Agent:
             out.extend((phrase, LLM) for phrase in self._resolve(span))
         return out
 
+    def _route(self, msg: str, turn: int) -> str | None:
+        """Dialogue act for an unfamiliar wrapper, or None to leave V1 behaviour alone.
+
+        Every failure mode -- module absent, checkpoint missing, torch unavailable,
+        inference error -- returns None, which is exactly the pre-Node-1 behaviour.
+        """
+        node = getattr(self, "route_node", None)
+        if node is None:
+            return None
+        try:
+            return node.classify(msg, turn)
+        except Exception:
+            return None                             # may never break a session
+
     def _deparaphrase(self, text: str) -> str | None:
         """Ask the optional LLM layer to name the catalogue value behind a paraphrase.
 
@@ -740,9 +834,9 @@ class Agent:
         resolver = getattr(self, "resolver", None)
         if resolver is None or not resolver.enabled:
             return None
-        toks = raw_toks(text)[:self.RESOLVE_CAP]
-        if not toks:
-            return None
+        toks = raw_toks(text)
+        if not toks or len(toks) > self.DEPARAPHRASE_MAX_TOKENS:
+            return None                             # a sentence, not a value
         try:
             return resolver.resolve(" ".join(toks))
         except Exception:
@@ -755,6 +849,20 @@ class Agent:
         self._seen_messages = getattr(self, "_seen_messages", 0) + 1
         if not known:
             self._unrecognised = getattr(self, "_unrecognised", 0) + 1
+            # NODE 1. Only reachable here, so a recognised message never touches it and
+            # the clean path is unchanged by control flow rather than by threshold.
+            action = self._route(msg, st.turn)
+            if action == "no_evidence":
+                # The customer said they have no requirement for this attribute, in
+                # wording the literal pattern does not know. Mining it would manufacture
+                # evidence for a preference they explicitly declined. Held-out recall
+                # 100% against 0% for the lexical rule, at 0/8000 false positives.
+                return
+            if action in ("override_update", "override_opening"):
+                # An override invalidates every earlier rejection: products dismissed
+                # under the OLD intent must become eligible again. Missing this is a
+                # hit-rate failure, not a ranking one.
+                st.rejected.clear()
         found = self._extract_templated(msg)
         if st.turn == 1:
             st.buying = any(tier == CONSTRAINT for _, tier in found)
@@ -815,6 +923,7 @@ class Agent:
             # attested in the frozen catalogue, or nothing. No threshold, no similarity,
             # no model decision; the tagger's output is a candidate SOURCE only.
             node = getattr(self, "span_node", None)
+            category, attrs = None, set()
             if node is not None and node.ok:
                 try:
                     category, attrs = node.extract(raw_toks(mine_text))
@@ -824,11 +933,22 @@ class Agent:
                     resolved.append((category, CAT))
                     resolved.extend((tok, CAT) for tok in raw_toks(category))
                 resolved.extend((a, MINED) for a in attrs)
-            span = " ".join(raw_toks(mine_text)[:self.RESOLVE_CAP])
-            if span and self.ix.df(span) == 0:
-                ph = self._deparaphrase(span)
-                if ph:
-                    resolved.append((ph, SEM))
+            # NO DEPARAPHRASER ON THIS PATH, and the reason is a property of the layer
+            # rather than a tuning choice. It is asked to name the catalogue term behind
+            # one reworded VALUE, so it needs a value. The unfamiliar-wrapper path does not
+            # produce one: the tagger yields a cleaned MESSAGE, and the span node yields
+            # values only when they are already attested -- precisely when the layer is not
+            # needed. Handing it the message instead was tried and is a runaway: every
+            # message looks like an unresolved value, nothing caches because every span is
+            # unique, and a length cap cannot separate the two because the messages are as
+            # short as the values (median 8 tokens either way).
+            #
+            # So on a message whose wrapper AND values are both reworded, this layer
+            # legitimately cannot contribute, and says so by not firing. The sound way to
+            # reach that case is to subtract what the span node explained -- category and
+            # attested attributes -- and offer only the UNEXPLAINED residue. That is a real
+            # design, not a patch, and it has not been measured yet.
+
         if not any(tier == CONSTRAINT for _, tier in found):
             resolved.extend((ph, MINED) for ph, _ in self.ix.mine(mine_text))
             if mine_text is not msg:

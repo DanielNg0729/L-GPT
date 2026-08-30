@@ -40,3 +40,8 @@ tests/test_organizer_pipeline.py
 # which is precisely the self-scoring this repo's audits exist to prevent. Every run
 # must be free to re-derive its answers.
 robustness/v2/.llm_resolver_cache.json
+# Shipped resolver's runtime cache. Same reason as the research one: a committed cache of
+# resolved paraphrases is a lookup table over evaluation vocabulary, and it would also
+# ship answers the agent is supposed to derive.
+submission/.llm_resolve_cache.json
+robustness/v2/open_vocabulary/.pipeline_resolve_cache.json

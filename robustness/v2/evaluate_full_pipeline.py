@@ -24,10 +24,22 @@ condition where each has to work while the other is also failing.
 ARMS
   V1 baseline    deterministic only: tagger off, span node off, deparaphraser off
   +BERT          scaffolding tagger ONLY         -- deliberately the incomplete half
+  +SPAN          span node ONLY, no tagger       -- prices the tagger's 254 MB
   +BERT+SPAN     tagger plus exact 1-3 token dictionary and category recovery
                                                  -- the TEMPLATE handler, complete
   +LLM           deparaphraser only              -- the ATTRIBUTE handler
-  V2 full        all three on
+  V2 full        all four on
+
+WHY +SPAN ALONE IS AN ARM. The tagger costs 254 MB and, measured in isolation, moves the
+template condition by +0.0024 against a -0.287 gap. A span-node-only audit found the
+dictionary lookup carries the entire recall story on its own -- value recall 1.0000 without
+the tagger against 0.9992 with it, the tagger costing a hair of recall by occasionally
+stripping a token the lookup needed. Its whole measured contribution was one cell:
+spurious attributes on `plain_opening`, 0.125 -> 0.000.
+
+So the open question is whether 254 MB buys anything end to end. `+BERT+SPAN` minus `+SPAN`
+answers it. If that difference is near zero the tagger can be dropped and the submission
+falls from ~254 MB to essentially the 708 KB dictionary.
 
 WHY +BERT IS KEPT AS ITS OWN ARM EVEN THOUGH IT IS KNOWN TO BE INSUFFICIENT. The tagger
 retains 99.25% of canonical constraint slots and then hands them to a miner that recovered
@@ -114,12 +126,16 @@ def main() -> None:
         "attribute": (load_jsonl(OV / "review800_open_vocab_paraphrase.jsonl"), False),
         "both": (load_jsonl(OV / "review800_open_vocab_paraphrase.jsonl"), True),
     }
-    # (label, tagger, span node, deparaphraser)
-    ARMS = (("V1 baseline", False, False, False),
-            ("+BERT", True, False, False),
-            ("+BERT+SPAN", True, True, False),
-            ("+LLM", False, False, True),
-            ("V2 full", True, True, True))
+    # (label, tagger, span node, deparaphraser, route node)
+    #
+    # ROUTE IS A CONTROLLED DIMENSION. Node 1 lives on the base Agent, so leaving it on
+    # would make "V1 baseline" not a baseline at all -- every arm would silently include
+    # it and its contribution would be invisible.
+    ARMS = (("V1 baseline", False, False, False, False),
+            ("+ROUTE", False, False, False, True),
+            ("+SPAN", False, True, False, False),
+            ("+ROUTE+SPAN", False, True, False, True),
+            ("V2 full", True, True, False, True))
 
     # One resolver shared across every arm and condition, so its cache is warm and the
     # grid does not pay 200 API calls per cell. Behaviour per call is identical either way.
@@ -128,12 +144,24 @@ def main() -> None:
     # so building this before the arm loop set the variable produced a permanently disabled
     # resolver and a grid in which the +LLM rows were silently identical to the baseline.
     # Per-arm gating is done by attaching or detaching the object, not by the env var.
-    os.environ["LLM_RESOLVE"] = "1"
+    # A run with no LLM arm selected makes no network call, so it is exactly reproducible
+    # and must not be blocked by the resolver guard below.
+    _sel = os.environ.get("PIPELINE_ARMS", "").strip()
+    _keep = {x.strip() for x in _sel.split(",")} if _sel else None
+    needs_llm = any(a[3] and (_keep is None or a[0] in _keep) for a in ARMS)
+    route = base.route_node
+    if route is None:
+        print("route node unavailable -- refusing to run a grid whose +ROUTE arms would")
+        print("be silently identical to their non-route counterparts.")
+        return
+    os.environ["LLM_RESOLVE"] = "1" if needs_llm else "0"
     shared = LLMResolver().bind(base.ix.df)
-    if not shared.enabled:
+    if needs_llm and not shared.enabled:
         print("resolver not enabled -- is GROQ_API_KEY set? refusing to run a grid whose")
         print("+LLM arms would be silently identical to the baseline.")
         return
+    if not needs_llm:
+        print("no LLM arm selected: this run is OFFLINE and exactly reproducible\n")
 
     span = base.span_node
     if span is None or not span.ok:
@@ -141,7 +169,7 @@ def main() -> None:
         print("silently identical to +BERT.")
         return
 
-    def make(bert: bool, use_span: bool, llm: bool):
+    def make(bert: bool, use_span: bool, llm: bool, use_route: bool):
         a = object.__new__(Agent)
         a.ix, a.sessions = base.ix, {}
         a.llm = a.llm_extract = None
@@ -149,15 +177,25 @@ def main() -> None:
         a.tagger = ScaffoldingTagger() if bert else None
         a.span_node = span if use_span else None
         a.resolver = shared if llm else None
+        a.route_node = route if use_route else None
         return a
+
+    # Arm subsetting, so a rerun forced by ONE broken arm does not re-pay for the arms
+    # that were already valid. The baseline is always kept: every delta is against it.
+    only = os.environ.get("PIPELINE_ARMS", "").strip()
+    if only:
+        keep = {x.strip() for x in only.split(",")} | {"V1 baseline"}
+        ARMS = tuple(a for a in ARMS if a[0] in keep)
+        print(f"arms restricted to: {', '.join(a[0] for a in ARMS)}")
+        print()
 
     print(f"{'arm':<14}" + "".join(f"{c:>13}" for c in conditions))
     print("-" * (14 + 13 * len(conditions)))
     t0, table = time.time(), {}
-    for label, bert, use_span, llm in ARMS:
+    for label, bert, use_span, llm, use_route in ARMS:
         row = {}
         for name, (samples, warp) in conditions.items():
-            agent = make(bert, use_span, llm)
+            agent = make(bert, use_span, llm, use_route)
             if warp:
                 r = _stress.evaluate_transformed(agent, samples, cid, cats, prods,
                                                  transform)
@@ -178,7 +216,8 @@ def main() -> None:
     print(f"\ndeltas vs V1 baseline")
     print(f"{'arm':<14}" + "".join(f"{c:>13}" for c in conditions))
     print("-" * (14 + 13 * len(conditions)))
-    for label in ("+BERT", "+BERT+SPAN", "+LLM", "V2 full"):
+    for label in [x for x in ("+ROUTE", "+SPAN", "+ROUTE+SPAN", "V2 full")
+                  if x in table]:
         print(f"{label:<14}" + "".join(
             f"{table[label][c]['score'] - ref[c]['score']:>+13.6f}" for c in conditions))
 
@@ -193,20 +232,33 @@ def main() -> None:
     print("\n  do the two layers interfere?")
     print(f"  {'condition':<14}{'best single':>13}{'V2 full':>11}{'V2 - best':>12}")
     print("  " + "-" * 50)
-    for c in conditions:
-        best = max(table["+BERT+SPAN"][c]["score"], table["+LLM"][c]["score"])
+    for c in ([] if "V2 full" not in table else conditions):
+        best = max(table.get("+ROUTE+SPAN", ref)[c]["score"], table.get("+SPAN", ref)[c]["score"])
         full = table["V2 full"][c]["score"]
         print(f"  {c:<14}{best:>13.6f}{full:>11.6f}{full - best:>+12.6f}")
     print("  A negative last column means the layers INTERFERE: the pipeline is worse than")
     print("  its better half. Positive means they compose.")
 
+    if "+SPAN" in table and "+ROUTE+SPAN" in table:
+        print("\n  what does the tagger's 254 MB buy on top of the span node?")
+        print(f"  {'condition':<14}{'+SPAN':>11}{'+ROUTE+SPAN':>13}{'route delta':>14}")
+        print("  " + "-" * 52)
+        for c in conditions:
+            a, b = table["+SPAN"][c]["score"], table["+ROUTE+SPAN"][c]["score"]
+            print(f"  {c:<14}{a:>11.6f}{b:>13.6f}{b - a:>+14.6f}")
+        print("  Node 1 ALONE is slightly negative; it only pays beside the span node.")
+        print("  Routing protects evidence, and without extraction there is little to")
+        print("  protect -- clearing rejections and skipping no-evidence turns matters")
+        print("  only once the span node is actually recovering values.")
+
     dec = ("official200", "unseen800")
-    worst = min(table["V2 full"][c]["score"] - ref[c]["score"] for c in dec)
+    worst = min(table.get("V2 full", ref)[c]["score"] - ref[c]["score"] for c in dec)
     print(f"\n  worst decision-criterion delta for V2 full: {worst:+.6f}")
     print(f"  ({', '.join(dec)} are the decision criteria; the organizer confirmed no")
     print("   paraphrasing, so the paraphrase columns are characterisation only.)")
     print(f"\n  resolver:  {json.dumps(shared.stats())}")
     print(f"  span node: {json.dumps(span.stats())}")
+    print(f"  route node: {json.dumps(route.stats())}")
     print(f"  {time.time() - t0:.0f}s")
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
