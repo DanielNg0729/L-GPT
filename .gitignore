@@ -46,3 +46,14 @@ robustness/v2/.llm_resolver_cache.json
 submission/.llm_resolve_cache.json
 robustness/v2/open_vocabulary/.pipeline_resolve_cache.json
 robustness/v2/open_vocabulary/.resolver_cache_open_vocab.json
+
+# MODEL CHECKPOINTS ARE NOT VERSIONED HERE. They live on the Hugging Face Hub:
+#   KhiemGOM/techjam-route-classifier      dialogue-act router (Node 1)
+#   KhiemGOM/techjam-scaffolding-tagger    content/scaffolding tagger
+# Both resolve automatically at load time; set V2_ROUTE_MODEL_DIR or BERT_TAGGER_DIR to a
+# local directory to override. Git LFS was tried and rejected: a history rewrite left a
+# 134-byte pointer in the working tree instead of the weights, and the agent kept scoring
+# its usual number because these layers are gated off clean traffic -- a dead model
+# reported as a healthy run. A clone without `git lfs pull`, or past a bandwidth quota,
+# reproduces exactly that. Hub resolution fails loudly instead.
+submission/models/
