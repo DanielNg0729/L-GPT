@@ -568,3 +568,71 @@ naming correction: the mechanism is not RAG, and RAG is actively worse here.
 The encoder question is now closed from both directions. Top-1 was the wrong statistic
 (V2.47), but fixing that and giving the encoder its best legitimate role — supplying
 candidates for an LLM to filter — still loses to using no encoder at all.
+
+## V2.50 — Node 5 verifies the LLM's proposal, and works
+
+### Why the shape changed
+
+Node 5 scored 0.9726 AUROC zero-shot and was still unusable, because it was being asked to
+pick a winner out of ~100 retrieved candidates and pairwise AUROC is not selection
+precision. In the `generate` design the LLM emits ONE proposal and node 5 answers one
+pairwise question — which is what 0.9726 actually measured. The LLM absorbed the selection
+problem; the verifier got its real competence back.
+
+### The invalid first probe, withdrawn
+
+The first adversarial probe mined negatives as the bi-encoder's nearest neighbours OF THE
+PROPOSAL. For "made from animal hide" → `leather` it produced `leather fabric`,
+`leather material`, `leather suede`, `canvas leather` — all of which SATISFY the
+paraphrase. They were labelled negative while being true positives, so its **AUROC 0.5760
+is void** and is withdrawn rather than deleted.
+
+The valid construction is within-family cross-pairing: the proposal resolved for one
+paraphrase, tested against a DIFFERENT paraphrase in the same family. `leather` against
+"made from a soft plant fibre" is attested, hard, and certainly false — competing answers
+to the same question. The label follows from the construction, so there is nothing to tune.
+
+### Result
+
+| measurement | value |
+|---|---|
+| AUROC, correct proposal vs competing same-family value | **0.8349** |
+| mean entailment, correct | 0.7010 |
+| mean entailment, competing | **0.1966** |
+| competing values rejected at threshold | 68/76 (89.5%) |
+| competing values the `df>0` gate rejects | **0/76** |
+
+**The semantic hole is real and node 5 closes most of it.** All 76 competing values are
+catalogue-attested and pass the provenance gate untouched; entailment separates them from
+correct proposals by 0.50 of mean score.
+
+### The threshold does not transfer, and must not be fixed by tuning
+
+Set at 0.938 on the frozen 134-row set (precision 0.943 there), it rejects **9 of 20
+correct proposals** at runtime. Correct proposals average 0.7010, far below 0.938. The
+frozen set is SYNONYM pairs, which entail strongly; runtime is PARAPHRASE → CANONICAL,
+which entails weakly. This is the same distribution-shift failure that made 0.9726
+misleading, one level up.
+
+End to end on the attribute-paraphrase suite:
+
+| arm | attr-para | vs floor | vs generate |
+|---|---|---|---|
+| suppression (floor) | 0.833000 | — | −0.0378 |
+| generate (`df>0` only) | 0.870800 | +0.0378 | — |
+| generate + node 5 verifier | 0.864800 | +0.0318 | **−0.0060** |
+
+Exactly the pre-registered expectation: on this suite the verifier can only reject correct
+answers, because the LLM rarely proposes a competing value here. The insurance is real and
+currently unused.
+
+**The obvious fix is the forbidden one.** Lowering the threshold until attr-para improves
+would be tuning on the evaluation suite. The legal path is to recalibrate on TRAIN-ONLY
+data using the same within-family construction — hard negatives mined as the nearest
+canonical that the corpus does not list as a synonym — and apply the result unchanged.
+Until that is done, node 5 stays measured but unintegrated.
+
+### Status
+
+Node 5 is **validated as a mechanism and blocked on calibration**. It is the first node in
+the 3/4/5 cluster to survive contact with the runtime distribution.
