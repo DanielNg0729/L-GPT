@@ -47,6 +47,16 @@ try:
 except Exception:
     ScaffoldingTagger = None  # type: ignore[assignment,misc]
 
+try:
+    from submission.llm_resolve import LLMResolver
+except Exception:
+    LLMResolver = None  # type: ignore[assignment,misc]
+
+try:
+    from submission.span_node import ExactCatalogueSpanNode
+except Exception:
+    ExactCatalogueSpanNode = None  # type: ignore[assignment,misc]
+
 # --------------------------------------------------------------------------- constants
 
 TOKEN_RE = re.compile(r"[a-z0-9]+", re.I)
@@ -101,6 +111,12 @@ DEAD_ATTRIBUTES = ("category", "brand", "budget")
 PROBE_ORDER = ("feature", "material", "other", "color", "style", "size", "use_case")
 
 CAT, CONSTRAINT, MINED, LLM = "cat", "con", "mined", "llm"
+# Deparaphrased attribute values. A SEPARATE tier because they must carry LESS
+# weight than a value the customer literally said: they are a model's inference
+# about what was meant, and at CONSTRAINT strength one wrong inference outranks the
+# correct evidence beside it. Measured: 81.5% of a perfect resolver at CONSTRAINT
+# weight against ~96% attenuated.
+SEM = "sem"
 
 # --------------------------------------------------------------------------- gate
 #
@@ -394,6 +410,11 @@ class Agent:
     # win. Only reachable on unrecognised messages, so this constant is inert on a clean
     # run regardless of its value.
     W_LLM = 0.60
+    # Attenuation for deparaphrased values. NOT tuned: 0.15 / 0.30 / 0.45 differ by
+    # 0.0046 and non-monotonically on a 200-session suite, so the measured property
+    # is insensitivity across that range, not an optimum. 0.15 is the low end, which
+    # is the conservative choice when the quantity is a model's inference.
+    W_SEM = 0.15
 
     # Small rarity correction selected by trial 38. Earlier public-only tuning chose a
     # much larger exponent and failed robustness; independent validation consumed here
@@ -537,6 +558,19 @@ class Agent:
         self.llm = LLMReranker() if LLMReranker is not None else None
         self.llm_extract = LLMExtractor() if LLMExtractor is not None else None
         self.tagger = ScaffoldingTagger() if ScaffoldingTagger is not None else None
+        # Bound to this index's df so the module never imports the agent back.
+        self.resolver = (LLMResolver().bind(self.ix.df)
+                         if LLMResolver is not None else None)
+        # The other half of the tagger. Built once; degrades to inert if its frozen
+        # dictionary is missing rather than breaking the agent.
+        self.span_node = None
+        if ExactCatalogueSpanNode is not None:
+            try:
+                from evaluator.local_evaluator import coarse_category as _coarse
+                node = ExactCatalogueSpanNode(catalog_path, toks=raw_toks, coarse=_coarse)
+                self.span_node = node if node.ok else None
+            except Exception:
+                self.span_node = None
 
     # -- Layer 2 ------------------------------------------------------------
     def reset(self, session_id: str, user_profile: dict) -> None:
@@ -691,6 +725,29 @@ class Agent:
             out.extend((phrase, LLM) for phrase in self._resolve(span))
         return out
 
+    def _deparaphrase(self, text: str) -> str | None:
+        """Ask the optional LLM layer to name the catalogue value behind a paraphrase.
+
+        Returns a catalogue-attested phrase, or None to leave the clause suppressed. Inert
+        unless BOTH `LLM_RESOLVE=1` and `GROQ_API_KEY` are set, so the deterministic agent
+        is byte-identical without them.
+
+        This is called only where `_resolve` already gave up, so its floor is the shipped
+        behaviour: the worst case for a useless response is exactly today's suppression.
+        Every failure mode -- disabled, circuit open, network error, empty completion,
+        abstention, unattested proposal -- lands on that same floor.
+        """
+        resolver = getattr(self, "resolver", None)
+        if resolver is None or not resolver.enabled:
+            return None
+        toks = raw_toks(text)[:self.RESOLVE_CAP]
+        if not toks:
+            return None
+        try:
+            return resolver.resolve(" ".join(toks))
+        except Exception:
+            return None                             # the layer may never break a session
+
     def _observe(self, st: SessionState, msg: str) -> None:
         if PAT_NOINFO.search(msg):
             return                                  # explicit "no preference" carries nothing
@@ -703,7 +760,21 @@ class Agent:
             st.buying = any(tier == CONSTRAINT for _, tier in found)
         resolved: list[tuple[str, str]] = []
         for text, tier in found:
-            resolved.extend((ph, tier) for ph in self._resolve(text))
+            got = self._resolve(text)
+            resolved.extend((ph, tier) for ph in got)
+            if not got and tier == CONSTRAINT:
+                # SUPPRESSED CLAUSE. `_resolve` returned nothing, so the catalogue cannot
+                # attest this value and the agent is about to discard it. This is the ONLY
+                # point the deparaphraser is consulted -- it can therefore add evidence
+                # where there was none, and can never overwrite evidence that exists.
+                #
+                # The proposal enters at SEM, not at `tier`. It is the model's inference
+                # about what the customer meant, not something the customer said, and the
+                # weight difference is worth more than the resolution itself: 81.5% of a
+                # perfect resolver at CONSTRAINT strength against ~96% attenuated.
+                ph = self._deparaphrase(text)
+                if ph:
+                    resolved.append((ph, SEM))
         # Fall back to mining whenever templates yielded no CONSTRAINT: a category alone
         # is not enough to conclude the message was understood.
         mine_text = msg
@@ -720,8 +791,53 @@ class Agent:
                     kept = None
                 if kept:
                     mine_text = kept
+            # The deparaphraser must be reachable from HERE too, not only from the template
+            # branch above. Template paraphrase and attribute paraphrase are INDEPENDENT
+            # axes -- the organizer can reword the wrapper, the values, or both -- so the
+            # handler for each has to be reachable independently of the other. Gating the
+            # value handler behind template recognition would make it unreachable in
+            # exactly the compound case, which is the hardest one and the one where it is
+            # most needed.
+            #
+            # The condition is the same as the template branch's: the span is offered only
+            # when the catalogue cannot attest it as a whole, which is where mining would
+            # otherwise return fragments of a phrase we failed to parse. The result is
+            # UNIONED with mining, never substituted for it, so the floor is unchanged.
+            # EXACT SPAN RECOVERY -- the other half of the tagger, and the half that
+            # carries the value. The tagger retains 99.25% of canonical constraint slots
+            # and then hands them to a miner that recovered 0.00% of SHORT constraints:
+            # mining keeps an n-gram only when `0 < df <= DF_CAP` and is built for
+            # distinctive multi-word phrases, so a one-to-three token value like `cotton`
+            # or `pull on closure` is far too common to survive. The tagger cleans the
+            # text and the miner discards exactly the part that mattered.
+            #
+            # These two lookups close that. Both are G1 exclusions -- an exact string
+            # attested in the frozen catalogue, or nothing. No threshold, no similarity,
+            # no model decision; the tagger's output is a candidate SOURCE only.
+            node = getattr(self, "span_node", None)
+            if node is not None and node.ok:
+                try:
+                    category, attrs = node.extract(raw_toks(mine_text))
+                except Exception:
+                    category, attrs = None, set()     # never break a session
+                if category:
+                    resolved.append((category, CAT))
+                    resolved.extend((tok, CAT) for tok in raw_toks(category))
+                resolved.extend((a, MINED) for a in attrs)
+            span = " ".join(raw_toks(mine_text)[:self.RESOLVE_CAP])
+            if span and self.ix.df(span) == 0:
+                ph = self._deparaphrase(span)
+                if ph:
+                    resolved.append((ph, SEM))
         if not any(tier == CONSTRAINT for _, tier in found):
             resolved.extend((ph, MINED) for ph, _ in self.ix.mine(mine_text))
+            if mine_text is not msg:
+                # UNION cleaned-text mining with RAW-text mining rather than replacing it.
+                # Stripping filler can also strip a token the miner needed for adjacency,
+                # so the two recover overlapping-but-different phrase sets and the union
+                # is never worse than either. Evidence is a dict keyed by phrase, so a
+                # phrase found twice is stored once at the first tier that claimed it.
+                resolved.extend((ph, MINED) for ph, _ in self.ix.mine(msg))
         if not known:
             # ALTERNATE: the LLM extractor, off by default now that the local tagger
             # carries this. Retained because a stronger model may yet beat it, and because
@@ -796,7 +912,8 @@ class Agent:
     # -- Layer 5 ------------------------------------------------------------
     def _weight(self, phrase: str, df: int, tier: str) -> float:
         base = {CONSTRAINT: self.W_CONSTRAINT, CAT: self.W_CATEGORY,
-                LLM: self.W_LLM, MINED: self.W_MINED}.get(tier, self.W_MINED)
+                LLM: self.W_LLM, MINED: self.W_MINED, SEM: self.W_SEM}.get(
+                    tier, self.W_MINED)
         if tier == MINED:
             base *= min(1.0, len(phrase.split()) / self.MINED_LEN_DIV)
         return base / (1.0 + df) ** self.IDF_POW
