@@ -1,0 +1,40 @@
+{
+  "experiment": "V2.48 choose vs generate vs hybrid",
+  "model": "openai/gpt-oss-120b",
+  "retriever": "intfloat/e5-base-v2",
+  "k": 100,
+  "floor": 0.833,
+  "selection_surface": "train-only synonymy corpus (never dev200)",
+  "results": {
+    "0 suppression (floor, no LLM)": {
+      "score": 0.833
+    },
+    "generate": {
+      "score": 0.8702,
+      "calls": 23,
+      "accepted": 20,
+      "abstained": 3,
+      "unattested": 0,
+      "failed": 0,
+      "off_list": 0
+    },
+    "choose": {
+      "score": 0.828,
+      "calls": 23,
+      "accepted": 17,
+      "abstained": 6,
+      "unattested": 0,
+      "failed": 0,
+      "off_list": 0
+    },
+    "hybrid": {
+      "score": 0.8604,
+      "calls": 26,
+      "accepted": 21,
+      "abstained": 2,
+      "unattested": 0,
+      "failed": 3,
+      "off_list": 2
+    }
+  }
+}

@@ -522,3 +522,49 @@ used.
 
 k is likewise fixed at 100 from the corpus curve (0.8846 → 0.9396 → 0.9560 for k = 50 →
 100 → 200, i.e. near saturation), never from the end-to-end score.
+
+## V2.48 — retrieval augmentation is rejected, on measurement
+
+| arm | attr-para | vs floor | vs generate |
+|---|---|---|---|
+| suppression (floor, no LLM) | 0.833000 | — | −0.0372 |
+| **generate** (no candidates) | **0.870200** | **+0.0372** | — |
+| choose (must pick from k=100) | 0.828000 | **−0.0050** | −0.0422 |
+| hybrid (candidates as hints) | 0.860400 | +0.0274 | −0.0098 |
+
+| arm | calls | accepted | abstained | off-list |
+|---|---|---|---|---|
+| generate | 23 | 20 | 3 | — |
+| choose | 23 | 17 | 6 | — |
+| hybrid | 26 | 21 | 2 | **2** |
+
+**`choose` scores below the no-ML floor.** Constraining the model to a retrieved list is
+worse than contributing nothing at all: it accepted 17 proposals and they were wrong often
+enough to cost more than silence. This is despite a genuine 0.54 ceiling (V2.47), so it is
+not a recall failure — the list contained the answer far more often than the model picked
+it.
+
+**The mechanism is visible in `off-list`.** Hybrid was told explicitly that candidates are
+hints, often wrong, and that it should ignore them and answer freely when none fit. It
+answered off-list **2 times out of 21**. Unaided, the same model answers freely 23 times
+out of 23. So presenting a list captured the model's answer ~90% of the time regardless of
+the instruction not to defer to it. That is anchoring, and it is why hybrid — which had a
+strict superset of generate's information — still lost.
+
+**Read the magnitudes differently.** `choose` −0.0422 is large and directional. The
+hybrid−generate gap of −0.0098 is about one or two phrases out of 23 and should not be
+over-read on its own; it is the `off-list` count, not the score gap, that carries the
+anchoring finding. Run-to-run variance is also nonzero: generate scored 0.870200 here
+against 0.870800 in V2.46 (Δ0.0006) despite temperature 0, so anything below ~0.001 is
+noise.
+
+### Verdict
+
+**Retrieval augmentation is rejected for this task, by measurement rather than assumption.**
+The shape that works is `generate` — deparaphrasing from parametric knowledge with a
+`df > 0` provenance gate and no catalogue context. This retroactively vindicates the V2.45
+naming correction: the mechanism is not RAG, and RAG is actively worse here.
+
+The encoder question is now closed from both directions. Top-1 was the wrong statistic
+(V2.47), but fixing that and giving the encoder its best legitimate role — supplying
+candidates for an LLM to filter — still loses to using no encoder at all.
