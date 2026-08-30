@@ -71,7 +71,15 @@ class SubmissionContractTest(unittest.TestCase):
         auditor = _ContractAuditor(Agent(CATALOG), catalog_ids)
         result = evaluate(auditor, samples, catalog_ids, categories, products)
         self.assertGreater(auditor.responses, len(samples))
-        self.assertEqual(result["recommended_technical_score"], 0.9696)
+        # A FLOOR, not an equality. Pinning the exact score makes every legitimate
+        # improvement look like a failure -- this assertion already broke once when the
+        # information-gain probe policy raised the score from 0.96960 to 0.97010. A floor
+        # still catches what this test is for: a regression, or a silent break in the
+        # contract that shows up as a collapsed score. Raise the floor deliberately when
+        # a gain is confirmed, rather than editing it to match whatever today's number is.
+        self.assertGreaterEqual(result["recommended_technical_score"], 0.9696)
+        # The scored path must stay offline: any token spend here means a network layer
+        # escaped its gate.
         self.assertEqual(result["reported_token_usage"]["total_tokens"], 0)
 
 

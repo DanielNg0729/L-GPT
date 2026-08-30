@@ -82,6 +82,7 @@ class ScaffoldingTagger:
         self._model = None
         self._tok = None
         self._torch = None
+        self._device = None
         flag = os.environ.get("BERT_EXTRACT", "1").strip().lower()
         self._flag = flag not in {"0", "false", "no", "off"}
 
@@ -111,6 +112,9 @@ class ScaffoldingTagger:
             self._torch = torch
             self._tok = AutoTokenizer.from_pretrained(str(self.model_dir))
             model = AutoModelForTokenClassification.from_pretrained(str(self.model_dir))
+            requested = os.environ.get("BERT_DEVICE", "auto").strip().lower()
+            self._device = torch.device("cuda:0") if requested != "cpu" and torch.cuda.is_available() else torch.device("cpu")
+            model.to(self._device)
             model.eval()
             self._model = model
             return True
@@ -139,9 +143,9 @@ class ScaffoldingTagger:
             enc = self._tok([words], is_split_into_words=True, truncation=True,
                             max_length=MAX_WORDS, return_tensors="pt")
             with torch.no_grad():
-                logits = self._model(input_ids=enc["input_ids"],
-                                     attention_mask=enc["attention_mask"]).logits
-                probs = torch.softmax(logits, -1)[0, :, 1]
+                logits = self._model(input_ids=enc["input_ids"].to(self._device),
+                                     attention_mask=enc["attention_mask"].to(self._device)).logits
+                probs = torch.softmax(logits, -1)[0, :, 1].cpu()
             kept, prev = [], None
             for pos, wid in enumerate(enc.word_ids(0)):
                 if wid is None or wid == prev:
@@ -170,4 +174,5 @@ class ScaffoldingTagger:
     def stats(self) -> dict:
         return {"enabled": self.enabled, "model_dir": str(self.model_dir),
                 "calls": self.calls, "stripped": self.stripped,
-                "failures": self.failures, "circuit_reason": self._open_reason}
+                "failures": self.failures, "circuit_reason": self._open_reason,
+                "device": str(self._device) if self._device is not None else None}
