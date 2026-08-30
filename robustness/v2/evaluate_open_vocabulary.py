@@ -192,10 +192,27 @@ def main() -> None:
           f"{res.abstained} abstained, {res.unattested} failed provenance")
     print(f"  node 5:   {rejected}/{len(vcache)} proposals rejected at threshold "
           f"{THRESH:.3f}")
-    print(f"\n  GENERALISATION: `generate` recovers {frac(gen):.1%} of the gap here, "
-          f"against ~96% of the")
-    print(f"  oracle on the 27-phrase suite. A large drop means that number was partly "
-          f"memorisation.")
+    # APPLES TO APPLES. The 27-phrase suite's headline was "~96% of the ORACLE", and the
+    # oracle itself closes only about half the canonical gap. Comparing that against a
+    # percentage-of-GAP here would be comparing different denominators and would overstate
+    # the drop enormously. On the old suite, generate recovered 27.6% of the same
+    # suppression -> canonical gap this function reports: (0.8708 - 0.8330)/(0.9701 - 0.8330).
+    PRIOR_SUITE_FRACTION = 0.276
+    print(f"\n  GENERALISATION: `generate` recovers {frac(gen):.1%} of the "
+          f"suppression->canonical gap here,")
+    print(f"  against {PRIOR_SUITE_FRACTION:.1%} of the SAME quantity on the 27-phrase "
+          f"suite. Both are fractions of")
+    print(f"  gap; the 27-phrase headline of '96%' was a fraction of the ORACLE, which is "
+          f"a different")
+    print(f"  denominator and must not be compared with this number.")
+    if res.failed:
+        print(f"\n  CAVEAT: {res.failed}/{res.calls} calls FAILED. A failed call returns "
+              f"nothing and degrades")
+        print(f"  to suppression, so the `generate` figure above is a LOWER BOUND, "
+              f"depressed by however")
+        print(f"  much those {res.failed} phrases would have contributed. Re-run when the "
+              f"failure rate is low")
+        print(f"  before treating the number as the effect size.")
     print(f"  IS NODE 5 NEEDED: arm 3 - arm 2 = {ver - gen:+.6f}. Positive means "
           f"verification pays")
     print(f"  for the correct answers it also rejects; negative means the df>0 gate plus "

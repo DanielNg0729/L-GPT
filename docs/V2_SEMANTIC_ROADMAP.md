@@ -719,3 +719,61 @@ full, so `hand wash only` -> `wash by hand` is still caught.
 The suite ships with a canonical control materialised from the same sessions, because a
 paraphrase score is only interpretable against the same base materialised the same way.
 Results are compared as FRACTIONS of the gap, never as raw scores against Official200's.
+
+### V2.51 result — generalisation is real but weaker, and Node 5 is not needed
+
+| arm | score | vs floor | % of gap |
+|---|---|---|---|
+| 0 canonical replay (ceiling) | 0.945125 | +0.098022 | 100.0% |
+| 1 suppression (floor) | 0.847103 | — | 0.0% |
+| **2 generate** | 0.863969 | +0.016866 | **17.2%** |
+| 3 generate + node 5 | 0.848031 | +0.000928 | 0.9% |
+
+#### Q1: does `generate` generalise? Yes, at about two-thirds the rate.
+
+| suite | canonical | floor | generate | % of gap |
+|---|---|---|---|---|
+| prior, 27 phrases | 0.970100 | 0.833000 | 0.870800 | **27.6%** |
+| open-vocabulary, 204 | 0.945125 | 0.847103 | 0.863969 | **17.2%** |
+
+**These are the same quantity.** The prior suite's headline of "~96%" was a fraction of the
+V2.43 ORACLE, and the oracle itself closes only about half the canonical gap. Comparing 96%
+against 17.2% would be comparing different denominators and would overstate the drop
+enormously — the first version of the evaluation script printed exactly that invalid
+comparison and it is corrected in place.
+
+**A confound that cannot be separated here, stated rather than glossed.** The contamination
+filter removed `cotton`, `imported` and `leather` — the three highest-frequency atoms. So
+this suite is not merely UNSEEN vocabulary, it is unseen AND harder. Part of the
+27.6% → 17.2% drop is the changed atom mix, not memorisation, and this experiment cannot
+apportion between them. What it does establish: the prior number was flattering, and the
+effect survives on independently generated vocabulary over disjoint targets.
+
+#### Q2: is Node 5 needed? No — it is actively harmful at this operating point.
+
+Node 5 rejects **86 of 113** proposals and takes the gain from +0.016866 to +0.000928, a
+delta of **−0.015938**. The failure is worse here than on the prior suite (76% rejection vs
+47%), which is exactly what the distribution-shift diagnosis predicts: the threshold was
+calibrated on synonym pairs, and the further runtime drifts from synonymy, the more correct
+answers it discards.
+
+This is decisive against the pre-registered reading. Node 5 separates well in isolation
+(0.8349 AUROC, rejecting 89.5% of competing attested values) but that competence is
+unreachable at any threshold transferred from the frozen set. **Node 5 stays out.**
+Reopening it requires recalibration on train-only data, and even then it would be insurance
+against a failure mode neither suite has yet shown the resolver committing.
+
+#### Integration verdict
+
+The weight schedule (node 7) is cleared and safe, but the case for enabling it by default
+is now weaker, not stronger:
+
+* benefit on all five decision criteria: **+0.000000**
+* benefit on paraphrased traffic: +0.0169, down from the +0.0378 the prior suite suggested
+* cost: a network dependency on the scored path, and the contract test's
+  `total_tokens == 0` assertion — the tripwire that would catch any future layer escaping
+  its gate — would have to be broken or weakened
+
+Ship the plumbing default-OFF behind an environment flag, the shape `llm_extract` already
+uses. Insurance priced at zero, rather than a bet on paraphrasing the organizer has said
+will not occur.

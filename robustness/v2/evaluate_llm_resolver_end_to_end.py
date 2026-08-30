@@ -117,6 +117,7 @@ from __future__ import annotations
 
 import json
 import os
+import random
 import sys
 import time
 from pathlib import Path
@@ -174,15 +175,18 @@ class Resolver:
             # Groq's edge answers Python's default `Python-urllib/*` identity with a
             # Cloudflare 403 (code 1010) despite valid credentials.
             "User-Agent": "Mozilla/5.0"})
-        for attempt in range(3):
+        for attempt in range(5):
             try:
-                with urlopen(req, timeout=30) as r:
+                with urlopen(req, timeout=45) as r:
                     return json.loads(r.read().decode("utf-8"))[
                         "choices"][0]["message"]["content"].strip()
             except Exception:
-                if attempt == 2:
+                if attempt == 4:
                     return None
-                time.sleep(2 * (attempt + 1))
+                # Rate limiting is the dominant failure here, and a short fixed backoff
+                # does not clear it: a 24% failure rate was observed with 3 attempts at
+                # 2/4 seconds. Exponential with jitter, and more attempts.
+                time.sleep(min(2 ** attempt, 16) * (1.0 + 0.4 * random.random()))
         return None
 
     def resolve(self, phrase: str) -> str | None:
