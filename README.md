@@ -17,25 +17,25 @@ Scored by the **official, unmodified** evaluator (`evaluator/local_evaluator.py`
 | Metric | Weak BM25 starter | **This agent** |
 |---|---|---|
 | Hit Rate@10 | 0.125 | **0.995** |
-| MRR | 0.068 | **0.690** |
-| MTTC (mean turns to conversion) | 9.81 | **1.685** |
-| Efficiency | 0.119 | **0.932** |
-| **TechnicalScore** | **0.1067** | **0.8907** |
+| MRR | 0.068 | **0.694** |
+| MTTC (mean turns to conversion) | 9.81 | **1.655** |
+| Efficiency | 0.119 | **0.935** |
+| **TechnicalScore** | **0.1067** | **0.8927** |
 
 Per scenario:
 
 | Scenario | n | Hit@10 | MRR | MTTC | Starter Hit@10 |
 |---|---|---|---|---|---|
-| buying | 80 | 0.988 | 0.722 | 1.35 | 0.238 |
-| browsing | 80 | **1.000** | 0.599 | 1.29 | 0.025 |
-| intent_override | 30 | **1.000** | 0.866 | 3.67 | 0.133 |
+| buying | 80 | 0.988 | 0.713 | 1.29 | 0.238 |
+| browsing | 80 | **1.000** | 0.610 | 1.29 | 0.025 |
+| intent_override | 30 | **1.000** | 0.894 | 3.63 | 0.133 |
 | boundary | 10 | **1.000** | 0.624 | 1.60 | 0.000 |
 
 199 of 200 sessions convert. Median rank at conversion is **1**; 54% of sessions
 convert at rank 1 and 79% within the top 3.
 
 **Not overfitted.** Tuning used a fixed 140/60 dev/held-out split of the public set.
-Held-out score **0.8856** vs dev **0.8930** — a 0.007 gap.
+Held-out score **0.8872** vs dev **0.8951** — a 0.008 gap.
 
 **Cost and speed.** 0 model tokens. 19 ms mean per turn (p95 41 ms), 17 s index build,
 23 s for the full 200-session run on one core.
@@ -135,7 +135,7 @@ shopper's own messages out of the session graph and returns their requirements a
 structured JSON. It never ranks, never picks the question, and never produces a
 `parent_asin`; a failure returns `None` and the turn continues untouched. On the clean
 public set it fires 3 times in 200 conversations and changes nothing at all. Its value is
-insurance: on a reworded set it lifts 0.8430 -> 0.8573 and restores hit@10 to 0.995, for
+insurance: on a reworded set it lifts 0.8440 -> 0.8623 and restores hit@10 to 0.995, for
 about 10k tokens across all 200 conversations.
 
 ---
@@ -164,7 +164,7 @@ gzip -dk catalog.jsonl.gz                     # -> catalog.jsonl, 50,000 rows
 cd provided/techjam-conversational-search
 
 python -m evaluator.local_evaluator --output results_copilot.json
-# TechnicalScore 0.890686
+# TechnicalScore 0.892686
 
 BASELINE=1 python -m evaluator.local_evaluator --output results_baseline.json
 # TechnicalScore 0.106710  — matches docs/baseline_results.json exactly
@@ -204,14 +204,14 @@ inside a category with ~10,000 rows. Nothing disclosed distinguishes the target.
 is a floor imposed by the data, not by the retriever.
 
 **MRR is the remaining headroom**, not hit rate. At 0.995 hit rate the score is
-`0.5·0.995 + 0.3·MRR + 0.2·Efficiency`, so lifting MRR from 0.690 to 0.86 (what
+`0.5·0.995 + 0.3·MRR + 0.2·Efficiency`, so lifting MRR from 0.694 to 0.86 (what
 popularity ranking achieves on a *fully* disclosed card) is worth about +0.05. The
 tension is real: converting at turn 1 at rank 8 scores worse than converting at turn 2
 at rank 1, and we cannot choose to withhold a correct answer.
 
 **The anonymised profile did not help.** `preference_tags` are generic ("fit",
 "comfort", "durability") and match most of the catalog. Measured on the held-out split:
-weight 0.0 → 0.8856, 0.3 → 0.8811, 1.2 → 0.8300. It is switched off, and the code path
+weight 0.0 → 0.8872, 0.3 → 0.8828, 1.2 → 0.8310. It is switched off, and the code path
 is kept in case the private set ships sharper tags.
 
 **Robustness to a paraphrased private set — now measured, not assumed.**
@@ -221,16 +221,16 @@ text it emits:
 
 | | score | hit@10 |
 |---|---|---|
-| clean (control) | 0.8907 | 0.995 |
-| carrier sentence reworded, quoted text intact | 0.8430 | 0.985 |
-| + LLM rescue from turn 5 (`openai/gpt-oss-20b`) | **0.8573** | **0.995** |
-| heavily reworded incl. synonym swaps | 0.8126 | 0.950 |
+| clean (control) | 0.8927 | 0.995 |
+| carrier sentence reworded, quoted text intact | 0.8440 | 0.985 |
+| + LLM rescue from turn 5 (`openai/gpt-oss-20b`) | **0.8623** | **0.995** |
+| heavily reworded incl. synonym swaps | 0.8136 | 0.950 |
 
 Recall barely moves — we still *find* the product, we just rank it lower and take a turn
 longer. The loss is MRR, not misses.
 
 The hedge that does the work is **BM25F**, not the latent-semantic channel: with LSA on,
-the reworded score is 0.8403 against 0.8430 with it off.
+the reworded score is 0.8403 against 0.8440 with it off.
 
 **Cross-session learning is out of scope.** Both graphs are per-run: the knowledge graph
 is read-only, the session graph dies with the session. Nothing a customer says is

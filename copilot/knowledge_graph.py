@@ -25,6 +25,7 @@ from pathlib import Path
 import numpy as np
 
 from .text import (
+    STOPWORDS,
     COLOR_RE,
     MATERIAL_RE,
     normalize,
@@ -228,8 +229,18 @@ class KnowledgeGraph:
         terms = tokens(needle, drop_stopwords=False)
         if not terms:
             return np.zeros(0, dtype=np.int32)
-        seeds = [self.postings.get(t) for t in terms]
-        if any(s is None for s in seeds):
+        # Seed only from tokens the index actually holds. The postings are built from
+        # `tokens()` with stopwords dropped, so a phrase like "Zipper fly WITH button
+        # closure" has no posting list for "with" — and requiring one made the whole
+        # phrase return nothing. Correctness does not depend on seeding with every
+        # token: the candidates are verified by substring against `doc_norm` below, so
+        # any indexed token is enough to narrow the search.
+        if any(t not in self.postings and t not in STOPWORDS for t in terms):
+            # a genuinely unknown word cannot appear in any row, so neither can the phrase
+            return np.zeros(0, dtype=np.int32)
+        seeds = [self.postings[t] for t in terms if t in self.postings]
+        if not seeds:
+            # every token is a stopword — such a phrase carries no signal anyway
             return np.zeros(0, dtype=np.int32)
         seeds.sort(key=len)
         candidates = seeds[0]

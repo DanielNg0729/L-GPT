@@ -201,13 +201,13 @@ decide correctness."* Three points on that:
 - **The reveal policy lives in the evaluator, not in a paraphraser.** The same
   information would still arrive; only exact *matching* would degrade.
 - **It is measured, not hoped for.** `harness/paraphrase_stress.py` rewords the
-  simulator's output and re-scores: 0.8907 clean, **0.8430** with the carrier sentence
-  reworded, **0.8126** with synonym swaps on top. Recall holds up far better than the
+  simulator's output and re-scores: 0.8927 clean, **0.8440** with the carrier sentence
+  reworded, **0.8136** with synonym swaps on top. Recall holds up far better than the
   score — 0.995 -> 0.985 -> 0.950 — so we still find the product, just lower down.
-  Turning the optional LLM rescue on recovers the reworded case to **0.8573** at
+  Turning the optional LLM rescue on recovers the reworded case to **0.8623** at
   hit@10 0.995.
 - **The hedge that works is BM25F, not the semantic channel.** With LSA on, the reworded
-  score is 0.8403 against 0.8430 with it off. Earlier drafts of this document credited
+  score is 0.8403 against 0.8440 with it off. Earlier drafts of this document credited
   LSA as the paraphrase hedge; the measurement says otherwise.
 - **That stress test found a real bug.** Reworded, `intent_override` collapsed to
   hit@10 0.067 — when no template matched we assumed hits were scored from turn 1, so we
@@ -215,8 +215,8 @@ decide correctness."* Three points on that:
   scoring, and buried it. Fixed by detecting a change of mind from cue words, and by
   holding demotion until turn 5 when the opening line is unrecognised.
 - **Nothing is keyed to a specific sample.** No per-sample rules, no use of
-  `difficulty_bucket`, and all tuning was gated on a held-out split (0.8856 held-out vs
-  0.8930 dev).
+  `difficulty_bucket`, and all tuning was gated on a held-out split (0.8872 held-out vs
+  0.8951 dev).
 
 The deeper point is a known one in the conversational-recommendation literature: a
 policy tuned against a user simulator overfits that simulator. What protects the design

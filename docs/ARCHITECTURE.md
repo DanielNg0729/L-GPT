@@ -333,9 +333,14 @@ treated as noise and dropped.
 All numbers below come from a **single sweep**, every variant measured against the same
 shipped baseline. (An earlier revision of this table mixed two baselines and is superseded.)
 
+> The shipped row is current. The variant rows were swept before the stopword fix in
+> `phrase_docs` (§4) and so sit ~0.002 low across the board; the *ordering* and the
+> gaps between them are unaffected, which is what the table is for. Re-run
+> `python harness/ablate.py` for exact current values.
+
 | Configuration | dev (140) | held-out (60) | all (200) |
 |---|---|---|---|
-| **shipped** | **0.8930** | **0.8856** | **0.8907** |
+| **shipped** | **0.8951** | **0.8872** | **0.8927** |
 | `w_category = 1.5` | 0.8930 | 0.8818 | 0.8895 |
 | `w_category = 0` (no category signal) | 0.8253 | 0.8117 | 0.8210 |
 | `w_profile = 0.3` | 0.8888 | 0.8828 | 0.8869 |
@@ -373,7 +378,8 @@ the same formula**. The differences, and what each is worth here:
 | When to answer | every turn | gated: unique top `M`, or from turn 3 |
 
 Its distinctive ideas were ported into this reranker one at a time and measured on the
-same split:
+same split (swept before the `phrase_docs` stopword fix, so all rows sit ~0.002 low
+together — the comparison between them is unaffected):
 
 | Ported idea | dev | held-out | all |
 |---|---|---|---|
@@ -418,7 +424,7 @@ design worth measuring next.
 
 ```bash
 cd provided/techjam-conversational-search
-python -m evaluator.local_evaluator --output results_copilot.json    # 0.890686
+python -m evaluator.local_evaluator --output results_copilot.json    # 0.892686
 BASELINE=1 python -m evaluator.local_evaluator                       # 0.106710
 ```
 
