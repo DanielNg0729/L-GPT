@@ -45,3 +45,4 @@ robustness/v2/.llm_resolver_cache.json
 # ship answers the agent is supposed to derive.
 submission/.llm_resolve_cache.json
 robustness/v2/open_vocabulary/.pipeline_resolve_cache.json
+robustness/v2/open_vocabulary/.resolver_cache_open_vocab.json
