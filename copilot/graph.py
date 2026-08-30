@@ -112,6 +112,15 @@ def build_graph(kg: KnowledgeGraph, config: CopilotConfig, scratch: dict):
             # turn 3 and being wrong marks a correct turn-3 list "already proven wrong"
             # and pushes the real answer out of the top 10 on turn 4.
             graph["hit_blocked_until"] = MAX_TURNS + 1
+        elif intent["last_reply_kind"] == "fallback_open":
+            # We did not recognise the opening line, so we cannot tell a change-of-mind
+            # conversation from an ordinary one - and those suppress scoring until turn
+            # 3 or 4. Demoting a product we showed before then marks the *right* answer
+            # as proven wrong and buries it for the rest of the session. Measured on a
+            # reworded public set: assuming turn 1 dropped intent_override hit@10 to
+            # 0.067; waiting until turn 5 keeps it at 0.900. Demotion is worth 0.018
+            # overall, so the cautious default is the cheap side of this trade.
+            graph["hit_blocked_until"] = 5
         sg.record_turn(graph, state["turn"], state["user_message"], intent["opening_type"], learned)
         for constraint in learned:
             sg.record_attribute(graph, constraint["attribute"], constraint["text"], "user", state["turn"])

@@ -34,6 +34,18 @@ RE_BOUNDARY = re.compile(r"^\s*i don't have a preference for\s*(?P<attr>[a-z_]+)
 RE_NUDGE = re.compile(r"not quite right yet\.\s*ask me about one specific attribute", re.I)
 RE_OVERRIDE = re.compile(r"^\s*actually,?\s*ignore my earlier preference\.\s*what i need is:\s*(?P<value>.+?)\.?\s*$", re.I | re.S)
 
+# A reworded change of mind still has to signal itself somehow. These are the cues, and
+# the marker that introduces the replacement. Matching on cues rather than on one exact
+# sentence is what keeps override handling alive if the private set is paraphrased -
+# and mis-detecting an override is expensive, see `hit_blocked_until` in graph.py.
+RE_OVERRIDE_CUE = re.compile(
+    r"(actually|forget what|forget everything|scratch that|never ?mind|"
+    r"changed my mind|change of plan|ignore (?:my|what|the))", re.I)
+RE_NEW_VALUE = re.compile(
+    r"(?:what i (?:really )?need is|i (?:really )?need|the thing i need is|"
+    r"it has to be|it needs to be|what i want is|i want)\s*:?\s*(?P<value>.+?)\.?\s*$",
+    re.I | re.S)
+
 # --- synthesised constraints the simulator writes rather than quotes -----------------
 RE_COLOR_C = re.compile(r"^\s*color:\s*(?P<value>.+?)\s*$", re.I)
 RE_BUDGET_C = re.compile(r"^\s*budget around \$\s*(?P<value>[0-9][0-9.,]*)\s*$", re.I)
@@ -279,6 +291,29 @@ def update_with_new_info(intent: dict, user_message: str, turn: int) -> tuple[di
         signals["kind"] = "override"
         signals["genuine_pivot"] = genuine_pivot
         intent["last_reply_kind"] = "override"
+        return intent, learned, signals
+
+    if RE_OVERRIDE_CUE.search(message):
+        # Reworded change of mind. Pull out the replacement if we can see a marker,
+        # otherwise fall back to the whole sentence, and reuse the same
+        # re-affirmation-vs-real-pivot logic as the exact template above.
+        marker = RE_NEW_VALUE.search(message)
+        value = (marker.group("value") if marker else message).strip()
+        norm = normalize_phrase(value)
+        genuine_pivot = norm not in {c["norm"] for c in intent["constraints"]}
+        if genuine_pivot and marker:
+            for existing in intent["constraints"]:
+                if existing["turn"] < turn:
+                    existing["superseded"] = True
+                    existing["weight"] = min(existing["weight"], 0.35)
+        added = _add_constraint(intent, value, turn, weight=1.0 if marker else 0.4)
+        if added:
+            learned.append(added)
+        intent["changed_mind"] = genuine_pivot
+        signals["kind"] = "override"
+        signals["genuine_pivot"] = genuine_pivot
+        signals["inferred"] = True
+        intent["last_reply_kind"] = "override_inferred"
         return intent, learned, signals
 
     # Unrecognised utterance (a paraphrased private set lands here): treat the whole
