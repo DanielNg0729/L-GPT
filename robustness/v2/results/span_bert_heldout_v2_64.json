@@ -1,0 +1,118 @@
+{
+  "experiment": "V2.64 span extractor, held-out templates",
+  "checkpoint": "D:\\Coding\\Models\\TiktokTechJam\\.v2_model_cache\\span_bert_v2",
+  "bank": "robustness\\v2\\v1_turn_gated_bank\\final_test.jsonl",
+  "paraphrase_pool": 244,
+  "conditions": {
+    "canonical": {
+      "model": {
+        "span_exact": 0.6032,
+        "token_p": 0.4672,
+        "token_r": 0.9293,
+        "token_f1": 0.6218,
+        "n": 9600
+      },
+      "predict_nothing": {
+        "span_exact": 0.3333,
+        "token_p": 0.0,
+        "token_r": 0.0,
+        "token_f1": 0.0,
+        "n": 9600
+      },
+      "predict_everything": {
+        "span_exact": 0.0,
+        "token_p": 0.1108,
+        "token_r": 1.0,
+        "token_f1": 0.1995,
+        "n": 9600
+      },
+      "per_action": {
+        "buying_opening": {
+          "n": 1600,
+          "fp_rows": 0,
+          "exact": 892
+        },
+        "plain_opening": {
+          "n": 1600,
+          "fp_rows": 793,
+          "exact": 807
+        },
+        "override_opening": {
+          "n": 1600,
+          "fp_rows": 0,
+          "exact": 818
+        },
+        "constraint_update": {
+          "n": 1600,
+          "fp_rows": 0,
+          "exact": 819
+        },
+        "no_evidence": {
+          "n": 1600,
+          "fp_rows": 200,
+          "exact": 1400
+        },
+        "override_update": {
+          "n": 1600,
+          "fp_rows": 0,
+          "exact": 1055
+        }
+      }
+    },
+    "paraphrased": {
+      "model": {
+        "span_exact": 0.5046,
+        "token_p": 0.7664,
+        "token_r": 0.8202,
+        "token_f1": 0.7924,
+        "n": 9600
+      },
+      "predict_nothing": {
+        "span_exact": 0.3333,
+        "token_p": 0.0,
+        "token_r": 0.0,
+        "token_f1": 0.0,
+        "n": 9600
+      },
+      "predict_everything": {
+        "span_exact": 0.0,
+        "token_p": 0.3446,
+        "token_r": 1.0,
+        "token_f1": 0.5126,
+        "n": 9600
+      },
+      "per_action": {
+        "buying_opening": {
+          "n": 1600,
+          "fp_rows": 0,
+          "exact": 799
+        },
+        "plain_opening": {
+          "n": 1600,
+          "fp_rows": 793,
+          "exact": 807
+        },
+        "override_opening": {
+          "n": 1600,
+          "fp_rows": 0,
+          "exact": 724
+        },
+        "constraint_update": {
+          "n": 1600,
+          "fp_rows": 0,
+          "exact": 388
+        },
+        "no_evidence": {
+          "n": 1600,
+          "fp_rows": 200,
+          "exact": 1400
+        },
+        "override_update": {
+          "n": 1600,
+          "fp_rows": 0,
+          "exact": 726
+        }
+      }
+    }
+  }
+}

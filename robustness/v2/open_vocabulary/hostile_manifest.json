@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "purpose": "hostile condition: reworded wrapper, only-paraphrased values, category neutralised at evaluation time",
+  "session_base": "review800 open-vocabulary",
+  "sessions": 710,
+  "values_kept": 1280,
+  "values_dropped_as_canonical": 1916,
+  "category": "neutralised by empty category lists -> 'clothing item'",
+  "control": "review800_hostile_canonical.jsonl, identical value slots",
+  "review800_hostile_paraphrase.jsonl": {
+    "sha256": "f096bd7e37305512caf51dcdd2668379bd3ab560904ea355dde93936a821549d",
+    "sessions": 710
+  },
+  "review800_hostile_canonical.jsonl": {
+    "sha256": "1033a7d0fecc3184739e3b2b01ca75f86099ad378145fc539168c81c93d68d41",
+    "sessions": 710
+  }
+}
