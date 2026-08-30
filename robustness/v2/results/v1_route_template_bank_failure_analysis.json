@@ -1,0 +1,659 @@
+{
+  "purpose": "diagnostic only; no model selection or retraining",
+  "labels": [
+    "buying_opening",
+    "constraint_update",
+    "no_evidence",
+    "override_opening",
+    "override_update",
+    "plain_opening"
+  ],
+  "confusion": {
+    "buying_opening": {
+      "buying_opening": 688,
+      "constraint_update": 912
+    },
+    "constraint_update": {
+      "constraint_update": 1172,
+      "buying_opening": 428
+    },
+    "no_evidence": {
+      "no_evidence": 1600
+    },
+    "override_opening": {
+      "override_opening": 1600
+    },
+    "override_update": {
+      "override_update": 1600
+    },
+    "plain_opening": {
+      "plain_opening": 1595,
+      "buying_opening": 5
+    }
+  },
+  "template_summary": {
+    "At first I sought {category} after initially favoring {b}.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "override_opening": 200
+      }
+    },
+    "At first I sought {category} and had {b} as a prior preference.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "override_opening": 200
+      }
+    },
+    "At first I sought {category} where {b} was my starting point.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "override_opening": 200
+      }
+    },
+    "At first I sought {category} with an earlier inclination toward {b}.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "override_opening": 200
+      }
+    },
+    "I am looking around at {category} at this stage.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "plain_opening": 200
+      }
+    },
+    "I am looking around at {category} to review the available options.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "plain_opening": 200
+      }
+    },
+    "I am looking around at {category} while I compare possibilities.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "plain_opening": 200
+      }
+    },
+    "I am looking around at {category} without deciding yet.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "plain_opening": 200
+      }
+    },
+    "I leave it up to you concerning {attribute}.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "no_evidence": 200
+      }
+    },
+    "I leave it up to you in relation to {attribute}.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "no_evidence": 200
+      }
+    },
+    "I leave it up to you when it comes to {attribute}.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "no_evidence": 200
+      }
+    },
+    "I leave it up to you with respect to {attribute}.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "no_evidence": 200
+      }
+    },
+    "Instead of my earlier preference, select {a} as my revised priority.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "override_update": 200
+      }
+    },
+    "Instead of my earlier preference, select {a} as the replacement requirement.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "override_update": 200
+      }
+    },
+    "Instead of my earlier preference, select {a} from this point onward.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "override_update": 200
+      }
+    },
+    "Instead of my earlier preference, select {a} rather than the previous choice.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "override_update": 200
+      }
+    },
+    "Let us explore {category} at this stage.": {
+      "rows": 200,
+      "accuracy": 0.975,
+      "predictions": {
+        "plain_opening": 195,
+        "buying_opening": 5
+      }
+    },
+    "Let us explore {category} to review the available options.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "plain_opening": 200
+      }
+    },
+    "Let us explore {category} while I compare possibilities.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "plain_opening": 200
+      }
+    },
+    "Let us explore {category} without deciding yet.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "plain_opening": 200
+      }
+    },
+    "Make sure it combines a need for {a} as well as {b}.": {
+      "rows": 200,
+      "accuracy": 0.0,
+      "predictions": {
+        "buying_opening": 200
+      }
+    },
+    "Make sure it combines both {a} and {b} as requirements.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "constraint_update": 200
+      }
+    },
+    "Make sure it combines {a} alongside {b}.": {
+      "rows": 200,
+      "accuracy": 0.275,
+      "predictions": {
+        "buying_opening": 145,
+        "constraint_update": 55
+      }
+    },
+    "Make sure it combines {a} combined with {b}.": {
+      "rows": 200,
+      "accuracy": 0.585,
+      "predictions": {
+        "constraint_update": 117,
+        "buying_opening": 83
+      }
+    },
+    "My earlier preference no longer applies; choose {a} as my revised priority.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "override_update": 200
+      }
+    },
+    "My earlier preference no longer applies; choose {a} as the replacement requirement.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "override_update": 200
+      }
+    },
+    "My earlier preference no longer applies; choose {a} from this point onward.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "override_update": 200
+      }
+    },
+    "My earlier preference no longer applies; choose {a} rather than the previous choice.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "override_update": 200
+      }
+    },
+    "My goal is {category} built with {a}.": {
+      "rows": 200,
+      "accuracy": 0.0,
+      "predictions": {
+        "constraint_update": 200
+      }
+    },
+    "My goal is {category} prioritizing {a}.": {
+      "rows": 200,
+      "accuracy": 0.0,
+      "predictions": {
+        "constraint_update": 200
+      }
+    },
+    "My goal is {category} that must include {a}.": {
+      "rows": 200,
+      "accuracy": 0.0,
+      "predictions": {
+        "constraint_update": 200
+      }
+    },
+    "My goal is {category} whose defining requirement is {a}.": {
+      "rows": 200,
+      "accuracy": 0.005,
+      "predictions": {
+        "constraint_update": 199,
+        "buying_opening": 1
+      }
+    },
+    "My original thought was {category} after initially favoring {b}.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "override_opening": 200
+      }
+    },
+    "My original thought was {category} and had {b} as a prior preference.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "override_opening": 200
+      }
+    },
+    "My original thought was {category} where {b} was my starting point.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "override_opening": 200
+      }
+    },
+    "My original thought was {category} with an earlier inclination toward {b}.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "override_opening": 200
+      }
+    },
+    "Nothing more matters concerning {attribute}.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "no_evidence": 200
+      }
+    },
+    "Nothing more matters in relation to {attribute}.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "no_evidence": 200
+      }
+    },
+    "Nothing more matters when it comes to {attribute}.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "no_evidence": 200
+      }
+    },
+    "Nothing more matters with respect to {attribute}.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "no_evidence": 200
+      }
+    },
+    "Seeking {category} built with {a}.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "buying_opening": 200
+      }
+    },
+    "Seeking {category} prioritizing {a}.": {
+      "rows": 200,
+      "accuracy": 0.435,
+      "predictions": {
+        "buying_opening": 87,
+        "constraint_update": 113
+      }
+    },
+    "Seeking {category} that must include {a}.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "buying_opening": 200
+      }
+    },
+    "Seeking {category} whose defining requirement is {a}.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "buying_opening": 200
+      }
+    },
+    "The important details are a need for {a} as well as {b}.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "constraint_update": 200
+      }
+    },
+    "The important details are both {a} and {b} as requirements.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "constraint_update": 200
+      }
+    },
+    "The important details are {a} alongside {b}.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "constraint_update": 200
+      }
+    },
+    "The important details are {a} combined with {b}.": {
+      "rows": 200,
+      "accuracy": 1.0,
+      "predictions": {
+        "constraint_update": 200
+      }
+    }
+  },
+  "turn_gated_template_summary": {
+    "At first I sought {category} after initially favoring {b}.": {
+      "accuracy": 1.0
+    },
+    "At first I sought {category} and had {b} as a prior preference.": {
+      "accuracy": 1.0
+    },
+    "At first I sought {category} where {b} was my starting point.": {
+      "accuracy": 1.0
+    },
+    "At first I sought {category} with an earlier inclination toward {b}.": {
+      "accuracy": 1.0
+    },
+    "I am looking around at {category} at this stage.": {
+      "accuracy": 1.0
+    },
+    "I am looking around at {category} to review the available options.": {
+      "accuracy": 1.0
+    },
+    "I am looking around at {category} while I compare possibilities.": {
+      "accuracy": 1.0
+    },
+    "I am looking around at {category} without deciding yet.": {
+      "accuracy": 1.0
+    },
+    "I leave it up to you concerning {attribute}.": {
+      "accuracy": 1.0
+    },
+    "I leave it up to you in relation to {attribute}.": {
+      "accuracy": 1.0
+    },
+    "I leave it up to you when it comes to {attribute}.": {
+      "accuracy": 1.0
+    },
+    "I leave it up to you with respect to {attribute}.": {
+      "accuracy": 1.0
+    },
+    "Instead of my earlier preference, select {a} as my revised priority.": {
+      "accuracy": 1.0
+    },
+    "Instead of my earlier preference, select {a} as the replacement requirement.": {
+      "accuracy": 1.0
+    },
+    "Instead of my earlier preference, select {a} from this point onward.": {
+      "accuracy": 1.0
+    },
+    "Instead of my earlier preference, select {a} rather than the previous choice.": {
+      "accuracy": 1.0
+    },
+    "Let us explore {category} at this stage.": {
+      "accuracy": 0.975
+    },
+    "Let us explore {category} to review the available options.": {
+      "accuracy": 1.0
+    },
+    "Let us explore {category} while I compare possibilities.": {
+      "accuracy": 1.0
+    },
+    "Let us explore {category} without deciding yet.": {
+      "accuracy": 1.0
+    },
+    "Make sure it combines a need for {a} as well as {b}.": {
+      "accuracy": 0.405
+    },
+    "Make sure it combines both {a} and {b} as requirements.": {
+      "accuracy": 1.0
+    },
+    "Make sure it combines {a} alongside {b}.": {
+      "accuracy": 1.0
+    },
+    "Make sure it combines {a} combined with {b}.": {
+      "accuracy": 1.0
+    },
+    "My earlier preference no longer applies; choose {a} as my revised priority.": {
+      "accuracy": 1.0
+    },
+    "My earlier preference no longer applies; choose {a} as the replacement requirement.": {
+      "accuracy": 1.0
+    },
+    "My earlier preference no longer applies; choose {a} from this point onward.": {
+      "accuracy": 1.0
+    },
+    "My earlier preference no longer applies; choose {a} rather than the previous choice.": {
+      "accuracy": 1.0
+    },
+    "My goal is {category} built with {a}.": {
+      "accuracy": 0.93
+    },
+    "My goal is {category} prioritizing {a}.": {
+      "accuracy": 0.015
+    },
+    "My goal is {category} that must include {a}.": {
+      "accuracy": 1.0
+    },
+    "My goal is {category} whose defining requirement is {a}.": {
+      "accuracy": 1.0
+    },
+    "My original thought was {category} after initially favoring {b}.": {
+      "accuracy": 1.0
+    },
+    "My original thought was {category} and had {b} as a prior preference.": {
+      "accuracy": 1.0
+    },
+    "My original thought was {category} where {b} was my starting point.": {
+      "accuracy": 1.0
+    },
+    "My original thought was {category} with an earlier inclination toward {b}.": {
+      "accuracy": 1.0
+    },
+    "Nothing more matters concerning {attribute}.": {
+      "accuracy": 1.0
+    },
+    "Nothing more matters in relation to {attribute}.": {
+      "accuracy": 1.0
+    },
+    "Nothing more matters when it comes to {attribute}.": {
+      "accuracy": 1.0
+    },
+    "Nothing more matters with respect to {attribute}.": {
+      "accuracy": 1.0
+    },
+    "Seeking {category} built with {a}.": {
+      "accuracy": 1.0
+    },
+    "Seeking {category} prioritizing {a}.": {
+      "accuracy": 1.0
+    },
+    "Seeking {category} that must include {a}.": {
+      "accuracy": 1.0
+    },
+    "Seeking {category} whose defining requirement is {a}.": {
+      "accuracy": 1.0
+    },
+    "The important details are a need for {a} as well as {b}.": {
+      "accuracy": 1.0
+    },
+    "The important details are both {a} and {b} as requirements.": {
+      "accuracy": 1.0
+    },
+    "The important details are {a} alongside {b}.": {
+      "accuracy": 1.0
+    },
+    "The important details are {a} combined with {b}.": {
+      "accuracy": 1.0
+    }
+  },
+  "failure_examples": {
+    "buying_opening -> constraint_update": [
+      {
+        "message": "My goal is Shirts Casual Button-Down Shirts built with Cotton.",
+        "confidence": 0.784973
+      },
+      {
+        "message": "My goal is Shirts Casual Button-Down Shirts whose defining requirement is Cotton.",
+        "confidence": 0.808575
+      },
+      {
+        "message": "My goal is Shirts Casual Button-Down Shirts that must include Cotton.",
+        "confidence": 0.840088
+      },
+      {
+        "message": "My goal is Shirts Casual Button-Down Shirts prioritizing Cotton.",
+        "confidence": 0.964864
+      },
+      {
+        "message": "My goal is Sweaters Cardigans built with polyester.",
+        "confidence": 0.811056
+      },
+      {
+        "message": "My goal is Sweaters Cardigans whose defining requirement is polyester.",
+        "confidence": 0.747674
+      },
+      {
+        "message": "My goal is Sweaters Cardigans that must include polyester.",
+        "confidence": 0.871527
+      },
+      {
+        "message": "My goal is Sweaters Cardigans prioritizing polyester.",
+        "confidence": 0.971318
+      },
+      {
+        "message": "My goal is Tops & Tees Tanks & Camis built with Cotton.",
+        "confidence": 0.800152
+      },
+      {
+        "message": "My goal is Tops & Tees Tanks & Camis whose defining requirement is Cotton.",
+        "confidence": 0.777824
+      },
+      {
+        "message": "My goal is Tops & Tees Tanks & Camis that must include Cotton.",
+        "confidence": 0.688277
+      },
+      {
+        "message": "My goal is Tops & Tees Tanks & Camis prioritizing Cotton.",
+        "confidence": 0.969101
+      }
+    ],
+    "constraint_update -> buying_opening": [
+      {
+        "message": "Make sure it combines Cotton alongside Imported.",
+        "confidence": 0.672932
+      },
+      {
+        "message": "Make sure it combines a need for Cotton as well as Imported.",
+        "confidence": 0.7885
+      },
+      {
+        "message": "Make sure it combines polyester alongside Pull On closure.",
+        "confidence": 0.847879
+      },
+      {
+        "message": "Make sure it combines a need for polyester as well as Pull On closure.",
+        "confidence": 0.829013
+      },
+      {
+        "message": "Make sure it combines polyester combined with Pull On closure.",
+        "confidence": 0.724795
+      },
+      {
+        "message": "Make sure it combines Cotton alongside Pull On closure.",
+        "confidence": 0.910049
+      },
+      {
+        "message": "Make sure it combines a need for Cotton as well as Pull On closure.",
+        "confidence": 0.830094
+      },
+      {
+        "message": "Make sure it combines Cotton combined with Pull On closure.",
+        "confidence": 0.757856
+      },
+      {
+        "message": "Make sure it combines Rubber alongside Imported.",
+        "confidence": 0.767571
+      },
+      {
+        "message": "Make sure it combines a need for Rubber as well as Imported.",
+        "confidence": 0.808688
+      },
+      {
+        "message": "Make sure it combines Rubber combined with Imported.",
+        "confidence": 0.620888
+      },
+      {
+        "message": "Make sure it combines Rubber alongside Imported.",
+        "confidence": 0.767571
+      }
+    ],
+    "plain_opening -> buying_opening": [
+      {
+        "message": "Let us explore Shoes & Jewelry Westlake at this stage.",
+        "confidence": 0.486785
+      },
+      {
+        "message": "Let us explore Shoes & Jewelry Westlake at this stage.",
+        "confidence": 0.486785
+      },
+      {
+        "message": "Let us explore Shoes & Jewelry Westlake at this stage.",
+        "confidence": 0.486785
+      },
+      {
+        "message": "Let us explore Gloves & Mittens Cold Weather Gloves at this stage.",
+        "confidence": 0.485518
+      },
+      {
+        "message": "Let us explore Gloves & Mittens Cold Weather Gloves at this stage.",
+        "confidence": 0.485518
+      }
+    ]
+  },
+  "turn_gated_diagnostic": {
+    "definition": "For each already-labelled test row, mask actions impossible at its known runtime phase before argmax. This is post-hoc diagnosis only, not a selection result.",
+    "accuracy": 0.965104,
+    "per_action_accuracy": {
+      "buying_opening": 0.868125,
+      "constraint_update": 0.925625,
+      "no_evidence": 1.0,
+      "override_opening": 1.0,
+      "override_update": 1.0,
+      "plain_opening": 0.996875
+    }
+  }
+}

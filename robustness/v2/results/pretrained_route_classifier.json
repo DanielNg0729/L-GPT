@@ -1,0 +1,16 @@
+{
+  "experiment": "V2.12 pretrained DistilBERT route classifier",
+  "base_model": "D:\\Coding\\Models\\TiktokTechJam\\submission\\models\\scaffolding_tagger",
+  "train_rows": 6400,
+  "holdout_rows": 4800,
+  "accuracy": 0.907083,
+  "per_route_accuracy": {
+    "boundary": 1.0,
+    "constraint_reply": 1.0,
+    "no_preference": 0.75,
+    "nudge": 1.0,
+    "opening": 1.0,
+    "override": 0.6925
+  },
+  "decision_rule": "Compare only with a rule fallback restricted to development cues, then audit strict-gate non-interference before any integration."
+}

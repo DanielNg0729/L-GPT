@@ -1,0 +1,21 @@
+{
+  "experiment": "V2.14 deterministic V1-action route classifier",
+  "seed": 20260906,
+  "epochs": 6,
+  "train_rows": 4186,
+  "development_rows": 1014,
+  "holdout_rows": 2600,
+  "selected_epoch": 1,
+  "development_accuracy": 1.0,
+  "holdout_accuracy": 0.905,
+  "per_action_accuracy": {
+    "buying_opening": 1.0,
+    "constraint_update": 0.9925,
+    "no_evidence": 1.0,
+    "override_opening": 1.0,
+    "override_update": 0.89,
+    "plain_opening": 0.5
+  },
+  "model_artifact": "D:\\Coding\\Models\\TiktokTechJam\\.v2_model_cache\\v1_route_action_classifier_seeded",
+  "selection": "best target-disjoint development split; frozen wrapper holdout evaluated once"
+}

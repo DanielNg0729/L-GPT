@@ -1,0 +1,1382 @@
+{"canonical": "card case wallet", "paraphrases": ["holds cards", "card case style", "card wallet"], "emittable": false}
+{"canonical": "unisex baby", "paraphrases": ["for babies", "baby sized", "unisex infant"], "emittable": false}
+{"canonical": "polyurethane sole", "paraphrases": ["polyurethane bottom", "pu sole", "polyurethane sole"], "emittable": true}
+{"canonical": "cushioned midsole", "paraphrases": ["has cushioning", "padded midsole", "soft cushioning"], "emittable": false}
+{"canonical": "warm", "paraphrases": ["keeps you warm", "warm feeling", "very cozy"], "emittable": false}
+{"canonical": "lens height 38 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "easy to care", "paraphrases": ["easy maintenance", "low care", "doesn't need much care"], "emittable": false}
+{"canonical": "date window at 3 00", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "knit", "paraphrases": ["knit fabric", "is it knit", "soft knit"], "emittable": true}
+{"canonical": "travelling hiking", "paraphrases": ["good for travel", "hiking friendly", "travel and hiking"], "emittable": false}
+{"canonical": "weave type woven", "paraphrases": ["is it woven", "woven style", "regular weave"], "emittable": false}
+{"canonical": "injection molded eva midsole", "paraphrases": ["has eva cushioning", "eva foam inside", "molded foam"], "emittable": true}
+{"canonical": "snap closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "long", "paraphrases": ["full length", "longer style", "goes down far"], "emittable": false}
+{"canonical": "machine wash tumble dry", "paraphrases": ["machine wash and dry", "washable and dryer safe", "machine wash dryer"], "emittable": true}
+{"canonical": "vendor name puma", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "reebook shoes", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "made in india", "paraphrases": ["made in india", "from india", "indian made"], "emittable": true}
+{"canonical": "white", "paraphrases": ["in white", "white color", "comes in white"], "emittable": false}
+{"canonical": "removable footbed", "paraphrases": ["can remove the footbed", "takes out sole", "removable insole"], "emittable": true}
+{"canonical": "dry clean", "paraphrases": ["needs dry cleaning", "dry clean only", "professional cleaning"], "emittable": false}
+{"canonical": "flannel", "paraphrases": ["flannel fabric", "made of flannel", "soft flannel"], "emittable": true}
+{"canonical": "synthetic mesh upper", "paraphrases": ["synthetic mesh top", "mesh upper", "has mesh"], "emittable": true}
+{"canonical": "lens height 49 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "country of origin imported", "paraphrases": ["is it imported", "made overseas", "imported"], "emittable": false}
+{"canonical": "not applicable", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "memory foam midsole", "paraphrases": ["memory foam inside", "has memory foam", "foam cushioning"], "emittable": false}
+{"canonical": "polar fleece lining", "paraphrases": ["fleece lined", "has fleece inside", "fleece lining"], "emittable": false}
+{"canonical": "boys", "paraphrases": ["for boys", "boys size", "is it for boys"], "emittable": false}
+{"canonical": "wedding", "paraphrases": ["for a wedding", "wedding appropriate", "wedding style"], "emittable": false}
+{"canonical": "stretch", "paraphrases": ["stretchy material", "has stretch", "gives a bit"], "emittable": true}
+{"canonical": "machine wash hand wash", "paraphrases": ["can wash by hand or machine", "either machine or hand", "machine or hand washable"], "emittable": true}
+{"canonical": "mesh upper", "paraphrases": ["mesh top", "has mesh upper", "breathable mesh"], "emittable": true}
+{"canonical": "lens width 48 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "aluminum", "paraphrases": ["made of aluminum", "aluminum frame", "has aluminum"], "emittable": false}
+{"canonical": "100 rubber", "paraphrases": ["all rubber", "solid rubber", "full rubber"], "emittable": true}
+{"canonical": "10 spandex", "paraphrases": ["has 10 spandex", "the blend is 10 spandex", "10 spandex mix"], "emittable": true}
+{"canonical": "prompt shipping", "paraphrases": ["ships quick", "fast shipping", "quick delivery"], "emittable": true}
+{"canonical": "polyurethane outsole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "solid", "paraphrases": ["solid color", "all one color", "no pattern"], "emittable": true}
+{"canonical": "cashmere", "paraphrases": ["cashmere blend", "pure cashmere", "made of cashmere"], "emittable": true}
+{"canonical": "92 polyester 8 spandex", "paraphrases": ["has 92 polyester 8 spandex", "the blend is 92 polyester 8 spandex", "92 polyester 8 spandex mix"], "emittable": true}
+{"canonical": "button closure", "paraphrases": ["buttons up", "closes with buttons", "button front"], "emittable": true}
+{"canonical": "nylon lining", "paraphrases": ["has nylon lining", "nylon lined", "lined with nylon"], "emittable": true}
+{"canonical": "handcrafted and handfinished", "paraphrases": ["handmade", "hand finished", "made by hand"], "emittable": true}
+{"canonical": "water resistant to 330 feet", "paraphrases": ["waterproof to 330 feet", "resists water up to 330 feet", "water resistant at depth"], "emittable": false}
+{"canonical": "anime", "paraphrases": ["anime style", "anime themed", "anime design"], "emittable": false}
+{"canonical": "cap sleeve", "paraphrases": ["short sleeves", "cap sleeves", "tiny sleeves"], "emittable": false}
+{"canonical": "comfort footbed", "paraphrases": ["padded footbed", "comfortable sole", "cushioned bottom"], "emittable": false}
+{"canonical": "cotton leather", "paraphrases": ["has cotton leather", "with cotton leather", "is cotton leather"], "emittable": true}
+{"canonical": "buttons", "paraphrases": ["made of buttons", "is it buttons", "buttons material"], "emittable": true}
+{"canonical": "fashion sneaker", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "floral print", "paraphrases": ["has floral print", "with floral print", "is floral print"], "emittable": true}
+{"canonical": "synthetic and rubber", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "nike", "paraphrases": ["made of nike", "is it nike", "nike material"], "emittable": true}
+{"canonical": "unknown", "paraphrases": ["made of unknown", "is it unknown", "unknown material"], "emittable": true}
+{"canonical": "mirrored", "paraphrases": ["made of mirrored", "is it mirrored", "mirrored material"], "emittable": true}
+{"canonical": "durable outsole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "synthetic upper", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "lightly cushioned footbed", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "arm 120 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "95 viscose 5 spandex", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "removable hood", "paraphrases": ["has removable hood", "with removable hood", "is removable hood"], "emittable": false}
+{"canonical": "manmade sole", "paraphrases": ["has manmade sole", "with manmade sole", "is manmade sole"], "emittable": true}
+{"canonical": "lug sole sole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "short sleeve", "paraphrases": ["short sleeves", "has short sleeves", "above elbow"], "emittable": true}
+{"canonical": "ortholite insole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "ear loop", "paraphrases": ["has ear loop", "with ear loop", "is ear loop"], "emittable": false}
+{"canonical": "non marking outsole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "suede leather", "paraphrases": ["has suede leather", "with suede leather", "is suede leather"], "emittable": true}
+{"canonical": "lens height 35 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "zippered hand pockets", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "breathable leather lining", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "100 synthetic mesh", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "machine washable hand washed sugggestion", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "elastic", "paraphrases": ["made of elastic", "is it elastic", "elastic material"], "emittable": true}
+{"canonical": "marked 925", "paraphrases": ["has marked 925", "with marked 925", "is marked 925"], "emittable": true}
+{"canonical": "soccer", "paraphrases": ["made of soccer", "is it soccer", "soccer material"], "emittable": false}
+{"canonical": "crew neckline", "paraphrases": ["has crew neckline", "with crew neckline", "is crew neckline"], "emittable": false}
+{"canonical": "durable", "paraphrases": ["made of durable", "is it durable", "durable material"], "emittable": true}
+{"canonical": "radically lightweight", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "amazon collection", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "indoor outdoor outsole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "8 inches", "paraphrases": ["has 8 inches", "with 8 inches", "is 8 inches"], "emittable": false}
+{"canonical": "handbag", "paraphrases": ["made of handbag", "is it handbag", "handbag material"], "emittable": false}
+{"canonical": "30 liters", "paraphrases": ["has 30 liters", "with 30 liters", "is 30 liters"], "emittable": false}
+{"canonical": "lightweight responsive 5gen cushioning", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "skiing", "paraphrases": ["made of skiing", "is it skiing", "skiing material"], "emittable": false}
+{"canonical": "to be updated", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "brushed", "paraphrases": ["made of brushed", "is it brushed", "brushed material"], "emittable": true}
+{"canonical": "bohemian", "paraphrases": ["made of bohemian", "is it bohemian", "bohemian material"], "emittable": false}
+{"canonical": "size medium", "paraphrases": ["has size medium", "with size medium", "is size medium"], "emittable": true}
+{"canonical": "slim fit", "paraphrases": ["fits tight", "slims down", "tapers in"], "emittable": true}
+{"canonical": "material alloy", "paraphrases": ["has material alloy", "with material alloy", "is material alloy"], "emittable": true}
+{"canonical": "100 pvc", "paraphrases": ["has 100 pvc", "with 100 pvc", "is 100 pvc"], "emittable": true}
+{"canonical": "premium leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "cushioned insole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "vibram sole", "paraphrases": ["has vibram sole", "with vibram sole", "is vibram sole"], "emittable": true}
+{"canonical": "7 inches", "paraphrases": ["has 7 inches", "with 7 inches", "is 7 inches"], "emittable": false}
+{"canonical": "jetted pocket", "paraphrases": ["has jetted pocket", "with jetted pocket", "is jetted pocket"], "emittable": false}
+{"canonical": "fit type loose", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "wireless", "paraphrases": ["made of wireless", "is it wireless", "wireless material"], "emittable": false}
+{"canonical": "self adhesive", "paraphrases": ["has self adhesive", "with self adhesive", "is self adhesive"], "emittable": false}
+{"canonical": "100 satisfaction guarantee", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "balaclava", "paraphrases": ["made of balaclava", "is it balaclava", "balaclava material"], "emittable": false}
+{"canonical": "unisex adult mens", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "all man made material", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "polyester and spandex", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "comfortable and durable", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "100 linen", "paraphrases": ["has 100 linen", "with 100 linen", "is 100 linen"], "emittable": true}
+{"canonical": "treadlite by ugg outsole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "rfid protected", "paraphrases": ["has rfid protected", "with rfid protected", "is rfid protected"], "emittable": false}
+{"canonical": "do not bleach", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "graphics more", "paraphrases": ["has graphics more", "with graphics more", "is graphics more"], "emittable": false}
+{"canonical": "shirts closure", "paraphrases": ["has shirts closure", "with shirts closure", "is shirts closure"], "emittable": true}
+{"canonical": "lens height 43 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "delicate cycle", "paraphrases": ["has delicate cycle", "with delicate cycle", "is delicate cycle"], "emittable": true}
+{"canonical": "ratchet closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "zipper fly with button closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "loungefly", "paraphrases": ["made of loungefly", "is it loungefly", "loungefly material"], "emittable": false}
+{"canonical": "tapered leg", "paraphrases": ["has tapered leg", "with tapered leg", "is tapered leg"], "emittable": false}
+{"canonical": "open top closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "gender mens", "paraphrases": ["has gender mens", "with gender mens", "is gender mens"], "emittable": true}
+{"canonical": "tumble dry do not iron", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "material polyester", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "molded rubber outsole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "hypoallergenic", "paraphrases": ["made of hypoallergenic", "is it hypoallergenic", "hypoallergenic material"], "emittable": true}
+{"canonical": "fossil", "paraphrases": ["made of fossil", "is it fossil", "fossil material"], "emittable": false}
+{"canonical": "pvc outsole", "paraphrases": ["has pvc outsole", "with pvc outsole", "is pvc outsole"], "emittable": false}
+{"canonical": "83 nylon 17 spandex", "paraphrases": ["has 83 nylon 17 spandex", "the blend is 83 nylon 17 spandex", "83 nylon 17 spandex mix"], "emittable": true}
+{"canonical": "jewelry and accessories not included", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "soft hand feel", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "minimalist", "paraphrases": ["made of minimalist", "is it minimalist", "minimalist material"], "emittable": false}
+{"canonical": "omni heat thermal reflective", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "big kid", "paraphrases": ["has big kid", "with big kid", "is big kid"], "emittable": false}
+{"canonical": "grey", "paraphrases": ["in grey", "grey color", "comes in grey"], "emittable": false}
+{"canonical": "50 polyester 50 cotton", "paraphrases": ["has 50 polyester 50 cotton", "the blend is 50 polyester 50 cotton", "50 polyester 50 cotton mix"], "emittable": true}
+{"canonical": "m select grip outsole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "luggage", "paraphrases": ["made of luggage", "is it luggage", "luggage material"], "emittable": false}
+{"canonical": "87 nylon 13 spandex", "paraphrases": ["has 87 nylon 13 spandex", "the blend is 87 nylon 13 spandex", "87 nylon 13 spandex mix"], "emittable": true}
+{"canonical": "rectangular", "paraphrases": ["made of rectangular", "is it rectangular", "rectangular material"], "emittable": false}
+{"canonical": "5 elastane", "paraphrases": ["has 5 elastane", "with 5 elastane", "is 5 elastane"], "emittable": true}
+{"canonical": "made in italy", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "65 polyester 35 rayon", "paraphrases": ["has 65 polyester 35 rayon", "the blend is 65 polyester 35 rayon", "65 polyester 35 rayon mix"], "emittable": true}
+{"canonical": "season spring autumn winter", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "100 waterproof", "paraphrases": ["has 100 waterproof", "with 100 waterproof", "is 100 waterproof"], "emittable": true}
+{"canonical": "86 nylon 14 spandex", "paraphrases": ["has 86 nylon 14 spandex", "the blend is 86 nylon 14 spandex", "86 nylon 14 spandex mix"], "emittable": true}
+{"canonical": "brand logo", "paraphrases": ["has brand logo", "with brand logo", "is brand logo"], "emittable": false}
+{"canonical": "beads", "paraphrases": ["made of beads", "is it beads", "beads material"], "emittable": false}
+{"canonical": "ankle strap with buckle closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "sport", "paraphrases": ["made of sport", "is it sport", "sport material"], "emittable": true}
+{"canonical": "satin label", "paraphrases": ["has satin label", "with satin label", "is satin label"], "emittable": false}
+{"canonical": "disney", "paraphrases": ["made of disney", "is it disney", "disney material"], "emittable": false}
+{"canonical": "premium full grain leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "screw closure", "paraphrases": ["has screw closure", "with screw closure", "is screw closure"], "emittable": true}
+{"canonical": "94 polyester 6 elastane", "paraphrases": ["has 94 polyester 6 elastane", "the blend is 94 polyester 6 elastane", "94 polyester 6 elastane mix"], "emittable": true}
+{"canonical": "durable rubber outsole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "thermoplastic polyurethane sole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "tag free neck label", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "spring summer 2014", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "retail fit", "paraphrases": ["has retail fit", "with retail fit", "is retail fit"], "emittable": false}
+{"canonical": "scratch resistant sapphire crystal", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "textured outsole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "fitment true to size", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "form fitting", "paraphrases": ["has form fitting", "with form fitting", "is form fitting"], "emittable": true}
+{"canonical": "multicoloured", "paraphrases": ["made of multicoloured", "is it multicoloured", "multicoloured material"], "emittable": false}
+{"canonical": "quick dry", "paraphrases": ["has quick dry", "with quick dry", "is quick dry"], "emittable": false}
+{"canonical": "n5 comfort system footbed", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "breathable lining", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "interior security pocket", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "cloth", "paraphrases": ["made of cloth", "is it cloth", "cloth material"], "emittable": true}
+{"canonical": "2 spandex", "paraphrases": ["has 2 spandex", "the blend is 2 spandex", "2 spandex mix"], "emittable": true}
+{"canonical": "linen", "paraphrases": ["linen fabric", "made of linen", "pure linen"], "emittable": true}
+{"canonical": "vacation", "paraphrases": ["made of vacation", "is it vacation", "vacation material"], "emittable": false}
+{"canonical": "synthetic sole", "paraphrases": ["has synthetic sole", "with synthetic sole", "is synthetic sole"], "emittable": true}
+{"canonical": "an amazon brand", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "bangle charm", "paraphrases": ["has bangle charm", "with bangle charm", "is bangle charm"], "emittable": false}
+{"canonical": "large", "paraphrases": ["made of large", "is it large", "large material"], "emittable": false}
+{"canonical": "84 polyester 16 elastane", "paraphrases": ["has 84 polyester 16 elastane", "the blend is 84 polyester 16 elastane", "84 polyester 16 elastane mix"], "emittable": true}
+{"canonical": "country of origin china", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "classic", "paraphrases": ["made of classic", "is it classic", "classic material"], "emittable": false}
+{"canonical": "leggings", "paraphrases": ["made of leggings", "is it leggings", "leggings material"], "emittable": false}
+{"canonical": "pu leather", "paraphrases": ["has pu leather", "with pu leather", "is pu leather"], "emittable": true}
+{"canonical": "1 a batteries required", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "women s", "paraphrases": ["has women s", "with women s", "is women s"], "emittable": true}
+{"canonical": "handmade", "paraphrases": ["made of handmade", "is it handmade", "handmade material"], "emittable": true}
+{"canonical": "curved bill", "paraphrases": ["has curved bill", "with curved bill", "is curved bill"], "emittable": false}
+{"canonical": "buckle", "paraphrases": ["made of buckle", "is it buckle", "buckle material"], "emittable": false}
+{"canonical": "material cotton polyester", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "mexico", "paraphrases": ["made of mexico", "is it mexico", "mexico material"], "emittable": true}
+{"canonical": "air cushioned synthetic sole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "zinc", "paraphrases": ["made of zinc", "is it zinc", "zinc material"], "emittable": false}
+{"canonical": "origin made in china", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "65 polyester 35 cotton", "paraphrases": ["has 65 polyester 35 cotton", "the blend is 65 polyester 35 cotton", "65 polyester 35 cotton mix"], "emittable": true}
+{"canonical": "flexible outsole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "high quality", "paraphrases": ["has high quality", "with high quality", "is high quality"], "emittable": true}
+{"canonical": "gray", "paraphrases": ["in gray", "gray color", "comes in gray"], "emittable": false}
+{"canonical": "alloy", "paraphrases": ["made of alloy", "is it alloy", "alloy material"], "emittable": true}
+{"canonical": "100 polyamide", "paraphrases": ["has 100 polyamide", "with 100 polyamide", "is 100 polyamide"], "emittable": true}
+{"canonical": "80 polyamide 20 spandex", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "n5 comfort", "paraphrases": ["has n5 comfort", "with n5 comfort", "is n5 comfort"], "emittable": false}
+{"canonical": "analog quartz movement", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "made in china", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "analog", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "machine wash cold imported", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "preshrunk 65 polyester 35 cotton", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "80 polyamide 20 elastane", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "95 cotton and 5 spandex", "paraphrases": ["has 95 cotton and 5 spandex", "the blend is 95 cotton and 5 spandex", "95 cotton and 5 spandex mix"], "emittable": true}
+{"canonical": "soft suede upper", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "ambidextrous", "paraphrases": ["made of ambidextrous", "is it ambidextrous", "ambidextrous material"], "emittable": false}
+{"canonical": "great gift idea", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "duratread outsole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "100 solid sterling silver", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "drawstring closure", "paraphrases": ["has drawstrings", "drawstring waist", "pulls tight"], "emittable": true}
+{"canonical": "material polyester spandex", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "preshrunk", "paraphrases": ["made of preshrunk", "is it preshrunk", "preshrunk material"], "emittable": false}
+{"canonical": "polar fleece", "paraphrases": ["has polar fleece", "with polar fleece", "is polar fleece"], "emittable": true}
+{"canonical": "front pockets", "paraphrases": ["has front pockets", "with front pockets", "is front pockets"], "emittable": false}
+{"canonical": "italy", "paraphrases": ["made of italy", "is it italy", "italy material"], "emittable": true}
+{"canonical": "set in sleeves", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "breathable leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "arm 135 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "poland", "paraphrases": ["made of poland", "is it poland", "poland material"], "emittable": false}
+{"canonical": "functional zipper", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "trusstic system", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "man made", "paraphrases": ["has man made", "with man made", "is man made"], "emittable": true}
+{"canonical": "straight hem", "paraphrases": ["has straight hem", "with straight hem", "is straight hem"], "emittable": false}
+{"canonical": "womens mens", "paraphrases": ["has womens mens", "with womens mens", "is womens mens"], "emittable": false}
+{"canonical": "textile upper", "paraphrases": ["has textile upper", "with textile upper", "is textile upper"], "emittable": true}
+{"canonical": "slim through hip and thigh", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "82 polyester 18 elastane", "paraphrases": ["has 82 polyester 18 elastane", "the blend is 82 polyester 18 elastane", "82 polyester 18 elastane mix"], "emittable": true}
+{"canonical": "contoured footbed", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "100 merino wool", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "3x large", "paraphrases": ["has 3x large", "with 3x large", "is 3x large"], "emittable": false}
+{"canonical": "womens girls", "paraphrases": ["has womens girls", "with womens girls", "is womens girls"], "emittable": false}
+{"canonical": "stainless steel", "paraphrases": ["stainless steel", "steel made", "made of steel"], "emittable": true}
+{"canonical": "medium large", "paraphrases": ["has medium large", "with medium large", "is medium large"], "emittable": false}
+{"canonical": "durable lightweight", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "brand new", "paraphrases": ["has brand new", "with brand new", "is brand new"], "emittable": true}
+{"canonical": "chiffon", "paraphrases": ["made of chiffon", "is it chiffon", "chiffon material"], "emittable": true}
+{"canonical": "lobster claw clasp", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "rayon spandex", "paraphrases": ["has rayon spandex", "with rayon spandex", "is rayon spandex"], "emittable": true}
+{"canonical": "attached adjustable hood", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "arm 130 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "lens width 50 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "plastic frame", "paraphrases": ["has plastic frame", "with plastic frame", "is plastic frame"], "emittable": true}
+{"canonical": "women men", "paraphrases": ["has women men", "with women men", "is women men"], "emittable": false}
+{"canonical": "all over print", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "x small", "paraphrases": ["has x small", "with x small", "is x small"], "emittable": false}
+{"canonical": "mens", "paraphrases": ["made of mens", "is it mens", "mens material"], "emittable": false}
+{"canonical": "bifold", "paraphrases": ["made of bifold", "is it bifold", "bifold material"], "emittable": false}
+{"canonical": "genuine leather leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "stretch fabric", "paraphrases": ["has stretch fabric", "with stretch fabric", "is stretch fabric"], "emittable": false}
+{"canonical": "no closure", "paraphrases": ["has no closure", "with no closure", "is no closure"], "emittable": true}
+{"canonical": "lens height 40 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "leather lined", "paraphrases": ["has leather lined", "with leather lined", "is leather lined"], "emittable": false}
+{"canonical": "loose fit", "paraphrases": ["fits loose", "roomy fit", "baggy style"], "emittable": true}
+{"canonical": "tumble dry low", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "width b m", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "flexible rubber traction outsole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "racer back", "paraphrases": ["has racer back", "with racer back", "is racer back"], "emittable": false}
+{"canonical": "spike", "paraphrases": ["made of spike", "is it spike", "spike material"], "emittable": false}
+{"canonical": "slip resistant outsole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "synthetic and mesh", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "78 nylon 22 spandex", "paraphrases": ["has 78 nylon 22 spandex", "the blend is 78 nylon 22 spandex", "78 nylon 22 spandex mix"], "emittable": true}
+{"canonical": "2 pack", "paraphrases": ["has 2 pack", "with 2 pack", "is 2 pack"], "emittable": false}
+{"canonical": "machine wash tumble dry low", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "base", "paraphrases": ["made of base", "is it base", "base material"], "emittable": false}
+{"canonical": "100 croslite", "paraphrases": ["has 100 croslite", "with 100 croslite", "is 100 croslite"], "emittable": true}
+{"canonical": "lens width 60 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "double needle stitching", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "comfortable", "paraphrases": ["made of comfortable", "is it comfortable", "comfortable material"], "emittable": true}
+{"canonical": "quartz", "paraphrases": ["made of quartz", "is it quartz", "quartz material"], "emittable": true}
+{"canonical": "iconic logo", "paraphrases": ["has iconic logo", "with iconic logo", "is iconic logo"], "emittable": false}
+{"canonical": "polyester blend", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "scratch resistant", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "india", "paraphrases": ["made of india", "is it india", "india material"], "emittable": true}
+{"canonical": "wool blend", "paraphrases": ["has wool blend", "with wool blend", "is wool blend"], "emittable": true}
+{"canonical": "copper", "paraphrases": ["made of copper", "is it copper", "copper material"], "emittable": false}
+{"canonical": "cotton spandex", "paraphrases": ["has cotton spandex", "with cotton spandex", "is cotton spandex"], "emittable": true}
+{"canonical": "silk", "paraphrases": ["pure silk", "silk material", "is it silk"], "emittable": true}
+{"canonical": "hook loop closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "unit count 1 0", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "vendor name jordan", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "hand crafted", "paraphrases": ["has hand crafted", "with hand crafted", "is hand crafted"], "emittable": true}
+{"canonical": "prana", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "lined", "paraphrases": ["made of lined", "is it lined", "lined material"], "emittable": true}
+{"canonical": "material nubuck man made", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "neoprene", "paraphrases": ["made of neoprene", "is it neoprene", "neoprene material"], "emittable": true}
+{"canonical": "rubber outsole provides excellent grip", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "uv protection upf 50", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "chronograph", "paraphrases": ["made of chronograph", "is it chronograph", "chronograph material"], "emittable": true}
+{"canonical": "machine wash hand wash only", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "adjustable buckle", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "100 suede", "paraphrases": ["has 100 suede", "with 100 suede", "is 100 suede"], "emittable": true}
+{"canonical": "made in korea", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "polyester silk", "paraphrases": ["has polyester silk", "with polyester silk", "is polyester silk"], "emittable": true}
+{"canonical": "multi sport", "paraphrases": ["has multi sport", "with multi sport", "is multi sport"], "emittable": false}
+{"canonical": "children", "paraphrases": ["made of children", "is it children", "children material"], "emittable": false}
+{"canonical": "man made upper", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "70 cotton 30 polyester", "paraphrases": ["has 70 cotton 30 polyester", "the blend is 70 cotton 30 polyester", "70 cotton 30 polyester mix"], "emittable": true}
+{"canonical": "lens height 45 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "heel height 2 inches", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "adult", "paraphrases": ["made of adult", "is it adult", "adult material"], "emittable": true}
+{"canonical": "suede sole", "paraphrases": ["has suede sole", "with suede sole", "is suede sole"], "emittable": true}
+{"canonical": "elastic polyester spandex", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "resin", "paraphrases": ["made of resin", "is it resin", "resin material"], "emittable": false}
+{"canonical": "snowboarding", "paraphrases": ["made of snowboarding", "is it snowboarding", "snowboarding material"], "emittable": false}
+{"canonical": "handmade in nepal", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "hook and loop", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "100 leather synthetic", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "merino wool", "paraphrases": ["has merino wool", "with merino wool", "is merino wool"], "emittable": true}
+{"canonical": "leather and rubber sole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "proudly made in the usa", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "sold in pairs", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "authenticity guaranteed", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "fleece lining", "paraphrases": ["has fleece lining", "with fleece lining", "is fleece lining"], "emittable": true}
+{"canonical": "leather pu leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "70 viscose 30 nylon", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "hand wash or machine wash", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "rose gold", "paraphrases": ["has rose gold", "with rose gold", "is rose gold"], "emittable": true}
+{"canonical": "padded collar", "paraphrases": ["has padded collar", "with padded collar", "is padded collar"], "emittable": true}
+{"canonical": "ahar high abrasion outsole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "textile and synthetic", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "male", "paraphrases": ["made of male", "is it male", "male material"], "emittable": false}
+{"canonical": "glass", "paraphrases": ["glass lens", "has glass", "glass material"], "emittable": false}
+{"canonical": "1 count pack of 1", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "importado", "paraphrases": ["made of importado", "is it importado", "importado material"], "emittable": true}
+{"canonical": "vietnam", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "buy with confidence authorized retailer", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "stretch denim", "paraphrases": ["has stretch denim", "with stretch denim", "is stretch denim"], "emittable": true}
+{"canonical": "phylon sole", "paraphrases": ["has phylon sole", "with phylon sole", "is phylon sole"], "emittable": true}
+{"canonical": "soft and comfortable", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "stomach back", "paraphrases": ["has stomach back", "with stomach back", "is stomach back"], "emittable": false}
+{"canonical": "bridge 17 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "adjustable straps", "paraphrases": ["straps adjust", "can adjust straps", "adjustable"], "emittable": true}
+{"canonical": "freestanding", "paraphrases": ["made of freestanding", "is it freestanding", "freestanding material"], "emittable": false}
+{"canonical": "90 polyester 10 spandex", "paraphrases": ["has 90 polyester 10 spandex", "the blend is 90 polyester 10 spandex", "90 polyester 10 spandex mix"], "emittable": true}
+{"canonical": "printed graphic", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "suede upper", "paraphrases": ["has suede upper", "with suede upper", "is suede upper"], "emittable": true}
+{"canonical": "curly", "paraphrases": ["made of curly", "is it curly", "curly material"], "emittable": false}
+{"canonical": "adjustable strap", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "black", "paraphrases": ["in black", "black color", "comes in black"], "emittable": true}
+{"canonical": "wool lining", "paraphrases": ["has wool lining", "with wool lining", "is wool lining"], "emittable": true}
+{"canonical": "full length gel cushioning", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "86 polyester 14 elastane", "paraphrases": ["has 86 polyester 14 elastane", "the blend is 86 polyester 14 elastane", "86 polyester 14 elastane mix"], "emittable": true}
+{"canonical": "wedge", "paraphrases": ["made of wedge", "is it wedge", "wedge material"], "emittable": true}
+{"canonical": "waterproof construction quickdry textile lining", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "50 cotton 50 polyester", "paraphrases": ["has 50 cotton 50 polyester", "the blend is 50 cotton 50 polyester", "50 cotton 50 polyester mix"], "emittable": true}
+{"canonical": "100 mesh synthetic", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "durable sole", "paraphrases": ["has durable sole", "with durable sole", "is durable sole"], "emittable": false}
+{"canonical": "leather covered footbed", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "pink", "paraphrases": ["in pink", "pink color", "comes in pink"], "emittable": true}
+{"canonical": "textile and synthetic sole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "beaded", "paraphrases": ["made of beaded", "is it beaded", "beaded material"], "emittable": false}
+{"canonical": "100 genuine leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "back zip closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "100 leather", "paraphrases": ["has 100 leather", "with 100 leather", "is 100 leather"], "emittable": true}
+{"canonical": "canvas lining", "paraphrases": ["has canvas lining", "with canvas lining", "is canvas lining"], "emittable": true}
+{"canonical": "wavy", "paraphrases": ["made of wavy", "is it wavy", "wavy material"], "emittable": false}
+{"canonical": "adjustable", "paraphrases": ["made of adjustable", "is it adjustable", "adjustable material"], "emittable": true}
+{"canonical": "quality japanese quartz movement", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "94 polyester", "paraphrases": ["has 94 polyester", "the blend is 94 polyester", "94 polyester mix"], "emittable": true}
+{"canonical": "heather polyester cotton", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "taped shoulder to shoulder", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "lens width 70 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "flattering fit", "paraphrases": ["has flattering fit", "with flattering fit", "is flattering fit"], "emittable": false}
+{"canonical": "color black", "paraphrases": ["has color black", "with color black", "is color black"], "emittable": true}
+{"canonical": "designed by maggie tang", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "two front pockets", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "headband", "paraphrases": ["made of headband", "is it headband", "headband material"], "emittable": true}
+{"canonical": "soft 4 way stretch fabric", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "embroidered", "paraphrases": ["made of embroidered", "is it embroidered", "embroidered material"], "emittable": true}
+{"canonical": "vintage", "paraphrases": ["made of vintage", "is it vintage", "vintage material"], "emittable": false}
+{"canonical": "bifold closure", "paraphrases": ["has bifold closure", "with bifold closure", "is bifold closure"], "emittable": true}
+{"canonical": "faux leather leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "swiss quartz movement", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "ceramic", "paraphrases": ["made of ceramic", "is it ceramic", "ceramic material"], "emittable": true}
+{"canonical": "no metal type", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "xt 600 carbon rubber outsole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "wipe with dry cloth", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "35 polyester", "paraphrases": ["has 35 polyester", "the blend is 35 polyester", "35 polyester mix"], "emittable": true}
+{"canonical": "umbrella", "paraphrases": ["made of umbrella", "is it umbrella", "umbrella material"], "emittable": false}
+{"canonical": "100 synthetic leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "foam sole", "paraphrases": ["has foam sole", "with foam sole", "is foam sole"], "emittable": true}
+{"canonical": "80 nylon 20 spandex", "paraphrases": ["has 80 nylon 20 spandex", "the blend is 80 nylon 20 spandex", "80 nylon 20 spandex mix"], "emittable": true}
+{"canonical": "guidance line", "paraphrases": ["has guidance line", "with guidance line", "is guidance line"], "emittable": false}
+{"canonical": "87 polyester 13 elastane", "paraphrases": ["has 87 polyester 13 elastane", "the blend is 87 polyester 13 elastane", "87 polyester 13 elastane mix"], "emittable": true}
+{"canonical": "brown", "paraphrases": ["in brown", "brown color", "comes in brown"], "emittable": false}
+{"canonical": "non toxic materials", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "silicone", "paraphrases": ["made of silicone", "is it silicone", "silicone material"], "emittable": true}
+{"canonical": "arm 142 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "non polarized", "paraphrases": ["has non polarized", "with non polarized", "is non polarized"], "emittable": true}
+{"canonical": "tailored fit", "paraphrases": ["has tailored fit", "with tailored fit", "is tailored fit"], "emittable": true}
+{"canonical": "letter print", "paraphrases": ["has letter print", "with letter print", "is letter print"], "emittable": false}
+{"canonical": "ultra lightweight", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "bowling", "paraphrases": ["made of bowling", "is it bowling", "bowling material"], "emittable": false}
+{"canonical": "95 poly 5 spandex", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "girls", "paraphrases": ["for girls", "girls size", "is it for girls"], "emittable": false}
+{"canonical": "7 inch", "paraphrases": ["has 7 inch", "with 7 inch", "is 7 inch"], "emittable": false}
+{"canonical": "moisture wicking", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "excellent quality and reasonable price", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "sequin", "paraphrases": ["made of sequin", "is it sequin", "sequin material"], "emittable": true}
+{"canonical": "polyester fleece", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "block heel", "paraphrases": ["has block heel", "with block heel", "is block heel"], "emittable": true}
+{"canonical": "top", "paraphrases": ["made of top", "is it top", "top material"], "emittable": true}
+{"canonical": "denim cotton", "paraphrases": ["has denim cotton", "with denim cotton", "is denim cotton"], "emittable": true}
+{"canonical": "acrylic cotton", "paraphrases": ["has acrylic cotton", "with acrylic cotton", "is acrylic cotton"], "emittable": true}
+{"canonical": "attached adjustable storm hood", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "coolsteelandbeyond", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "sterling silver", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "classic fit", "paraphrases": ["has classic fit", "with classic fit", "is classic fit"], "emittable": false}
+{"canonical": "tunic", "paraphrases": ["made of tunic", "is it tunic", "tunic material"], "emittable": false}
+{"canonical": "terry", "paraphrases": ["made of terry", "is it terry", "terry material"], "emittable": true}
+{"canonical": "rain", "paraphrases": ["made of rain", "is it rain", "rain material"], "emittable": false}
+{"canonical": "100 man made", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "light weight", "paraphrases": ["has light weight", "with light weight", "is light weight"], "emittable": true}
+{"canonical": "under armour", "paraphrases": ["has under armour", "with under armour", "is under armour"], "emittable": false}
+{"canonical": "zipper closure", "paraphrases": ["has a zipper", "zips up", "zip closure"], "emittable": true}
+{"canonical": "polycarbonate lens", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "washable", "paraphrases": ["made of washable", "is it washable", "washable material"], "emittable": true}
+{"canonical": "carbon fiber", "paraphrases": ["has carbon fiber", "with carbon fiber", "is carbon fiber"], "emittable": false}
+{"canonical": "drawstring waist closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "clicker closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "zip fly with button", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "85 nylon 15 spandex", "paraphrases": ["has 85 nylon 15 spandex", "the blend is 85 nylon 15 spandex", "85 nylon 15 spandex mix"], "emittable": true}
+{"canonical": "brand new item", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "stretch closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "runs true to size", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "purple", "paraphrases": ["in purple", "purple color", "comes in purple"], "emittable": false}
+{"canonical": "trifold wallet", "paraphrases": ["has trifold wallet", "with trifold wallet", "is trifold wallet"], "emittable": false}
+{"canonical": "steel", "paraphrases": ["made of steel", "is it steel", "steel material"], "emittable": false}
+{"canonical": "hand pockets", "paraphrases": ["has hand pockets", "with hand pockets", "is hand pockets"], "emittable": true}
+{"canonical": "60 polyester 40 cotton", "paraphrases": ["has 60 polyester 40 cotton", "the blend is 60 polyester 40 cotton", "60 polyester 40 cotton mix"], "emittable": true}
+{"canonical": "free gift box", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "polyester faux fur", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "gemstone", "paraphrases": ["made of gemstone", "is it gemstone", "gemstone material"], "emittable": false}
+{"canonical": "925 sterling silver solid", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "polyester", "paraphrases": ["polyester blend", "has polyester", "is it polyester"], "emittable": true}
+{"canonical": "100 viscose", "paraphrases": ["has 100 viscose", "with 100 viscose", "is 100 viscose"], "emittable": true}
+{"canonical": "5 pocket", "paraphrases": ["has 5 pocket", "with 5 pocket", "is 5 pocket"], "emittable": false}
+{"canonical": "makes a great gift", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "zip closure", "paraphrases": ["has zip closure", "with zip closure", "is zip closure"], "emittable": true}
+{"canonical": "tan", "paraphrases": ["in tan", "tan color", "comes in tan"], "emittable": false}
+{"canonical": "scratch resistant mineral", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "original packaging", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "90 polyester", "paraphrases": ["has 90 polyester", "the blend is 90 polyester", "90 polyester mix"], "emittable": true}
+{"canonical": "elastic straps closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "toddler", "paraphrases": ["made of toddler", "is it toddler", "toddler material"], "emittable": false}
+{"canonical": "comfortlite sockliner", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "comfort", "paraphrases": ["made of comfort", "is it comfort", "comfort material"], "emittable": true}
+{"canonical": "friction back post", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "textile", "paraphrases": ["made of textile", "is it textile", "textile material"], "emittable": true}
+{"canonical": "color pink", "paraphrases": ["has color pink", "with color pink", "is color pink"], "emittable": true}
+{"canonical": "sewing", "paraphrases": ["made of sewing", "is it sewing", "sewing material"], "emittable": false}
+{"canonical": "v neckline", "paraphrases": ["has v neckline", "with v neckline", "is v neckline"], "emittable": false}
+{"canonical": "ortholite footbed", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "mens shoes", "paraphrases": ["has mens shoes", "with mens shoes", "is mens shoes"], "emittable": true}
+{"canonical": "jewelry box", "paraphrases": ["has jewelry box", "with jewelry box", "is jewelry box"], "emittable": true}
+{"canonical": "comfort stretch", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "hooded", "paraphrases": ["has a hood", "with hood", "includes hood"], "emittable": false}
+{"canonical": "full grain leather upper", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "sleeve type short sleeve", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "super lightweight", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "vera bradley", "paraphrases": ["has vera bradley", "with vera bradley", "is vera bradley"], "emittable": false}
+{"canonical": "charm", "paraphrases": ["made of charm", "is it charm", "charm material"], "emittable": false}
+{"canonical": "100 manmade", "paraphrases": ["has 100 manmade", "with 100 manmade", "is 100 manmade"], "emittable": true}
+{"canonical": "600d polyester", "paraphrases": ["has 600d polyester", "with 600d polyester", "is 600d polyester"], "emittable": true}
+{"canonical": "96 polyester 4 spandex", "paraphrases": ["has 96 polyester 4 spandex", "the blend is 96 polyester 4 spandex", "96 polyester 4 spandex mix"], "emittable": true}
+{"canonical": "unique", "paraphrases": ["made of unique", "is it unique", "unique material"], "emittable": false}
+{"canonical": "party", "paraphrases": ["made of party", "is it party", "party material"], "emittable": false}
+{"canonical": "new arrival", "paraphrases": ["has new arrival", "with new arrival", "is new arrival"], "emittable": true}
+{"canonical": "4 way comfort stretch", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "hiking", "paraphrases": ["made of hiking", "is it hiking", "hiking material"], "emittable": false}
+{"canonical": "fit type regular fit", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "womens shoes", "paraphrases": ["has womens shoes", "with womens shoes", "is womens shoes"], "emittable": true}
+{"canonical": "case diameter 45 mm", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "snow skiing", "paraphrases": ["has snow skiing", "with snow skiing", "is snow skiing"], "emittable": false}
+{"canonical": "100 patent leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "oval", "paraphrases": ["made of oval", "is it oval", "oval material"], "emittable": false}
+{"canonical": "magnetic closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "crew neck", "paraphrases": ["has crew neck", "with crew neck", "is crew neck"], "emittable": true}
+{"canonical": "sueded sock insole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "spandex rayon", "paraphrases": ["has spandex rayon", "with spandex rayon", "is spandex rayon"], "emittable": true}
+{"canonical": "zippered wallet", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "wash cold", "paraphrases": ["has wash cold", "with wash cold", "is wash cold"], "emittable": true}
+{"canonical": "fabric upper", "paraphrases": ["has fabric upper", "with fabric upper", "is fabric upper"], "emittable": true}
+{"canonical": "100 fabric or textile", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "100 leather and mesh", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "90 cotton 10 spandex", "paraphrases": ["has 90 cotton 10 spandex", "the blend is 90 cotton 10 spandex", "90 cotton 10 spandex mix"], "emittable": true}
+{"canonical": "57 cotton 43 polyester", "paraphrases": ["has 57 cotton 43 polyester", "the blend is 57 cotton 43 polyester", "57 cotton 43 polyester mix"], "emittable": true}
+{"canonical": "off shoulder neck", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "95 cotton 5 polyester", "paraphrases": ["has 95 cotton 5 polyester", "the blend is 95 cotton 5 polyester", "95 cotton 5 polyester mix"], "emittable": true}
+{"canonical": "multi color", "paraphrases": ["has multi color", "with multi color", "is multi color"], "emittable": false}
+{"canonical": "silver plated base", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "running", "paraphrases": ["made of running", "is it running", "running material"], "emittable": true}
+{"canonical": "polycarbonate frame", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "other", "paraphrases": ["made of other", "is it other", "other material"], "emittable": true}
+{"canonical": "compact", "paraphrases": ["made of compact", "is it compact", "compact material"], "emittable": false}
+{"canonical": "includes pouch", "paraphrases": ["has includes pouch", "with includes pouch", "is includes pouch"], "emittable": false}
+{"canonical": "81 nylon 19 spandex", "paraphrases": ["has 81 nylon 19 spandex", "the blend is 81 nylon 19 spandex", "81 nylon 19 spandex mix"], "emittable": true}
+{"canonical": "traditional lace closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "classic doc dna", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "vinyl", "paraphrases": ["made of vinyl", "is it vinyl", "vinyl material"], "emittable": true}
+{"canonical": "full grain leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "contemporary", "paraphrases": ["made of contemporary", "is it contemporary", "contemporary material"], "emittable": false}
+{"canonical": "padded collar and tongue", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "88 polyester", "paraphrases": ["has 88 polyester", "the blend is 88 polyester", "88 polyester mix"], "emittable": true}
+{"canonical": "pump", "paraphrases": ["made of pump", "is it pump", "pump material"], "emittable": true}
+{"canonical": "precise swiss quartz movement", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "movement quartz", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "100 leather and fabric", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "sideseamed", "paraphrases": ["made of sideseamed", "is it sideseamed", "sideseamed material"], "emittable": false}
+{"canonical": "quick drying", "paraphrases": ["has quick drying", "with quick drying", "is quick drying"], "emittable": true}
+{"canonical": "80 cotton 20 polyester", "paraphrases": ["has 80 cotton 20 polyester", "the blend is 80 cotton 20 polyester", "80 cotton 20 polyester mix"], "emittable": true}
+{"canonical": "recommended use streetwear", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "straw", "paraphrases": ["made of straw", "is it straw", "straw material"], "emittable": true}
+{"canonical": "button back", "paraphrases": ["has button back", "with button back", "is button back"], "emittable": false}
+{"canonical": "cotton blend", "paraphrases": ["has cotton blend", "with cotton blend", "is cotton blend"], "emittable": true}
+{"canonical": "traditional", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "14k yellow gold", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "adjustable hook and loop closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "removable ortholite footbed", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "zipper entry at side", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "case diameter 42mm", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "one size fits all", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "unisex adults", "paraphrases": ["has unisex adults", "with unisex adults", "is unisex adults"], "emittable": false}
+{"canonical": "denim polyester", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "officially licensed by disney", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "recommended use casual", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "cork sole", "paraphrases": ["has cork sole", "with cork sole", "is cork sole"], "emittable": true}
+{"canonical": "auto open and close", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "nubuck upper", "paraphrases": ["has nubuck upper", "with nubuck upper", "is nubuck upper"], "emittable": true}
+{"canonical": "100 polyester", "paraphrases": ["has 100 polyester", "the blend is 100 polyester", "100 polyester mix"], "emittable": true}
+{"canonical": "75 cotton", "paraphrases": ["has 75 cotton", "the blend is 75 cotton", "75 cotton mix"], "emittable": true}
+{"canonical": "mesh", "paraphrases": ["made of mesh", "is it mesh", "mesh material"], "emittable": true}
+{"canonical": "screen print", "paraphrases": ["has screen print", "with screen print", "is screen print"], "emittable": true}
+{"canonical": "country of origin viet nam", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "bootie", "paraphrases": ["made of bootie", "is it bootie", "bootie material"], "emittable": true}
+{"canonical": "upf 50", "paraphrases": ["has upf 50", "with upf 50", "is upf 50"], "emittable": false}
+{"canonical": "man made outsole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "uv protection", "paraphrases": ["has uv protection", "with uv protection", "is uv protection"], "emittable": true}
+{"canonical": "spring summer", "paraphrases": ["has spring summer", "with spring summer", "is spring summer"], "emittable": false}
+{"canonical": "82 nylon 18 spandex", "paraphrases": ["has 82 nylon 18 spandex", "the blend is 82 nylon 18 spandex", "82 nylon 18 spandex mix"], "emittable": true}
+{"canonical": "100 silicone", "paraphrases": ["has 100 silicone", "with 100 silicone", "is 100 silicone"], "emittable": true}
+{"canonical": "cube", "paraphrases": ["made of cube", "is it cube", "cube material"], "emittable": false}
+{"canonical": "alloy steel", "paraphrases": ["has alloy steel", "with alloy steel", "is alloy steel"], "emittable": false}
+{"canonical": "gift box included", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "clasp closure", "paraphrases": ["has clasp closure", "with clasp closure", "is clasp closure"], "emittable": true}
+{"canonical": "65 polyester", "paraphrases": ["has 65 polyester", "the blend is 65 polyester", "65 polyester mix"], "emittable": true}
+{"canonical": "engineered wood", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "outdoor", "paraphrases": ["made of outdoor", "is it outdoor", "outdoor material"], "emittable": false}
+{"canonical": "polyester leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "good support", "paraphrases": ["has good support", "with good support", "is good support"], "emittable": false}
+{"canonical": "bridge 15 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "button", "paraphrases": ["made of button", "is it button", "button material"], "emittable": false}
+{"canonical": "lens width 59 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "seamless", "paraphrases": ["made of seamless", "is it seamless", "seamless material"], "emittable": false}
+{"canonical": "50 polyester", "paraphrases": ["has 50 polyester", "the blend is 50 polyester", "50 polyester mix"], "emittable": true}
+{"canonical": "100 leather and synthetic", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "lightly padded footbed", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "all materials used are recycled", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "textile sole", "paraphrases": ["has textile sole", "with textile sole", "is textile sole"], "emittable": true}
+{"canonical": "travel", "paraphrases": ["made of travel", "is it travel", "travel material"], "emittable": false}
+{"canonical": "rfid blocking", "paraphrases": ["has rfid blocking", "with rfid blocking", "is rfid blocking"], "emittable": false}
+{"canonical": "stainless steel leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "clip", "paraphrases": ["made of clip", "is it clip", "clip material"], "emittable": false}
+{"canonical": "dry cloth clean", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "polyester rayon spandex", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "back zipper", "paraphrases": ["has back zipper", "with back zipper", "is back zipper"], "emittable": true}
+{"canonical": "snap", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "eva", "paraphrases": ["made of eva", "is it eva", "eva material"], "emittable": true}
+{"canonical": "men", "paraphrases": ["for men", "men size", "is it for men"], "emittable": true}
+{"canonical": "stylish", "paraphrases": ["made of stylish", "is it stylish", "stylish material"], "emittable": false}
+{"canonical": "upper material leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "drawstring", "paraphrases": ["made of drawstring", "is it drawstring", "drawstring material"], "emittable": false}
+{"canonical": "vegan leather", "paraphrases": ["has vegan leather", "with vegan leather", "is vegan leather"], "emittable": true}
+{"canonical": "female", "paraphrases": ["made of female", "is it female", "female material"], "emittable": true}
+{"canonical": "low rise", "paraphrases": ["has low rise", "with low rise", "is low rise"], "emittable": true}
+{"canonical": "fits true to size", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "lace closure", "paraphrases": ["laces up", "has laces", "lace tied"], "emittable": true}
+{"canonical": "poly cotton blend", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "65 cotton 35 polyester", "paraphrases": ["has 65 cotton 35 polyester", "the blend is 65 cotton 35 polyester", "65 cotton 35 polyester mix"], "emittable": true}
+{"canonical": "hand wash cold", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "anti reflective coating coating", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "durable rubber sole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "polyester mesh", "paraphrases": ["has polyester mesh", "with polyester mesh", "is polyester mesh"], "emittable": true}
+{"canonical": "strap closure", "paraphrases": ["has strap closure", "with strap closure", "is strap closure"], "emittable": true}
+{"canonical": "82 polyamide 18 elastane", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "adult unisex", "paraphrases": ["has adult unisex", "with adult unisex", "is adult unisex"], "emittable": false}
+{"canonical": "holiday", "paraphrases": ["made of holiday", "is it holiday", "holiday material"], "emittable": false}
+{"canonical": "shrink resistant", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "kangaroo pocket", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "color gold", "paraphrases": ["has color gold", "with color gold", "is color gold"], "emittable": true}
+{"canonical": "cotton", "paraphrases": ["made of cotton", "cotton material", "is it cotton"], "emittable": true}
+{"canonical": "assembled in the usa", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "microfiber", "paraphrases": ["made of microfiber", "is it microfiber", "microfiber material"], "emittable": true}
+{"canonical": "closure type slip on", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "100 cotton", "paraphrases": ["all cotton", "solid cotton", "full cotton"], "emittable": true}
+{"canonical": "vented in back", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "wood", "paraphrases": ["made of wood", "is it wood", "wood material"], "emittable": true}
+{"canonical": "adjustable hood", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "ring spun cotton", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "all men made material", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "md sole", "paraphrases": ["has md sole", "with md sole", "is md sole"], "emittable": true}
+{"canonical": "polyester rayon", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "pivoting heel strap", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "lens height 42 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "straight fit", "paraphrases": ["has straight fit", "with straight fit", "is straight fit"], "emittable": true}
+{"canonical": "lens height 44 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "pewter", "paraphrases": ["made of pewter", "is it pewter", "pewter material"], "emittable": false}
+{"canonical": "multicolored", "paraphrases": ["made of multicolored", "is it multicolored", "multicolored material"], "emittable": false}
+{"canonical": "magnetic", "paraphrases": ["made of magnetic", "is it magnetic", "magnetic material"], "emittable": false}
+{"canonical": "ortholite insole for comfort", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "30 day money back guarantee", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "unlined", "paraphrases": ["made of unlined", "is it unlined", "unlined material"], "emittable": true}
+{"canonical": "prime day deals closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "button front closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "60 cotton 40 acrylic", "paraphrases": ["has 60 cotton 40 acrylic", "the blend is 60 cotton 40 acrylic", "60 cotton 40 acrylic mix"], "emittable": true}
+{"canonical": "polyester satin", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "heat resistant", "paraphrases": ["has heat resistant", "with heat resistant", "is heat resistant"], "emittable": false}
+{"canonical": "black dial", "paraphrases": ["has black dial", "with black dial", "is black dial"], "emittable": true}
+{"canonical": "cotton nylon", "paraphrases": ["has cotton nylon", "with cotton nylon", "is cotton nylon"], "emittable": true}
+{"canonical": "water resistant fabric", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "100 leather textile", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "30 days returns", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "fabric and synthetic", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "cement construction", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "mirror coating coating", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "button down collar", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "colombia", "paraphrases": ["made of colombia", "is it colombia", "colombia material"], "emittable": false}
+{"canonical": "23 liters", "paraphrases": ["has 23 liters", "with 23 liters", "is 23 liters"], "emittable": false}
+{"canonical": "removable sockliner", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "upf 50 sun protection", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "padded tongue and collar", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "swarovski", "paraphrases": ["made of swarovski", "is it swarovski", "swarovski material"], "emittable": false}
+{"canonical": "high quality body jewelry", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "air cooled memory foam insole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "83 polyester 17 spandex", "paraphrases": ["has 83 polyester 17 spandex", "the blend is 83 polyester 17 spandex", "83 polyester 17 spandex mix"], "emittable": true}
+{"canonical": "tear away label", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "square", "paraphrases": ["made of square", "is it square", "square material"], "emittable": false}
+{"canonical": "water resistant", "paraphrases": ["resists water", "some water resistance", "water resistant"], "emittable": true}
+{"canonical": "rain sun wind", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "yellow", "paraphrases": ["in yellow", "yellow color", "comes in yellow"], "emittable": false}
+{"canonical": "leather rubber sole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "drawcord on elastic waist", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "made in mexico", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "floral", "paraphrases": ["floral print", "has flowers", "flower pattern"], "emittable": true}
+{"canonical": "one size fits most", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "made in turkey", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "case diameter 41mm", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "do not iron", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "satisfaction guaranteed", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "synthetic leather and mesh upper", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "michael kors", "paraphrases": ["has michael kors", "with michael kors", "is michael kors"], "emittable": true}
+{"canonical": "slim", "paraphrases": ["made of slim", "is it slim", "slim material"], "emittable": false}
+{"canonical": "viscose", "paraphrases": ["made of viscose", "is it viscose", "viscose material"], "emittable": true}
+{"canonical": "1 lr44 batteries required included", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "rotating bezel", "paraphrases": ["has rotating bezel", "with rotating bezel", "is rotating bezel"], "emittable": true}
+{"canonical": "soft", "paraphrases": ["made of soft", "is it soft", "soft material"], "emittable": true}
+{"canonical": "closure", "paraphrases": ["made of closure", "is it closure", "closure material"], "emittable": true}
+{"canonical": "lobster clasp closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "cover", "paraphrases": ["made of cover", "is it cover", "cover material"], "emittable": false}
+{"canonical": "goodyear welt construction", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "side pockets", "paraphrases": ["has side pockets", "with side pockets", "is side pockets"], "emittable": true}
+{"canonical": "82 nylon 18 elastane", "paraphrases": ["has 82 nylon 18 elastane", "the blend is 82 nylon 18 elastane", "82 nylon 18 elastane mix"], "emittable": true}
+{"canonical": "straight", "paraphrases": ["made of straight", "is it straight", "straight material"], "emittable": false}
+{"canonical": "weave type knit", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "100 preshrunk cotton", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "8 inch", "paraphrases": ["has 8 inch", "with 8 inch", "is 8 inch"], "emittable": false}
+{"canonical": "graphic", "paraphrases": ["made of graphic", "is it graphic", "graphic material"], "emittable": false}
+{"canonical": "baby boys", "paraphrases": ["has baby boys", "with baby boys", "is baby boys"], "emittable": false}
+{"canonical": "smartphone", "paraphrases": ["made of smartphone", "is it smartphone", "smartphone material"], "emittable": false}
+{"canonical": "moisture absorbing aeroready", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "case diameter 42 mm", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "omni freeze", "paraphrases": ["has omni freeze", "with omni freeze", "is omni freeze"], "emittable": true}
+{"canonical": "lifetime guarantee", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "color silver", "paraphrases": ["has color silver", "with color silver", "is color silver"], "emittable": true}
+{"canonical": "flexible sole", "paraphrases": ["has flexible sole", "with flexible sole", "is flexible sole"], "emittable": true}
+{"canonical": "made in europe", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "1 product specific batteries required", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "machine washable handwash recommend", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "golf", "paraphrases": ["made of golf", "is it golf", "golf material"], "emittable": false}
+{"canonical": "kid", "paraphrases": ["made of kid", "is it kid", "kid material"], "emittable": false}
+{"canonical": "collarless", "paraphrases": ["made of collarless", "is it collarless", "collarless material"], "emittable": false}
+{"canonical": "quartz movement", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "clothing", "paraphrases": ["made of clothing", "is it clothing", "clothing material"], "emittable": true}
+{"canonical": "all age groups", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "925 sterling silver", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "metatomical eva footbed", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "100 nylon", "paraphrases": ["has 100 nylon", "the blend is 100 nylon", "100 nylon mix"], "emittable": true}
+{"canonical": "all", "paraphrases": ["made of all", "is it all", "all material"], "emittable": false}
+{"canonical": "4 way stretch", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "imported by adidas", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "rayon", "paraphrases": ["made of rayon", "is it rayon", "rayon material"], "emittable": true}
+{"canonical": "molded eva midsole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "walking", "paraphrases": ["made of walking", "is it walking", "walking material"], "emittable": false}
+{"canonical": "synthetic and fabric", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "100 plastic", "paraphrases": ["has 100 plastic", "with 100 plastic", "is 100 plastic"], "emittable": true}
+{"canonical": "breathability", "paraphrases": ["made of breathability", "is it breathability", "breathability material"], "emittable": false}
+{"canonical": "memory foam insole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "100 synthetic nylon", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "mother s day", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "made in america", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "trifold closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "natural rubber lining", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "100 percent cotton", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "standard", "paraphrases": ["made of standard", "is it standard", "standard material"], "emittable": false}
+{"canonical": "small medium large", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "auto open", "paraphrases": ["has auto open", "with auto open", "is auto open"], "emittable": false}
+{"canonical": "synthetic leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "75 polyester 25 spandex", "paraphrases": ["has 75 polyester 25 spandex", "the blend is 75 polyester 25 spandex", "75 polyester 25 spandex mix"], "emittable": true}
+{"canonical": "double needle stitching throughout", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "flexible", "paraphrases": ["made of flexible", "is it flexible", "flexible material"], "emittable": false}
+{"canonical": "material stainless steel", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "outdoor lifestyle", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "memory midsole", "paraphrases": ["has memory midsole", "with memory midsole", "is memory midsole"], "emittable": false}
+{"canonical": "stainless steel case black dial", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "premium leather upper", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "ringspun cotton", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "92 polyester", "paraphrases": ["has 92 polyester", "the blend is 92 polyester", "92 polyester mix"], "emittable": true}
+{"canonical": "automatic self wind movement", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "dark brown", "paraphrases": ["has dark brown", "with dark brown", "is dark brown"], "emittable": false}
+{"canonical": "wallet", "paraphrases": ["made of wallet", "is it wallet", "wallet material"], "emittable": false}
+{"canonical": "baby girls", "paraphrases": ["has baby girls", "with baby girls", "is baby girls"], "emittable": false}
+{"canonical": "left chest pocket", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "nylon frame", "paraphrases": ["has nylon frame", "with nylon frame", "is nylon frame"], "emittable": true}
+{"canonical": "torsion system for midfoot integrity", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "made in brazil", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "metal", "paraphrases": ["metal frame", "has metal", "metal material"], "emittable": true}
+{"canonical": "lobster claw", "paraphrases": ["has lobster claw", "with lobster claw", "is lobster claw"], "emittable": false}
+{"canonical": "cubic zirconia", "paraphrases": ["has cubic zirconia", "with cubic zirconia", "is cubic zirconia"], "emittable": true}
+{"canonical": "calendered sole unit", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "100 synthetic", "paraphrases": ["has 100 synthetic", "with 100 synthetic", "is 100 synthetic"], "emittable": true}
+{"canonical": "upper leather", "paraphrases": ["has upper leather", "with upper leather", "is upper leather"], "emittable": true}
+{"canonical": "does not contain animal products", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "sold as a pair", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "slip on providing easy wearability", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "relax fit", "paraphrases": ["has relax fit", "with relax fit", "is relax fit"], "emittable": true}
+{"canonical": "leather polyester", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "organza", "paraphrases": ["made of organza", "is it organza", "organza material"], "emittable": true}
+{"canonical": "89 polyester 11 elastane", "paraphrases": ["has 89 polyester 11 elastane", "the blend is 89 polyester 11 elastane", "89 polyester 11 elastane mix"], "emittable": true}
+{"canonical": "platform", "paraphrases": ["made of platform", "is it platform", "platform material"], "emittable": true}
+{"canonical": "unisex adult", "paraphrases": ["has unisex adult", "with unisex adult", "is unisex adult"], "emittable": false}
+{"canonical": "sun", "paraphrases": ["made of sun", "is it sun", "sun material"], "emittable": false}
+{"canonical": "adjustable crossbody strap", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "fit true to size", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "official licensed product", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "2 year international warranty", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "adjustable ankle strap", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "designed in usa imported", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "white black", "paraphrases": ["has white black", "with white black", "is white black"], "emittable": false}
+{"canonical": "98 cotton 2 spandex", "paraphrases": ["has 98 cotton 2 spandex", "the blend is 98 cotton 2 spandex", "98 cotton 2 spandex mix"], "emittable": true}
+{"canonical": "easy slip on construction", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "lined front and back", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "lace up vamp", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "embroidered logo", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "dakine", "paraphrases": ["made of dakine", "is it dakine", "dakine material"], "emittable": false}
+{"canonical": "belt closure", "paraphrases": ["has belt closure", "with belt closure", "is belt closure"], "emittable": true}
+{"canonical": "heel rest technology", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "70 cotton", "paraphrases": ["has 70 cotton", "the blend is 70 cotton", "70 cotton mix"], "emittable": true}
+{"canonical": "condition 100 brand new", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "hook and eye closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "lens width 56 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "case diameter 36mm", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "regular cuff", "paraphrases": ["has regular cuff", "with regular cuff", "is regular cuff"], "emittable": false}
+{"canonical": "material polyester and spandex", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "breathable mesh upper", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "shirt tail hem", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "1 count", "paraphrases": ["has 1 count", "with 1 count", "is 1 count"], "emittable": false}
+{"canonical": "short sleeves", "paraphrases": ["has short sleeves", "with short sleeves", "is short sleeves"], "emittable": false}
+{"canonical": "swimming", "paraphrases": ["made of swimming", "is it swimming", "swimming material"], "emittable": false}
+{"canonical": "birthday", "paraphrases": ["made of birthday", "is it birthday", "birthday material"], "emittable": false}
+{"canonical": "synthetic rubber", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "red", "paraphrases": ["in red", "red color", "comes in red"], "emittable": false}
+{"canonical": "crafted from genuine titanium", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "ribbed cuffs", "paraphrases": ["has ribbed cuffs", "with ribbed cuffs", "is ribbed cuffs"], "emittable": false}
+{"canonical": "80 nylon 20 elastane", "paraphrases": ["has 80 nylon 20 elastane", "the blend is 80 nylon 20 elastane", "80 nylon 20 elastane mix"], "emittable": true}
+{"canonical": "85 nylon 15 polyester", "paraphrases": ["has 85 nylon 15 polyester", "the blend is 85 nylon 15 polyester", "85 nylon 15 polyester mix"], "emittable": true}
+{"canonical": "black red", "paraphrases": ["has black red", "with black red", "is black red"], "emittable": false}
+{"canonical": "odor resistant", "paraphrases": ["has odor resistant", "with odor resistant", "is odor resistant"], "emittable": false}
+{"canonical": "insulated cooler pocket", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "breathable materials", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "100 polyester interlock", "paraphrases": ["has 100 polyester interlock", "the blend is 100 polyester interlock", "100 polyester interlock mix"], "emittable": true}
+{"canonical": "womens", "paraphrases": ["made of womens", "is it womens", "womens material"], "emittable": true}
+{"canonical": "55 cotton 45 polyester", "paraphrases": ["has 55 cotton 45 polyester", "the blend is 55 cotton 45 polyester", "55 cotton 45 polyester mix"], "emittable": true}
+{"canonical": "attached hood", "paraphrases": ["has attached hood", "with attached hood", "is attached hood"], "emittable": false}
+{"canonical": "thermoplastic elastomers sole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "100 textile", "paraphrases": ["has 100 textile", "with 100 textile", "is 100 textile"], "emittable": true}
+{"canonical": "mineral", "paraphrases": ["made of mineral", "is it mineral", "mineral material"], "emittable": true}
+{"canonical": "expandable", "paraphrases": ["made of expandable", "is it expandable", "expandable material"], "emittable": false}
+{"canonical": "rhinestone", "paraphrases": ["made of rhinestone", "is it rhinestone", "rhinestone material"], "emittable": true}
+{"canonical": "machine wash or hand wash", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "black white", "paraphrases": ["has black white", "with black white", "is black white"], "emittable": false}
+{"canonical": "bangle cuff", "paraphrases": ["has bangle cuff", "with bangle cuff", "is bangle cuff"], "emittable": false}
+{"canonical": "unisex child", "paraphrases": ["has unisex child", "with unisex child", "is unisex child"], "emittable": false}
+{"canonical": "lens width 65 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "polarized", "paraphrases": ["made of polarized", "is it polarized", "polarized material"], "emittable": true}
+{"canonical": "corduroy", "paraphrases": ["corduroy material", "made of corduroy", "corduroy fabric"], "emittable": true}
+{"canonical": "table top", "paraphrases": ["has table top", "with table top", "is table top"], "emittable": false}
+{"canonical": "metal alloy", "paraphrases": ["has metal alloy", "with metal alloy", "is metal alloy"], "emittable": true}
+{"canonical": "columbia", "paraphrases": ["made of columbia", "is it columbia", "columbia material"], "emittable": false}
+{"canonical": "metal frame", "paraphrases": ["has metal frame", "with metal frame", "is metal frame"], "emittable": true}
+{"canonical": "alex and ani", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "nylon spandex", "paraphrases": ["has nylon spandex", "with nylon spandex", "is nylon spandex"], "emittable": true}
+{"canonical": "mid rise sits at waist", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "stone", "paraphrases": ["made of stone", "is it stone", "stone material"], "emittable": false}
+{"canonical": "case diameter 50mm", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "relaxed fit", "paraphrases": ["has relaxed fit", "with relaxed fit", "is relaxed fit"], "emittable": true}
+{"canonical": "fabric polyester", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "leather sole", "paraphrases": ["has leather sole", "with leather sole", "is leather sole"], "emittable": true}
+{"canonical": "eye closure", "paraphrases": ["has eye closure", "with eye closure", "is eye closure"], "emittable": true}
+{"canonical": "non marking rubber outsole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "jersey cotton", "paraphrases": ["has jersey cotton", "with jersey cotton", "is jersey cotton"], "emittable": true}
+{"canonical": "100 brand new high quality", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "97 rayon 3 spandex", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "96 polyester 4 elastane", "paraphrases": ["has 96 polyester 4 elastane", "the blend is 96 polyester 4 elastane", "96 polyester 4 elastane mix"], "emittable": true}
+{"canonical": "1 unknown batteries required", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "wicks moisture", "paraphrases": ["has wicks moisture", "with wicks moisture", "is wicks moisture"], "emittable": false}
+{"canonical": "wood sole", "paraphrases": ["has wood sole", "with wood sole", "is wood sole"], "emittable": true}
+{"canonical": "memory foam", "paraphrases": ["has memory foam", "with memory foam", "is memory foam"], "emittable": true}
+{"canonical": "made in indonesia", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "fully lined", "paraphrases": ["has fully lined", "with fully lined", "is fully lined"], "emittable": true}
+{"canonical": "one size fits most adults", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "tennis", "paraphrases": ["made of tennis", "is it tennis", "tennis material"], "emittable": false}
+{"canonical": "blocks harmful uvb uva", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "solid 925 sterling silver", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "breathable", "paraphrases": ["lets air through", "breathable", "good airflow"], "emittable": true}
+{"canonical": "machine wash", "paraphrases": ["has machine wash", "with machine wash", "is machine wash"], "emittable": true}
+{"canonical": "box chain", "paraphrases": ["has box chain", "with box chain", "is box chain"], "emittable": false}
+{"canonical": "insert mount", "paraphrases": ["has insert mount", "with insert mount", "is insert mount"], "emittable": false}
+{"canonical": "shearling", "paraphrases": ["made of shearling", "is it shearling", "shearling material"], "emittable": true}
+{"canonical": "90 cotton 10 polyester", "paraphrases": ["has 90 cotton 10 polyester", "the blend is 90 cotton 10 polyester", "90 cotton 10 polyester mix"], "emittable": true}
+{"canonical": "high polished", "paraphrases": ["has high polished", "with high polished", "is high polished"], "emittable": true}
+{"canonical": "comfortable flowy fit", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "zip fly", "paraphrases": ["has zip fly", "with zip fly", "is zip fly"], "emittable": false}
+{"canonical": "open toe", "paraphrases": ["has open toe", "with open toe", "is open toe"], "emittable": true}
+{"canonical": "synthetic and leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "ideal for all occasions", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "printed in usa", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "generic", "paraphrases": ["made of generic", "is it generic", "generic material"], "emittable": false}
+{"canonical": "hook and eye", "paraphrases": ["hooks and eyes", "hook closure", "eye hooks"], "emittable": false}
+{"canonical": "padded insole", "paraphrases": ["has padded insole", "with padded insole", "is padded insole"], "emittable": true}
+{"canonical": "full length instep zipper", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "designed and printed in usa", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "bifold wallet", "paraphrases": ["has bifold wallet", "with bifold wallet", "is bifold wallet"], "emittable": false}
+{"canonical": "spread collar", "paraphrases": ["has spread collar", "with spread collar", "is spread collar"], "emittable": false}
+{"canonical": "arm 145 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "tree", "paraphrases": ["made of tree", "is it tree", "tree material"], "emittable": false}
+{"canonical": "elegant", "paraphrases": ["made of elegant", "is it elegant", "elegant material"], "emittable": false}
+{"canonical": "package content 1 bodysuit", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "5 pocket styling", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "side zipper", "paraphrases": ["has side zipper", "with side zipper", "is side zipper"], "emittable": false}
+{"canonical": "cotton polyester", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "high quality stainless steel", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "jewelry organizer", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "2 piece set", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "98 polyester 2 spandex", "paraphrases": ["has 98 polyester 2 spandex", "the blend is 98 polyester 2 spandex", "98 polyester 2 spandex mix"], "emittable": true}
+{"canonical": "high quality fabric", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "green", "paraphrases": ["in green", "green color", "comes in green"], "emittable": false}
+{"canonical": "women girls", "paraphrases": ["has women girls", "with women girls", "is women girls"], "emittable": false}
+{"canonical": "soft fabric lining", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "75 nylon 25 spandex", "paraphrases": ["has 75 nylon 25 spandex", "the blend is 75 nylon 25 spandex", "75 nylon 25 spandex mix"], "emittable": true}
+{"canonical": "100 uv protection", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "wool", "paraphrases": ["made of wool", "wool material", "all wool"], "emittable": true}
+{"canonical": "single chest pocket", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "ear loop closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "polyester cotton spandex", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "reusable washable", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "rainbow", "paraphrases": ["made of rainbow", "is it rainbow", "rainbow material"], "emittable": false}
+{"canonical": "date", "paraphrases": ["made of date", "is it date", "date material"], "emittable": true}
+{"canonical": "the original unmatched staple fit", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "short", "paraphrases": ["shorter cut", "not very long", "above the knee"], "emittable": false}
+{"canonical": "open front", "paraphrases": ["has open front", "with open front", "is open front"], "emittable": false}
+{"canonical": "topstitched rib crewneck", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "zipper", "paraphrases": ["made of zipper", "is it zipper", "zipper material"], "emittable": false}
+{"canonical": "age range description adult", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "synthetic outsole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "linen cotton", "paraphrases": ["has linen cotton", "with linen cotton", "is linen cotton"], "emittable": true}
+{"canonical": "hand wash in cold water", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "material 65 cotton 35 polyester", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "teen girls", "paraphrases": ["has teen girls", "with teen girls", "is teen girls"], "emittable": false}
+{"canonical": "the staple", "paraphrases": ["has the staple", "with the staple", "is the staple"], "emittable": true}
+{"canonical": "preshrunk cotton", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "material cotton spandex", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "gold", "paraphrases": ["made of gold", "is it gold", "gold material"], "emittable": false}
+{"canonical": "ankle strap", "paraphrases": ["has ankle strap", "with ankle strap", "is ankle strap"], "emittable": false}
+{"canonical": "cotton polyester lining", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "23 shoulder drop", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "very comfortable", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "slip resistant", "paraphrases": ["has slip resistant", "with slip resistant", "is slip resistant"], "emittable": true}
+{"canonical": "round classic ring closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "quick dry fabric", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "wall mount", "paraphrases": ["has wall mount", "with wall mount", "is wall mount"], "emittable": false}
+{"canonical": "bridge 23 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "100 spandex", "paraphrases": ["has 100 spandex", "the blend is 100 spandex", "100 spandex mix"], "emittable": true}
+{"canonical": "8mm comfort fit design", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "full coverage", "paraphrases": ["has full coverage", "with full coverage", "is full coverage"], "emittable": false}
+{"canonical": "non marking sole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "machine wash and dry", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "designed in california", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "domestic", "paraphrases": ["made of domestic", "is it domestic", "domestic material"], "emittable": true}
+{"canonical": "soft breathable lining", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "95 nylon 5 spandex", "paraphrases": ["has 95 nylon 5 spandex", "the blend is 95 nylon 5 spandex", "95 nylon 5 spandex mix"], "emittable": true}
+{"canonical": "adjustable circumference", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "easy care", "paraphrases": ["has easy care", "with easy care", "is easy care"], "emittable": false}
+{"canonical": "made in hawaii", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "oxford", "paraphrases": ["made of oxford", "is it oxford", "oxford material"], "emittable": true}
+{"canonical": "spring ring clasp", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "material 95 rayon 5 spandex", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "gold plated", "paraphrases": ["has gold plated", "with gold plated", "is gold plated"], "emittable": true}
+{"canonical": "men women", "paraphrases": ["has men women", "with men women", "is men women"], "emittable": false}
+{"canonical": "holidays", "paraphrases": ["made of holidays", "is it holidays", "holidays material"], "emittable": false}
+{"canonical": "exercise and fitness", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "smooth lining", "paraphrases": ["has smooth lining", "with smooth lining", "is smooth lining"], "emittable": false}
+{"canonical": "removable", "paraphrases": ["made of removable", "is it removable", "removable material"], "emittable": false}
+{"canonical": "japanese quartz movement", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "patch pocket", "paraphrases": ["has patch pocket", "with patch pocket", "is patch pocket"], "emittable": false}
+{"canonical": "auto open button", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "bead", "paraphrases": ["made of bead", "is it bead", "bead material"], "emittable": false}
+{"canonical": "regular fit", "paraphrases": ["has regular fit", "with regular fit", "is regular fit"], "emittable": true}
+{"canonical": "lens width 49 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "antique", "paraphrases": ["made of antique", "is it antique", "antique material"], "emittable": false}
+{"canonical": "button up closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "gentle cycle", "paraphrases": ["has gentle cycle", "with gentle cycle", "is gentle cycle"], "emittable": true}
+{"canonical": "95 viscose 5 other fibers", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "lace", "paraphrases": ["made of lace", "is it lace", "lace material"], "emittable": true}
+{"canonical": "84 polyester 16 spandex", "paraphrases": ["has 84 polyester 16 spandex", "the blend is 84 polyester 16 spandex", "84 polyester 16 spandex mix"], "emittable": true}
+{"canonical": "animal", "paraphrases": ["made of animal", "is it animal", "animal material"], "emittable": false}
+{"canonical": "96 rayon 4 spandex", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "laptop", "paraphrases": ["made of laptop", "is it laptop", "laptop material"], "emittable": false}
+{"canonical": "spot clean dry clean only", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "super stylish gladiator", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "good abrasion and slip resistance", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "checkered", "paraphrases": ["made of checkered", "is it checkered", "checkered material"], "emittable": false}
+{"canonical": "manmade material", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "sunglasses", "paraphrases": ["made of sunglasses", "is it sunglasses", "sunglasses material"], "emittable": false}
+{"canonical": "polarization", "paraphrases": ["made of polarization", "is it polarization", "polarization material"], "emittable": true}
+{"canonical": "material 316l stainless steel", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "flower", "paraphrases": ["made of flower", "is it flower", "flower material"], "emittable": false}
+{"canonical": "case included", "paraphrases": ["has case included", "with case included", "is case included"], "emittable": true}
+{"canonical": "closure lace", "paraphrases": ["has closure lace", "with closure lace", "is closure lace"], "emittable": true}
+{"canonical": "no chain type", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "lobster clasp", "paraphrases": ["has lobster clasp", "with lobster clasp", "is lobster clasp"], "emittable": true}
+{"canonical": "brand new and high quality", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "arm 128 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "faux fur lining", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "durable and long lasting", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "polyamide", "paraphrases": ["made of polyamide", "is it polyamide", "polyamide material"], "emittable": true}
+{"canonical": "traction outsole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "corset closure", "paraphrases": ["has corset closure", "with corset closure", "is corset closure"], "emittable": true}
+{"canonical": "86 polyester 14 spandex", "paraphrases": ["has 86 polyester 14 spandex", "the blend is 86 polyester 14 spandex", "86 polyester 14 spandex mix"], "emittable": true}
+{"canonical": "100 synthetic and textile", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "smart foam sockliner for comfort", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "plush", "paraphrases": ["made of plush", "is it plush", "plush material"], "emittable": true}
+{"canonical": "genuine original authentic disney store", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "clear", "paraphrases": ["made of clear", "is it clear", "clear material"], "emittable": false}
+{"canonical": "marshal", "paraphrases": ["made of marshal", "is it marshal", "marshal material"], "emittable": false}
+{"canonical": "cartoon", "paraphrases": ["cartoon design", "cartoon style", "animated look"], "emittable": false}
+{"canonical": "82 polyester 18 spandex", "paraphrases": ["has 82 polyester 18 spandex", "the blend is 82 polyester 18 spandex", "82 polyester 18 spandex mix"], "emittable": true}
+{"canonical": "concealed back zipper", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "pu outsole", "paraphrases": ["has pu outsole", "with pu outsole", "is pu outsole"], "emittable": false}
+{"canonical": "burton", "paraphrases": ["made of burton", "is it burton", "burton material"], "emittable": false}
+{"canonical": "magnetic flap closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "buckle closure", "paraphrases": ["has buckle closure", "with buckle closure", "is buckle closure"], "emittable": true}
+{"canonical": "100 uva uvb protection", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "10 inch", "paraphrases": ["has 10 inch", "with 10 inch", "is 10 inch"], "emittable": false}
+{"canonical": "heel height over 5 inch", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "mid rise", "paraphrases": ["has mid rise", "with mid rise", "is mid rise"], "emittable": false}
+{"canonical": "chain", "paraphrases": ["made of chain", "is it chain", "chain material"], "emittable": false}
+{"canonical": "100 synthetic textile", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "fit type regular", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "pumps", "paraphrases": ["made of pumps", "is it pumps", "pumps material"], "emittable": true}
+{"canonical": "retractable handle", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "fabric 100 cotton", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "car", "paraphrases": ["made of car", "is it car", "car material"], "emittable": false}
+{"canonical": "hand wash cold line dry", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "messenger bag", "paraphrases": ["has messenger bag", "with messenger bag", "is messenger bag"], "emittable": false}
+{"canonical": "padded footbed", "paraphrases": ["has padded footbed", "with padded footbed", "is padded footbed"], "emittable": true}
+{"canonical": "bridge 12 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "rear pull on loop", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "pre shrunk", "paraphrases": ["has pre shrunk", "with pre shrunk", "is pre shrunk"], "emittable": true}
+{"canonical": "hook", "paraphrases": ["made of hook", "is it hook", "hook material"], "emittable": false}
+{"canonical": "jersey polyester", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "shoulder to shoulder taping", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "slip on style", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "workout training", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "air cooled memory foam", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "camping hiking", "paraphrases": ["has camping hiking", "with camping hiking", "is camping hiking"], "emittable": false}
+{"canonical": "color white", "paraphrases": ["has color white", "with color white", "is color white"], "emittable": true}
+{"canonical": "bridge 20 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "modern fit", "paraphrases": ["has modern fit", "with modern fit", "is modern fit"], "emittable": false}
+{"canonical": "chain charm", "paraphrases": ["has chain charm", "with chain charm", "is chain charm"], "emittable": false}
+{"canonical": "golden", "paraphrases": ["made of golden", "is it golden", "golden material"], "emittable": false}
+{"canonical": "center back zipper", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "70 viscose 30 polyester", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "lens width 55 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "long length", "paraphrases": ["has long length", "with long length", "is long length"], "emittable": false}
+{"canonical": "heart", "paraphrases": ["made of heart", "is it heart", "heart material"], "emittable": true}
+{"canonical": "beige", "paraphrases": ["in beige", "beige color", "comes in beige"], "emittable": false}
+{"canonical": "a graphics and more product", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "velvet", "paraphrases": ["velvet fabric", "made of velvet", "soft velvet"], "emittable": true}
+{"canonical": "elastic closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "model is wearing size medium", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "90 cotton", "paraphrases": ["has 90 cotton", "the blend is 90 cotton", "90 cotton mix"], "emittable": true}
+{"canonical": "closed toe", "paraphrases": ["has closed toe", "with closed toe", "is closed toe"], "emittable": true}
+{"canonical": "hang dry", "paraphrases": ["has hang dry", "with hang dry", "is hang dry"], "emittable": true}
+{"canonical": "travel wallet", "paraphrases": ["has travel wallet", "with travel wallet", "is travel wallet"], "emittable": false}
+{"canonical": "lens width 54 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "japan", "paraphrases": ["made of japan", "is it japan", "japan material"], "emittable": true}
+{"canonical": "no clasp type", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "unisex sizing", "paraphrases": ["has unisex sizing", "with unisex sizing", "is unisex sizing"], "emittable": true}
+{"canonical": "air dry", "paraphrases": ["has air dry", "with air dry", "is air dry"], "emittable": true}
+{"canonical": "pullover", "paraphrases": ["made of pullover", "is it pullover", "pullover material"], "emittable": false}
+{"canonical": "none", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "90 polyester 10 elastane", "paraphrases": ["has 90 polyester 10 elastane", "the blend is 90 polyester 10 elastane", "90 polyester 10 elastane mix"], "emittable": true}
+{"canonical": "polyester lining", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "modern fitted", "paraphrases": ["has modern fitted", "with modern fitted", "is modern fitted"], "emittable": false}
+{"canonical": "size standard", "paraphrases": ["has size standard", "with size standard", "is size standard"], "emittable": true}
+{"canonical": "slim wallet", "paraphrases": ["has slim wallet", "with slim wallet", "is slim wallet"], "emittable": false}
+{"canonical": "waterproof", "paraphrases": ["keeps water out", "resists water", "water repellent"], "emittable": true}
+{"canonical": "zip fly with button closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "collared neck", "paraphrases": ["has collared neck", "with collared neck", "is collared neck"], "emittable": false}
+{"canonical": "dark", "paraphrases": ["made of dark", "is it dark", "dark material"], "emittable": false}
+{"canonical": "stainless steel case", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "99 cotton 1 spandex", "paraphrases": ["has 99 cotton 1 spandex", "the blend is 99 cotton 1 spandex", "99 cotton 1 spandex mix"], "emittable": true}
+{"canonical": "size m", "paraphrases": ["has size m", "with size m", "is size m"], "emittable": true}
+{"canonical": "75 cotton 25 polyester", "paraphrases": ["has 75 cotton 25 polyester", "the blend is 75 cotton 25 polyester", "75 cotton 25 polyester mix"], "emittable": true}
+{"canonical": "polyester pu leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "30 day satisfaction guarantee", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "china", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "shape", "paraphrases": ["made of shape", "is it shape", "shape material"], "emittable": false}
+{"canonical": "net", "paraphrases": ["made of net", "is it net", "net material"], "emittable": true}
+{"canonical": "95 polyester 5 elastane", "paraphrases": ["has 95 polyester 5 elastane", "the blend is 95 polyester 5 elastane", "95 polyester 5 elastane mix"], "emittable": true}
+{"canonical": "hand wash", "paraphrases": ["has hand wash", "with hand wash", "is hand wash"], "emittable": true}
+{"canonical": "90 polyamide 10 spandex", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "polarized lens", "paraphrases": ["has polarized lens", "with polarized lens", "is polarized lens"], "emittable": true}
+{"canonical": "reflective detail", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "windproof", "paraphrases": ["made of windproof", "is it windproof", "windproof material"], "emittable": true}
+{"canonical": "bangle", "paraphrases": ["made of bangle", "is it bangle", "bangle material"], "emittable": false}
+{"canonical": "vulcanized natural rubber upper", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "96 nylon 4 spandex", "paraphrases": ["has 96 nylon 4 spandex", "the blend is 96 nylon 4 spandex", "96 nylon 4 spandex mix"], "emittable": true}
+{"canonical": "life is good", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "case diameter 39 mm", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "glass lens", "paraphrases": ["has glass lens", "with glass lens", "is glass lens"], "emittable": true}
+{"canonical": "lens height 53 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "limited lifetime warranty", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "bridge 14 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "scoop neckline", "paraphrases": ["has scoop neckline", "with scoop neckline", "is scoop neckline"], "emittable": false}
+{"canonical": "material cotton", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "coach", "paraphrases": ["made of coach", "is it coach", "coach material"], "emittable": false}
+{"canonical": "customizable", "paraphrases": ["made of customizable", "is it customizable", "customizable material"], "emittable": false}
+{"canonical": "dexter", "paraphrases": ["made of dexter", "is it dexter", "dexter material"], "emittable": false}
+{"canonical": "polyester cotton mesh", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "xx large", "paraphrases": ["has xx large", "with xx large", "is xx large"], "emittable": false}
+{"canonical": "rfid wallet", "paraphrases": ["has rfid wallet", "with rfid wallet", "is rfid wallet"], "emittable": false}
+{"canonical": "95 polyester 5 other fibers", "paraphrases": ["has 95 polyester 5 other fibers", "the blend is 95 polyester 5 other fibers", "95 polyester 5 other fibers mix"], "emittable": true}
+{"canonical": "made of 100 cotton", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "97 cotton 3 other fibers", "paraphrases": ["has 97 cotton 3 other fibers", "the blend is 97 cotton 3 other fibers", "97 cotton 3 other fibers mix"], "emittable": true}
+{"canonical": "suede", "paraphrases": ["suede material", "made of suede", "suede finish"], "emittable": true}
+{"canonical": "93 polyester 7 spandex", "paraphrases": ["has 93 polyester 7 spandex", "the blend is 93 polyester 7 spandex", "93 polyester 7 spandex mix"], "emittable": true}
+{"canonical": "side zipper closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "flap closure", "paraphrases": ["has flap closure", "with flap closure", "is flap closure"], "emittable": true}
+{"canonical": "made in usa or imported", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "100 faux leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "original case", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "polyester elastane", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "synthetic fiber", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "multi density cushioning", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "square toe", "paraphrases": ["has square toe", "with square toe", "is square toe"], "emittable": true}
+{"canonical": "warm and comfortable", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "fit type fitted", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "poly cotton", "paraphrases": ["has poly cotton", "with poly cotton", "is poly cotton"], "emittable": true}
+{"canonical": "drawstring hood", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "97 polyester 3 other fibers", "paraphrases": ["has 97 polyester 3 other fibers", "the blend is 97 polyester 3 other fibers", "97 polyester 3 other fibers mix"], "emittable": true}
+{"canonical": "toggle closure", "paraphrases": ["has toggle closure", "with toggle closure", "is toggle closure"], "emittable": true}
+{"canonical": "cotton poly blend", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "case diameter 44mm", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "fabric sole", "paraphrases": ["has fabric sole", "with fabric sole", "is fabric sole"], "emittable": true}
+{"canonical": "satin", "paraphrases": ["made of satin", "is it satin", "satin material"], "emittable": true}
+{"canonical": "the north face", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "aluminum frame", "paraphrases": ["has aluminum frame", "with aluminum frame", "is aluminum frame"], "emittable": true}
+{"canonical": "fabric and leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "machine wash warm", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "100 polyurethane", "paraphrases": ["all polyurethane", "solid polyurethane", "full polyurethane"], "emittable": true}
+{"canonical": "pullover closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "upper material canvas", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "joycuff", "paraphrases": ["made of joycuff", "is it joycuff", "joycuff material"], "emittable": false}
+{"canonical": "polyester spandex rayon", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "91 polyester 9 spandex", "paraphrases": ["has 91 polyester 9 spandex", "the blend is 91 polyester 9 spandex", "91 polyester 9 spandex mix"], "emittable": true}
+{"canonical": "polyester spandex nylon", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "long sleeve", "paraphrases": ["has long sleeves", "full sleeves", "sleeves to wrist"], "emittable": true}
+{"canonical": "round neck", "paraphrases": ["has round neck", "with round neck", "is round neck"], "emittable": true}
+{"canonical": "slide sandal", "paraphrases": ["has slide sandal", "with slide sandal", "is slide sandal"], "emittable": true}
+{"canonical": "1 lithium ion batteries required", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "gender unisex", "paraphrases": ["has gender unisex", "with gender unisex", "is gender unisex"], "emittable": true}
+{"canonical": "polished", "paraphrases": ["made of polished", "is it polished", "polished material"], "emittable": true}
+{"canonical": "92 nylon", "paraphrases": ["has 92 nylon", "the blend is 92 nylon", "92 nylon mix"], "emittable": true}
+{"canonical": "scoop neck", "paraphrases": ["has scoop neck", "with scoop neck", "is scoop neck"], "emittable": false}
+{"canonical": "sherpa", "paraphrases": ["made of sherpa", "is it sherpa", "sherpa material"], "emittable": true}
+{"canonical": "removable insert", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "scratch resistant coating coating", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "waterproof leather upper", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "free shipping", "paraphrases": ["has free shipping", "with free shipping", "is free shipping"], "emittable": true}
+{"canonical": "rise style mid", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "betsey johnson", "paraphrases": ["has betsey johnson", "with betsey johnson", "is betsey johnson"], "emittable": true}
+{"canonical": "sheepskin", "paraphrases": ["made of sheepskin", "is it sheepskin", "sheepskin material"], "emittable": true}
+{"canonical": "made in poland", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "85 polyester", "paraphrases": ["has 85 polyester", "the blend is 85 polyester", "85 polyester mix"], "emittable": true}
+{"canonical": "tonal stitching", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "taped neck and shoulders", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "composite lens", "paraphrases": ["has composite lens", "with composite lens", "is composite lens"], "emittable": true}
+{"canonical": "arm 140 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "polyurethane lining", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "almond toe", "paraphrases": ["has almond toe", "with almond toe", "is almond toe"], "emittable": false}
+{"canonical": "canvas", "paraphrases": ["canvas material", "made of canvas", "canvas fabric"], "emittable": true}
+{"canonical": "painted", "paraphrases": ["made of painted", "is it painted", "painted material"], "emittable": false}
+{"canonical": "1 year", "paraphrases": ["has 1 year", "with 1 year", "is 1 year"], "emittable": false}
+{"canonical": "comfort fit design", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "cushion soft", "paraphrases": ["has cushion soft", "with cushion soft", "is cushion soft"], "emittable": false}
+{"canonical": "lens height 48 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "passenger car", "paraphrases": ["has passenger car", "with passenger car", "is passenger car"], "emittable": false}
+{"canonical": "pearl izumi", "paraphrases": ["has pearl izumi", "with pearl izumi", "is pearl izumi"], "emittable": false}
+{"canonical": "duomax support system", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "front button closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "gently contoured silhouette", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "sapphire crystal", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "tri acetate cellulose lens", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "92 nylon 8 spandex", "paraphrases": ["has 92 nylon 8 spandex", "the blend is 92 nylon 8 spandex", "92 nylon 8 spandex mix"], "emittable": true}
+{"canonical": "slash pockets", "paraphrases": ["has slash pockets", "with slash pockets", "is slash pockets"], "emittable": false}
+{"canonical": "100 cow leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "fabric lining", "paraphrases": ["has fabric lining", "with fabric lining", "is fabric lining"], "emittable": true}
+{"canonical": "fold closure", "paraphrases": ["has fold closure", "with fold closure", "is fold closure"], "emittable": true}
+{"canonical": "elastic waist", "paraphrases": ["has elastic waist", "with elastic waist", "is elastic waist"], "emittable": false}
+{"canonical": "orange", "paraphrases": ["in orange", "orange color", "comes in orange"], "emittable": false}
+{"canonical": "complimentary gift packaging", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "95 cottton 5 spandex", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "lens width 58 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "1 lr44 batteries required", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "925 solid sterling silver", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "finish polished", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "100 satin", "paraphrases": ["has 100 satin", "with 100 satin", "is 100 satin"], "emittable": true}
+{"canonical": "lens width 51 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "uv protection coating coating", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "100 rayon", "paraphrases": ["has 100 rayon", "with 100 rayon", "is 100 rayon"], "emittable": true}
+{"canonical": "synthetic suede", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "dry flat", "paraphrases": ["has dry flat", "with dry flat", "is dry flat"], "emittable": true}
+{"canonical": "fit regular", "paraphrases": ["has fit regular", "with fit regular", "is fit regular"], "emittable": true}
+{"canonical": "united kingdom", "paraphrases": ["has united kingdom", "with united kingdom", "is united kingdom"], "emittable": false}
+{"canonical": "five pocket styling", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "rose", "paraphrases": ["made of rose", "is it rose", "rose material"], "emittable": false}
+{"canonical": "true to size", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "eva outsole", "paraphrases": ["has eva outsole", "with eva outsole", "is eva outsole"], "emittable": false}
+{"canonical": "fitted", "paraphrases": ["made of fitted", "is it fitted", "fitted material"], "emittable": true}
+{"canonical": "cowhide leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "97 polyester 3 elastane", "paraphrases": ["has 97 polyester 3 elastane", "the blend is 97 polyester 3 elastane", "97 polyester 3 elastane mix"], "emittable": true}
+{"canonical": "17 liters", "paraphrases": ["has 17 liters", "with 17 liters", "is 17 liters"], "emittable": false}
+{"canonical": "bellows tongue keeps debris out", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "two tone", "paraphrases": ["has two tone", "with two tone", "is two tone"], "emittable": true}
+{"canonical": "100 full grain leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "regular", "paraphrases": ["made of regular", "is it regular", "regular material"], "emittable": false}
+{"canonical": "exercise fitness", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "multicolor", "paraphrases": ["made of multicolor", "is it multicolor", "multicolor material"], "emittable": false}
+{"canonical": "printed in usa garment imported", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "breathable fabric", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "front pouch pocket", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "bridge 19 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "case diameter 32mm", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "polyester cotton", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "brunswick", "paraphrases": ["made of brunswick", "is it brunswick", "brunswick material"], "emittable": false}
+{"canonical": "80 polyester 20 cotton", "paraphrases": ["has 80 polyester 20 cotton", "the blend is 80 polyester 20 cotton", "80 polyester 20 cotton mix"], "emittable": true}
+{"canonical": "pattern type solid", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "80 polyester", "paraphrases": ["has 80 polyester", "the blend is 80 polyester", "80 polyester mix"], "emittable": true}
+{"canonical": "twill", "paraphrases": ["made of twill", "is it twill", "twill material"], "emittable": true}
+{"canonical": "nine west", "paraphrases": ["has nine west", "with nine west", "is nine west"], "emittable": false}
+{"canonical": "elastic waistband", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "lightweight", "paraphrases": ["really light", "doesn't weigh much", "light to wear"], "emittable": true}
+{"canonical": "100 other fibers", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "fully padded sock lining", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "do not dry clean", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "lens height 54 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "durable mineral crystal", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "hook closure", "paraphrases": ["has hook closure", "with hook closure", "is hook closure"], "emittable": true}
+{"canonical": "bridge 16 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "lens width 53 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "all terra traction", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "exceptional styling", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "heel height 1 25", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "1 unknown batteries required included", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "tank top", "paraphrases": ["has tank top", "with tank top", "is tank top"], "emittable": false}
+{"canonical": "95 rayon 5 spandex", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "revlite midsole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "slip on closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "pull on style", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "brand new in box", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "ice carats", "paraphrases": ["has ice carats", "with ice carats", "is ice carats"], "emittable": false}
+{"canonical": "steel shank", "paraphrases": ["has steel shank", "with steel shank", "is steel shank"], "emittable": false}
+{"canonical": "fleece lined", "paraphrases": ["has fleece lined", "with fleece lined", "is fleece lined"], "emittable": true}
+{"canonical": "bridge 21 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "comfortable textile lining", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "lightly padded insole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "arm 138 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "crystal", "paraphrases": ["made of crystal", "is it crystal", "crystal material"], "emittable": false}
+{"canonical": "kate spade new york", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "stitch n turn technology", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "tpr outsole", "paraphrases": ["has tpr outsole", "with tpr outsole", "is tpr outsole"], "emittable": true}
+{"canonical": "lead compliant", "paraphrases": ["has lead compliant", "with lead compliant", "is lead compliant"], "emittable": true}
+{"canonical": "button front", "paraphrases": ["has button front", "with button front", "is button front"], "emittable": false}
+{"canonical": "wicking", "paraphrases": ["made of wicking", "is it wicking", "wicking material"], "emittable": false}
+{"canonical": "top zip closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "stainless steel frame", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "cuff", "paraphrases": ["made of cuff", "is it cuff", "cuff material"], "emittable": false}
+{"canonical": "tag free", "paraphrases": ["has tag free", "with tag free", "is tag free"], "emittable": false}
+{"canonical": "cushioned footbed", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "cycling", "paraphrases": ["made of cycling", "is it cycling", "cycling material"], "emittable": false}
+{"canonical": "composition faux leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "straight leg", "paraphrases": ["has straight leg", "with straight leg", "is straight leg"], "emittable": false}
+{"canonical": "side seam pockets", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "waterproof leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "indonesia", "paraphrases": ["made of indonesia", "is it indonesia", "indonesia material"], "emittable": false}
+{"canonical": "athletic fit", "paraphrases": ["has athletic fit", "with athletic fit", "is athletic fit"], "emittable": false}
+{"canonical": "x large", "paraphrases": ["has x large", "with x large", "is x large"], "emittable": true}
+{"canonical": "earloop", "paraphrases": ["made of earloop", "is it earloop", "earloop material"], "emittable": false}
+{"canonical": "adjustable closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "diamond pattern sole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "backpack", "paraphrases": ["made of backpack", "is it backpack", "backpack material"], "emittable": true}
+{"canonical": "cushion soft technology", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "lace up", "paraphrases": ["has lace up", "with lace up", "is lace up"], "emittable": true}
+{"canonical": "hot pink", "paraphrases": ["has hot pink", "with hot pink", "is hot pink"], "emittable": false}
+{"canonical": "bridge 22 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "60 cotton", "paraphrases": ["has 60 cotton", "the blend is 60 cotton", "60 cotton mix"], "emittable": true}
+{"canonical": "30 day return policy", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "machine washable easy care", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "arm 125 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "flap pockets", "paraphrases": ["has flap pockets", "with flap pockets", "is flap pockets"], "emittable": false}
+{"canonical": "usa", "paraphrases": ["made of usa", "is it usa", "usa material"], "emittable": false}
+{"canonical": "polyster", "paraphrases": ["made of polyster", "is it polyster", "polyster material"], "emittable": true}
+{"canonical": "compression molded eva midsole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "boots", "paraphrases": ["made of boots", "is it boots", "boots material"], "emittable": true}
+{"canonical": "seamless construction", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "thermal", "paraphrases": ["made of thermal", "is it thermal", "thermal material"], "emittable": false}
+{"canonical": "fishing", "paraphrases": ["made of fishing", "is it fishing", "fishing material"], "emittable": false}
+{"canonical": "adult male", "paraphrases": ["has adult male", "with adult male", "is adult male"], "emittable": false}
+{"canonical": "double padded memory foam insole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "crafted in 925 sterling silver", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "striped", "paraphrases": ["has stripes", "striped pattern", "with stripes"], "emittable": false}
+{"canonical": "1 cr2 batteries required included", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "eva footbed", "paraphrases": ["has eva footbed", "with eva footbed", "is eva footbed"], "emittable": true}
+{"canonical": "powder coated", "paraphrases": ["has powder coated", "with powder coated", "is powder coated"], "emittable": false}
+{"canonical": "kids", "paraphrases": ["made of kids", "is it kids", "kids material"], "emittable": false}
+{"canonical": "316l stainless steel", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "25 liters", "paraphrases": ["has 25 liters", "with 25 liters", "is 25 liters"], "emittable": false}
+{"canonical": "fit type classic fit", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "portable", "paraphrases": ["made of portable", "is it portable", "portable material"], "emittable": false}
+{"canonical": "retro", "paraphrases": ["made of retro", "is it retro", "retro material"], "emittable": false}
+{"canonical": "cotton linen", "paraphrases": ["has cotton linen", "with cotton linen", "is cotton linen"], "emittable": true}
+{"canonical": "luminous hands", "paraphrases": ["has luminous hands", "with luminous hands", "is luminous hands"], "emittable": true}
+{"canonical": "unisex adult luggage only", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "ships from the usa", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "t shirt", "paraphrases": ["has t shirt", "with t shirt", "is t shirt"], "emittable": false}
+{"canonical": "responsive 5gen cushioned midsole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "bead chain", "paraphrases": ["has bead chain", "with bead chain", "is bead chain"], "emittable": false}
+{"canonical": "50 synthetic 50 mesh", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "1 inch heel height", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "two small exterior pockets", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "adjustable buckle closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "leather and synthetic sole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "screen printed", "paraphrases": ["has screen printed", "with screen printed", "is screen printed"], "emittable": false}
+{"canonical": "jersey", "paraphrases": ["made of jersey", "is it jersey", "jersey material"], "emittable": true}
+{"canonical": "navy blue", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "standard length", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "100 supima cotton", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "baby", "paraphrases": ["made of baby", "is it baby", "baby material"], "emittable": false}
+{"canonical": "infant", "paraphrases": ["made of infant", "is it infant", "infant material"], "emittable": false}
+{"canonical": "lux accessories", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "98 cotton 2 elastane", "paraphrases": ["has 98 cotton 2 elastane", "the blend is 98 cotton 2 elastane", "98 cotton 2 elastane mix"], "emittable": true}
+{"canonical": "100 suede leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "plastic", "paraphrases": ["plastic material", "is it plastic", "made of plastic"], "emittable": true}
+{"canonical": "100 nubuck", "paraphrases": ["has 100 nubuck", "with 100 nubuck", "is 100 nubuck"], "emittable": true}
+{"canonical": "eva insole", "paraphrases": ["has eva insole", "with eva insole", "is eva insole"], "emittable": true}
+{"canonical": "modern", "paraphrases": ["made of modern", "is it modern", "modern material"], "emittable": false}
+{"canonical": "no warranty", "paraphrases": ["has no warranty", "with no warranty", "is no warranty"], "emittable": false}
+{"canonical": "synthetic leather upper", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "55 cotton", "paraphrases": ["has 55 cotton", "the blend is 55 cotton", "55 cotton mix"], "emittable": true}
+{"canonical": "94 polyester 6 spandex", "paraphrases": ["has 94 polyester 6 spandex", "the blend is 94 polyester 6 spandex", "94 polyester 6 spandex mix"], "emittable": true}
+{"canonical": "inside zipper", "paraphrases": ["has inside zipper", "with inside zipper", "is inside zipper"], "emittable": false}
+{"canonical": "9 inch", "paraphrases": ["has 9 inch", "with 9 inch", "is 9 inch"], "emittable": false}
+{"canonical": "belted", "paraphrases": ["made of belted", "is it belted", "belted material"], "emittable": false}
+{"canonical": "fabric laundered for reduced shrinkage", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "earring", "paraphrases": ["made of earring", "is it earring", "earring material"], "emittable": false}
+{"canonical": "easy on and off", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "rfid protection", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "nylon", "paraphrases": ["made of nylon", "is it nylon", "nylon material"], "emittable": true}
+{"canonical": "padded sock", "paraphrases": ["has padded sock", "with padded sock", "is padded sock"], "emittable": false}
+{"canonical": "fabric type", "paraphrases": ["has fabric type", "with fabric type", "is fabric type"], "emittable": true}
+{"canonical": "comfortable fit", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "fabric or textile", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "lens width 61 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "genuine leather upper", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "amazon exclusive women s activewear", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "officially licensed merchandise", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "94 nylon 6 spandex", "paraphrases": ["has 94 nylon 6 spandex", "the blend is 94 nylon 6 spandex", "94 nylon 6 spandex mix"], "emittable": true}
+{"canonical": "slip on", "paraphrases": ["has slip on", "with slip on", "is slip on"], "emittable": true}
+{"canonical": "side entry pockets", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "90 nylon 10 elastane", "paraphrases": ["has 90 nylon 10 elastane", "the blend is 90 nylon 10 elastane", "90 nylon 10 elastane mix"], "emittable": true}
+{"canonical": "lugged outsole", "paraphrases": ["has lugged outsole", "with lugged outsole", "is lugged outsole"], "emittable": false}
+{"canonical": "leather suede", "paraphrases": ["has leather suede", "with leather suede", "is leather suede"], "emittable": true}
+{"canonical": "bowling shoes", "paraphrases": ["has bowling shoes", "with bowling shoes", "is bowling shoes"], "emittable": false}
+{"canonical": "blue", "paraphrases": ["in blue", "blue color", "comes in blue"], "emittable": true}
+{"canonical": "medium", "paraphrases": ["made of medium", "is it medium", "medium material"], "emittable": false}
+{"canonical": "superior comfort", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "ladies", "paraphrases": ["made of ladies", "is it ladies", "ladies material"], "emittable": false}
+{"canonical": "fiberglass", "paraphrases": ["made of fiberglass", "is it fiberglass", "fiberglass material"], "emittable": false}
+{"canonical": "cotton rayon", "paraphrases": ["has cotton rayon", "with cotton rayon", "is cotton rayon"], "emittable": true}
+{"canonical": "100 leather and textile", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "genuine leather", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "stacked heel", "paraphrases": ["has stacked heel", "with stacked heel", "is stacked heel"], "emittable": false}
+{"canonical": "no metal stamp", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "denim", "paraphrases": ["made of denim", "denim material", "denim fabric"], "emittable": true}
+{"canonical": "metal 925 sterling silver", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "chest pocket", "paraphrases": ["has chest pocket", "with chest pocket", "is chest pocket"], "emittable": false}
+{"canonical": "english", "paraphrases": ["made of english", "is it english", "english material"], "emittable": false}
+{"canonical": "comes in a gift box", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "two piece set", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "special size type standard", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "no closure closure", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "unisex adult womens", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "printed", "paraphrases": ["made of printed", "is it printed", "printed material"], "emittable": false}
+{"canonical": "material chiffon", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "shirttail hem", "paraphrases": ["has shirttail hem", "with shirttail hem", "is shirttail hem"], "emittable": false}
+{"canonical": "80 cotton", "paraphrases": ["has 80 cotton", "the blend is 80 cotton", "80 cotton mix"], "emittable": true}
+{"canonical": "60 polyester", "paraphrases": ["has 60 polyester", "the blend is 60 polyester", "60 polyester mix"], "emittable": true}
+{"canonical": "comfort fit", "paraphrases": ["has comfort fit", "with comfort fit", "is comfort fit"], "emittable": true}
+{"canonical": "pull on closure", "paraphrases": ["slip on style", "no zip or buttons", "just pulls on"], "emittable": true}
+{"canonical": "wedding christmas birthday", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "100 percent polyester", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "65 polyester 35 viscose", "paraphrases": ["has 65 polyester 35 viscose", "the blend is 65 polyester 35 viscose", "65 polyester 35 viscose mix"], "emittable": true}
+{"canonical": "fabric", "paraphrases": ["made of fabric", "is it fabric", "fabric material"], "emittable": true}
+{"canonical": "tumble dry", "paraphrases": ["has tumble dry", "with tumble dry", "is tumble dry"], "emittable": true}
+{"canonical": "seam sealed construction", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "cotton blend polyester", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "all day comfort", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "spandex nylon", "paraphrases": ["has spandex nylon", "with spandex nylon", "is spandex nylon"], "emittable": true}
+{"canonical": "100 mesh", "paraphrases": ["has 100 mesh", "with 100 mesh", "is 100 mesh"], "emittable": true}
+{"canonical": "item shape round", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "microfiber polyester", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "machine wash and hand wash", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "reversible", "paraphrases": ["made of reversible", "is it reversible", "reversible material"], "emittable": true}
+{"canonical": "lightly cushioned insole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "100 cotton blend", "paraphrases": ["all blend", "solid blend", "full blend"], "emittable": true}
+{"canonical": "point collar", "paraphrases": ["has point collar", "with point collar", "is point collar"], "emittable": false}
+{"canonical": "leather and synthetic", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "100 leather suede", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "1 inch heel", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "made in thailand", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "titanium", "paraphrases": ["made of titanium", "is it titanium", "titanium material"], "emittable": true}
+{"canonical": "men s", "paraphrases": ["has men s", "with men s", "is men s"], "emittable": true}
+{"canonical": "polyester nylon", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "department name unisex adult", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "brass", "paraphrases": ["made of brass", "is it brass", "brass material"], "emittable": false}
+{"canonical": "travelon", "paraphrases": ["made of travelon", "is it travelon", "travelon material"], "emittable": false}
+{"canonical": "small", "paraphrases": ["made of small", "is it small", "small material"], "emittable": true}
+{"canonical": "3 piece set", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "cotton spandex nylon", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "100 textile synthetic", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "resin frame", "paraphrases": ["has resin frame", "with resin frame", "is resin frame"], "emittable": true}
+{"canonical": "material synthetic", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "wides", "paraphrases": ["made of wides", "is it wides", "wides material"], "emittable": false}
+{"canonical": "woven", "paraphrases": ["woven fabric", "regular woven", "tightly woven"], "emittable": true}
+{"canonical": "fabric 80 chinlon 20 spandex", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "bridge 13 millimeters", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "96 modal 4 spandex", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "60 combed cotton 40 polyester", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "wedding birthday", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "romwe", "paraphrases": ["made of romwe", "is it romwe", "romwe material"], "emittable": false}
+{"canonical": "30 day return exchange policy", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "hunting", "paraphrases": ["made of hunting", "is it hunting", "hunting material"], "emittable": false}
+{"canonical": "manmade outsole", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": false}
+{"canonical": "breathable mesh lining", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}
+{"canonical": "loop closure", "paraphrases": ["has loop closure", "with loop closure", "is loop closure"], "emittable": true}
+{"canonical": "sports", "paraphrases": ["sports themed", "sports design", "sports style"], "emittable": false}
+{"canonical": "100 textile and synthetic", "paraphrases": [], "skip_reason": "no natural shopper phrasing", "emittable": true}

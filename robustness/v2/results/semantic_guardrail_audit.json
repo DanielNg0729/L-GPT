@@ -1,0 +1,87 @@
+{
+  "contract_examples": {
+    "semantic_attribute": {
+      "routed": true,
+      "allowed": true,
+      "weight": 0.11819958563535923,
+      "reason": "accepted",
+      "trace": [
+        "provenance:eligible:0.825",
+        "dictionary:True",
+        "catalogue_attestation:True",
+        "family:True",
+        "similarity:True",
+        "margin:True",
+        "accepted"
+      ]
+    },
+    "literal_attribute": {
+      "routed": true,
+      "allowed": false,
+      "weight": 0.0,
+      "reason": "zero_weight",
+      "trace": [
+        "provenance:lexical:1.000",
+        "dictionary:True",
+        "catalogue_attestation:True",
+        "family:True",
+        "similarity:True",
+        "margin:True",
+        "zero_weight"
+      ]
+    }
+  },
+  "legacy_semantic_shift": {
+    "development200": {
+      "counts": {
+        "seen": 672,
+        "routed": 668,
+        "allowed": 0,
+        "zero_weight": 668,
+        "provenance": 4
+      },
+      "nonzero_cases": []
+    },
+    "holdout800": {
+      "counts": {
+        "seen": 2622,
+        "routed": 2614,
+        "allowed": 1,
+        "zero_weight": 2613,
+        "accepted": 1,
+        "provenance": 8
+      },
+      "nonzero_cases": [
+        {
+          "text": "Skid-resistant, weatherproof rugged sole provides indoor & outd",
+          "weight": 0.05913708563535914,
+          "provenance_confidence": 0.9123895027624309,
+          "full_attested": false,
+          "source_continuation": false
+        }
+      ]
+    }
+  },
+  "canonical_traffic": {
+    "official200": {
+      "counts": {
+        "seen": 436,
+        "routed": 435,
+        "allowed": 0,
+        "zero_weight": 435,
+        "provenance": 1
+      },
+      "nonzero_cases": []
+    },
+    "unseen800": {
+      "counts": {
+        "seen": 2123,
+        "routed": 2115,
+        "allowed": 0,
+        "zero_weight": 2115,
+        "provenance": 8
+      },
+      "nonzero_cases": []
+    }
+  }
+}

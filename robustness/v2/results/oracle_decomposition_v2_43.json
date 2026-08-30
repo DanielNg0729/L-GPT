@@ -1,0 +1,14 @@
+{
+  "experiment": "V2.43 oracle decomposition",
+  "canonical": 0.9701,
+  "arms": {
+    "1 baseline (V1 on paraphrase)": 0.777,
+    "2 ORACLE-RESOLVE (perfect 3/4/5)": 0.874925,
+    "3 ORACLE-DROP (delete paraphrase)": 0.823675,
+    "4 ORACLE-TOP1 (true canon, weak tier)": 0.8064,
+    "5 current resolver (mpnet+NLI)": 0.7568
+  },
+  "gap": 0.1931,
+  "resolver_top1_accuracy": 0.0,
+  "n_maps": 27
+}

@@ -1,0 +1,17 @@
+{
+  "experiment": "V2.13 pretrained classifier aligned to V1 fallback actions",
+  "train_rows": 5200,
+  "holdout_rows": 2600,
+  "accuracy": 0.769615,
+  "per_action_accuracy": {
+    "buying_opening": 0.9975,
+    "constraint_update": 0.505,
+    "no_evidence": 1.0,
+    "override_opening": 1.0,
+    "override_update": 0.5,
+    "plain_opening": 0.5
+  },
+  "official_training_examples": 1600,
+  "model_artifact": "D:\\Coding\\Models\\TiktokTechJam\\.v2_model_cache\\v1_route_action_classifier",
+  "decision_rule": "Requires a separate action-extraction audit and strict-gate non-interference before V1 integration."
+}

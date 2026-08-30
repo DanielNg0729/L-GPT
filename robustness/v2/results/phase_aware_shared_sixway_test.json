@@ -1,0 +1,28 @@
+{
+  "experiment": "V2.21 phase-aware shared route test",
+  "checkpoint": "D:\\Coding\\Models\\TiktokTechJam\\.v2_model_cache\\phase_aware_shared_sixway_cuda.pt",
+  "test_rows": 9600,
+  "selection": "fixed epoch 5 selected on eval before this test scoring",
+  "raw_sixway": {
+    "accuracy": 0.783125,
+    "per_action_accuracy": {
+      "buying_opening": 0.673125,
+      "constraint_update": 0.7025,
+      "no_evidence": 1.0,
+      "override_opening": 1.0,
+      "override_update": 0.3575,
+      "plain_opening": 0.965625
+    }
+  },
+  "turn_masked": {
+    "accuracy": 0.8425,
+    "per_action_accuracy": {
+      "buying_opening": 0.73375,
+      "constraint_update": 0.82625,
+      "no_evidence": 1.0,
+      "override_opening": 1.0,
+      "override_update": 0.529375,
+      "plain_opening": 0.965625
+    }
+  }
+}

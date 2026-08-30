@@ -75,7 +75,9 @@ class SemanticFeatureGrounder:
             from sentence_transformers import SentenceTransformer
 
             MODEL_CACHE.mkdir(parents=True, exist_ok=True)
-            self._model = SentenceTransformer(MODEL_NAME, cache_folder=str(MODEL_CACHE), device="cpu")
+            self._model = SentenceTransformer(
+                MODEL_NAME, cache_folder=str(MODEL_CACHE), device="cpu", local_files_only=True
+            )
             if CACHE_PATH.exists():
                 cached = np.load(CACHE_PATH, allow_pickle=False)
                 self._phrases = cached["phrases"].tolist()

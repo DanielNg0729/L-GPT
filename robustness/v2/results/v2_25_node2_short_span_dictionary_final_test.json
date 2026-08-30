@@ -1,0 +1,146 @@
+{
+  "experiment": "V2.25 BERT-cleaned exact 1-3 token dictionary candidate path",
+  "benchmark": "TemplateParaphrase9600-Test",
+  "test_rows": 9600,
+  "test_split": "D:\\Coding\\Models\\TiktokTechJam\\robustness\\v2\\v1_turn_gated_bank\\final_test.jsonl",
+  "dictionary": "D:\\Coding\\Models\\TiktokTechJam\\robustness\\v2\\catalogue_attribute_dictionary.jsonl",
+  "inference": {
+    "device": "cuda:0",
+    "batch_size": 64,
+    "keep_threshold": 0.3,
+    "candidate_rule": "contiguous 1-3 token exact dictionary membership"
+  },
+  "constraint_values": 8000,
+  "dictionary_coverage": 1.0,
+  "constraint_recall": 0.9925,
+  "mean_candidates_per_constraint_message": 2.013281,
+  "mean_extra_candidates_per_constraint_message": 0.772656,
+  "category_masked": {
+    "constraint_recall": 0.9925,
+    "mean_candidates_per_constraint_message": 1.392969,
+    "mean_extra_candidates_per_constraint_message": 0.152344,
+    "category_patterns": 1114,
+    "rule": "remove longest exact visible coarse-category mention on opening routes only"
+  },
+  "category_masked_maximal": {
+    "constraint_recall": 0.99,
+    "mean_candidates_per_constraint_message": 1.239844,
+    "mean_extra_candidates_per_constraint_message": 0.002344,
+    "rule": "category mask followed by removal of strict nested dictionary spans"
+  },
+  "messages_with_any_candidate": 0.991875,
+  "no_evidence_candidates": 0,
+  "category_exact_catalogue_recovery": 0.998542,
+  "per_action": {
+    "buying_opening": {
+      "expected_values": 1600,
+      "dictionary_coverage": 1.0,
+      "recovery": 0.99875,
+      "category_masked_recovery": 0.99875,
+      "maximal_recovery": 0.99875
+    },
+    "constraint_update": {
+      "expected_values": 3200,
+      "dictionary_coverage": 1.0,
+      "recovery": 0.999062,
+      "category_masked_recovery": 0.999062,
+      "maximal_recovery": 0.992812
+    },
+    "override_opening": {
+      "expected_values": 1600,
+      "dictionary_coverage": 1.0,
+      "recovery": 0.998125,
+      "category_masked_recovery": 0.998125,
+      "maximal_recovery": 0.998125
+    },
+    "override_update": {
+      "expected_values": 1600,
+      "dictionary_coverage": 1.0,
+      "recovery": 0.9675,
+      "category_masked_recovery": 0.9675,
+      "maximal_recovery": 0.9675
+    }
+  },
+  "five_diagnostic_examples": [
+    {
+      "action": "override_update",
+      "message": "Set Imported as the requirement from now on.",
+      "expected": [
+        "imported"
+      ],
+      "bert_tokens": [],
+      "after_category_mask": [],
+      "dictionary_candidates": [],
+      "masked_dictionary_candidates": [],
+      "maximal_dictionary_candidates": [],
+      "missing": [
+        "imported"
+      ],
+      "extra": []
+    },
+    {
+      "action": "override_update",
+      "message": "Set Imported as the requirement from now on.",
+      "expected": [
+        "imported"
+      ],
+      "bert_tokens": [],
+      "after_category_mask": [],
+      "dictionary_candidates": [],
+      "masked_dictionary_candidates": [],
+      "maximal_dictionary_candidates": [],
+      "missing": [
+        "imported"
+      ],
+      "extra": []
+    },
+    {
+      "action": "override_update",
+      "message": "Please treat Black as the new requirement.",
+      "expected": [
+        "black"
+      ],
+      "bert_tokens": [],
+      "after_category_mask": [],
+      "dictionary_candidates": [],
+      "masked_dictionary_candidates": [],
+      "maximal_dictionary_candidates": [],
+      "missing": [
+        "black"
+      ],
+      "extra": []
+    },
+    {
+      "action": "override_update",
+      "message": "Set Black as the requirement from now on.",
+      "expected": [
+        "black"
+      ],
+      "bert_tokens": [],
+      "after_category_mask": [],
+      "dictionary_candidates": [],
+      "masked_dictionary_candidates": [],
+      "maximal_dictionary_candidates": [],
+      "missing": [
+        "black"
+      ],
+      "extra": []
+    },
+    {
+      "action": "override_update",
+      "message": "I now need Black, not the earlier choice.",
+      "expected": [
+        "black"
+      ],
+      "bert_tokens": [],
+      "after_category_mask": [],
+      "dictionary_candidates": [],
+      "masked_dictionary_candidates": [],
+      "maximal_dictionary_candidates": [],
+      "missing": [
+        "black"
+      ],
+      "extra": []
+    }
+  ]
+}

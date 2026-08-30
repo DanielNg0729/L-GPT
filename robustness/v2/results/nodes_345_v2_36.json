@@ -1,0 +1,50 @@
+{
+  "experiment": "V2.36 nodes 3-5 on concept-expanded corpus",
+  "corpus_pairs": 184,
+  "concepts": {
+    "train": 129,
+    "evaluation": 23,
+    "test": 21
+  },
+  "train_non_emittable_concepts": 68,
+  "prior": 0.2,
+  "epochs": 1,
+  "node4": {
+    "frozen": {
+      "no_prior": {
+        "R@1": 0.36,
+        "R@3": 0.4,
+        "R@5": 0.52,
+        "R@10": 0.72,
+        "MRR": 0.4322,
+        "n": 25
+      },
+      "with_prior": {
+        "R@1": 0.2,
+        "R@3": 0.28,
+        "R@5": 0.36,
+        "R@10": 0.48,
+        "MRR": 0.2746,
+        "n": 25
+      }
+    },
+    "tuned": {
+      "no_prior": {
+        "R@1": 0.36,
+        "R@3": 0.36,
+        "R@5": 0.52,
+        "R@10": 0.68,
+        "MRR": 0.4286,
+        "n": 25
+      },
+      "with_prior": {
+        "R@1": 0.2,
+        "R@3": 0.28,
+        "R@5": 0.36,
+        "R@10": 0.48,
+        "MRR": 0.2749,
+        "n": 25
+      }
+    }
+  }
+}

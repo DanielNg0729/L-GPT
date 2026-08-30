@@ -19,6 +19,23 @@ the value represented by `<attribute paraphrase>` below:
 | Browsing follow-up | `For that, what matters is: <attribute paraphrase>; <attribute paraphrase>.` |
 | Intent override | `Actually, ignore my earlier preference. What I need is: <attribute paraphrase>.` |
 
+### Node 1 route runtime
+
+`RouteOnlyV2Agent` is the completed V2 route component. It first applies the exact
+organizer-template recognizer. Recognized traffic remains on the deterministic V1 path;
+only an unrecognized wrapper can lazily load the local six-route classifier. The classifier
+uses a deterministic first-turn versus follow-up mask and can preserve only the existing
+no-evidence and override-rejection controls. It does not extract semantic values.
+
+Run its canonical non-interference controls with:
+
+```bash
+python -m robustness.v2.run_semantic_attribute --candidate route-only --value-mode canonical --public-control --unseen-control
+```
+
+The saved V2.23 runtime checks report zero route-model loads and zero inferences on both
+Official200 and Unseen800. The submission entry point remains independent of this module.
+
 Examples:
 
 | Catalogue fact | Development family | Holdout family |
@@ -108,3 +125,54 @@ python -m robustness.v2.run_semantic_attribute --candidate semantic-feature --pu
 
 The development result may inform implementation, but the target-disjoint 800-session
 semantic holdout remains sealed until the candidate and threshold are frozen.
+
+## Node-level protocol
+
+The semantic development and holdout sets are frozen by their versioned SHA-256 values in
+[`sets/manifest.json`](sets/manifest.json). Do not rebuild them or inspect the holdout to
+choose a model threshold. Every V2 candidate is evaluated in this order:
+
+1. run the canonical replay control;
+2. report span and family routing results;
+3. report canonical retrieval recall at k;
+4. report equivalence-verifier precision against the negative bank;
+5. run end-to-end development evaluation;
+6. run canonical non-interference on Official200 and Unseen800; and only then
+7. open the target-disjoint semantic holdout once for final evaluation.
+
+Every fine-tuned encoder must be compared against the matching frozen-pretrained encoder
+on the same dictionary, rows, query construction, metrics, confidence gate, and integration
+weight. Record the absolute delta. Fine-tuning is rejected unless it beats this baseline on
+development and retains the benefit on the sealed holdout.
+
+`sets/canonical_verification_negatives.jsonl` contains deterministic catalogue-grounded
+non-equivalent candidates. It includes same-family and shared-head hard negatives, plus
+unrelated controls. It contains no generated paraphrase and must be paired only with
+verified synonym positives.
+
+Build the negative bank reproducibly:
+
+```bash
+python -m robustness.v2.build_canonical_negatives
+```
+
+Node predictions use a deliberately small JSONL interchange format:
+
+```json
+{"sample_id":"semantic_attribute_development_200_0001","family":"material","spans":["made from animal hide"],"candidates":["leather","suede"]}
+```
+
+Score the isolated resolver before end-to-end ranking:
+
+```bash
+python -m robustness.v2.evaluate_semantic_nodes \
+  --dataset robustness/v2/sets/semantic_attribute_development_200.jsonl \
+  --predictions results/my_resolver_predictions.jsonl --k 5
+```
+
+## Disabled integration harness
+
+`semantic_evidence_tier.py` is an analysis-only score-combination helper. Its default
+weight is exactly `0.0`, making it a strict identity transformation. The submission agent
+does not import it. A non-zero weight can be considered only in a dedicated integration
+experiment that passes every node-level gate and both canonical non-interference suites.

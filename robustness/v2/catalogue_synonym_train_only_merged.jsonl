@@ -1,0 +1,171 @@
+{"canonical": "1 count", "synonyms": ["one"], "sources": {"one": ["groq_verified"]}, "split": "train"}
+{"canonical": "1 year", "synonyms": ["12 months"], "sources": {"12 months": ["groq_verified"]}, "split": "train"}
+{"canonical": "100 ethylene vinyl acetate", "synonyms": ["100 eva"], "sources": {"100 eva": ["overlap_augmentation"]}, "split": "train"}
+{"canonical": "100 man made", "synonyms": ["fully synthetic"], "sources": {"fully synthetic": ["groq_verified"]}, "split": "train"}
+{"canonical": "100 synthetic", "synonyms": ["entirely synthetic"], "sources": {"entirely synthetic": ["overlap_augmentation"]}, "split": "train"}
+{"canonical": "100 synthetic nylon", "synonyms": ["entirely synthetic nylon"], "sources": {"entirely synthetic nylon": ["overlap_augmentation"]}, "split": "train"}
+{"canonical": "10k yellow gold", "synonyms": ["10 karat yellow gold"], "sources": {"10 karat yellow gold": ["overlap_augmentation"]}, "split": "train"}
+{"canonical": "10mm", "synonyms": ["10 millimeters", "10 mm"], "sources": {"10 millimeters": ["groq_verified"], "10 mm": ["groq_verified"]}, "split": "train"}
+{"canonical": "13 liters", "synonyms": ["13l volume"], "sources": {"13l volume": ["groq_verified"]}, "split": "train"}
+{"canonical": "14k gold", "synonyms": ["14 karat gold"], "sources": {"14 karat gold": ["overlap_augmentation"]}, "split": "train"}
+{"canonical": "14k yellow gold", "synonyms": ["14 karat yellow gold"], "sources": {"14 karat yellow gold": ["overlap_augmentation"]}, "split": "train"}
+{"canonical": "30 liters", "synonyms": ["30l capacity"], "sources": {"30l capacity": ["groq_verified"]}, "split": "train"}
+{"canonical": "35 liters", "synonyms": ["35l capacity"], "sources": {"35l capacity": ["groq_verified"]}, "split": "train"}
+{"canonical": "36 liters", "synonyms": ["36l capacity"], "sources": {"36l capacity": ["groq_verified"]}, "split": "train"}
+{"canonical": "3x large", "synonyms": ["xxxl"], "sources": {"xxxl": ["groq_verified"]}, "split": "train"}
+{"canonical": "all season", "synonyms": ["year round"], "sources": {"year round": ["groq_verified"]}, "split": "train"}
+{"canonical": "alphabets", "synonyms": ["letters"], "sources": {"letters": ["groq_verified"]}, "split": "evaluation"}
+{"canonical": "ambidextrous", "synonyms": ["two handed"], "sources": {"two handed": ["groq_verified"]}, "split": "train"}
+{"canonical": "american", "synonyms": ["us"], "sources": {"us": ["groq_verified"]}, "split": "train"}
+{"canonical": "athletic sneaker", "synonyms": ["sport shoe"], "sources": {"sport shoe": ["groq_verified"]}, "split": "evaluation"}
+{"canonical": "authentic", "synonyms": ["genuine"], "sources": {"genuine": ["groq_verified"]}, "split": "train"}
+{"canonical": "backpack", "synonyms": ["back pack", "rucksack"], "sources": {"back pack": ["groq_verified"], "rucksack": ["groq_verified"]}, "split": "train"}
+{"canonical": "blend", "synonyms": ["mix"], "sources": {"mix": ["groq_verified"]}, "split": "train"}
+{"canonical": "bras closure", "synonyms": ["bra clasp", "bra fastening"], "sources": {"bra clasp": ["groq_verified"], "bra fastening": ["groq_verified"]}, "split": "train"}
+{"canonical": "breathability", "synonyms": ["air permeability"], "sources": {"air permeability": ["groq_verified"]}, "split": "train"}
+{"canonical": "breathable", "synonyms": ["air permeable"], "sources": {"air permeable": ["groq_verified"]}, "split": "train"}
+{"canonical": "breathable fabric", "synonyms": ["air permeable textile"], "sources": {"air permeable textile": ["groq_verified"]}, "split": "train"}
+{"canonical": "buckle closure", "synonyms": ["buckle fastening"], "sources": {"buckle fastening": ["overlap_augmentation"]}, "split": "train"}
+{"canonical": "button cuffs", "synonyms": ["cuff buttons"], "sources": {"cuff buttons": ["groq_verified"]}, "split": "train"}
+{"canonical": "car", "synonyms": ["automobile"], "sources": {"automobile": ["groq_verified"]}, "split": "train"}
+{"canonical": "celebration", "synonyms": ["festivity"], "sources": {"festivity": ["groq_verified"]}, "split": "train"}
+{"canonical": "checkered", "synonyms": ["checked"], "sources": {"checked": ["groq_verified"]}, "split": "train"}
+{"canonical": "christmas", "synonyms": ["xmas"], "sources": {"xmas": ["groq_verified"]}, "split": "train"}
+{"canonical": "clear", "synonyms": ["transparent"], "sources": {"transparent": ["groq_verified"]}, "split": "train"}
+{"canonical": "clicker closure", "synonyms": ["click closure"], "sources": {"click closure": ["groq_verified"]}, "split": "train"}
+{"canonical": "closure", "synonyms": ["fastening"], "sources": {"fastening": ["groq_verified"]}, "split": "train"}
+{"canonical": "closure type lace up", "synonyms": ["laced closure"], "sources": {"laced closure": ["groq_verified"]}, "split": "train"}
+{"canonical": "collarless", "synonyms": ["no collar"], "sources": {"no collar": ["groq_verified"]}, "split": "train"}
+{"canonical": "colors may vary", "synonyms": ["color variation", "variable color"], "sources": {"color variation": ["groq_verified"], "variable color": ["groq_verified"]}, "split": "train"}
+{"canonical": "compact", "synonyms": ["mini"], "sources": {"mini": ["groq_verified"]}, "split": "evaluation"}
+{"canonical": "compact design", "synonyms": ["small footprint"], "sources": {"small footprint": ["groq_verified"]}, "split": "train"}
+{"canonical": "contrast midsole", "synonyms": ["contrasting sole"], "sources": {"contrasting sole": ["groq_verified"]}, "split": "train"}
+{"canonical": "costumes", "synonyms": ["costume wear"], "sources": {"costume wear": ["groq_verified"]}, "split": "train"}
+{"canonical": "cubic zirconia", "synonyms": ["cz"], "sources": {"cz": ["broad_semantic", "overlap_augmentation"]}, "split": "train"}
+{"canonical": "do not iron", "synonyms": ["no ironing"], "sources": {"no ironing": ["groq_verified"]}, "split": "train"}
+{"canonical": "durable", "synonyms": ["long lasting"], "sources": {"long lasting": ["groq_verified"]}, "split": "train"}
+{"canonical": "elastic", "synonyms": ["elasticated"], "sources": {"elasticated": ["groq_verified"]}, "split": "train"}
+{"canonical": "elegant", "synonyms": ["refined", "sophisticated"], "sources": {"refined": ["groq_verified"], "sophisticated": ["groq_verified"]}, "split": "train"}
+{"canonical": "embroidered", "synonyms": ["embroidery"], "sources": {"embroidery": ["groq_verified"]}, "split": "evaluation"}
+{"canonical": "fall", "synonyms": ["autumn"], "sources": {"autumn": ["groq_verified"]}, "split": "train"}
+{"canonical": "fall winter 2013", "synonyms": ["aw13"], "sources": {"aw13": ["groq_verified"]}, "split": "train"}
+{"canonical": "fast shipping", "synonyms": ["quick delivery"], "sources": {"quick delivery": ["groq_verified"]}, "split": "train"}
+{"canonical": "faux fur", "synonyms": ["imitation fur"], "sources": {"imitation fur": ["overlap_augmentation"]}, "split": "train"}
+{"canonical": "faux leather", "synonyms": ["imitation leather"], "sources": {"imitation leather": ["overlap_augmentation"]}, "split": "train"}
+{"canonical": "faux suede", "synonyms": ["imitation suede"], "sources": {"imitation suede": ["overlap_augmentation"]}, "split": "train"}
+{"canonical": "fiberglass", "synonyms": ["glass fiber"], "sources": {"glass fiber": ["groq_verified"]}, "split": "train"}
+{"canonical": "fights odors", "synonyms": ["anti odor"], "sources": {"anti odor": ["groq_verified"]}, "split": "train"}
+{"canonical": "flame resistant", "synonyms": ["fire retardant"], "sources": {"fire retardant": ["groq_verified"]}, "split": "train"}
+{"canonical": "flats", "synonyms": ["flat shoes"], "sources": {"flat shoes": ["groq_verified"]}, "split": "train"}
+{"canonical": "flexible", "synonyms": ["bendable", "pliable"], "sources": {"bendable": ["groq_verified"], "pliable": ["groq_verified"]}, "split": "train"}
+{"canonical": "flower", "synonyms": ["bloom"], "sources": {"bloom": ["groq_verified"]}, "split": "train"}
+{"canonical": "form fitting", "synonyms": ["bodycon"], "sources": {"bodycon": ["groq_verified"]}, "split": "train"}
+{"canonical": "freestanding", "synonyms": ["standalone"], "sources": {"standalone": ["groq_verified"]}, "split": "train"}
+{"canonical": "fully lined", "synonyms": ["complete lining"], "sources": {"complete lining": ["groq_verified"]}, "split": "train"}
+{"canonical": "gemstone", "synonyms": ["gem"], "sources": {"gem": ["groq_verified"]}, "split": "train"}
+{"canonical": "gender mens", "synonyms": ["for men"], "sources": {"for men": ["groq_verified"]}, "split": "train"}
+{"canonical": "glossy", "synonyms": ["shiny"], "sources": {"shiny": ["groq_verified"]}, "split": "evaluation"}
+{"canonical": "great gift", "synonyms": ["excellent present"], "sources": {"excellent present": ["groq_verified"]}, "split": "train"}
+{"canonical": "heather", "synonyms": ["marled"], "sources": {"marled": ["groq_verified"]}, "split": "train"}
+{"canonical": "hooded", "synonyms": ["with a hood"], "sources": {"with a hood": ["broad_semantic", "overlap_augmentation"]}, "split": "train"}
+{"canonical": "hoodie", "synonyms": ["hooded sweatshirt"], "sources": {"hooded sweatshirt": ["groq_verified"]}, "split": "train"}
+{"canonical": "hook and loop", "synonyms": ["touch fastener"], "sources": {"touch fastener": ["broad_semantic", "overlap_augmentation"]}, "split": "train"}
+{"canonical": "hook and loop closure", "synonyms": ["touch fastener closure"], "sources": {"touch fastener closure": ["broad_semantic", "overlap_augmentation"]}, "split": "train"}
+{"canonical": "hypoallergenic", "synonyms": ["allergy friendly", "non allergenic"], "sources": {"allergy friendly": ["groq_verified"], "non allergenic": ["groq_verified"]}, "split": "train"}
+{"canonical": "independence day", "synonyms": ["4th of july"], "sources": {"4th of july": ["groq_verified"]}, "split": "train"}
+{"canonical": "infant diaper", "synonyms": ["baby nappy"], "sources": {"baby nappy": ["groq_verified"]}, "split": "train"}
+{"canonical": "inside zip", "synonyms": ["internal zipper"], "sources": {"internal zipper": ["groq_verified"]}, "split": "train"}
+{"canonical": "inside zipper", "synonyms": ["zippered interior"], "sources": {"zippered interior": ["groq_verified"]}, "split": "train"}
+{"canonical": "item", "synonyms": ["article", "product"], "sources": {"article": ["groq_verified"], "product": ["groq_verified"]}, "split": "train"}
+{"canonical": "jewelry", "synonyms": ["jewellery"], "sources": {"jewellery": ["external_train_only"]}, "split": "train"}
+{"canonical": "juniors sizing", "synonyms": ["junior size"], "sources": {"junior size": ["groq_verified"]}, "split": "train"}
+{"canonical": "kid adult", "synonyms": ["children and adults"], "sources": {"children and adults": ["groq_verified"]}, "split": "train"}
+{"canonical": "knit fabric", "synonyms": ["knitted material"], "sources": {"knitted material": ["groq_verified"]}, "split": "train"}
+{"canonical": "laptop", "synonyms": ["notebook computer"], "sources": {"notebook computer": ["groq_verified"]}, "split": "evaluation"}
+{"canonical": "large", "synonyms": ["big"], "sources": {"big": ["groq_verified"]}, "split": "train"}
+{"canonical": "large x large", "synonyms": ["xl xl"], "sources": {"xl xl": ["groq_verified"]}, "split": "train"}
+{"canonical": "lifetime guarantee", "synonyms": ["life warranty"], "sources": {"life warranty": ["groq_verified"]}, "split": "train"}
+{"canonical": "lightweight durable", "synonyms": ["featherweight and sturdy"], "sources": {"featherweight and sturdy": ["groq_verified"]}, "split": "train"}
+{"canonical": "lightweight flexible", "synonyms": ["featherweight and pliable"], "sources": {"featherweight and pliable": ["groq_verified"]}, "split": "train"}
+{"canonical": "lightweight sole", "synonyms": ["featherweight outsole"], "sources": {"featherweight outsole": ["groq_verified"]}, "split": "train"}
+{"canonical": "lockable", "synonyms": ["secureable"], "sources": {"secureable": ["groq_verified"]}, "split": "train"}
+{"canonical": "low temperature for washing", "synonyms": ["cold wash"], "sources": {"cold wash": ["groq_verified"]}, "split": "train"}
+{"canonical": "lugged outsole", "synonyms": ["treaded sole"], "sources": {"treaded sole": ["groq_verified"]}, "split": "train"}
+{"canonical": "manmade material", "synonyms": ["artificial material"], "sources": {"artificial material": ["groq_verified"]}, "split": "train"}
+{"canonical": "material stainless steel", "synonyms": ["ss material"], "sources": {"ss material": ["groq_verified"]}, "split": "train"}
+{"canonical": "material stretchy micro fiber", "synonyms": ["material microfiber", "material microfibre"], "sources": {"material microfiber": ["groq_verified"], "material microfibre": ["groq_verified"]}, "split": "train"}
+{"canonical": "material textile", "synonyms": ["fabric material"], "sources": {"fabric material": ["groq_verified"]}, "split": "train"}
+{"canonical": "md sole", "synonyms": ["midsole"], "sources": {"midsole": ["groq_verified"]}, "split": "train"}
+{"canonical": "medium", "synonyms": ["mid size"], "sources": {"mid size": ["groq_verified"]}, "split": "train"}
+{"canonical": "mens shoes", "synonyms": ["men s footwear"], "sources": {"men s footwear": ["groq_verified"]}, "split": "train"}
+{"canonical": "michael kors", "synonyms": ["mk"], "sources": {"mk": ["groq_verified"]}, "split": "train"}
+{"canonical": "micro fleece", "synonyms": ["microfleece"], "sources": {"microfleece": ["groq_verified"]}, "split": "train"}
+{"canonical": "microfiber", "synonyms": ["microfibre"], "sources": {"microfibre": ["groq_verified"]}, "split": "train"}
+{"canonical": "mother of pearl", "synonyms": ["nacre"], "sources": {"nacre": ["groq_verified"]}, "split": "train"}
+{"canonical": "movie", "synonyms": ["film"], "sources": {"film": ["groq_verified"]}, "split": "train"}
+{"canonical": "multicolor", "synonyms": ["multi colour"], "sources": {"multi colour": ["groq_verified"]}, "split": "train"}
+{"canonical": "no tie laces", "synonyms": ["laceless"], "sources": {"laceless": ["groq_verified"]}, "split": "train"}
+{"canonical": "not polarized", "synonyms": ["without polarization"], "sources": {"without polarization": ["groq_verified"]}, "split": "train"}
+{"canonical": "occasion", "synonyms": ["event"], "sources": {"event": ["groq_verified"]}, "split": "train"}
+{"canonical": "oval", "synonyms": ["elliptical"], "sources": {"elliptical": ["groq_verified"]}, "split": "train"}
+{"canonical": "pants", "synonyms": ["trousers"], "sources": {"trousers": ["groq_verified"]}, "split": "evaluation"}
+{"canonical": "polyurethane", "synonyms": ["pu"], "sources": {"pu": ["broad_semantic", "groq_verified", "overlap_augmentation"]}, "split": "train"}
+{"canonical": "pullover", "synonyms": ["pull over"], "sources": {"pull over": ["groq_verified"]}, "split": "train"}
+{"canonical": "quickly", "synonyms": ["fast"], "sources": {"fast": ["groq_verified"]}, "split": "train"}
+{"canonical": "radically lightweight", "synonyms": ["extremely light"], "sources": {"extremely light": ["groq_verified"]}, "split": "train"}
+{"canonical": "removable", "synonyms": ["detachable"], "sources": {"detachable": ["groq_verified"]}, "split": "train"}
+{"canonical": "reversible", "synonyms": ["double sided"], "sources": {"double sided": ["groq_verified"]}, "split": "train"}
+{"canonical": "rhinestone", "synonyms": ["rhinestones"], "sources": {"rhinestones": ["groq_verified"]}, "split": "train"}
+{"canonical": "round", "synonyms": ["circular"], "sources": {"circular": ["groq_verified"]}, "split": "train"}
+{"canonical": "rx able yes", "synonyms": ["prescription ready"], "sources": {"prescription ready": ["groq_verified"]}, "split": "train"}
+{"canonical": "seamless", "synonyms": ["without seams"], "sources": {"without seams": ["broad_semantic", "overlap_augmentation"]}, "split": "evaluation"}
+{"canonical": "sewing", "synonyms": ["stitching"], "sources": {"stitching": ["groq_verified"]}, "split": "train"}
+{"canonical": "shape", "synonyms": ["form", "silhouette"], "sources": {"form": ["groq_verified"], "silhouette": ["groq_verified"]}, "split": "train"}
+{"canonical": "shirts closure", "synonyms": ["shirt fastening"], "sources": {"shirt fastening": ["groq_verified"]}, "split": "train"}
+{"canonical": "shorts", "synonyms": ["short pants"], "sources": {"short pants": ["groq_verified"]}, "split": "train"}
+{"canonical": "shrink resistant", "synonyms": ["resists shrinking"], "sources": {"resists shrinking": ["groq_verified"]}, "split": "train"}
+{"canonical": "silver", "synonyms": ["argent"], "sources": {"argent": ["groq_verified"]}, "split": "train"}
+{"canonical": "sleeveless", "synonyms": ["without sleeves"], "sources": {"without sleeves": ["broad_semantic", "overlap_augmentation"]}, "split": "train"}
+{"canonical": "small medium large", "synonyms": ["s m l"], "sources": {"s m l": ["groq_verified"]}, "split": "train"}
+{"canonical": "smartphone", "synonyms": ["cell phone", "mobile phone"], "sources": {"cell phone": ["groq_verified"], "mobile phone": ["groq_verified"]}, "split": "train"}
+{"canonical": "snap closure", "synonyms": ["press stud closure"], "sources": {"press stud closure": ["broad_semantic", "overlap_augmentation"]}, "split": "train"}
+{"canonical": "snaps", "synonyms": ["press studs"], "sources": {"press studs": ["groq_verified"]}, "split": "train"}
+{"canonical": "sneaker", "synonyms": ["trainer"], "sources": {"trainer": ["groq_verified"]}, "split": "train"}
+{"canonical": "soft fabric", "synonyms": ["plush textile"], "sources": {"plush textile": ["groq_verified"]}, "split": "train"}
+{"canonical": "solid sterling silver", "synonyms": ["solid 925 silver"], "sources": {"solid 925 silver": ["overlap_augmentation"]}, "split": "train"}
+{"canonical": "spring summer 2014", "synonyms": ["ss14"], "sources": {"ss14": ["groq_verified"]}, "split": "train"}
+{"canonical": "standard", "synonyms": ["normal"], "sources": {"normal": ["groq_verified"]}, "split": "evaluation"}
+{"canonical": "sterling silver", "synonyms": ["925 silver"], "sources": {"925 silver": ["overlap_augmentation"]}, "split": "train"}
+{"canonical": "straight", "synonyms": ["linear"], "sources": {"linear": ["groq_verified"]}, "split": "train"}
+{"canonical": "straps closure", "synonyms": ["strap fastening"], "sources": {"strap fastening": ["groq_verified"]}, "split": "train"}
+{"canonical": "sunglasses", "synonyms": ["shades"], "sources": {"shades": ["groq_verified"]}, "split": "train"}
+{"canonical": "super lightweight", "synonyms": ["featherweight"], "sources": {"featherweight": ["groq_verified"]}, "split": "evaluation"}
+{"canonical": "tagless", "synonyms": ["no tag"], "sources": {"no tag": ["groq_verified"]}, "split": "train"}
+{"canonical": "teen girls", "synonyms": ["adolescent females"], "sources": {"adolescent females": ["groq_verified"]}, "split": "train"}
+{"canonical": "thermoplastic polyurethane", "synonyms": ["tpu"], "sources": {"tpu": ["groq_verified"]}, "split": "train"}
+{"canonical": "training", "synonyms": ["workout"], "sources": {"workout": ["groq_verified"]}, "split": "train"}
+{"canonical": "true to size", "synonyms": ["standard sizing"], "sources": {"standard sizing": ["groq_verified"]}, "split": "train"}
+{"canonical": "true to the size", "synonyms": ["accurate sizing"], "sources": {"accurate sizing": ["groq_verified"]}, "split": "train"}
+{"canonical": "turn lock closure", "synonyms": ["twist lock closure"], "sources": {"twist lock closure": ["overlap_augmentation"]}, "split": "train"}
+{"canonical": "turtleneck", "synonyms": ["polo neck"], "sources": {"polo neck": ["broad_semantic", "overlap_augmentation"]}, "split": "train"}
+{"canonical": "twill", "synonyms": ["diagonal weave"], "sources": {"diagonal weave": ["groq_verified"]}, "split": "train"}
+{"canonical": "two tone", "synonyms": ["bi color"], "sources": {"bi color": ["groq_verified"]}, "split": "train"}
+{"canonical": "umbrella", "synonyms": ["parasol"], "sources": {"parasol": ["groq_verified"]}, "split": "train"}
+{"canonical": "united kingdom", "synonyms": ["uk"], "sources": {"uk": ["groq_verified"]}, "split": "train"}
+{"canonical": "unlined", "synonyms": ["no lining"], "sources": {"no lining": ["groq_verified"]}, "split": "train"}
+{"canonical": "uv protection", "synonyms": ["uv blocking"], "sources": {"uv blocking": ["overlap_augmentation"]}, "split": "train"}
+{"canonical": "versatile", "synonyms": ["adaptable"], "sources": {"adaptable": ["groq_verified"]}, "split": "train"}
+{"canonical": "very good", "synonyms": ["excellent"], "sources": {"excellent": ["groq_verified"]}, "split": "evaluation"}
+{"canonical": "wallet", "synonyms": ["billfold"], "sources": {"billfold": ["groq_verified"]}, "split": "train"}
+{"canonical": "watch", "synonyms": ["timepiece"], "sources": {"timepiece": ["groq_verified"]}, "split": "train"}
+{"canonical": "watches", "synonyms": ["timepieces"], "sources": {"timepieces": ["groq_verified"]}, "split": "train"}
+{"canonical": "waterproof", "synonyms": ["watertight"], "sources": {"watertight": ["broad_semantic", "overlap_augmentation"]}, "split": "train"}
+{"canonical": "wavy", "synonyms": ["undulating"], "sources": {"undulating": ["groq_verified"]}, "split": "evaluation"}
+{"canonical": "wicks moisture", "synonyms": ["sweat wicking"], "sources": {"sweat wicking": ["groq_verified"]}, "split": "train"}
+{"canonical": "wireless", "synonyms": ["cordless"], "sources": {"cordless": ["groq_verified"]}, "split": "train"}
+{"canonical": "womens mens", "synonyms": ["men s and women s"], "sources": {"men s and women s": ["groq_verified"]}, "split": "evaluation"}
+{"canonical": "wood", "synonyms": ["timber"], "sources": {"timber": ["groq_verified"]}, "split": "train"}
+{"canonical": "woven", "synonyms": ["interlaced"], "sources": {"interlaced": ["groq_verified"]}, "split": "train"}
+{"canonical": "x large", "synonyms": ["xl"], "sources": {"xl": ["groq_verified"]}, "split": "train"}
+{"canonical": "x small", "synonyms": ["xs"], "sources": {"xs": ["groq_verified"]}, "split": "train"}
+{"canonical": "xx large", "synonyms": ["xxl"], "sources": {"xxl": ["groq_verified"]}, "split": "train"}

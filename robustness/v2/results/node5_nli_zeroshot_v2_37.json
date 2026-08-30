@@ -1,0 +1,16 @@
+{
+  "experiment": "V2.37 zero-shot NLI entailment for Node 5",
+  "model": "cross-encoder/nli-deberta-v3-small",
+  "training": "none (zero-shot)",
+  "rows": 134,
+  "positives": 40,
+  "prior_finetuned_auroc": {
+    "V2.05_frozen": 0.7758,
+    "V2.30": 0.784,
+    "V2.31": 0.7782
+  },
+  "entail_a_to_b": 0.9726,
+  "entail_b_to_a": 0.8279,
+  "entail_both_min": 0.9585,
+  "entail_max": 0.8801
+}

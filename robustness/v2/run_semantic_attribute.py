@@ -35,6 +35,7 @@ from evaluator.local_evaluator import (  # noqa: E402
 )
 from submission.agent import Agent, raw_toks  # noqa: E402
 from robustness.v2.semantic_grounding import SemanticFeatureGrounder  # noqa: E402
+from robustness.v2.route_node import RouteAndSpanV2Agent, RouteOnlyV2Agent  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -233,6 +234,10 @@ def evaluate_v2(agent: Agent, samples: list[dict], catalog_ids: set[str],
 def make_agent(candidate: str, catalog: Path, development_rows: list[dict]) -> Agent:
     if candidate == "literal":
         return Agent(catalog)
+    if candidate == "route-only":
+        return RouteOnlyV2Agent(catalog)
+    if candidate == "route-span":
+        return RouteAndSpanV2Agent(catalog)
     if candidate == "development-lexicon":
         return ExactAbsentLexiconAgent(catalog, development_lexicon(development_rows))
     if candidate == "semantic-feature":
@@ -244,11 +249,13 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="V2 semantic-attribute robustness runner")
     parser.add_argument("--dataset", type=Path,
                         default=ROOT / "robustness" / "v2" / "sets" / "semantic_attribute_development_200.jsonl")
-    parser.add_argument("--candidate", choices=("literal", "development-lexicon", "semantic-feature"), default="literal")
+    parser.add_argument("--candidate", choices=("literal", "route-only", "route-span", "development-lexicon", "semantic-feature"), default="literal")
     parser.add_argument("--value-mode", choices=("paraphrase", "canonical"), default="paraphrase",
                         help="Use semantic rewrites or replay canonical values on the same rows.")
     parser.add_argument("--public-control", action="store_true",
                         help="also score the candidate on official public data to verify the semantic gate")
+    parser.add_argument("--unseen-control", action="store_true",
+                        help="also score the candidate on the frozen same-population Unseen800 control")
     parser.add_argument("--output", type=Path, default=None)
     args = parser.parse_args()
 
@@ -267,6 +274,8 @@ def main() -> None:
         result["semantic_gate_after_shift"] = dict(agent.semantic_gate)
     if isinstance(agent, SemanticFeatureAgent):
         result["semantic_grounding_after_shift"] = dict(agent.grounder.calls)
+    if isinstance(agent, RouteOnlyV2Agent):
+        result["route_node_after_shift"] = agent.route_node.stats()
     if args.public_control:
         public_agent = make_agent(args.candidate, catalog, development_rows)
         public = evaluate(public_agent, load_jsonl(ROOT / "data" / "public_set.jsonl"), ids, categories, products)
@@ -275,6 +284,15 @@ def main() -> None:
             result["semantic_gate_after_public"] = dict(public_agent.semantic_gate)
         if isinstance(public_agent, SemanticFeatureAgent):
             result["semantic_grounding_after_public"] = dict(public_agent.grounder.calls)
+        if isinstance(public_agent, RouteOnlyV2Agent):
+            result["route_node_after_public"] = public_agent.route_node.stats()
+    if args.unseen_control:
+        unseen_path = ROOT / "robustness" / "optuna_v2_sets" / "population_shift_01_800.jsonl"
+        unseen_agent = make_agent(args.candidate, catalog, development_rows)
+        unseen = evaluate(unseen_agent, load_jsonl(unseen_path), ids, categories, products)
+        result["unseen800"] = compact(unseen)
+        if isinstance(unseen_agent, RouteOnlyV2Agent):
+            result["route_node_after_unseen800"] = unseen_agent.route_node.stats()
     text = json.dumps(result, indent=2) + "\n"
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)

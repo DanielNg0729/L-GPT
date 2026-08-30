@@ -1,0 +1,48 @@
+{
+  "experiment": "V2.33 properly-trained Node 4 encoder",
+  "optimizer_steps": 600,
+  "previous_steps_approx": 30,
+  "objective": "in-batch negatives (MNRL-style softmax over batch similarity)",
+  "epochs": 60,
+  "batch": 16,
+  "lr": 2e-05,
+  "train_pairs": 173,
+  "benchmark_atoms": 712,
+  "benchmark_distinct_concepts": 67,
+  "frozen": {
+    "weighted": {
+      "R@1": 0.059,
+      "R@3": 0.059,
+      "R@5": 0.1334,
+      "R@10": 0.1334,
+      "MRR": 0.088,
+      "n": 712
+    },
+    "per_concept": {
+      "R@1": 0.0448,
+      "R@3": 0.0448,
+      "R@5": 0.1194,
+      "R@10": 0.1194,
+      "MRR": 0.0761,
+      "n": 67
+    }
+  },
+  "fine_tuned": {
+    "weighted": {
+      "R@1": 0.0,
+      "R@3": 0.1334,
+      "R@5": 0.1334,
+      "R@10": 0.1756,
+      "MRR": 0.0717,
+      "n": 712
+    },
+    "per_concept": {
+      "R@1": 0.0,
+      "R@3": 0.1194,
+      "R@5": 0.1194,
+      "R@10": 0.194,
+      "MRR": 0.0762,
+      "n": 67
+    }
+  }
+}

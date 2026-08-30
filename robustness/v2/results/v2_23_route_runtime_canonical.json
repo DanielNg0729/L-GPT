@@ -1,0 +1,39 @@
+{
+  "candidate": "route-only",
+  "dataset": "D:\\Coding\\Models\\TiktokTechJam\\robustness\\v2\\sets\\semantic_attribute_development_200.jsonl",
+  "value_mode": "canonical",
+  "semantic_shift": {
+    "sample_count": 200,
+    "hit_rate_at_10": 0.85,
+    "mrr": 0.8275,
+    "mttc": 5.625,
+    "efficiency": 0.5375,
+    "recommended_technical_score": 0.78075
+  },
+  "route_node_after_shift": {
+    "enabled": true,
+    "model_dir": "D:\\Coding\\Models\\TiktokTechJam\\.v2_model_cache\\shared_sixway_phrase_augmented_cuda",
+    "model_loads": 0,
+    "inferences": 0,
+    "failures": 0,
+    "actions": {},
+    "disabled_reason": null
+  },
+  "official200": {
+    "sample_count": 200,
+    "hit_rate_at_10": 0.995,
+    "mrr": 0.995,
+    "mttc": 2.32,
+    "efficiency": 0.868,
+    "recommended_technical_score": 0.9696
+  },
+  "route_node_after_public": {
+    "enabled": true,
+    "model_dir": "D:\\Coding\\Models\\TiktokTechJam\\.v2_model_cache\\shared_sixway_phrase_augmented_cuda",
+    "model_loads": 0,
+    "inferences": 0,
+    "failures": 0,
+    "actions": {},
+    "disabled_reason": null
+  }
+}

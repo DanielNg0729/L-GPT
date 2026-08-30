@@ -1,0 +1,116 @@
+{
+  "experiment": "V2.11 local TF-IDF route-family classifier",
+  "training_rows": 1200,
+  "heldout_rows": 1200,
+  "heldout_accuracy": 0.509167,
+  "labels": [
+    "boundary",
+    "constraint_reply",
+    "no_preference",
+    "nudge",
+    "opening",
+    "override"
+  ],
+  "confusion_matrix": [
+    [
+      0,
+      0,
+      0,
+      0,
+      200,
+      0
+    ],
+    [
+      0,
+      11,
+      0,
+      0,
+      189,
+      0
+    ],
+    [
+      0,
+      0,
+      200,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      200,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      200,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      200,
+      0
+    ]
+  ],
+  "classification_report": {
+    "boundary": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 200.0
+    },
+    "constraint_reply": {
+      "precision": 1.0,
+      "recall": 0.055,
+      "f1-score": 0.10426540284360189,
+      "support": 200.0
+    },
+    "no_preference": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 200.0
+    },
+    "nudge": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 200.0
+    },
+    "opening": {
+      "precision": 0.2534854245880862,
+      "recall": 1.0,
+      "f1-score": 0.4044489383215369,
+      "support": 200.0
+    },
+    "override": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 200.0
+    },
+    "accuracy": 0.5091666666666667,
+    "macro avg": {
+      "precision": 0.542247570764681,
+      "recall": 0.5091666666666667,
+      "f1-score": 0.41811905686085643,
+      "support": 1200.0
+    },
+    "weighted avg": {
+      "precision": 0.542247570764681,
+      "recall": 0.5091666666666667,
+      "f1-score": 0.4181190568608565,
+      "support": 1200.0
+    }
+  },
+  "decision_rule": "Do not integrate unless it improves over the conservative rule fallback on a broader, independently authored format set and preserves exact-recogniser-only canonical traffic."
+}
