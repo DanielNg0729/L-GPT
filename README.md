@@ -8,121 +8,146 @@ interface.
 
 The shipped path is offline, deterministic, and costs $0.00 per evaluation.
 
+## What this task actually is
+
+The released simulator builds every customer utterance from the target product's own
+catalogue record: `intent_card()` reads `features` and `details`, regexes material and
+colour out of the product's searchable text, and formats price. Every constraint the
+customer speaks is therefore a **verbatim substring of the target document**.
+
+That makes the benchmark a *string-provenance recovery* problem rather than a semantic
+search problem, and it is worth saying plainly rather than dressing up: exact phrase
+matching against the catalogue is not a trick here, it is the tool that fits the generative
+process. A dense retriever is solving a harder problem than the one being scored.
+
+We took the hackathon's intent to be the harder problem, so the system is built as a
+**hybrid**: cheap exact mechanisms run first because they are correct and free when they
+apply, and learned components take over when the cheap ones cannot see the answer. To find
+out whether that actually generalises, we generated our own paraphrase corpora and measured
+against them, rather than assuming that passing a ten-turn templated harness implies
+handling natural language.
+
 ## Verified results
+
+Scored through the organizer's own `evaluator/local_evaluator.py`, unmodified.
 
 | Evaluation | Sessions | HitRate@10 | MRR | MTTC | TechnicalScore |
 |---|---:|---:|---:|---:|---:|
-| Official public development set | 200 | 0.9950 | 0.9950 | 2.3200 | **0.969600** |
-| Tune800 fixed selection fold | 800 | 0.9775 | 0.976875 | 2.94875 | **0.942837** |
-| Unseen4x800 independent mean | 4 x 800 | 0.983438 | 0.981563 | 2.81469 | **0.949894** |
-| Published weak BM25 baseline | 200 | 0.1250 | 0.068034 | 9.8100 | 0.106710 |
+| Official public development set | 200 | 0.9950 | 0.9950 | 2.295 | **0.970100** |
+| Organizer-proxy population | 800 | — | — | — | **0.952788** |
+| Review-weighted unseen population | 800 | 0.9788 | 0.9754 | 2.844 | **0.945125** |
+| Uniform-target population | 800 | — | — | — | **0.882763** |
+| Inverse-popularity population | 800 | — | — | — | **0.866062** |
+| Published weak BM25 baseline | 200 | 0.1250 | 0.0680 | 9.8100 | 0.106710 |
 
-Trial 38 was frozen before the four independent folds were evaluated. It preserved the
-public score and improved the untouched-fold mean by `+0.001213` over the previous shipped
-configuration. The gain is small and is reported as a candidate-selection signal, not as a
-private-score claim. See the [independent validation report](docs/validation/independent_validation.md).
+Robustness under wording change, on suites we generated ourselves. These are
+characterisation, not leaderboard claims — the organizer confirmed the released simulator
+does not paraphrase.
 
-## Final shipped pipeline
+| Perturbation | Deterministic only | Shipped hybrid | Recovered |
+|---|---:|---:|---:|
+| Template paraphrase (wrapper reworded) | 0.666810 | **0.919540** | +0.252730 |
+| Attribute paraphrase (values reworded) | 0.847103 | 0.847103 / **0.863969** with resolver | +0.016866 |
+| Both at once | 0.604585 | **0.810251** | +0.205666 |
 
-The simulator reveals constraints derived from the target product's catalogue record. The
-agent therefore treats the task as grounded provenance recovery rather than general semantic
-search. The following is the complete execution path of `submission/agent.py`.
+Every optional layer is measured at **+0.000000** on all five decision criteria. That is the
+no-regression rule holding, not an absence of effect: the components are unreachable on
+traffic the agent already understands, by control flow rather than by threshold.
+
+## Architecture
+
+The agent escalates through mechanisms ordered by cost and certainty. Each layer runs only
+where the cheaper one below it could not produce an answer, so the expensive machinery
+never touches traffic the simple machinery already handles correctly.
 
 ```text
 customer message
-    -> exact official-form recognition
-    -> deterministic template extraction and phrase resolution
-    -> gated BERT scaffolding fallback for unfamiliar wording only
-    -> catalogue-attested n-gram mining
-    -> session ledger, override handling, and rejection management
-    -> FTS5 candidate ladder
-    -> evidence coverage plus population-calibrated ranking
-    -> optional exact-tie LLM reranking, disabled by default
-    -> sequential disclosure and contract-shaped response
+  1  recognition gate        is this one of the simulator's own message shapes?
+  2  template extraction     exact slot parsing, values resolved against the catalogue
+  3  dialogue-act routing    a local classifier reads intent when the wording is unfamiliar
+  4  exact span recovery     1-3 token catalogue-attested values, longest-category matching
+  5  content tagging         a local tagger strips filler so mining sees product text
+  6  n-gram mining           catalogue-attested phrases, bounded document frequency
+  7  attribute deparaphrase  a hosted model names the catalogue term behind a rewording
+  8  session ledger          evidence, overrides, rejection history
+  9  retrieval ladder        conjunctive -> backoff -> disjunctive -> bag-of-words floor
+ 10  ranking                 coverage, specificity, evidence tier, population-calibrated prior
+ 11  disclosure              one candidate on turns 1-9, up to ten at turn 10
 ```
 
 ```mermaid
 flowchart TD
-    M[Customer message] --> R{Official form recognised?}
-    R -->|Yes| T[Deterministic template extraction<br/>and phrase resolution]
-    R -->|No| B{Local BERT fallback available?}
-    B -->|Yes| BT[DistilBERT scaffold removal<br/>CONTENT or SCAFFOLD only]
-    B -->|No or failure| O[Original message]
-    BT --> G[Grounded catalogue n-gram mining]
-    O --> G
-    T --> G
-    G --> L[Session ledger<br/>overrides and rejected products]
-    L --> F[FTS5 candidate ladder]
-    F --> S[Evidence coverage and specificity<br/>plus population-calibrated popularity prior]
-    S --> X{Optional LLM tie reranking enabled?}
-    X -->|No, release default| D[Sequential disclosure<br/>one early candidate, up to ten at turn 10]
-    X -->|Yes, experimental only| V[Verbatim and catalogue validation]
-    V --> D
-    D --> C[Valid contract response]
+    M[Customer message] --> R{Recognised simulator shape?}
+    R -->|Yes| T[Template extraction<br/>exact slot parsing]
+    R -->|No| N1[Node 1 router<br/>dialogue act from wording]
+    N1 --> NE{No-evidence turn?}
+    NE -->|Yes| STOP[Contribute nothing]
+    NE -->|No| SP[Exact span recovery<br/>category + 1-3 token values]
+    SP --> TG[Content tagger<br/>strip filler]
+    TG --> MI[Catalogue-grounded mining]
+    T --> RES{Value attested in catalogue?}
+    RES -->|Yes| L
+    RES -->|No| DP[Deparaphrase<br/>model names the catalogue term]
+    DP --> PV{df of proposal > 0?}
+    PV -->|Yes| L
+    PV -->|No| SUP[Suppress the clause]
+    MI --> L[Session ledger<br/>evidence, overrides, rejections]
+    SUP --> L
+    STOP --> L
+    L --> F[FTS5 retrieval ladder]
+    F --> S[Coverage + specificity + population prior]
+    S --> D[Sequential disclosure]
+    D --> C[Contract response]
 
     classDef default fill:#102a43,stroke:#38bdf8,color:#ffffff
-    classDef optional fill:#3b2f5c,stroke:#c084fc,color:#ffffff
-    class BT,B,X,V optional
+    classDef learned fill:#3b2f5c,stroke:#c084fc,color:#ffffff
+    class N1,TG,DP learned
 ```
 
-1. **Catalog initialization.** `CatalogIndex` builds an in-memory SQLite FTS5 index over
-   the frozen participant-visible fields and caches normalized product text, document
-   frequencies, title spans, and `log1p(rating_number)`.
-2. **Session initialization.** `reset()` stores only the safe aggregate preference tags and
-   starts a fresh ledger for evidence, asked attributes, rejected recommendations, turn
-   count, and override state.
-3. **Official-form recognition.** Anchored patterns recognize the message shapes emitted by
-   the released simulator. Recognized messages use deterministic category and constraint
-   extraction. No BERT model or API request is reachable on this route.
-4. **Grounded evidence extraction.** Extracted clauses are resolved to the longest phrases
-   attested in the frozen catalogue. The agent never accepts a model-generated requirement
-   that is absent from the visible customer message or catalogue.
-5. **Gated BERT fallback.** Only when a message is not recognized, the lazily loaded local
-   DistilBERT tagger may remove conversational scaffolding before mining. It labels words as
-   `CONTENT` or `SCAFFOLD`; it does not retrieve products, rank products, invent
-   requirements, or call a network. Missing dependencies, weights, invalid output, or any
-   inference failure return the original message to the deterministic miner. This is the
-   BERT fallback, not a dependency of the official-form path.
-6. **Catalogue-grounded n-gram mining.** If templates do not provide a constraint, bounded
-   n-grams are enumerated from the message or BERT-stripped text. Only phrases with positive
-   catalogue document frequency at or below the fixed cap are retained.
-7. **Optional external extraction.** On unrecognized wording only, Groq extraction can add
-   candidate spans if `LLM_EXTRACT=1` and a key are both supplied. It is disabled in the
-   release. Every span still passes verbatim and catalogue-attestation checks.
-8. **Dialogue state and overrides.** Evidence accumulates across turns. An override clears
-   incompatible rejection evidence so a candidate shown before the new intent is never
-   incorrectly penalized.
-9. **Clarification policy.** The agent asks from a measured order of useful attributes while
-   returning recommendations in the same response. Attributes that the simulator never
-   meaningfully pays out are excluded.
-10. **FTS5 candidate ladder.** The retrieval layer attempts selective conjunctive phrase
-    queries, progressively shorter conjunctive backoffs, a disjunctive phrase query, and a
-    bag-of-words floor. It always has a deterministic fallback.
-11. **Ranking and population calibration.** Candidates are ranked by weighted phrase
-    coverage, phrase specificity, evidence source, and a popularity prior. The only
-    population-sensitive coefficient is scaled from aggregate retrieved-pool popularity,
-    never from target labels or product identity.
-12. **Tie handling and rejection demotion.** Optional Groq tie reranking is disabled because
-    it lost to popularity in measurement. Candidates shown on a prior non-terminal turn are
-    demoted, not removed, preserving the final recall budget.
-13. **Sequential disclosure.** The agent returns its highest-confidence candidate on turns
-    1 through 9 and up to ten candidates at turn 10. This preserves final-turn recall while
-    placing successful early hits at rank 1.
-14. **Contract and failure boundary.** `respond()` returns a string, allowed structured
-    attribute, ordered catalogue identifiers, and non-negative per-turn token usage. Any
-    internal failure returns the last valid ranking instead of raising.
+**Why the recognition gate matters.** It answers a question no confidence score can: *is
+this the simulator's own wording, or has something reworded it?* Measured over a clean run,
+463 of 463 messages are recognised and 0 of 3,929 perturbed ones are. That perfect
+separation is what makes the learned layers safe to enable — they are unreachable on clean
+traffic as a property of control flow, so the deterministic score cannot move.
 
-The official release is offline, deterministic, and reports zero API tokens. The BERT
-fallback is a real local, gated component retained for unfamiliar wording; it is not needed
-to achieve the reported official score. Optional Groq extraction and reranking are disabled
-by default.
+**Two independent ways wording can change**, handled by different mechanisms because they
+break different things:
+
+- **Template paraphrase** reworks the wrapper and leaves values intact. Node 1 recovers the
+  dialogue act; exact span recovery finds the values, which are still catalogue vocabulary.
+- **Attribute paraphrase** reworks the values and leaves wrappers intact. Exact lookup
+  cannot help — the value has left the vocabulary — so the deparaphraser names the
+  catalogue term and a `df > 0` check decides whether it may become evidence.
+
+**The model proposes; the catalogue disposes.** No layer can introduce a phrase the frozen
+catalogue does not contain. That is what keeps a hosted model from inventing requirements.
+
+## Learned components
+
+| Component | Where it runs | Cost on the scored path |
+|---|---|---|
+| Node 1 dialogue-act router (DistilBERT, 257 MB) | unfamiliar wording only | 0 model loads, 0 inferences |
+| Content tagger (DistilBERT, 254 MB) | unfamiliar wording only | 0 model loads, 0 inferences |
+| Attribute deparaphraser (hosted, `openai/gpt-oss-120b`) | catalogue-unattested values only | 0 requests, 0 tokens |
+
+All three ship **enabled**. The deparaphraser additionally requires `GROQ_API_KEY`; without
+one it is inert — no client, no request, byte-identical to a lexical run — which is what an
+evaluator without our key sees. Set `LLM_RESOLVE=0` to disable it outright, appropriate if
+the environment forbids network egress, if exact reproducibility is required (the provider
+is not bit-reproducible even at temperature 0), or if there is any doubt about per-call
+cost. **The deterministic pipeline is the product; these are additions to it, never
+dependencies of it.**
+
+Two further layers ship **disabled** and are documented rather than removed: hosted span
+extraction, superseded by the local tagger which beat it on the hardest transform, and
+hosted tie reranking, which lost to the popularity prior in measurement.
 
 ## Repository guide
 
 | Path | Purpose |
 |---|---|
 | [`submission/`](submission/) | Canonical agent, optional model integrations, and packaging documentation |
-| [`starter/`](starter/) | Evaluator entry point, kept identical to the canonical agent |
+| [`starter/`](starter/) | Evaluator entry point; re-exports the canonical agent so there is exactly one implementation |
 | [`evaluator/`](evaluator/) | Official local simulator and scorer |
 | [`robustness/`](robustness/) | Reproducible private-like proxy and population-shift suites |
 | [`experiments/`](experiments/) | Experiment registry, runnable scripts, raw results, and complete findings |
@@ -138,14 +163,42 @@ methods, measurements, corrections, and negative results.
 
 ## Technology and data
 
-- Python 3.10 or newer
-- SQLite FTS5 for in-process lexical retrieval
-- PyTorch and Hugging Face Transformers for the optional local DistilBERT tagger
-- Groq's OpenAI-compatible API for optional extraction and rejected reranking experiments
-- Amazon Reviews 2023 `Clothing_Shoes_and_Jewelry` metadata and organizer-released sessions
+**Runtime**
+
+- Python 3.10 or newer; the scored deterministic path uses only the standard library
+- SQLite FTS5 for in-process lexical retrieval, no external search service
+- PyTorch and Hugging Face Transformers, lazily imported, for the two local DistilBERT
+  components (dialogue-act router, content tagger)
+- Groq's OpenAI-compatible API (`openai/gpt-oss-120b`) for attribute deparaphrasing, via
+  `urllib` — no vendor SDK is a dependency
+
+**Research and evaluation only, not runtime dependencies**
+
+- sentence-transformers encoders (`all-mpnet-base-v2`, `e5-base-v2`, `all-MiniLM-L6-v2`,
+  `bge-small-en-v1.5`, `Qwen3-Embedding-0.6B`) — evaluated as retrievers and verifiers,
+  all rejected, kept in the log with their numbers
+- `cross-encoder/nli-deberta-v3-small` for the entailment verifier experiment, rejected
+- Optuna for the joint hyperparameter search that produced the frozen trial-38 constants
+- Claude Haiku, used once to generate the open-vocabulary paraphrase corpus — deliberately
+  a different model family from the solver, so the suite is not the solver inverting its
+  own encoding
+
+**Data and assets**
+
+- Amazon Reviews 2023 `Clothing_Shoes_and_Jewelry` metadata (the organizer's frozen 50k
+  catalogue) and the organizer-released public sessions
+- A 7,922-entry attribute vocabulary mined from that catalogue's `features` and `details`
+- Synthetic evaluation corpora we generated: held-out message-template banks, four
+  population-shift suites, and a 204-phrase open-vocabulary paraphrase set over targets
+  disjoint from the public sessions
+
+**Development tools.** VS Code, Claude Code for pair development, Git, and a local CUDA
+workstation for the training and evaluation runs.
 
 All official scoring runs use the frozen organizer catalogue and released evaluator. No
-private labels, raw user histories, free-text reviews, or organizer-only files are included.
+private labels, raw user histories, free-text reviews, or organizer-only files are
+included, and `evaluator/` and `data/public_set.jsonl` are byte-identical to the
+organizer's release.
 
 ## Installation
 
@@ -256,23 +309,69 @@ The trace emits the exact recognition result, template matches, resolved evidenc
 candidate-pool summary, top-ten ranking, rejection state, and contract response for each
 turn. It is a one-session diagnostic, not an evaluation run.
 
-The evaluator imports `starter.agent`. `starter/agent.py` and `submission/agent.py` must
-remain byte-identical for a release.
+The evaluator imports `starter.agent`. That module RE-EXPORTS `submission.agent` rather
+than duplicating it, so there is exactly one `Agent` in the repository and the scored and
+shipped versions cannot diverge. It used to be a hand-maintained byte copy; an audit found
+the copies had already drifted, with a stale default sitting in the scored entry point.
+`tests/test_submission_contract.py` asserts the object identity.
+
+### Reproduce the paraphrase-robustness results
+
+These are the suites behind the robustness table. All are offline and deterministic except
+where noted.
+
+```bash
+# The full layer x condition grid: five arms over five conditions.
+python -u robustness/v2/evaluate_full_pipeline.py
+
+# Restrict to particular arms (the baseline is always kept):
+PIPELINE_ARMS="+SPAN,+ROUTE+SPAN" python -u robustness/v2/evaluate_full_pipeline.py
+```
+
+```bash
+# Rebuild the open-vocabulary paraphrase suite from its generation record.
+python -u robustness/v2/build_open_vocabulary_paraphrase_input.py
+python -u robustness/v2/build_open_vocabulary_suite.py     # filters and materialises
+python -u robustness/v2/evaluate_open_vocabulary.py        # needs GROQ_API_KEY
+```
+
+```bash
+# The two diagnostics that shaped the design.
+python -u robustness/v2/evaluate_open_vocab_oracle.py      # attribute ceiling, offline
+python -u robustness/v2/build_hostile_suite.py             # strip every free channel
+python -u robustness/v2/evaluate_hostile.py                # what remains, offline
+```
+
+```bash
+# Node 1 against the lexical alternative, on held-out templates.
+python -u robustness/v2/audit_node1_vs_regex.py
+```
+
+The paraphrase generation step is **not** re-run by default: `open_vocabulary_paraphrases.jsonl`
+is committed so the suite is reproducible without a second generation pass, which would
+produce different phrasings and therefore different numbers. Resolver caches are
+deliberately gitignored — a committed cache of resolved paraphrases would be a lookup table
+over the evaluation vocabulary, and every run should be free to re-derive its answers.
+
+Scripts that call a hosted model say so in their docstring. Everything else runs offline.
 
 ## Model, network, and cost disclosure
 
-- Required external API: none.
-- Default external-model cost: $0.00.
-- Measured public evaluation latency: 17.93 seconds for 200 sessions in the final local
-  audit environment, including one-time index construction.
-- Reported public token usage: 0 prompt tokens and 0 completion tokens.
-- Local model: fine-tuned `distilbert-base-uncased`, stored through Git LFS.
-- Optional API: Groq extraction or reranking requires both `GROQ_API_KEY` and an explicit
-  feature flag.
-- Safety boundary: optional model output must be a verbatim span from the visible message
-  and must be attested in the frozen catalogue.
-- Fallback: missing dependencies, weights, credentials, network, or valid model output
-  returns control to the lexical pipeline.
+- **Required external API: none.** The system scores 0.970100 with no network access.
+- **Cost on the official evaluation: $0.00.** Reported token usage is 0 prompt and 0
+  completion tokens, asserted by `tests/test_submission_contract.py`.
+- **Local models: two DistilBERT checkpoints** (dialogue-act router, content tagger),
+  shipped in-repo, lazily loaded. Measured on the public set: **0 model loads and 0
+  inferences** — the recognition gate short-circuits before either is constructed.
+- **Hosted model: `openai/gpt-oss-120b` via Groq**, enabled by default but additionally
+  requiring `GROQ_API_KEY`. Without a key the layer is inert. With one it is reached
+  roughly once per 460 clean messages and measured at +0.000000 on every decision
+  criterion. Disable outright with `LLM_RESOLVE=0`.
+- **Safety boundary:** every phrase entering the evidence ledger must be attested in the
+  frozen catalogue (`df > 0`). A model may propose; only the catalogue may admit.
+- **Degradation:** missing dependencies, weights, credentials, network, or malformed model
+  output all return control to the lexical pipeline. Every failure path lands on the
+  deterministic behaviour, never on an exception.
 
 Never commit credentials. Use environment variables or an ignored local `.env` file.
 
@@ -289,11 +388,50 @@ robustness characterization. Project Q&A notes report that paraphrasing is absen
 official evaluation, but that point is not reproduced in the written specification and is
 not used as an official-score claim.
 
-Given more time, the highest-value improvements would be reducing the optional tagger's
-package size, validating on an organizer-provided eligibility pool, and replacing
-template-family stress tests with independently authored language variations. Additional
-public-only tuning would not be justified because the measured gains are already smaller
-than fold variance.
+### What we know is weak
+
+**Our robustness suites are ours.** The template banks, population shifts and paraphrase
+corpora were generated by us. Train and test templates share zero strings and the paraphrase
+generator is a different model family from the solver, but "generalises across our own
+synthetic variation" is a weaker claim than "generalises to real users", and we do not make
+the stronger one.
+
+**Attribute paraphrase is only partly solved.** A perfect resolver would recover 95.1% of
+that gap; ours recovers 17.2%. Its error profile is measured — roughly a third of answers
+share a token with the truth, a quarter are confidently wrong, the rest are abstentions —
+and the weight is already at its optimum, so the only remaining lever is the error rate.
+We tried to filter the wrong answers with encoder corroboration and it failed *inverted*:
+the encoder ranks the harmful proposals better, because the resolver earns its keep exactly
+where surface similarity misleads.
+
+**The category is doing most of the work, and we only found that late.** Removing it while
+keeping perfect canonical values drops the achievable score from 0.945 to 0.280. Much of
+what looks like constraint-matching skill is really category narrowing followed by ranking
+inside a small pool.
+
+**Model size.** Two DistilBERT checkpoints are ~511 MB of the repository. They cost nothing
+at inference on clean traffic, but the footprint is real.
+
+### What we would do next, in priority order
+
+1. **Validate on genuinely external language.** Everything above is bounded by our own
+   generators. Human-written queries, or a corpus authored by someone else, would move
+   several claims from "supported on our data" to "supported".
+2. **Attack the category channel, not the constraint channel.** The ablation says that is
+   where the leverage is, and every paraphrase experiment we ran was measuring the smaller
+   half of the problem.
+3. **Recalibrate the entailment verifier on train-only data.** It separates good proposals
+   from bad at 0.8349 AUROC but no threshold transferred; that is a calibration problem, not
+   a capability one.
+4. **Shrink or distil the local models**, now that we know the exact-lookup layer carries
+   most of the template axis on its own.
+
+Additional public-only tuning is deliberately *not* on this list: measured gains there are
+already smaller than fold variance, so more of it would be fitting noise.
+
+## Team contributions
+
+*(Fill in before submission — the judging criteria require this for non-solo entries.)*
 
 Catalogue and sessions derive from Amazon Reviews 2023 by McAuley Lab, UCSD. See
 [`DATA_ATTRIBUTION.md`](DATA_ATTRIBUTION.md).
