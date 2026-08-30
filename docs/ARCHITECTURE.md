@@ -165,7 +165,7 @@ AND of every disclosed constraint  ->  pool contains the target   100.0%
 
 ```text
 1. For each disclosed constraint, look up the rows containing it verbatim.
-   Seed candidates from the two rarest tokens via the postings index, then
+   Seed candidates from the three rarest tokens via the postings index, then
    verify containment against doc_norm.
 2. Sort constraints most-selective-first and intersect.
 3. If the intersection empties, drop one member and retry. Backoff order:

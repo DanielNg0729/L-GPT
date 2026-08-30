@@ -219,7 +219,7 @@ class KnowledgeGraph:
     def phrase_docs(self, phrase: str, limit: int | None = None) -> np.ndarray:
         """Product ids whose text contains `phrase` verbatim (punctuation-insensitive).
 
-        Seeds candidates from the two rarest tokens of the phrase, then verifies
+        Seeds candidates from the three rarest tokens of the phrase, then verifies
         containment on the normalised document text. Falls back to an empty result
         when any token is out of vocabulary — an out-of-vocabulary token cannot be
         present in any row, so the phrase cannot match either.
