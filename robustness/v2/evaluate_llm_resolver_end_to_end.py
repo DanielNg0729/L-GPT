@@ -127,8 +127,13 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 V2 = ROOT / "robustness" / "v2"
 PVO = V2 / "public_value_only"
-OUT = V2 / "results" / "llm_resolver_end_to_end_v2_46.json"
-CACHE = V2 / ".llm_resolver_cache.json"
+# These overrides make ablations reproducible without changing the shipped agent or
+# contaminating another effort level's responses through a shared cache.
+OUT = Path(os.environ.get(
+    "LLM_RESOLVER_OUTPUT", str(V2 / "results" / "llm_resolver_end_to_end_v2_46.json")))
+CACHE = Path(os.environ.get(
+    "LLM_RESOLVER_CACHE", str(V2 / ".llm_resolver_cache.json")))
+REASONING_EFFORT = os.environ.get("LLM_RESOLVER_REASONING_EFFORT", "low").strip()
 
 SEM = "sem"
 
@@ -166,7 +171,7 @@ class Resolver:
             # GPT-OSS bills hidden reasoning against max_tokens and returns EMPTY content
             # when the budget runs out mid-thought: HTTP 200 with nothing to parse. The
             # headroom is for the reasoning, not for the two-word answer.
-            "max_tokens": 512, "reasoning_effort": "low",
+            "max_tokens": 512, "reasoning_effort": REASONING_EFFORT,
             "messages": [{"role": "system", "content": SYSTEM},
                          {"role": "user", "content": phrase}],
         }).encode("utf-8")
@@ -308,7 +313,8 @@ def main() -> None:
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps({
         "experiment": "V2.46 LLM resolver, end to end",
-        "model": model, "arms": arms, "floor": floor,
+        "model": model, "reasoning_effort": REASONING_EFFORT,
+        "arms": arms, "floor": floor,
         "official200": {"suppression": off_supp, "llm_arm": off_llm,
                         "llm_calls": res.calls - calls_before},
         "resolver": {"calls": res.calls, "accepted": res.accepted,
