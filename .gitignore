@@ -35,3 +35,8 @@ docs/participant_release_checklist.md
 tests/test_5core_builder.py
 tests/test_organizer_pipeline.py
 *.log
+# LLM resolver cache. Deliberately NOT tracked: committing it would turn a runtime
+# convenience into a checked-in lookup table over the evaluation suite's paraphrases,
+# which is precisely the self-scoring this repo's audits exist to prevent. Every run
+# must be free to re-derive its answers.
+robustness/v2/.llm_resolver_cache.json

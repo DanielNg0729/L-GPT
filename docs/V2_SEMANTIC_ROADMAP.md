@@ -344,3 +344,105 @@ development and retain that benefit on the sealed holdout is rejected.
 | 8. Product retrieval | Existing dense product RAG result rejected | Closed unless grounded attribute resolution plateaus after tuning. |
 | 9. Override | Existing literal conflict experiments reject universal reset | Await a semantic contradiction detector with its own counterfactual suite. |
 | 10. Clarification | V1.65 uniform candidate-partition controller: Official200 0.969600 to 0.970100 with unchanged HR@10; review-weighted Unseen800 0.956313 to 0.957038; uniform population 0.882869 to 0.881229; inverse population 0.895937 to 0.899631. Integer signatures cost 69.57 ms/session versus 59.49 ms fixed V1. | **Complete for the current simulator contract.** V1 uses the uniform, catalogue-grounded controller with a fixed-order fail-safe. Do not add a semantic question generator unless it clears the same non-interference and runtime bar. |
+
+## V2.45 / V2.46 — the LLM resolver, and what redirected the programme
+
+### Suppression first (shipped)
+
+The V2.43 oracle decomposition showed that of the 0.1931 attribute-paraphrase gap, a
+perfect resolver recovers +0.0979 while merely DELETING the unresolvable clause recovers
++0.0467. A quarter of the loss was self-inflicted: `_resolve`'s substring and single-token
+fallbacks were contributing debris (`soft`, `plant` from "made from a soft plant fibre")
+at full constraint weight. Deleting both fallbacks is now shipped in V1, measured on the
+shipped path across all six suites:
+
+| suite | before | after | delta |
+|---|---|---|---|
+| official200 | 0.970100 | 0.970100 | +0.000000 |
+| org-proxy | 0.952788 | 0.952788 | +0.000000 |
+| review800 | 0.945125 | 0.945125 | +0.000000 |
+| uniform | 0.882763 | 0.882763 | +0.000000 |
+| inverse | 0.866262 | 0.866062 | **-0.000200** |
+| attr-para | 0.777000 | 0.833000 | **+0.056000** |
+
+The `inverse` move is stated as a regression rather than rounded to a wash. It is an order
+of magnitude inside the suite's bootstrap noise, and `inverse` is an adversarial bound.
+
+**0.8330 is now the bar.** Any semantic resolver has to beat "delete the clause", not
+"keep the debris" — a materially higher bar, because a confidently wrong canonical is
+worse than an absent one.
+
+### V2.45 — the probe, and a metric that was wrong in the model's favour
+
+Scored by string equality against the suite's canonicals, the LLM resolved 3/27. That
+number is wrong: the canonicals are RAW CATALOGUE STRINGS, so equality demanded the model
+reproduce the whole thing.
+
+| paraphrase | model | "canonical" | scored |
+|---|---|---|---|
+| made from a soft plant fibre | `cotton` | `100 cotton size 3t 2 3 4t 3 4 5 5` | wrong |
+| in the darkest colour | `black` | `color black` | wrong |
+| slips on without separate fasteners | `pull on` | `pull on closure` | wrong |
+| made from heavy woven cloth | `canvas` | `canvas upper` | wrong |
+| keeps water from penetrating | `waterproof` | `100 waterproof women s ...` | wrong |
+
+The correction was NOT to loosen the string metric — a similarity threshold here is a free
+parameter that could be tuned until the answer looked good. It was to stop scoring the
+intermediate representation and score end to end.
+
+The probe also corrected itself in a second way: its first run reported "27 abstentions"
+that were in fact 27 HTTP 403s (Groq's edge rejects Python's default `urllib` identity).
+An empty completion and a declined answer are now counted separately.
+
+### V2.46 — end to end, against the suppression floor
+
+| arm | attr-para | vs floor | % of the V2.43 oracle |
+|---|---|---|---|
+| suppression (shipped, no ML) | 0.833000 | — | 57.2% |
+| LLM @ CONSTRAINT weight | 0.856800 | +0.0238 | 81.5% |
+| LLM @ weak tier w=0.15 | 0.870800 | +0.0378 | 95.8% |
+| LLM @ weak tier w=0.30 | 0.867300 | +0.0343 | 93.5% |
+| LLM @ weak tier w=0.45 | 0.871900 | +0.0389 | 96.9% |
+| ORACLE-RESOLVE (perfect) | 0.874925 | +0.0979 | 100.0% |
+
+This is the first learned component to beat the no-ML baseline on attribute paraphrase,
+after seven failures from encoder-based directions. It succeeds for the reason those
+failed: the task is world knowledge over a closed answer set, not ranking. Bi-encoders
+retrieved antonyms because cosine similarity does not encode negation; the LLM correctly
+ABSTAINS on the negation case (`made overseas` -> NONE) rather than inverting it.
+
+**Attenuation is the mechanism.** Arms 2 and 3 have identical knowledge and differ only in
+what a wrong proposal costs. G3 soft attenuation beats G2 pessimistic-hard by 15 points of
+oracle, on its own terms.
+
+**The weight is not tuned and must not be.** The three weak-tier weights span 0.0046 and
+are non-monotone (0.45 > 0.15 > 0.30) — noise on a 200-session suite. Reporting w=0.45 as
+"best" would manufacture a sharp optimum where the data shows a flat one. The finding is
+that the weak tier is worth ~+0.037 and is insensitive to its weight across 0.15–0.45.
+
+### Guards, and one claim that had to be withdrawn
+
+* PROVENANCE: `df(proposal) > 0` before anything becomes evidence. The model proposes, the
+  catalogue disposes. 0 proposals were rejected here, but the gate is what makes a
+  hallucinated phrase impossible rather than merely unlikely.
+* NO EMITTABILITY FILTER: restricting proposals to values `intent_card()` can emit would
+  score better and would be gaming — the suite's canonicals are emittable by construction.
+* REACHABILITY, **corrected**: this was first claimed as "unreachable on clean traffic by
+  construction", since the recognition gate matches 463/463 clean messages. Measuring it
+  showed the claim is false. The gate governs MESSAGES, not VALUES, and `intent_card()`
+  truncates long feature bullets mid-word — `"All daughters love their mom, but sometimes
+  we just forget to sa."` is genuine catalogue prose whose truncation breaks the phrase.
+  It reaches the resolver once in 463 clean messages at exactly 0.000000 cost on
+  official200. The guarantee is empirical, not structural.
+
+### Blocking condition before any of this can ship
+
+The suite carries **27 distinct paraphrases**, and the resolver was consulted 25 times.
+One phrase resolving differently moves the rate by 3.7 points. That is a weakness of the
+suite, not a property of the problem — a real customer population has an open-ended
+paraphrase vocabulary.
+
+So: nothing may be keyed, sized, cached or tuned to those 27 phrases (the runtime cache is
+gitignored for exactly this reason), and **96% of oracle is not a shippable claim until it
+is reproduced on an open-vocabulary suite whose paraphrases were generated independently
+of these.** Until then V2.46 establishes sign and mechanism, not effect size.

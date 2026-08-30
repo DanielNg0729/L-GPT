@@ -1,0 +1,283 @@
+{
+  "experiment": "V2.45 LLM RAG resolver probe",
+  "model": "openai/gpt-oss-120b",
+  "n": 27,
+  "accepted": 21,
+  "correct": 3,
+  "wrong": 18,
+  "abstained": 6,
+  "rejected_by_provenance": 0,
+  "failed_calls": 0,
+  "rows": [
+    {
+      "paraphrase": "allows air to circulate",
+      "truth": "our go walk 5 true shoe is made with skechers air cooled goga mat a breathable insole that provides high rebound cushioning",
+      "proposed": "breathable",
+      "df": 2716,
+      "abstained": false,
+      "accepted": true,
+      "correct": false,
+      "failed": false
+    },
+    {
+      "paraphrase": "built to add very little weight",
+      "truth": "soft lightweight which only weight about 200g lightweight and durable eva material can arbitrary bending thick soles design with light rebound ability give your feet ultimate",
+      "proposed": "lightweight",
+      "df": 2716,
+      "abstained": false,
+      "accepted": true,
+      "correct": false,
+      "failed": false
+    },
+    {
+      "paraphrase": "can be resized for fit",
+      "truth": "fit for different sizes fit bands up to 30mm wide 6 replacement pins and an adjustable base allow for use with different band thicknesses",
+      "proposed": "adjustable",
+      "df": 2716,
+      "abstained": false,
+      "accepted": true,
+      "correct": false,
+      "failed": false
+    },
+    {
+      "paraphrase": "closes with interlocking teeth",
+      "truth": "zipper closure",
+      "proposed": "zipper",
+      "df": 2716,
+      "abstained": false,
+      "accepted": true,
+      "correct": false,
+      "failed": false
+    },
+    {
+      "paraphrase": "fastens using a metal clasp",
+      "truth": "buckle closure",
+      "proposed": "metal clasp",
+      "df": 15,
+      "abstained": false,
+      "accepted": true,
+      "correct": false,
+      "failed": false
+    },
+    {
+      "paraphrase": "fastens with round closures",
+      "truth": "button closure",
+      "proposed": "buttons",
+      "df": 695,
+      "abstained": false,
+      "accepted": true,
+      "correct": false,
+      "failed": false
+    },
+    {
+      "paraphrase": "in a leaf toned shade",
+      "truth": "pattern the end of the mardi gras shawl is tassel stripe pattern is shimmering gold speckled with green and purple",
+      "proposed": "none",
+      "df": 0,
+      "abstained": true,
+      "accepted": false,
+      "correct": false,
+      "failed": false
+    },
+    {
+      "paraphrase": "in a light neutral colour",
+      "truth": "color white",
+      "proposed": "none",
+      "df": 0,
+      "abstained": true,
+      "accepted": false,
+      "correct": false,
+      "failed": false
+    },
+    {
+      "paraphrase": "in a neutral ash shade",
+      "truth": "color grey",
+      "proposed": "ash",
+      "df": 88,
+      "abstained": false,
+      "accepted": true,
+      "correct": false,
+      "failed": false
+    },
+    {
+      "paraphrase": "in a rosy shade",
+      "truth": "color pink",
+      "proposed": "rose",
+      "df": 846,
+      "abstained": false,
+      "accepted": true,
+      "correct": false,
+      "failed": false
+    },
+    {
+      "paraphrase": "in a warm crimson shade",
+      "truth": "color red",
+      "proposed": "crimson",
+      "df": 28,
+      "abstained": false,
+      "accepted": true,
+      "correct": false,
+      "failed": false
+    },
+    {
+      "paraphrase": "in an earthy tan shade",
+      "truth": "color brown",
+      "proposed": "tan",
+      "df": 274,
+      "abstained": false,
+      "accepted": true,
+      "correct": false,
+      "failed": false
+    },
+    {
+      "paraphrase": "in an ocean toned shade",
+      "truth": "summer vibe accessories blue and orange colors of the wave strand bracelet set can easily make you look vibrant going well with different clothes nice accessories to wear in sum",
+      "proposed": "blue",
+      "df": 2716,
+      "abstained": false,
+      "accepted": true,
+      "correct": false,
+      "failed": false
+    },
+    {
+      "paraphrase": "in the darkest colour",
+      "truth": "color black",
+      "proposed": "black",
+      "df": 2716,
+      "abstained": false,
+      "accepted": true,
+      "correct": false,
+      "failed": false
+    },
+    {
+      "paraphrase": "keeps water from penetrating",
+      "truth": "100 waterproof women s boots are suitable for any season and any outdoor activity",
+      "proposed": "waterproof",
+      "df": 1653,
+      "abstained": false,
+      "accepted": true,
+      "correct": false,
+      "failed": false
+    },
+    {
+      "paraphrase": "made from a durable synthetic polyamide",
+      "truth": "nylon",
+      "proposed": "nylon",
+      "df": 2610,
+      "abstained": false,
+      "accepted": true,
+      "correct": true,
+      "failed": false
+    },
+    {
+      "paraphrase": "made from a man made textile",
+      "truth": "94 polyester 6 spandex",
+      "proposed": "none",
+      "df": 0,
+      "abstained": true,
+      "accepted": false,
+      "correct": false,
+      "failed": false
+    },
+    {
+      "paraphrase": "made from a soft plant fibre",
+      "truth": "100 cotton size 3t 2 3 4t 3 4 5 5 6 6 6 7 8 7 8 10 9 10 12 10 12",
+      "proposed": "cotton",
+      "df": 2716,
+      "abstained": false,
+      "accepted": true,
+      "correct": false,
+      "failed": false
+    },
+    {
+      "paraphrase": "made from animal fleece fibre",
+      "truth": "wool",
+      "proposed": "wool",
+      "df": 737,
+      "abstained": false,
+      "accepted": true,
+      "correct": true,
+      "failed": false
+    },
+    {
+      "paraphrase": "made from animal hide",
+      "truth": "leather",
+      "proposed": "leather",
+      "df": 2716,
+      "abstained": false,
+      "accepted": true,
+      "correct": true,
+      "failed": false
+    },
+    {
+      "paraphrase": "made from heavy woven cloth",
+      "truth": "canvas upper",
+      "proposed": "canvas",
+      "df": 796,
+      "abstained": false,
+      "accepted": true,
+      "correct": false,
+      "failed": false
+    },
+    {
+      "paraphrase": "made overseas",
+      "truth": "imported",
+      "proposed": "none",
+      "df": 0,
+      "abstained": true,
+      "accepted": false,
+      "correct": false,
+      "failed": false
+    },
+    {
+      "paraphrase": "made with a flexible elastic polymer",
+      "truth": "ultra flexible rubber outsole",
+      "proposed": "spandex",
+      "df": 2716,
+      "abstained": false,
+      "accepted": true,
+      "correct": false,
+      "failed": false
+    },
+    {
+      "paraphrase": "repels light moisture",
+      "truth": "perfect for travel comfortable lightweight and water resistant passport and vaccine card holder designed to offer you a safe and secure location to store valuables passport",
+      "proposed": "water resistant",
+      "df": 1240,
+      "abstained": false,
+      "accepted": true,
+      "correct": false,
+      "failed": false
+    },
+    {
+      "paraphrase": "requires manual cleaning",
+      "truth": "hand wash only",
+      "proposed": "none",
+      "df": 0,
+      "abstained": true,
+      "accepted": false,
+      "correct": false,
+      "failed": false
+    },
+    {
+      "paraphrase": "slips on without separate fasteners",
+      "truth": "pull on closure",
+      "proposed": "pull on",
+      "df": 2716,
+      "abstained": false,
+      "accepted": true,
+      "correct": false,
+      "failed": false
+    },
+    {
+      "paraphrase": "stretches to conform",
+      "truth": "elastic",
+      "proposed": "none",
+      "df": 0,
+      "abstained": true,
+      "accepted": false,
+      "correct": false,
+      "failed": false
+    }
+  ]
+}

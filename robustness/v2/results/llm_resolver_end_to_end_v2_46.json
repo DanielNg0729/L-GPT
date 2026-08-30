@@ -1,0 +1,24 @@
+{
+  "experiment": "V2.46 LLM resolver, end to end",
+  "model": "openai/gpt-oss-120b",
+  "arms": {
+    "1 suppression (shipped floor)": 0.833,
+    "2 LLM @ CONSTRAINT weight": 0.8568,
+    "3 LLM @ weak tier w=0.15": 0.8708,
+    "3 LLM @ weak tier w=0.30": 0.8673,
+    "3 LLM @ weak tier w=0.45": 0.8719
+  },
+  "floor": 0.833,
+  "official200": {
+    "suppression": 0.9701,
+    "llm_arm": 0.9701,
+    "llm_calls": 1
+  },
+  "resolver": {
+    "calls": 25,
+    "accepted": 19,
+    "abstained": 6,
+    "unattested": 0,
+    "failed": 0
+  }
+}
