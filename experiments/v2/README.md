@@ -97,3 +97,4 @@ candidate generation, grounding, and override state.
 | Experiment | Node | Outcome |
 |---|---|---|
 | [V2.01](01_semantic_feature_grounding.md) | Broad semantic phrase grounding | Rejected. A development phrase-map control confirms recovery opportunity, but nearest visible-feature retrieval is not precise enough and cannot meet the clean-score gate. |
+| [V2.02](02_provenance_gate_and_tag.md) | Full provenance gate, dense RAG, and semantic attribute tags | Attribute tags improve the value-only semantic suite while preserving Official200 and Unseen800 exactly. Dense product-passage RAG is rejected. |

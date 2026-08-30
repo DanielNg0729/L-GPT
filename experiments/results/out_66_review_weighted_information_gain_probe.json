@@ -1,0 +1,110 @@
+{
+  "posterior": "reviews",
+  "formula": "E_remaining=sum_r P(r|q)*|G_r|; uniform prior reduces to sum_r |G_r|^2/|C|",
+  "suites": {
+    "Official200": {
+      "fixed_v1": {
+        "hit_rate_at_10": 0.995,
+        "mrr": 0.995,
+        "mttc": 2.32,
+        "recommended_technical_score": 0.9696
+      },
+      "candidate_information_gain": {
+        "hit_rate_at_10": 0.995,
+        "mrr": 0.991667,
+        "mttc": 2.32,
+        "recommended_technical_score": 0.9686
+      },
+      "delta_score": -0.0010000000000000009,
+      "question_counts": {
+        "other": 193,
+        "feature": 117,
+        "material": 87,
+        "color": 36,
+        "style": 9,
+        "size": 9,
+        "use_case": 5
+      },
+      "mean_pool_size": 1191.592105263158,
+      "mean_expected_eliminated": 1060.0227017571576
+    },
+    "Unseen800_review_weighted": {
+      "fixed_v1": {
+        "hit_rate_at_10": 0.98625,
+        "mrr": 0.984792,
+        "mttc": 2.6125,
+        "recommended_technical_score": 0.956313
+      },
+      "candidate_information_gain": {
+        "hit_rate_at_10": 0.98625,
+        "mrr": 0.983792,
+        "mttc": 2.575,
+        "recommended_technical_score": 0.956763
+      },
+      "delta_score": 0.00045000000000006146,
+      "question_counts": {
+        "other": 772,
+        "feature": 527,
+        "material": 397,
+        "color": 153,
+        "style": 62,
+        "size": 42,
+        "use_case": 36
+      },
+      "mean_pool_size": 1196.795877325289,
+      "mean_expected_eliminated": 1033.6461217153183
+    },
+    "Unseen800_uniform": {
+      "fixed_v1": {
+        "hit_rate_at_10": 0.92,
+        "mrr": 0.916146,
+        "mttc": 3.59875,
+        "recommended_technical_score": 0.882869
+      },
+      "candidate_information_gain": {
+        "hit_rate_at_10": 0.92,
+        "mrr": 0.912847,
+        "mttc": 3.635,
+        "recommended_technical_score": 0.881154
+      },
+      "delta_score": -0.001715000000000022,
+      "question_counts": {
+        "feature": 663,
+        "other": 787,
+        "material": 475,
+        "color": 279,
+        "style": 153,
+        "size": 127,
+        "use_case": 104
+      },
+      "mean_pool_size": 1209.4544049459041,
+      "mean_expected_eliminated": 941.9624331441235
+    },
+    "Unseen800_inverse": {
+      "fixed_v1": {
+        "hit_rate_at_10": 0.9325,
+        "mrr": 0.927708,
+        "mttc": 3.43125,
+        "recommended_technical_score": 0.895937
+      },
+      "candidate_information_gain": {
+        "hit_rate_at_10": 0.93625,
+        "mrr": 0.931979,
+        "mttc": 3.41625,
+        "recommended_technical_score": 0.899394
+      },
+      "delta_score": 0.0034570000000000434,
+      "question_counts": {
+        "feature": 676,
+        "other": 789,
+        "material": 433,
+        "color": 256,
+        "style": 133,
+        "size": 111,
+        "use_case": 84
+      },
+      "mean_pool_size": 1210.9983883964544,
+      "mean_expected_eliminated": 972.491753476456
+    }
+  }
+}
