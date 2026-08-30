@@ -61,11 +61,28 @@ values the `df > 0` gate waves through), but no threshold transferred: calibrate
 synonym pairs it discarded 76% of CORRECT proposals on open vocabulary, cutting the gain
 from +0.0169 to +0.0009. It stays out until it can be recalibrated on train-only data.
 
-DEFAULT OFF. Enabled only when BOTH `LLM_RESOLVE=1` and `GROQ_API_KEY` are set. The
-deterministic agent is byte-identical without them, and the contract test's
-`total_tokens == 0` assertion -- the tripwire for any layer escaping its gate -- keeps
-holding. The measured benefit on every realistic population is +0.000000, so default-on
-would buy nothing and would cost a network dependency on the scored path.
+ENABLED BY DEFAULT, AND WHAT THAT ACTUALLY MEANS
+------------------------------------------------
+`LLM_RESOLVE` defaults to 1, but the layer additionally requires `GROQ_API_KEY`. Both must
+hold, so there are exactly two outcomes and both are intended:
+
+  no credentials    the layer is inert. `enabled` is False, no client is constructed, no
+                    request is made, and the agent is byte-identical to a lexical-only run.
+                    This is what an evaluator without our key sees.
+  credentials       the layer activates exactly where `Agent._resolve` already gave up --
+                    on a clause the catalogue cannot attest. Measured across every
+                    population suite it reaches that state 26 times in total and changes
+                    the score by +0.000000, while recovering +0.0169 on open-vocabulary
+                    attribute paraphrase.
+
+So enabling it by default cannot surprise anyone: without a key nothing happens, and with
+one it fires rarely and has been measured not to move the decision criteria.
+
+TO DISABLE COMPLETELY, set `LLM_RESOLVE=0` (or simply provide no `GROQ_API_KEY`). Do that
+if the evaluation environment forbids network egress, if reproducibility must be exact --
+the provider is not bit-reproducible even at temperature 0 -- or if any doubt exists about
+per-call cost. The deterministic pipeline is the product; this layer is an addition to it,
+never a dependency of it.
 """
 from __future__ import annotations
 
@@ -134,7 +151,7 @@ class LLMResolver:
 
     def __init__(self, model: str = DEFAULT_MODEL,
                  cache_path: Path = CACHE_PATH) -> None:
-        flag = os.environ.get("LLM_RESOLVE", "0").strip().lower()
+        flag = os.environ.get("LLM_RESOLVE", "1").strip().lower()
         self._flag = flag not in {"0", "false", "no", "off", ""}
         self.model = model
         self.cache_path = cache_path

@@ -1,0 +1,26 @@
+{
+  "off": {
+    "official200": 0.9701,
+    "org-proxy": 0.952788,
+    "review800": 0.945125,
+    "uniform": 0.882763,
+    "inverse": 0.866262,
+    "attr-para": 0.777
+  },
+  "tokens": {
+    "official200": 0.9701,
+    "org-proxy": 0.952788,
+    "review800": 0.945125,
+    "uniform": 0.882763,
+    "inverse": 0.864987,
+    "attr-para": 0.7909
+  },
+  "substrings": {
+    "official200": 0.9701,
+    "org-proxy": 0.952788,
+    "review800": 0.945125,
+    "uniform": 0.882763,
+    "inverse": 0.864862,
+    "attr-para": 0.833
+  }
+}

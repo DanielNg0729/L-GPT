@@ -93,13 +93,19 @@ class ScaffoldingTagger:
         #     attribute     0.847103    0.847103         +0.000000
         #     both          0.719805    0.728008         +0.008203
         #
-        # HR@10 on template is identical either way (0.9812). The span node alone recovers
-        # +0.2466 of a -0.287 template gap -- 86% of it -- with no model at all, while the
-        # tagger costs 254 MB of shipped weights. An isolated audit had already shown the
-        # dictionary carries the whole recall story: value recall 1.0000 WITHOUT the tagger
-        # against 0.9992 with it, the tagger occasionally stripping a token the lookup
-        # needed. Set BERT_EXTRACT=1 to re-enable it.
-        flag = os.environ.get("BERT_EXTRACT", "0").strip().lower()
+        # HR@10 on template is identical either way (0.9812), and the span node alone
+        # recovers 86% of the template gap with no model at all. So the tagger is NOT the
+        # component carrying that axis, and it must not be described as though it were.
+        #
+        # It ships ENABLED nonetheless. It costs nothing on the decision criteria -- the
+        # recognition gate makes it unreachable on clean traffic, measured at +0.000000 on
+        # official200 and every population suite -- it runs locally with no network and no
+        # per-call cost, and it contributes a small positive on the compound paraphrase
+        # condition. Disabling a layer that is free where it matters and mildly useful
+        # where it fires would be trading a real capability for nothing.
+        #
+        # Set BERT_EXTRACT=0 for a strictly lexical run.
+        flag = os.environ.get("BERT_EXTRACT", "1").strip().lower()
         self._flag = flag not in {"0", "false", "no", "off"}
 
     # ---------------------------------------------------------------- lifecycle

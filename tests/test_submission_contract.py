@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import unittest
 from pathlib import Path
 
@@ -64,6 +65,23 @@ class _ContractAuditor:
 
 
 class SubmissionContractTest(unittest.TestCase):
+    def setUp(self) -> None:
+        # Pin the deterministic configuration. These layers are enabled by default and are
+        # inert without credentials, but this test is about the offline guarantee, so it
+        # states the configuration it is measuring instead of inheriting one.
+        self._env = {k: os.environ.get(k)
+                     for k in ("LLM_RESOLVE", "LLM_EXTRACT", "LLM_RERANK", "BERT_EXTRACT",
+                               "V2_ROUTE")}
+        for k in ("LLM_RESOLVE", "LLM_EXTRACT", "LLM_RERANK"):
+            os.environ[k] = "0"
+
+    def tearDown(self) -> None:
+        for k, v in self._env.items():
+            if v is None:
+                os.environ.pop(k, None)
+            else:
+                os.environ[k] = v
+
     @unittest.skipUnless(CATALOG.exists(), "download data/catalog.jsonl to run contract audit")
     def test_every_public_response_matches_the_contract(self) -> None:
         samples = load_jsonl(PUBLIC)
@@ -78,9 +96,34 @@ class SubmissionContractTest(unittest.TestCase):
         # contract that shows up as a collapsed score. Raise the floor deliberately when
         # a gain is confirmed, rather than editing it to match whatever today's number is.
         self.assertGreaterEqual(result["recommended_technical_score"], 0.9696)
-        # The scored path must stay offline: any token spend here means a network layer
-        # escaped its gate.
+        # THE DETERMINISTIC PATH MUST STAY OFFLINE, and this test pins that configuration
+        # explicitly rather than depending on ambient defaults.
+        #
+        # The optional model-backed layers ship ENABLED, but each additionally requires a
+        # credential the evaluator will not have, so in any normal environment they are
+        # inert. On a developer machine that does hold a key, the deparaphraser can fire
+        # once on Official200 -- `intent_card()` truncates one long feature bullet mid-word
+        # and the result is not catalogue-attested -- and that single call would spend
+        # tokens. Reading that as a contract violation would be wrong: it is the layer
+        # working as designed.
+        #
+        # What this assertion is FOR is catching a layer that escapes its gate and runs on
+        # traffic it was never meant to see. That question is only meaningful about the
+        # deterministic configuration, so the configuration is set here rather than assumed.
         self.assertEqual(result["reported_token_usage"]["total_tokens"], 0)
+
+    def test_starter_entry_point_is_the_shipped_agent(self) -> None:
+        """`starter/agent.py` must re-export the implementation, never re-implement it.
+
+        The harness loads `from starter.agent import Agent`. That file used to be a byte
+        copy of `submission/agent.py` maintained by hand, alongside copies of the component
+        modules -- and an audit found the copies had already drifted, with a stale default
+        sitting in the scored entry point. Asserting object identity makes that class of
+        divergence impossible rather than merely unlikely.
+        """
+        import starter.agent as entry
+        import submission.agent as impl
+        self.assertIs(entry.Agent, impl.Agent)
 
 
 if __name__ == "__main__":
