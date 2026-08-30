@@ -330,25 +330,87 @@ Every configuration run on the same fixed 140/60 dev/held-out split of the publi
 Tuning read the held-out column; a change that won on dev and lost on held-out was
 treated as noise and dropped.
 
+All numbers below come from a **single sweep**, every variant measured against the same
+shipped baseline. (An earlier revision of this table mixed two baselines and is superseded.)
+
 | Configuration | dev (140) | held-out (60) | all (200) |
 |---|---|---|---|
-| **shipped** (`w_category=3.0`, `w_profile=0.0`) | **0.8930** | **0.8856** | **0.8907** |
-| `w_category = 1.5` | 0.8884 | 0.8811 | 0.8862 |
-| `w_category = 0` (no category signal) | 0.8096 | 0.8059 | 0.8085 |
-| `w_profile = 0.3` | 0.8884 | 0.8811 | 0.8862 |
-| `w_profile = 1.2` | 0.8614 | 0.8300 | 0.8517 |
-| `demote_shown = 0` (no session-graph feedback) | 0.8687 | 0.8579 | 0.8654 |
-| facets folded into the AND | 0.8851 | 0.8784 | 0.8830 |
-| latent-semantic channel on | 0.8885 | 0.8805 | 0.8861 |
+| **shipped** | **0.8930** | **0.8856** | **0.8907** |
+| `w_category = 1.5` | 0.8930 | 0.8818 | 0.8895 |
+| `w_category = 0` (no category signal) | 0.8253 | 0.8117 | 0.8210 |
+| `w_profile = 0.3` | 0.8888 | 0.8828 | 0.8869 |
+| `w_profile = 1.2` | 0.8612 | 0.8310 | 0.8518 |
+| `demote_shown = 0` (no session-graph feedback) | 0.8763 | 0.8659 | 0.8731 |
+| facets folded into the AND | 0.8922 | 0.8855 | 0.8901 |
+| latent-semantic channel on | 0.8932 | 0.8886 | 0.8918 |
 
 Read three things off this table:
 
-- **The category signal is worth 0.082.** Larger than anything else measured.
-- **Session-graph demotion is worth 0.025.** The feedback edge earns its place.
-- **The latent-semantic channel is worth nothing — 0.8861 against 0.8862.** That is not
-  a failure of the channel; it is direct evidence that the public set carries no
-  semantic content for it to find. It stays off by default and remains available as the
-  paraphrase hedge for the private set.
+- **The category signal is worth 0.070.** Larger than anything else measured.
+- **Session-graph demotion is worth 0.018.** The feedback edge earns its place.
+- **The latent-semantic channel is worth +0.001** — inside noise on dev (+0.0002), about
+  one session on held-out. It costs **45 s of extra startup** (18 s → 63 s) and a
+  scikit-learn runtime dependency, so it stays off. Its real job is the paraphrase hedge
+  for the private set, not points on this one.
+
+---
+
+## 10. Comparison with the alternative "M and S" formula
+
+A separate design (`formula.md`, developed in parallel) ranks with a two-key sort:
+**M**, an integer count of how many of the shopper's sentences a product matches, then
+**S**, a weighted score `Σ W×E×R×U + category + profile + reviews`. The two are **not
+the same formula**. The differences, and what each is worth here:
+
+| | This agent | The M/S formula |
+|---|---|---|
+| Requirement filtering | **hard AND** — keep only products matching all, backing off the vaguest first | soft — every product scored, `M` counts matches |
+| Sort | one weighted score | lexicographic: `M`, then `S` |
+| Requirement weighting | all equal | scaled by rarity, `R = ln(1 + N/n)` |
+| Match quality | binary (exact phrase or not) | graded ladder, `E` = 1.00 / 0.85 / 0.55 / 0.25 |
+| Category | flat weight × path overlap | `0.9 × ln(1 + N/n_cat)` |
+| Popularity | `log1p(ratings) × stars`, weight 0.9 | capped-linear, ≤ 0.07 total |
+| When to answer | every turn | gated: unique top `M`, or from turn 3 |
+
+Its distinctive ideas were ported into this reranker one at a time and measured on the
+same split:
+
+| Ported idea | dev | held-out | all |
+|---|---|---|---|
+| shipped (none of them) | **0.8930** | **0.8856** | **0.8907** |
+| rarity-weighted requirements (`R`) | 0.8930 | 0.8856 | 0.8907 |
+| lexicographic `M` then `S` | 0.8930 | 0.8856 | 0.8907 |
+| both together | 0.8930 | 0.8856 | 0.8907 |
+| popularity capped at 0.07 | 0.8930 | 0.8856 | 0.8907 |
+| rarity-scaled category | 0.8891 | 0.8692 | 0.8829 |
+| profile weight 0.12 | 0.8909 | 0.8866 | 0.8896 |
+| all five combined | 0.8561 | 0.8304 | 0.8481 |
+
+**Nothing improves on the shipped ranker, and the first four change nothing at all.**
+The reason is structural, and it is worth stating precisely:
+
+> Over all **336 turns** of a full public-set run, the ten products we emit **always
+> satisfy the same number of requirements as each other** — 336 turns out of 336, zero
+> exceptions.
+
+`M` is therefore constant across everything we rank, so sorting by it, or weighting it by
+rarity, cannot reorder anything. That is not luck: our conjunctive AND has already
+*filtered* to products satisfying every requirement, upstream of the reranker. Filtering
+is strictly stronger than scoring-by-count whenever the target really does satisfy all of
+them — which the public set does 100% of the time (§4). The M/S formula spends its
+primary sort key recovering a property we enforce as a precondition, which then leaves
+`S` doing all the real work.
+
+The switches are kept, defaulting off, in `RankConfig`: `idf_coverage`, `lexicographic`,
+`idf_category`. Re-run the comparison with `python harness/ablate.py`.
+
+**What this comparison does not show.** The M/S agent as a whole was never run — its code
+is not in this repository — so this is a comparison of *ranking formulas inside our
+pipeline*, not of two complete agents. One of its ideas is untested here and is not a
+ranking change at all: **gating the answer** until a unique top-`M` exists, or turn 3.
+That trades MTTC for MRR, and the metric algebra in §8 says rank is worth roughly 13× a
+turn once recall is saturated — so it could genuinely pay. It is the one part of that
+design worth measuring next.
 
 ---
 

@@ -24,6 +24,8 @@ The remaining channels carry the early turns and the paraphrase risk:
 """
 from __future__ import annotations
 
+import math
+
 import numpy as np
 
 from .config import RetrievalConfig
@@ -120,17 +122,45 @@ def conjunctive_pool(
     return _EMPTY, [], [e["constraint"] for e in dropped]
 
 
-def coverage_vector(kg: KnowledgeGraph, intent: dict) -> tuple[np.ndarray, float]:
-    """Per-document weighted count of satisfied constraints, and the achievable max."""
+def coverage_vector(kg: KnowledgeGraph, intent: dict) -> dict:
+    """How well each product satisfies the requirements the shopper has given.
+
+    Returns three views of the same thing, because the reranker can be configured to
+    use either:
+
+    * ``coverage``   sum of requirement weights satisfied (every requirement equal)
+    * ``idf``        the same sum, but each requirement scaled by ln(1 + N/df) so a
+                     rare phrase counts for more than boilerplate
+    * ``count``      plain integer count, for a strict "more requirements always wins"
+                     sort
+
+    The IDF view only changes anything when products differ in *which* requirements
+    they satisfy. Inside a conjunctive pool every member satisfies all of them, so the
+    three agree; it matters on the early turns, where the pool is still wide.
+    """
+    n = float(len(kg))
     coverage = np.zeros(len(kg), dtype=np.float32)
+    idf_coverage = np.zeros(len(kg), dtype=np.float32)
+    count = np.zeros(len(kg), dtype=np.int16)
     total = 0.0
+    idf_total = 0.0
     for constraint in intent["constraints"]:
         weight = float(constraint["weight"])
         total += weight
         docs = kg.phrase_docs(constraint["norm"])
+        idf = math.log(1.0 + n / max(1, docs.size))
+        idf_total += weight * idf
         if docs.size:
             coverage[docs] += weight
-    return coverage, total
+            idf_coverage[docs] += weight * idf
+            count[docs] += 1
+    return {
+        "coverage": coverage,
+        "idf": idf_coverage,
+        "count": count,
+        "max": total,
+        "idf_max": idf_total,
+    }
 
 
 def facet_members(kg: KnowledgeGraph, intent: dict,
@@ -208,7 +238,8 @@ def query_terms(intent: dict) -> list[str]:
 def retrieve(kg: KnowledgeGraph, intent: dict, cfg: RetrievalConfig) -> RetrievalResult:
     """Run every channel and fuse. `pool` is the authoritative narrow candidate set."""
     pool, used, dropped = conjunctive_pool(kg, intent, cfg)
-    coverage, coverage_max = coverage_vector(kg, intent)
+    cov = coverage_vector(kg, intent)
+    coverage, coverage_max = cov["coverage"], cov["max"]
 
     result = RetrievalResult(
         pool=pool,
@@ -217,6 +248,9 @@ def retrieve(kg: KnowledgeGraph, intent: dict, cfg: RetrievalConfig) -> Retrieva
         dropped_constraints=[c["text"] for c in dropped],
         coverage=coverage,
         coverage_max=coverage_max,
+        idf_coverage=cov["idf"],
+        idf_coverage_max=cov["idf_max"],
+        match_count=cov["count"],
         channels={},
         direct_emit=bool(0 < pool.size <= cfg.direct_emit_max),
     )

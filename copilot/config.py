@@ -70,6 +70,16 @@ class RankConfig:
     demote_shown: float = 4.0       # previously shown *and* provably not the target
     superseded_weight: float = 0.35  # an overridden constraint is down-weighted, never deleted
 
+    # --- switches for the alternative scoring formula (see docs/ARCHITECTURE.md) ---
+    # Weight each satisfied requirement by ln(1 + N/df) instead of treating them all
+    # equally, so a rare phrase counts for more than "Imported".
+    idf_coverage: bool = False
+    # Sort strictly by "how many requirements does this product satisfy" first, and use
+    # the blended score only to break ties, instead of one weighted sum.
+    lexicographic: bool = False
+    # Scale the category bonus by how narrow the category is, rather than a flat weight.
+    idf_category: bool = False
+
     # The anonymised `preference_tags` scored as noise and is therefore off. Measured
     # on the held-out split: 0.0 -> 0.8856, 0.3 -> 0.8811, 1.2 -> 0.8300. The tags are
     # generic ("fit", "comfort", "durability") and match most of the catalog, so they

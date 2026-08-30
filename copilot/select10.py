@@ -19,6 +19,8 @@ slate. The ordering signals, strongest first:
 """
 from __future__ import annotations
 
+import math
+
 import numpy as np
 
 from .config import RankConfig
@@ -54,20 +56,33 @@ def select(
         else:
             candidates = np.argsort(-kg.popularity)[: top_k * 20].tolist()
 
-    coverage: np.ndarray = retrieval.get("coverage")
-    coverage_max = float(retrieval.get("coverage_max") or 1.0) or 1.0
+    if cfg.idf_coverage:
+        coverage: np.ndarray = retrieval.get("idf_coverage")
+        coverage_max = float(retrieval.get("idf_coverage_max") or 1.0) or 1.0
+    else:
+        coverage = retrieval.get("coverage")
+        coverage_max = float(retrieval.get("coverage_max") or 1.0) or 1.0
+    match_count = retrieval.get("match_count")
     pop_max = float(kg.popularity.max()) or 1.0
     demoted = demoted_asins(session_graph)
     profile = _profile_terms(user_profile)
 
     category_terms = set(intent.get("category_terms") or [])
+    category_bonus = cfg.w_category
+    if cfg.idf_category and category_terms:
+        # A narrow shelf is worth more than a broad one. ln(1+N/n) normalised by
+        # ln(1+N) so the weight keeps its familiar scale.
+        n_cat = int(kg.category_docs(list(category_terms)).size)
+        if n_cat:
+            category_bonus = cfg.w_category * (
+                math.log(1.0 + len(kg) / n_cat) / math.log(1.0 + len(kg)))
     facets = intent["facets"]
     want_colors = [c.lower() for c in (facets.get("color") or [])]
     want_materials = [m.lower() for m in (facets.get("material") or [])]
     want_departments = [d.lower() for d in (facets.get("department") or [])]
     want_price = facets.get("price")
 
-    scored: list[tuple[float, float, int]] = []
+    scored: list[tuple[float, float, float, int]] = []
     for doc in candidates:
         node = kg.nodes[doc]
         cov = float(coverage[doc]) / coverage_max if coverage is not None else 0.0
@@ -87,7 +102,7 @@ def select(
 
         if category_terms:
             path = set(" ".join(node["category_path"]).split())
-            score += cfg.w_category * (len(category_terms & path) / len(category_terms))
+            score += category_bonus * (len(category_terms & path) / len(category_terms))
 
         score += cfg.w_popularity * (node["popularity"] / pop_max)
 
@@ -98,10 +113,13 @@ def select(
         if node["parent_asin"] in demoted:
             score -= cfg.demote_shown
 
-        scored.append((-score, -node["popularity"], doc))
+        # Lexicographic mode makes "satisfies more requirements" strictly dominant, so
+        # no amount of category, facet or popularity credit can overturn it.
+        primary = -int(match_count[doc]) if (cfg.lexicographic and match_count is not None) else 0.0
+        scored.append((primary, -score, -node["popularity"], doc))
 
     scored.sort()
     return [
         {"parent_asin": kg.asins[doc], "score": round(-neg_score, 6)}
-        for neg_score, _, doc in scored[:top_k]
+        for _, neg_score, _, doc in scored[:top_k]
     ]
