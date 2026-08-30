@@ -636,3 +636,86 @@ Until that is done, node 5 stays measured but unintegrated.
 
 Node 5 is **validated as a mechanism and blocked on calibration**. It is the first node in
 the 3/4/5 cluster to survive contact with the runtime distribution.
+
+## V2.49 — Node 7 clears, and "unreachable" was wrong everywhere
+
+Node 7's clearance condition asks for no ranking regression on Official200 and Unseen800.
+V2.46 had measured only Official200 and the paraphrase suite, so node 7 had never actually
+been cleared.
+
+| suite | suppression | LLM arm | delta | reaches | calls |
+|---|---|---|---|---|---|
+| official200 | 0.970100 | 0.970100 | **+0.000000** | 1 | 0 |
+| org-proxy | 0.952788 | 0.952788 | **+0.000000** | 2 | 0 |
+| review800 | 0.945125 | 0.945125 | **+0.000000** | 7 | 0 |
+| uniform | 0.882763 | 0.882763 | **+0.000000** | 9 | 0 |
+| inverse | 0.866062 | 0.866062 | **+0.000000** | 7 | 0 |
+| attr-para | 0.833000 | 0.870800 | +0.037800 | 304 | 0 |
+
+**Node 7 clears**: worst decision-criterion delta +0.000000.
+
+### REACHES is not CALLS, and conflating them produced a false claim
+
+The first version of this run reported `calls` and concluded "official200 triggered zero
+calls, therefore byte-identical by construction". Both halves were wrong.
+
+`calls` counts cache MISSES. The resolver caches, so the same run showed the
+attribute-paraphrase suite at 0 calls while it plainly resolved hundreds of phrases. A
+cached resolution is still a resolution.
+
+The scoring arm also hooks `_observe`/`_extract_templated`, while `_resolve` is
+additionally called from `_seed_from_override_opening` — which is the path by which
+Official200's one unattested clause (an `intent_card()` bullet truncated mid-word) arrives.
+Absence of calls was never evidence of absence of reach.
+
+With a probe that counts reaches across all call sites: **every decision suite reaches the
+resolver.** None is structurally untouched. That makes the result stronger, not weaker —
+the resolver fires 26 times across the five decision suites and moves the score by exactly
+zero. Safety by measurement on live invocations, rather than safety by never being invoked.
+
+This is the third time in this programme that a number measured on the wrong quantity
+looked like a verdict: top-1 for the encoders, string equality for V2.45, and
+calls-for-reaches here.
+
+## V2.51 — the open-vocabulary suite
+
+Built to replace the 27-phrase suite that blocks every effect-size claim in this document.
+
+| property | prior suite | open-vocabulary suite |
+|---|---|---|
+| distinct paraphrases | 27 | **204** |
+| targets | Official200 | review800, **overlap 0** |
+| generator | 27 hand-written rules | Claude Haiku (Anthropic) |
+| solver under test | gpt-oss-120b | gpt-oss-120b (Groq) |
+| generator independent of solver | n/a | **yes** |
+| atoms rewritten | 551 across 192 sessions | 1,280 across 710 sessions |
+
+**Generator independence is the assumption that would invalidate everything.** A model that
+both writes and solves the paraphrases is inverting its own encoding, and the result would
+be inflated by an unknown amount. Haiku writes, Groq's gpt-oss-120b solves.
+
+### Filter results — 78.5% pass, against a prior attempt's 94% failure
+
+| rejected | n | example |
+|---|---|---|
+| shared content stem | 33 | `color black` -> `in the darkest colour` |
+| SKIP (product codes, measurements) | 16 | `platform measures approximately 1` |
+| already catalogue-attested | 1 | `man made` -> `created in a laboratory` |
+| **present in the prior 27-rule suite** | **6** | `cotton` -> `made from a soft plant fibre` |
+
+The last row is a mistake made while building this suite and then caught. The generation
+prompt illustrated the task with seven worked examples, **all copied from the old suite**,
+and the generator reproduced them verbatim. Those are the only phrases a resolver could
+plausibly have been measured on before — precisely the contamination this suite exists to
+remove. Excluding them drops high-frequency atoms (`cotton`, `imported`, `leather`) and
+cuts coverage from 2,092 atoms to 1,280. Shrinking the gap is the correct price.
+
+Function words are excluded from the stem-overlap test. Comparing them rejected good rows
+for the wrong reason (`pull on closure` vs `slips on without separate fasteners` collides
+only on "on") and, since such collisions are commoner in multi-word atoms, would have
+skewed the surviving suite toward single-word atoms. Content words are still compared in
+full, so `hand wash only` -> `wash by hand` is still caught.
+
+The suite ships with a canonical control materialised from the same sessions, because a
+paraphrase score is only interpretable against the same base materialised the same way.
+Results are compared as FRACTIONS of the gap, never as raw scores against Official200's.
