@@ -10,8 +10,8 @@ Every node is named after what it actually does:
       -> route                    is this the first message, or a follow-up?
       -> read_first_message       build the shopper's intent from the opening line
          update_with_new_info     or update the intent we already have
-      -> narrow_search            we have requirements: search precisely
-         broad_search             we have none: show the category and ask
+      -> buying_search            we hold requirements: search precisely
+         browse_search             we hold none: show the category and ask
       -> search_catalog           run the searches against the product index
       -> remember_turn            write this turn into the conversation memory
       -> pick_top_10              rank, push down what we know is wrong, take 10
@@ -51,7 +51,7 @@ class CopilotState(TypedDict, total=False):
     user_message: str
 
     next_step: str             # "read_first_message" | "update_with_new_info"
-    search_mode: str           # "narrow" | "broad" — decided fresh every turn
+    search_mode: str           # "buying" | "browse" — decided fresh every turn
     shopper_intent: dict       # what we know the shopper wants (JSON)
     session_graph: dict        # what has happened in this conversation (JSON)
 
@@ -203,18 +203,18 @@ def build_graph(kg: KnowledgeGraph, config: CopilotConfig, scratch: dict):
         conversation down the poorer path.
 
         It is also re-decided every turn, so a browsing chat that starts with nothing
-        moves to the narrow search by itself as soon as the shopper answers.
+        moves to the buying search by itself as soon as the shopper answers.
         """
         live = [c for c in state["shopper_intent"]["constraints"] if not c["superseded"]]
-        return "narrow_search" if live else "broad_search"
+        return "buying_search" if live else "browse_search"
 
-    def narrow_search(state: CopilotState) -> dict:
+    def buying_search(state: CopilotState) -> dict:
         """We have requirements: lock them in and keep only products matching all."""
-        return {"search_mode": "narrow", "steps": [("search_mode", "narrow")]}
+        return {"search_mode": "buying", "steps": [("search_mode", "buying")]}
 
-    def broad_search(state: CopilotState) -> dict:
+    def browse_search(state: CopilotState) -> dict:
         """We only have a category: show its most popular products and ask early."""
-        return {"search_mode": "broad", "steps": [("search_mode", "broad")]}
+        return {"search_mode": "browse", "steps": [("search_mode", "browse")]}
 
     # ------------------------------------------------------- search the index
     def search_catalog(state: CopilotState) -> dict:
@@ -299,8 +299,8 @@ def build_graph(kg: KnowledgeGraph, config: CopilotConfig, scratch: dict):
     builder.add_node("read_first_message", read_first_message)
     builder.add_node("update_with_new_info", update_with_new_info)
     builder.add_node("llm_rescue", llm_rescue_node)
-    builder.add_node("narrow_search", narrow_search)
-    builder.add_node("broad_search", broad_search)
+    builder.add_node("buying_search", buying_search)
+    builder.add_node("browse_search", browse_search)
     builder.add_node("search_catalog", search_catalog)
     builder.add_node("remember_turn", remember_turn)
     builder.add_node("pick_top_10", pick_top_10)
@@ -315,20 +315,20 @@ def build_graph(kg: KnowledgeGraph, config: CopilotConfig, scratch: dict):
     )
     builder.add_conditional_edges(
         "read_first_message", choose_search_mode,
-        {"narrow_search": "narrow_search", "broad_search": "broad_search"},
+        {"buying_search": "buying_search", "browse_search": "browse_search"},
     )
     # A follow-up turn may first divert through the LLM rescue.
     builder.add_conditional_edges(
         "update_with_new_info", needs_rescue,
         {"llm_rescue": "llm_rescue",
-         "narrow_search": "narrow_search", "broad_search": "broad_search"},
+         "buying_search": "buying_search", "browse_search": "browse_search"},
     )
     builder.add_conditional_edges(
         "llm_rescue", choose_search_mode,
-        {"narrow_search": "narrow_search", "broad_search": "broad_search"},
+        {"buying_search": "buying_search", "browse_search": "browse_search"},
     )
-    builder.add_edge("narrow_search", "search_catalog")
-    builder.add_edge("broad_search", "search_catalog")
+    builder.add_edge("buying_search", "search_catalog")
+    builder.add_edge("browse_search", "search_catalog")
     builder.add_edge("search_catalog", "remember_turn")
     builder.add_edge("remember_turn", "pick_top_10")
     builder.add_edge("pick_top_10", "choose_question")

@@ -174,16 +174,27 @@ bounds what any retriever can do: 0.53% of rows carry no distinguishing text at 
 
 ## 3. What this means for the design
 
-1. **The lexical channel carries the competition.** In production, a two-tower dense
-   model trained on click and purchase logs carries this weight. Here no behavioural
-   data exists, and the customer quotes the catalog, so exact matching takes its place.
-2. **Query expansion and commonsense enrichment are the wrong tools.** Both widen a
-   query that already contains the answer. Removed.
-3. **Ask early and ask unrestricted.** Asking is free — a turn carries recommendations
-   *and* a question, and the hit is checked before the customer replies.
-4. **Semantic retrieval earns nothing on this set — and we can prove it.** With the
-   latent-semantic channel on: 0.8861. Off: 0.8862. That is not a broken channel, it is
-   a measurement of how much semantic content the public set contains.
+Each of these turned into a component, documented separately:
+
+1. **Exact matching carries the competition.** In production a dense model trained on
+   purchase logs would carry this weight. Here no behavioural data exists and the shopper
+   quotes the catalog, so exact matching takes its place.
+   → [TEXT_MATCHING.md](TEXT_MATCHING.md)
+2. **Intersect, do not score.** Keeping only products that satisfy every stated
+   requirement finds the right answer 100% of the time, with a typical set size of one.
+   → [RETRIEVAL.md](RETRIEVAL.md)
+3. **Query expansion and commonsense enrichment are the wrong tools.** Both widen a query
+   that already contains the answer. Removed.
+   → [ARCHITECTURE.md](ARCHITECTURE.md#why-query-expansion-and-cosmo-were-removed)
+4. **Ask early, and ask unrestricted.** Asking is free here — one reply carries
+   recommendations *and* a question, and the win is checked before the shopper replies.
+   → [ASK_POLICY.md](ASK_POLICY.md)
+5. **Popularity is a real signal, because the target is a real purchase.** Ranking a
+   narrowed set by popularity alone reaches Hit@10 0.945.
+   → [RANKING.md](RANKING.md)
+6. **Meaning-based retrieval earns nothing here — and we can prove it.** With the
+   latent-semantic channel on: 0.8928. Off: 0.8927. That is not a broken channel, it is a
+   measurement of how much semantic content this data contains.
 
 ---
 
