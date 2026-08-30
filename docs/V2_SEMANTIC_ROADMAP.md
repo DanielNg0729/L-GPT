@@ -466,3 +466,59 @@ So: nothing may be keyed, sized, cached or tuned to those 27 phrases (the runtim
 gitignored for exactly this reason), and **96% of oracle is not a shippable claim until it
 is reproduced on an open-vocabulary suite whose paraphrases were generated independently
 of these.** Until then V2.46 establishes sign and mechanism, not effect size.
+
+## V2.47 — recall@k, and a correction to "the encoders are hopeless"
+
+### The claim that was wrong
+
+V2.41 measured encoder recall only to k=10, where dev200 sat at 0.0896–0.1493. That was
+read as "retrieval has no signal, so a candidate-list arm is capped around 15%". Extending
+the curve to the full 7,922-canonical index shows the opposite: it does not flatten, it
+climbs steeply past k=10.
+
+| encoder | R@10 | R@50 | R@100 | R@200 | median rank |
+|---|---|---|---|---|---|
+| MiniLM-L6 (22M, incumbent) | 0.1194 | 0.3284 | **0.7612** | — | 70 |
+| all-mpnet-base-v2 | 0.1045 | 0.4478 | 0.7164 | — | 56 |
+| bge-small-en-v1.5 | 0.1493 | 0.4030 | 0.6269 | 0.8657 | 72 |
+| e5-base-v2 | 0.0896 | 0.3134 | 0.5373 | — | 96 |
+| Qwen3-Embedding-0.6B | 0.1642 | 0.3284 | 0.6119 | — | 82 |
+
+The correct canonical sits at **median rank 56–96**. The encoders are not clueless; their
+signal is DIFFUSE. Every prior conclusion about them was drawn from top-1 or k≤10, which
+is the wrong statistic for a candidate list — a list needs recall, and recall was never
+measured past 10. `choose` therefore has a real ceiling near 0.76, not near 0.15.
+
+### The LLM-based embedder does not help
+
+The question "can we use the LLM's own encoder" has no answer at the API — `gpt-oss-120b`
+is decoder-only and Groq serves no embedding endpoint. Open-weight LLM embedders are the
+usable form of the idea, and they lose: **Qwen3-Embedding-0.6B (600M, 2025) is beaten at
+R@100 by all-MiniLM-L6-v2 (22M, 2021)**, on both benchmarks. `gte-Qwen2-1.5B-instruct`
+failed to load (`Qwen2Config has no attribute rope_theta`; its remote code needs a newer
+transformers than this environment pins) and was not pursued, since Qwen3 already tested
+the hypothesis. Scale and recency are not the missing ingredient.
+
+### Selection protocol, and its visible cost
+
+dev200 shares paraphrase vocabulary with the suite that scores the end-to-end arms, so
+selecting a retriever or a k there would be selecting on the evaluation data. **Selection
+happens on the train-only synonymy corpus only.**
+
+| encoder | corpus R@20 | R@50 | R@100 | R@200 |
+|---|---|---|---|---|
+| MiniLM-L6 | 0.7418 | 0.8242 | 0.8681 | 0.8956 |
+| all-mpnet-base-v2 | 0.7912 | 0.8571 | 0.8791 | 0.9231 |
+| bge-small-en-v1.5 | 0.7363 | 0.7912 | 0.8407 | 0.8791 |
+| **e5-base-v2** | 0.8022 | 0.8846 | **0.9396** | 0.9560 |
+| Qwen3-Embedding-0.6B | 0.5604 | 0.7033 | 0.7747 | 0.8352 |
+
+The corpus selects **e5-base-v2 at k=100**. That model is the WORST of the six on dev200
+(R@100 0.5373 against MiniLM's 0.7612) — so honouring the protocol hands the `choose` arm
+a materially weaker retriever than selecting on the evaluation surface would have. The
+handicap is the evidence that the protocol is real rather than decorative, and it is
+recorded here so the arm's result is not later re-read as if the best retriever had been
+used.
+
+k is likewise fixed at 100 from the corpus curve (0.8846 → 0.9396 → 0.9560 for k = 50 →
+100 → 200, i.e. near saturation), never from the end-to-end score.
