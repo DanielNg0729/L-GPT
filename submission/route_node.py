@@ -84,7 +84,24 @@ LABELS = (
     "override_opening", "override_update", "plain_opening",
 )
 OPENING = frozenset({"buying_opening", "plain_opening", "override_opening"})
-DEFAULT_MODEL = Path(__file__).resolve().parent / "models" / "route_classifier"
+# WHERE THE CHECKPOINT COMES FROM: an explicit override, then a local directory that
+# actually holds weights, then the Hub. The local branch lets a developer point at a
+# training output without publishing it; the Hub default is what makes a fresh clone work,
+# because `submission/models/` is gitignored and absent there.
+HUB_ID = os.environ.get("V2_ROUTE_HUB", "KhiemGOM/techjam-route-classifier")
+_LOCAL = Path(__file__).resolve().parent / "models" / "route_classifier"
+
+
+def _resolve_source() -> str:
+    override = os.environ.get("V2_ROUTE_MODEL_DIR")
+    if override:
+        return override
+    # A directory with no weights in it is not a checkpoint. Requiring the safetensors
+    # file avoids the Git-LFS failure this migration existed to end: a 134-byte pointer
+    # left in place of the weights, loading "successfully", and scoring as if healthy.
+    if _LOCAL.is_dir() and any(_LOCAL.glob("*.safetensors")):
+        return str(_LOCAL)
+    return HUB_ID
 
 
 class StrictGatedRouteNode:
@@ -93,8 +110,7 @@ class StrictGatedRouteNode:
     MAX_LEN = 80
 
     def __init__(self, model_dir: Path | None = None) -> None:
-        self.model_dir = Path(model_dir or os.environ.get("V2_ROUTE_MODEL_DIR",
-                                                          DEFAULT_MODEL))
+        self.model_dir = str(model_dir) if model_dir else _resolve_source()
         flag = os.environ.get("V2_ROUTE", "1").strip().lower()
         self.enabled = flag not in {"0", "false", "no", "off"}
         self._model = self._tokenizer = self._torch = self._device = None
@@ -111,16 +127,21 @@ class StrictGatedRouteNode:
             return True
         if not self.enabled or self.disabled_reason is not None:
             return False
-        if not self.model_dir.is_dir():
-            self._disable("model directory missing")
-            return False
+        # NO DIRECTORY CHECK. `self.model_dir` may be a Hub id, which is not a path. The
+        # previous version tested `is_dir()` and disabled with "model directory missing",
+        # so on any FRESH CLONE -- where `submission/models/` is gitignored and absent --
+        # both learned layers switched themselves off in silence. It only looked healthy
+        # here because this machine still had the training output on disk. A missing
+        # checkpoint, an unreachable Hub or absent credentials now all surface as a load
+        # exception below, which is the same safe state, and `disabled_reason` records it.
         try:
             import torch  # Deliberately lazy: never imported on a literal V1 path.
             from transformers import AutoModelForSequenceClassification, AutoTokenizer
+            local_only = Path(self.model_dir).is_dir()
             self._tokenizer = AutoTokenizer.from_pretrained(
-                self.model_dir, local_files_only=True)
+                self.model_dir, local_files_only=local_only)
             model = AutoModelForSequenceClassification.from_pretrained(
-                self.model_dir, local_files_only=True)
+                self.model_dir, local_files_only=local_only)
             self._device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
             model.to(self._device).eval()
             self._model, self._torch = model, torch

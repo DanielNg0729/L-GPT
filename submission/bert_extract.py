@@ -64,8 +64,24 @@ import os
 import re
 from pathlib import Path
 
-MODEL_DIR = Path(os.environ.get(
-    "BERT_TAGGER_DIR", str(Path(__file__).resolve().parent / "models" / "scaffolding_tagger")))
+# WHERE THE CHECKPOINT COMES FROM: an explicit override, then a local directory that
+# actually holds weights, then the Hub. The Hub default is what makes a fresh clone work --
+# `submission/models/` is gitignored, so on any clone but this machine the local path does
+# not exist.
+HUB_ID = os.environ.get("BERT_TAGGER_HUB", "KhiemGOM/techjam-scaffolding-tagger")
+_LOCAL = Path(__file__).resolve().parent / "models" / "scaffolding_tagger"
+
+
+def _resolve_source() -> str:
+    override = os.environ.get("BERT_TAGGER_DIR")
+    if override:
+        return override
+    if _LOCAL.is_dir() and any(_LOCAL.glob("*.safetensors")):
+        return str(_LOCAL)
+    return HUB_ID
+
+
+MODEL_DIR = _resolve_source()
 
 TOKEN_RE = re.compile(r"[a-z0-9]+", re.I)
 MAX_WORDS = 96
@@ -74,8 +90,8 @@ TRIP_AFTER = 5
 
 
 class ScaffoldingTagger:
-    def __init__(self, model_dir: Path = MODEL_DIR) -> None:
-        self.model_dir = Path(model_dir)
+    def __init__(self, model_dir=MODEL_DIR) -> None:
+        self.model_dir = str(model_dir)
         self.calls = self.failures = self.stripped = 0
         self._consecutive = 0
         self._open_reason: str | None = None
@@ -124,16 +140,20 @@ class ScaffoldingTagger:
             return True
         if not self._flag or self._open_reason is not None:
             return False
-        if not self.model_dir.exists():
-            self._trip("model directory missing")
-            return False
+        # NO EXISTENCE CHECK: `model_dir` may be a Hub id, which is not a path. Testing it
+        # meant that on a fresh clone -- where `submission/models/` is gitignored and
+        # therefore absent -- this layer disabled itself silently with "model directory
+        # missing". A local directory that exists but holds no weights is caught below.
         try:
             import torch                      # noqa: PLC0415 - deliberately lazy
             from transformers import (AutoModelForTokenClassification,  # noqa: PLC0415
                                       AutoTokenizer)
             self._torch = torch
-            self._tok = AutoTokenizer.from_pretrained(str(self.model_dir))
-            model = AutoModelForTokenClassification.from_pretrained(str(self.model_dir))
+            local_only = Path(self.model_dir).is_dir()
+            self._tok = AutoTokenizer.from_pretrained(
+                self.model_dir, local_files_only=local_only)
+            model = AutoModelForTokenClassification.from_pretrained(
+                self.model_dir, local_files_only=local_only)
             requested = os.environ.get("BERT_DEVICE", "auto").strip().lower()
             self._device = torch.device("cuda:0") if requested != "cpu" and torch.cuda.is_available() else torch.device("cpu")
             model.to(self._device)

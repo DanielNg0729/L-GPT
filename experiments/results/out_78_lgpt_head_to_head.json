@@ -1,0 +1,87 @@
+{
+  "experiment": "shipped agent vs L-GPT baseline, same evaluator, same suites",
+  "lgpt_repo": "D:\\Coding\\Models\\lgpt-baseline",
+  "configuration": "both deterministic; L-GPT rescue off, our hosted layers off",
+  "suites": {
+    "official200": {
+      "ours": {
+        "recommended_technical_score": 0.9715,
+        "hit_rate_at_10": 0.995,
+        "mrr": 0.995,
+        "mttc": 2.225,
+        "seconds": 38.2
+      },
+      "lgpt": {
+        "recommended_technical_score": 0.892711,
+        "hit_rate_at_10": 0.995,
+        "mrr": 0.694038,
+        "mttc": 1.65,
+        "seconds": 29.8
+      }
+    },
+    "org_proxy_800": {
+      "ours": {
+        "recommended_technical_score": 0.963863,
+        "hit_rate_at_10": 0.99375,
+        "mrr": 0.992292,
+        "mttc": 2.535,
+        "seconds": 124.4
+      },
+      "lgpt": {
+        "recommended_technical_score": 0.88781,
+        "hit_rate_at_10": 0.9975,
+        "mrr": 0.69045,
+        "mttc": 1.90375,
+        "seconds": 58.9
+      }
+    },
+    "review800": {
+      "ours": {
+        "recommended_technical_score": 0.956138,
+        "hit_rate_at_10": 0.985,
+        "mrr": 0.983542,
+        "mttc": 2.57125,
+        "seconds": 105.9
+      },
+      "lgpt": {
+        "recommended_technical_score": 0.881408,
+        "hit_rate_at_10": 0.995,
+        "mrr": 0.674528,
+        "mttc": 1.9225,
+        "seconds": 44.0
+      }
+    },
+    "uniform800": {
+      "ours": {
+        "recommended_technical_score": 0.918225,
+        "hit_rate_at_10": 0.955,
+        "mrr": 0.95,
+        "mttc": 3.21375,
+        "seconds": 126.8
+      },
+      "lgpt": {
+        "recommended_technical_score": 0.880618,
+        "hit_rate_at_10": 0.98625,
+        "mrr": 0.724309,
+        "mttc": 2.49,
+        "seconds": 78.4
+      }
+    },
+    "inverse800": {
+      "ours": {
+        "recommended_technical_score": 0.897825,
+        "hit_rate_at_10": 0.93,
+        "mrr": 0.92875,
+        "mttc": 3.29,
+        "seconds": 162.7
+      },
+      "lgpt": {
+        "recommended_technical_score": 0.878688,
+        "hit_rate_at_10": 0.96875,
+        "mrr": 0.762461,
+        "mttc": 2.72125,
+        "seconds": 81.7
+      }
+    }
+  }
+}

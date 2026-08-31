@@ -31,8 +31,21 @@ Verify the download against `data/SHA256SUMS`.
 python -m evaluator.local_evaluator
 ```
 
-Expect `recommended_technical_score = 0.970500`, with **0 prompt and 0 completion tokens**.
+Expect `recommended_technical_score = 0.971500`, with **0 prompt and 0 completion tokens**.
 No network access is required and no API key is used.
+
+The two learned checkpoints are **not** in the repository — they live on the Hugging Face
+Hub and are fetched on first use, only when a message fails the recognition gate. Nothing on
+the scored path needs them, so a clone with no network still reproduces the headline score.
+To pre-fetch them, or to point at a local copy:
+
+```bash
+python -c "from huggingface_hub import snapshot_download as d; [d(r) for r in ('KhiemGOM/techjam-route-classifier','KhiemGOM/techjam-scaffolding-tagger')]"
+```
+
+```bash
+V2_ROUTE_MODEL_DIR=/path/to/route_classifier BERT_TAGGER_DIR=/path/to/scaffolding_tagger python -m evaluator.local_evaluator
+```
 
 **Check that we did not touch what we were not allowed to touch:**
 
@@ -56,7 +69,7 @@ python tools/run_population_benchmark.py --only organizer_proxy_800   # just the
 
 | what you ran | expected |
 |---|---|
-| `evaluator.local_evaluator` | 0.970500 · HR@10 0.9950 · MRR 0.9950 · MTTC 2.275 |
+| `evaluator.local_evaluator` | 0.971500 · HR@10 0.9950 · MRR 0.9950 · MTTC 2.225 |
 | `verify_upstream_integrity.py` | all 6 organizer-owned files unmodified |
 | `unittest discover -s tests` | 29 tests, OK |
 | `run_population_benchmark.py` | 0.954163 / 0.947263 / 0.885581 / 0.867775 |
@@ -91,7 +104,7 @@ Scored through the organizer's own `evaluator/local_evaluator.py`, unmodified.
 
 | Evaluation | Sessions | HitRate@10 | MRR | MTTC | TechnicalScore |
 |---|---:|---:|---:|---:|---:|
-| Official public development set | 200 | 0.9950 | 0.9950 | 2.275 | **0.970500** |
+| Official public development set | 200 | 0.9950 | 0.9950 | 2.225 | **0.971500** |
 | Organizer-proxy population | 800 | 0.9860 | 0.9840 | 2.701 | **0.954163** |
 | Review-weighted unseen population | 800 | 0.9790 | 0.9760 | 2.746 | **0.947263** |
 | Uniform-target population | 800 | 0.9240 | 0.9170 | 3.572 | **0.885581** |
@@ -447,7 +460,7 @@ Scripts that call a hosted model say so in their docstring. Everything else runs
 
 ## Model, network, and cost disclosure
 
-- **Required external API: none.** The system scores 0.970500 with no network access.
+- **Required external API: none.** The system scores 0.971500 with no network access.
 - **Cost on the official evaluation: $0.00.** Reported token usage is 0 prompt and 0
   completion tokens, asserted by `tests/test_submission_contract.py`.
 - **Local models: two DistilBERT checkpoints** (dialogue-act router, content tagger),

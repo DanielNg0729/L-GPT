@@ -55,7 +55,12 @@ robustness/v2/open_vocabulary/.resolver_cache_open_vocab.json
 # 134-byte pointer in the working tree instead of the weights, and the agent kept scoring
 # its usual number because these layers are gated off clean traffic -- a dead model
 # reported as a healthy run. A clone without `git lfs pull`, or past a bandwidth quota,
-# reproduces exactly that. Hub resolution fails loudly instead.
+# reproduces exactly that. Hub resolution fails loudly instead -- and the code now
+# actually does that: `_resolve_source()` in route_node.py and bert_extract.py falls
+# back to the Hub id, and neither tests for a local directory before loading. An
+# earlier version claimed this in THIS COMMENT while still checking `is_dir()` and
+# disabling with "model directory missing", so both layers switched off silently on
+# every clone but the machine that trained them.
 submission/models/
 
 # Training outputs and provider-response caches. Neither belongs in the repository:
