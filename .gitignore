@@ -16,3 +16,7 @@ docs/participant_release_checklist.md
 tests/test_5core_builder.py
 tests/test_organizer_pipeline.py
 *.log
+# Response caches for the optional hosted layers. The agent never writes these -- only a
+# measurement harness that opts in by calling `flush()` -- but they hold conversation text
+# and resolved customer values, so they must never be committed.
+submission/.llm_*cache*.json
