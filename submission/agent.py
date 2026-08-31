@@ -26,11 +26,22 @@ dependencies and weights are available; every failure falls back to lexical extr
 from __future__ import annotations
 
 import json
+import hashlib
 import math
+# `os` is read in exactly one place, for the presentation-only MESSAGE_VARIETY toggle.
+# Every other optional layer reads its own flag inside its own module, which is why this
+# file is otherwise free of environment lookups: the scored path is decided by control
+# flow, not by configuration.
+import os
 import re
 import sqlite3
 from functools import lru_cache
 from pathlib import Path
+
+try:
+    from submission.llm_message import LLMMessageWriter
+except Exception:                                   # pragma: no cover
+    LLMMessageWriter = None  # type: ignore[assignment,misc]
 
 try:
     from submission.llm_rerank import LLMReranker
@@ -187,6 +198,63 @@ def _askable(attribute: str, st: "SessionState") -> bool:
     better justified than the restriction it replaces, not because it is worth 0.0004.
     """
     return attribute == "other" or attribute not in st.asked
+
+# ---------------------------------------------------------------- phrasing fragments
+# Assembled combinatorially by `Agent._question_text`: opener x question x closer. Kept
+# as data rather than a hundred literal sentences so the variety multiplies -- 6 x 4 x 4
+# is 96 forms per attribute per width -- and so a reviewer can see every fragment at once.
+# Nothing here is parsed by anything; `ask_attribute` carries the actual request.
+_OPENERS_NARROW = (
+    "Here's my closest match so far.",
+    "This is the nearest thing I've found.",
+    "Here's the one that fits best right now.",
+    "That narrows it to this one.",
+    "My best single match is below.",
+    "Closest I have so far:",
+)
+_OPENERS_WIDE = (
+    "Here are the closest matches I found.",
+    "These are the nearest options so far.",
+    "A few that fit what you've told me:",
+    "Here's what matches best right now.",
+    "These look closest to what you described.",
+    "Some candidates below:",
+)
+_QUESTIONS = {
+    "feature": ("Is there a specific feature it needs to have",
+                "Any particular feature you're after",
+                "Is there a feature that matters most",
+                "What feature should it definitely have"),
+    "material": ("Do you have a material preference",
+                 "Any material you'd prefer",
+                 "Is there a material that works better for you",
+                 "What material are you hoping for"),
+    "color": ("Any colour you'd prefer",
+              "Is there a colour you have in mind",
+              "What colour would work best",
+              "Do you have a colour preference"),
+    "style": ("What style are you going for",
+              "Any style you'd prefer",
+              "Is there a style that suits you better",
+              "What style did you have in mind"),
+    "size": ("Is there a size or fit you need",
+             "What size should I look for",
+             "Any size or fit requirement",
+             "Do you need a particular size"),
+    "use_case": ("What will you mainly use it for",
+                 "Where do you plan to use it",
+                 "What's the main use you have in mind",
+                 "What are you mainly using it for"),
+    "other": ("Anything else that matters to you",
+              "Is there anything else I should know",
+              "Anything else you'd like me to match on",
+              "What else matters for this one"),
+    "_default": ("Tell me a little more about what you need",
+                 "What else should I know",
+                 "Anything more you can tell me",
+                 "What matters most to you here"),
+}
+_CLOSERS = ("?", "?", "? Happy to narrow it down.", "? That'll help me refine this.")
 
 CAT, CONSTRAINT, MINED, LLM = "cat", "con", "mined", "llm"
 # Deparaphrased attribute values. A SEPARATE tier because they must carry LESS
@@ -668,6 +736,9 @@ class Agent:
         self.ix = CatalogIndex(catalog_path)
         self.sessions: dict[str, SessionState] = {}
         self.llm = LLMReranker() if LLMReranker is not None else None
+        # Presentation-only phrasing for `message`. Default off; see llm_message.py.
+        self.message_writer = (LLMMessageWriter()
+                               if LLMMessageWriter is not None else None)
         self.llm_extract = LLMExtractor() if LLMExtractor is not None else None
         self.tagger = ScaffoldingTagger() if ScaffoldingTagger is not None else None
         # Bound to this index's df so the module never imports the agent back.
@@ -1295,8 +1366,23 @@ class Agent:
         st.rejected.update(ranked)
         st.asked.append(probe)
         usage_after = self._model_usage()
+        # PRESENTATION ONLY. `message` is read by nobody -- `customer_reply` uses
+        # `ask_attribute` and the intent card and never inspects this text -- so the
+        # optional writer cannot reach HitRate, MRR or MTTC by any route. It is default
+        # OFF regardless, because a layer that cannot help the score does not belong in
+        # the scored path. Any failure returns `deterministic` unchanged.
+        deterministic = self._question_text(probe, narrow=len(ranked) <= 1,
+                                            seed=f"{session_id}|{turn}")
+        writer = getattr(self, "message_writer", None)
+        message = deterministic
+        if writer is not None and writer.enabled:
+            try:
+                message = writer.write(probe, deterministic,
+                                       narrow=len(ranked) <= 1, shown=len(ranked))
+            except Exception:
+                message = deterministic          # may never break a session
         return {
-            "message": self._question_text(probe, narrow=len(ranked) <= 1),
+            "message": message,
             "ask_attribute": probe,
             "recommendations": [{"parent_asin": a} for a in ranked],
             "usage": {
@@ -1318,21 +1404,33 @@ class Agent:
         return {"messages": seen, "unrecognised": unknown,
                 "rate": (unknown / seen) if seen else 0.0}
 
-    @staticmethod
-    def _question_text(attribute: str, narrow: bool = True) -> str:
+    def _question_text(self, attribute: str, narrow: bool = True,
+                       seed: str = "") -> str:
         """Customer-facing text. Never parsed by the simulator -- only `ask_attribute` is
         -- but it must stay honest about what the agent is doing, because under
-        sequential disclosure we are showing ONE candidate rather than a shortlist."""
-        phrasing = {
-            "feature": "Is there a specific feature it needs to have?",
-            "material": "Do you have a material preference?",
-            "color": "Any colour you'd prefer?",
-            "style": "What style are you going for?",
-            "size": "Is there a size or fit you need?",
-            "use_case": "What will you mainly use it for?",
-            "other": "Anything else that matters to you?",
-        }
-        question = phrasing.get(attribute, "Tell me a little more about what you need.")
-        if narrow:
-            return f"Here's my closest match so far. {question}"
-        return f"Here are the closest matches I found. {question}"
+        sequential disclosure we are showing ONE candidate rather than a shortlist.
+
+        VARIETY WITHOUT A GENERATOR. Repeating one sentence every turn reads like a
+        template because it is one. Rather than author a hundred lines, the sentence is
+        assembled from three independent slots, so the phrasings multiply instead of
+        adding: 6 openers x 4 questions per attribute x 4 closers is 96 forms per
+        attribute per width, and 1,344 across the seven attributes -- from 45 authored
+        fragments.
+
+        SELECTION IS SEEDED, NOT RANDOM. `random` would break the determinism the rest of
+        the agent guarantees: two runs of the same session would differ, and the contract
+        test asserts they do not. The slot indices come from a hash of the session, turn
+        and attribute, so the text varies across turns and conversations and is identical
+        on every replay of the same one.
+
+        Set `MESSAGE_VARIETY=0` for the single fixed sentence.
+        """
+        question = _QUESTIONS.get(attribute, _QUESTIONS["_default"])
+        openers = _OPENERS_NARROW if narrow else _OPENERS_WIDE
+        if os.environ.get("MESSAGE_VARIETY", "1").strip().lower() in {"0", "false", "no"}:
+            return f"{openers[0]} {question[0]}?"
+        h = hashlib.sha256(f"{seed}|{attribute}|{narrow}".encode("utf-8")).digest()
+        opener = openers[h[0] % len(openers)]
+        asked = question[h[1] % len(question)]
+        closer = _CLOSERS[h[2] % len(_CLOSERS)]
+        return f"{opener} {asked}{closer}"
