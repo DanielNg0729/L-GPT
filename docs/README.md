@@ -1,14 +1,19 @@
 # Documentation
 
-This directory separates competition evidence, system design, external research, and
-validation reports.
+External-facing material only: the competition's own documents, the design rationale, and
+the policies this submission commits to. The complete experimental record — scripts,
+datasets, results, decision log — lives under [`../experiments/`](../experiments/).
 
-| Section | Contents |
+| Path | Contents |
 |---|---|
-| [`competition/`](competition/) | Official brief, verbatim slide transcription, and interpretation |
-| [`design/`](design/) | Architecture and hyperparameter rationale |
-| [`research/`](research/) | Literature review and alternative-pipeline analysis |
-| [`validation/`](validation/) | Robustness audits, proxy design, and independent trial validation |
+| [`competition/`](competition/) | The official brief, a verbatim slide transcription, and our reading of it |
+| [`competition_specification.md`](competition_specification.md) | The task specification as released |
+| [`submission_rules.md`](submission_rules.md) | The rules this submission is bound by |
+| [`design/architecture.md`](design/architecture.md) | Design rationale behind the shipped pipeline |
+| [`MODEL_ARTIFACT_POLICY.md`](MODEL_ARTIFACT_POLICY.md) | Where trained checkpoints live and why they are not in the repository |
+| [`DEMO.md`](DEMO.md) | An annotated single-session transcript |
+| `agent_api_contract.json`, `baseline_results.json`, `evaluation_config.json` | Organizer-released; hash-verified unmodified |
 
-Experimental programs and raw outputs are maintained separately under
-[`experiments/`](../experiments/).
+The literature review, validation write-ups and decision briefs moved to
+[`../experiments/notes/`](../experiments/notes/), because they are part of the research
+record rather than the deliverable.

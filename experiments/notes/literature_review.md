@@ -5,7 +5,7 @@ stage. Every numeric claim below was read out of the primary source (PDF or publ
 HTML), not from a search-result summary. Where a claim could only be verified at abstract
 level, it is marked **[abstract-only]**.
 
-Companion documents: [`../competition/track4_brief.md`](../competition/track4_brief.md)
+Companion documents: [`../competition/track4_brief.md`](../../docs/competition/track4_brief.md)
 (the official problem statement),
 [`../../experiments/FINDINGS.md`](../../experiments/FINDINGS.md)
 (empirical results), and [`../../experiments/log/`](../../experiments/log/)

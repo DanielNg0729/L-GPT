@@ -66,48 +66,63 @@ where the cheaper one below it could not produce an answer, so the expensive mac
 never touches traffic the simple machinery already handles correctly.
 
 ```text
-customer message
-  1  recognition gate        is this one of the simulator's own message shapes?
-  2  template extraction     exact slot parsing, values resolved against the catalogue
-  3  dialogue-act routing    a local classifier reads intent when the wording is unfamiliar
-  4  exact span recovery     1-3 token catalogue-attested values, longest-category matching
-  5  content tagging         a local tagger strips filler so mining sees product text
-  6  n-gram mining           catalogue-attested phrases, bounded document frequency
-  7  attribute deparaphrase  a hosted model names the catalogue term behind a rewording
-  8  session ledger          evidence, overrides, rejection history
-  9  retrieval ladder        conjunctive -> backoff -> disjunctive -> bag-of-words floor
- 10  ranking                 coverage, specificity, evidence tier, population-calibrated prior
- 11  disclosure              one candidate on turns 1-9, up to ten at turn 10
+                        cost and certainty increase downward
+  ---------------------------------------------------------------------------
+  MESSAGE LEVEL   is this one of the simulator's own message shapes?
+    recognised    -> exact slot parsing
+    unfamiliar    -> dialogue-act router, span recovery, content tagger, mining
+  ---------------------------------------------------------------------------
+  VALUE LEVEL     does the frozen catalogue attest this phrase?
+    attested      -> admit as evidence
+    unattested    -> hosted deparaphraser proposes; catalogue admits or drops
+  ---------------------------------------------------------------------------
+  SESSION LEVEL   ledger -> retrieval ladder -> ranking -> disclosure
 ```
+
+The two levels are independent, and that is the point: **a message can be perfectly
+recognised and still carry a value the catalogue has never seen.** Wording changes on those
+two axes are different failures and are handled by different mechanisms.
 
 ```mermaid
 flowchart TD
-    M[Customer message] --> R{Recognised simulator shape?}
-    R -->|Yes| T[Template extraction<br/>exact slot parsing]
-    R -->|No| N1[Node 1 router<br/>dialogue act from wording]
-    N1 --> NE{No-evidence turn?}
-    NE -->|Yes| STOP[Contribute nothing]
-    NE -->|No| SP[Exact span recovery<br/>category + 1-3 token values]
-    SP --> TG[Content tagger<br/>strip filler]
-    TG --> MI[Catalogue-grounded mining]
-    T --> RES{Value attested in catalogue?}
-    RES -->|Yes| L
-    RES -->|No| DP[Deparaphrase<br/>model names the catalogue term]
-    DP --> PV{df of proposal > 0?}
-    PV -->|Yes| L
-    PV -->|No| SUP[Suppress the clause]
-    MI --> L[Session ledger<br/>evidence, overrides, rejections]
-    SUP --> L
-    STOP --> L
-    L --> F[FTS5 retrieval ladder]
-    F --> S[Coverage + specificity + population prior]
-    S --> D[Sequential disclosure]
-    D --> C[Contract response]
+    M([Customer message]) --> GATE{"Recognition gate<br/>a simulator message shape?"}
 
-    classDef default fill:#102a43,stroke:#38bdf8,color:#ffffff
-    classDef learned fill:#3b2f5c,stroke:#c084fc,color:#ffffff
-    class N1,TG,DP learned
+    GATE -->|"yes &nbsp;463/463 clean"| TPL["Template extraction<br/>exact slot parsing"]
+    GATE -->|"no &nbsp;0/463 clean"| ROUTE["Dialogue-act router<br/>DistilBERT"]
+
+    ROUTE --> ACT{"Which act?"}
+    ACT -->|no evidence| NIL["Contribute nothing"]
+    ACT -->|override| CLR["Clear rejection history"]
+    ACT -->|constraint| SPAN["Exact span recovery<br/>category + 1-3 token values"]
+    CLR --> SPAN
+    SPAN --> TAG["Content tagger<br/>DistilBERT, strips filler"]
+    TAG --> MINE["n-gram mining<br/>bounded document frequency"]
+
+    TPL --> VAL{"Value gate<br/>catalogue attests it?"}
+    MINE --> VAL
+    VAL -->|yes| LEDGER
+    VAL -->|no| DEP["Deparaphraser<br/>hosted model names the term"]
+    DEP --> ATT{"Proposal attested?"}
+    ATT -->|yes| LEDGER
+    ATT -->|no| DROP["Suppress the clause"]
+
+    NIL --> LEDGER
+    DROP --> LEDGER
+    LEDGER[("Session ledger<br/>evidence, overrides, rejections")] --> RET["FTS5 retrieval ladder<br/>conjunctive to bag-of-words floor"]
+    RET --> RANK["Ranking<br/>coverage, specificity, tier, popularity prior"]
+    RANK --> DISC["Disclosure<br/>one candidate to turn 9, ten at turn 10"]
+    DISC --> OUT([Ranked parent_asin values])
+
+    classDef learned stroke-dasharray:6 4,stroke-width:2px
+    class ROUTE,TAG,DEP learned
 ```
+
+**Dashed boxes are the learned components, and they are unreachable on scored traffic.**
+Not unlikely — unreachable, by control flow. Audited across the public set and the unseen
+population: 2,716 messages, **0 unrecognised**, so the two DistilBERTs record **0 model
+loads and 0 inferences**. The deparaphraser sits behind the *value* gate rather than the
+message gate, and is consulted **0 times on the public set and twice in 800 unseen
+sessions** — a mid-word truncation from `intent_card()` and a malformed price.
 
 **Why the recognition gate matters.** It answers a question no confidence score can: *is
 this the simulator's own wording, or has something reworded it?* Measured over a clean run,
@@ -338,7 +353,7 @@ Do not use `Tune800`, `Unseen4x800`, or `Shifted12x800` for additional parameter
 Their recorded evaluations are already consumed validation evidence. For a new candidate,
 create a new seeded suite and keep it separate from final reporting. Detailed construction,
 invariants, and historical outputs are in [experiments/README.md](experiments/README.md) and
-[the independent-validation report](docs/validation/independent_validation.md).
+[the independent-validation report](experiments/notes/independent_validation.md).
 
 Run all automated tests:
 

@@ -14,7 +14,7 @@ validation requires `starter/agent.py` and `submission/agent.py` to be byte-iden
 
 Balanced trial 38 was frozen before independent evaluation. It preserved the public score
 and improved the untouched-fold mean by `+0.001213` over the preceding configuration. See
-the [independent validation report](../docs/validation/independent_validation.md).
+the [independent validation report](../experiments/notes/independent_validation.md).
 
 These internal proxy results are generalization evidence, not private-label estimates.
 
@@ -156,4 +156,4 @@ organizer-provided eligible-target pool, and collect independently authored para
 We would not continue optimizing against the consumed validation folds.
 
 See the [robustness benchmark](../experiments/README.md) and
-[robustness audit](../docs/validation/robustness_audit.md) for the full evidence.
+[robustness audit](../experiments/notes/robustness_audit.md) for the full evidence.

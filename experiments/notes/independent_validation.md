@@ -2,7 +2,7 @@
 
 ## Protocol
 
-Candidate parameters were frozen in `robustness/validation_candidates.json` before any
+Candidate parameters were frozen in `experiments/validation_candidates.json` before any
 held-out fold was evaluated. Both Optuna workers were stopped. No result in this report was
 fed back into tuning.
 

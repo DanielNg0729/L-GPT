@@ -8,10 +8,14 @@ organized as a reproducible research package rather than as exploratory analysis
 | Path | Purpose |
 |---|---|
 | [`INDEX.md`](INDEX.md) | One-line question, result, and decision for every experiment |
-| [`DECISION_LOG.md`](DECISION_LOG.md) | Full one-by-one result, ruling, and final-design impact for every experiment |
+| [`DECISION_LOG.md`](DECISION_LOG.md) | Full result, ruling, and final-design impact for every experiment |
 | [`FINDINGS.md`](FINDINGS.md) | Detailed methods, measurements, corrections, and interpretation |
-| [`scripts/`](scripts/) | Runnable experiment and validation programs |
-| [`results/`](results/) | Versioned raw JSON outputs used by the reports |
+| [`DATASETS.md`](DATASETS.md) | What every corpus is, how it was built, and the provenance rules it follows |
+| [`log/`](log/) | Numbered chronological experiments, in the order they were run |
+| [`studies/`](studies/) | Reusable study scripts: `audit_` / `build_` / `evaluate_` / `train_` / `run_` |
+| [`datasets/`](datasets/) | Every generated corpus — see `DATASETS.md` |
+| [`results/`](results/) | Raw JSON output, one file per run |
+| [`notes/`](notes/) | Literature review, validation write-ups, decision briefs |
 | [`archive/`](archive/) | Preserved original baseline implementation |
 | `studies/` | Ignored local optimizer databases, caches, and temporary model artifacts |
 

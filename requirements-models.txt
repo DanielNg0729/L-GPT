@@ -1,5 +1,5 @@
-# Reproducible dependencies for the isolated V2 semantic-grounding experiments.
-# V1 submission execution does not import or require this file.
+# Dependencies for the optional learned components and the experiments that trained them.
+# The scored deterministic path never imports this file.
 torch==2.7.1
 transformers==4.52.4
 sentence-transformers==4.1.0

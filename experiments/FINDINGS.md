@@ -52,7 +52,7 @@ HitRate, so every successful session lands at rank 1.
 This document is chronological. Scores in later sections describe the configuration that
 existed at that experiment and are historical unless explicitly labeled as the final
 release. The final joint selection is balanced Optuna trial 38; its independent validation
-is documented in [`../docs/validation/independent_validation.md`](../docs/validation/independent_validation.md).
+is documented in [`../docs/validation/independent_validation.md`](notes/independent_validation.md).
 
 **Stability.** Five disjoint 40-session folds: mean 0.8969, **stdev 0.0168**. Differences
 below ≈0.017 are not distinguishable from sampling noise and were not chased. Every candidate
@@ -1128,7 +1128,7 @@ only - no LLM, no embeddings, no network on the scored path.
 
 ## §21 Robustness audit (passes 28-35): generalisation, stress, and two defects it exposed
 
-Full writeup: [`../docs/validation/robustness_audit.md`](../docs/validation/robustness_audit.md).
+Full writeup: [`../docs/validation/robustness_audit.md`](notes/robustness_audit.md).
 Summary of what is new.
 
 **Score: 0.96330 -> 0.96755 -> 0.96960 [OFFICIAL].** HR@10 0.990 -> 0.995. MRR 0.995 = HR,
@@ -1305,7 +1305,7 @@ The prior thirteen ML attempts all targeted retrieval/reranking. These targeted 
 where robustness actually fails -- extraction and probe policy -- using EXACT supervision
 (`intent_card()` is a pure function, so it enumerates every emittable constraint across all
 50,000 products). Full writeup:
-[`../docs/research/ml_nlp_literature_review.md`](../docs/research/ml_nlp_literature_review.md),
+[`../docs/research/ml_nlp_literature_review.md`](notes/ml_nlp_literature_review.md),
 section F.
 
 **F1 constraint-likeness scorer** (0.637 held-out): monotone degradation in BOTH directions.

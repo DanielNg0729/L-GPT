@@ -1,6 +1,6 @@
 # Model Artifact and Checkpoint Policy
 
-Every trainable V2 experiment must preserve artifacts before any evaluation or integration.
+Every trainable experiment must preserve artifacts before any evaluation or integration.
 
 1. Save the immutable base-model reference and its local path or revision.
 2. Save a run manifest with the script path, data manifests, seeds, hyperparameters, and

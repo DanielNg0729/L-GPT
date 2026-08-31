@@ -72,4 +72,4 @@ The final independent mean delta was `+0.001213` over the preceding shipped conf
 This is smaller than individual-fold noise and is treated as a cautious selection signal.
 The consumed folds are not eligible for further tuning.
 
-See [`../validation/independent_validation.md`](../validation/independent_validation.md).
+See [`../validation/independent_validation.md`](independent_validation.md).
