@@ -249,6 +249,22 @@ _QUESTIONS = {
               "Is there anything else I should know",
               "Anything else you'd like me to match on",
               "What else matters for this one"),
+    # The three the shipped policy never asks, because `classify_constraint` emits no
+    # branch for them and a budget string is always truncated away -- 0 payouts in 200
+    # sessions. Phrasing is kept anyway: they are dead against the SIMULATOR, not against
+    # a person, and the demo re-enables them. Unreachable here, so it costs nothing.
+    "category": ("What type of item are you after",
+                 "What type of thing are you shopping for",
+                 "Which type of product did you have in mind",
+                 "What type of item should I look for"),
+    "brand": ("Is there a brand you prefer",
+              "Any brand you'd like me to stick to",
+              "Do you have a brand in mind",
+              "Is there a brand you'd rather avoid"),
+    "budget": ("What budget are you working with",
+               "Is there a budget I should stay under",
+               "What sort of budget did you have in mind",
+               "Do you have a budget range"),
     "_default": ("Tell me a little more about what you need",
                  "What else should I know",
                  "Anything more you can tell me",
@@ -1377,8 +1393,11 @@ class Agent:
         message = deterministic
         if writer is not None and writer.enabled:
             try:
+                category = next((p for p, (_d, t) in st.evidence.items() if t == CAT), "")
+                known = tuple(p for p, (_d, t) in st.evidence.items() if t != CAT)
                 message = writer.write(probe, deterministic,
-                                       narrow=len(ranked) <= 1, shown=len(ranked))
+                                       narrow=len(ranked) <= 1, shown=len(ranked),
+                                       category=category, known=known)
             except Exception:
                 message = deterministic          # may never break a session
         return {

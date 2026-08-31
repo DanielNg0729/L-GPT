@@ -72,3 +72,6 @@ robustness/v2/prompt_arm_caches/
 # Provider-response caches under the new datasets path (the pre-move entry is stale).
 experiments/datasets/prompt_arm_caches/
 experiments/datasets/**/.*_cache*.json
+
+# Demo UI. Not part of the submission; the scored path never imports it.
+.web/

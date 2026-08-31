@@ -65,6 +65,11 @@ _REQUIRED_WORD = {
     "style": ("style", "style"),
     "size": ("size", "size"),
     "use_case": ("use", "use"),
+    # Dead against the simulator, live in a demo where a person answers. `category` is
+    # asked as "type" -- nobody says "what category are you shopping for".
+    "category": ("type", "type"),
+    "brand": ("brand", "brand"),
+    "budget": ("budget", "budget"),
 }
 
 SYSTEM = (
@@ -149,19 +154,43 @@ class LLMMessageWriter:
         return None
 
     def write(self, attribute: str, fallback: str, *, narrow: bool,
-              shown: int = 0) -> str:
-        """Return a rephrased question, or `fallback` if anything at all is off."""
+              shown: int = 0, category: str = "", known: tuple[str, ...] = ()) -> str:
+        """Return a rephrased question, or `fallback` if anything at all is off.
+
+        `category` and `known` are what the agent has established so far. They exist
+        because `other` -- which the clarification policy chooses on most turns, since it
+        is the one question that is never exhausted -- carries no topic of its own. Asked
+        to phrase it with nothing else, a model can only produce "is there anything else?",
+        which is true, useless, and identical every turn.
+
+        Given the category and what the shopper has already said, the same open turn
+        becomes a specific question a person can answer. `ask_attribute` is unchanged:
+        the field still carries what the policy chose, because that is what the simulator
+        reads. Only the sentence a human reads gets the extra context.
+        """
         if not self.enabled or not attribute:
             return fallback
         pair = _REQUIRED_WORD.get(attribute)
         ask_word, required = pair if pair else (None, None)
         if required is None:
-            task = ("Ask an open-ended question about whether there is anything else "
-                    "they need. Do not name a specific property.")
+            # `other` MUST stay open. An earlier version told the model to ask something
+            # specific here -- fit, colour, occasion -- to stop the sentence being bland.
+            # It worked and it was wrong: `ask_attribute` still said `other`, so the field
+            # requested "anything" while the sentence asked about cut. The message must
+            # not describe a different question from the one being asked. Blandness is the
+            # honest cost of an open turn; the demo fixes it by not choosing `other`.
+            task = ("Ask an open-ended question about whether there is anything else they "
+                    "need. Do not name a specific property.")
         else:
             task = (f'Ask about the {attribute}. The sentence must contain the word '
                     f'"{ask_word}".')
-        prompt = (f'Products shown: {"one" if narrow else shown or "several"}\n{task}')
+        context = ""
+        if category:
+            context += f'They are shopping for: {category}\n'
+        if known:
+            context += f'They have already told you: {"; ".join(known[:6])}\n'
+        prompt = (f'{context}Products shown: '
+                  f'{"one" if narrow else shown or "several"}\n{task}')
         self.calls += 1
         raw = self._call(prompt)
         if not raw or not raw.strip():
