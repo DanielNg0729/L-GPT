@@ -49,6 +49,11 @@ conversation. Both must pass the same catalogue-attestation check before affecti
 Use Python 3.10 or later. Download the organizer catalogue release and place
 `catalog.jsonl` at `data/catalog.jsonl`, as described in [`data/README.md`](data/README.md).
 
+For the complete semantic-recovery configuration, allow network access, copy
+[`.env.example`](.env.example) to `.env`, and set `GROQ_API_KEY` before evaluation. The
+offline configuration remains supported, but it intentionally omits the hosted recovery
+layers for unfamiliar customer wording.
+
 ```bash
 python -m pip install -r requirements.txt
 python -m evaluator.local_evaluator
@@ -73,15 +78,19 @@ python -m submission.demo --sample-id public_0002
 It prints each customer message, structured question, recommendation list, token usage, and
 the public target's rank. It uses only the released public session and official simulator.
 
-## Optional Groq configuration
+## Groq configuration (recommended)
 
-No API key or network access is required for the reported public result. To enable the
-optional semantic recovery helpers, copy [`.env.example`](.env.example) to `.env` and set
-`GROQ_API_KEY`, or export it in the environment. The key is never committed.
+For final evaluation, we recommend allowing network access and providing `GROQ_API_KEY`.
+This enables the complete semantic-recovery system: the resolver and whole-transcript rescue
+can recover catalogue-attested evidence when a customer uses unfamiliar wording. Copy
+[`.env.example`](.env.example) to `.env` and set the key, or export it in the environment.
+The key is never committed.
 
-Without a key, no hosted request is made. With a key, the resolver and transcript rescue are
-conservative fallbacks: their proposed evidence is discarded unless it is present in the
-frozen catalogue. The response always reports non-negative prompt and completion token usage.
+The key remains optional so the deterministic agent can be reproduced in a fully offline
+environment. The documented public 200-session result does not require hosted calls and is
+therefore the offline floor, rather than the recommended configuration for broader wording
+conditions. With a key, all proposed evidence remains subject to frozen-catalogue
+attestation, and the response always reports non-negative prompt and completion token usage.
 
 ## Runtime, model, and cost disclosure
 

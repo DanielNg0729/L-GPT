@@ -41,21 +41,25 @@ and exact lookups in the included catalogue-derived attribute dictionary. If loc
 weights or their dependencies are unavailable, these layers fail closed and the
 deterministic lexical path remains valid.
 
-Two optional Groq helpers are available only when `GROQ_API_KEY` is supplied: an
-unattested-value resolver and a late whole-transcript recovery step. Both are catalogue
-attested before they affect retrieval. They are not required for final scoring, and the
+For the complete submitted configuration, allow network access and provide `GROQ_API_KEY`.
+This enables two conservative Groq helpers: an unattested-value resolver and a late
+whole-transcript recovery step. Both are catalogue-attested before they affect retrieval.
+The deterministic offline path remains supported, but it omits these recovery layers. The
 agent makes no external request without a key. Set `LLM_RESOLVE=0` or `LLM_RESCUE=0` to
 disable either helper explicitly.
 
 ## Disclosure and limitations
 
-- Required network access: none.
-- Required API key: none.
+- Recommended network access: enabled for complete semantic recovery. The deterministic
+  offline fallback remains available.
+- Recommended API key: `GROQ_API_KEY` for complete semantic recovery. No key is needed for
+  the deterministic offline fallback.
 - Offline public-development result: TechnicalScore 0.971500, HR@10 0.9950, MRR 0.9950,
   MTTC 2.225.
 - Offline token usage: zero prompt tokens and zero completion tokens.
-- Optional hosted model: Groq `openai/gpt-oss-20b`; usage and cost depend on the team's
-  credential and are reported in the response `usage` fields when invoked.
+- Hosted recovery model: Groq `openai/gpt-oss-20b`; it is recommended for final evaluation
+  beyond clean template wording. Usage and cost depend on the team's credential and are
+  reported in the response `usage` fields when invoked.
 - The deterministic pipeline relies on customer constraints being recoverable as exact,
   catalogue-attested wording. The optional recovery helpers are conservative fallbacks for
   unfamiliar wording, not a replacement for the frozen catalogue.
