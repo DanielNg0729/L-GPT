@@ -13,5 +13,5 @@ override timing remain unchanged.
 Build reproducibly:
 
 ```bash
-python -m robustness.override_focus.build_override_focus_set
+python experiments/studies/build_sets.py  # override_focus is one of its outputs
 ```

@@ -34,7 +34,7 @@ def main() -> None:
     parser.add_argument("--sets", type=Path, default=ROOT / "experiments" / "datasets" / "sets")
     parser.add_argument("--only", nargs="*", help="set basenames without .jsonl")
     parser.add_argument("--output", type=Path,
-                        default=ROOT / "robustness" / "results.json")
+                        default=ROOT / "experiments" / "results" / "population_benchmark.json")
     args = parser.parse_args()
 
     # Internal robustness is offline and reproducible by default.

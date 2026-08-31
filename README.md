@@ -8,6 +8,64 @@ interface.
 
 The shipped path is offline, deterministic, and costs $0.00 per evaluation.
 
+## Run it
+
+Python 3.10 or newer. The scored path uses only the standard library.
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+The catalogue is not committed (60 MB). If `data/catalog.jsonl` is absent:
+
+```bash
+curl -L -o data/catalog.jsonl.gz https://github.com/TechJam2026/techjam-conversational-search/releases/download/participant-kit/catalog.jsonl.gz
+gzip -dk data/catalog.jsonl.gz
+```
+
+Verify the download against `data/SHA256SUMS`.
+
+**Reproduce the headline score** — the organizer's own evaluator, unmodified:
+
+```bash
+python -m evaluator.local_evaluator
+```
+
+Expect `recommended_technical_score = 0.970500`, with **0 prompt and 0 completion tokens**.
+No network access is required and no API key is used.
+
+**Check that we did not touch what we were not allowed to touch:**
+
+```bash
+python tools/verify_upstream_integrity.py
+```
+
+**Run the release safety suite** — contract, determinism, failure handling, model gating:
+
+```bash
+python -m unittest discover -s tests
+```
+
+**Score the population-shift suites** (four 800-session draws, ~6 minutes):
+
+```bash
+python experiments/studies/build_sets.py        # regenerate the suites (optional; they are committed)
+python tools/run_population_benchmark.py
+python tools/run_population_benchmark.py --only organizer_proxy_800   # just the anchor condition
+```
+
+| what you ran | expected |
+|---|---|
+| `evaluator.local_evaluator` | 0.970500 · HR@10 0.9950 · MRR 0.9950 · MTTC 2.275 |
+| `verify_upstream_integrity.py` | all 6 organizer-owned files unmodified |
+| `unittest discover -s tests` | 29 tests, OK |
+| `run_population_benchmark.py` | 0.954163 / 0.947263 / 0.885581 / 0.867775 |
+
+Everything above is offline and deterministic. The optional hosted layer needs
+`GROQ_API_KEY`; without one it is inert and the agent is byte-identical to a lexical-only
+run. Set `LLM_RESOLVE=0` to disable it outright.
+
+
 ## What this task actually is
 
 The released simulator builds every customer utterance from the target product's own
@@ -270,44 +328,6 @@ private labels, raw user histories, free-text reviews, or organizer-only files a
 included, and `evaluator/` and `data/public_set.jsonl` are byte-identical to the
 organizer's release.
 
-## Installation
-
-Python 3.10 or newer is required.
-
-```bash
-python -m pip install -r submission/requirements.txt
-```
-
-If `data/catalog.jsonl` is absent, download and decompress the frozen release catalogue:
-
-```bash
-curl -L -o data/catalog.jsonl.gz https://github.com/TechJam2026/techjam-conversational-search/releases/download/participant-kit/catalog.jsonl.gz
-gzip -dk data/catalog.jsonl.gz
-```
-
-Verify the download against `data/SHA256SUMS`. The catalogue is not duplicated in Git.
-
-## Reproduce the evaluation
-
-Run the official public evaluator:
-
-```bash
-python -m evaluator.local_evaluator
-```
-
-Run the custom four-condition population stress suite:
-
-```bash
-python -m robustness.build_sets
-python -m robustness.run_benchmark
-```
-
-Run only its organizer-aligned anchor condition:
-
-```bash
-python -m robustness.run_benchmark --only organizer_proxy_800
-```
-
 ## Evaluation and robustness tests
 
 The following memorable labels are used throughout the documentation. They describe fixed,
@@ -336,14 +356,14 @@ official simulator and disable optional network models by default.
 
 ```bash
 # Build and score the rapid Shifted4x800 suite.
-python -m robustness.build_sets
-python -m robustness.run_benchmark
+python experiments/studies/build_sets.py
+python tools/run_population_benchmark.py
 
 # Rebuild the fixed Tune800 and Unseen4x800 data sets from their recorded seeds.
-python -m robustness.build_optuna_sets
+python experiments/studies/build_optuna_sets.py
 
 # Rebuild the controlled Shifted12x800 data sets from their recorded seeds.
-python -m robustness.build_independent_validation_sets
+python experiments/studies/build_independent_validation_sets.py
 
 # Score the frozen candidate registry on Unseen4x800 plus Shifted12x800.
 python experiments/log/57_independent_validation.py
