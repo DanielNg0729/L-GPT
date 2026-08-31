@@ -57,3 +57,14 @@ robustness/v2/open_vocabulary/.resolver_cache_open_vocab.json
 # reported as a healthy run. A clone without `git lfs pull`, or past a bandwidth quota,
 # reproduces exactly that. Hub resolution fails loudly instead.
 submission/models/
+
+# Training outputs and provider-response caches. Neither belongs in the repository:
+# checkpoints are published to the Hugging Face Hub (see docs/MODEL_ARTIFACT_POLICY.md),
+# and the prompt caches are per-experiment scratch. Both were UNIGNORED until an audit
+# caught them -- a `git add -A` would have committed model weights back in, which is the
+# exact problem the Hub migration existed to solve.
+checkpoints/
+robustness/v2/prompt_arm_caches/
+
+# Branch-review scratch directory, created when reviewing a teammate branch locally.
+.review-*/
