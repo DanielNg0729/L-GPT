@@ -20,8 +20,10 @@ Everything the agent needs is under `submission/`:
     span_node.py                         exact catalogue span recovery
     route_node.py                        the dialogue-act router (Node 1)
     bert_extract.py                      scaffolding tagger
-    llm_resolve.py, llm_extract.py       optional model-backed layers
-    llm_rerank.py                        optional reranker
+    llm_resolve.py                       deparaphraser (unattested value -> attested)
+    llm_rescue.py                        whole-transcript recovery on a stall
+    llm_message.py                       optional phrasing writer (off by default)
+    llm_extract.py, llm_rerank.py        optional layers, both measured negative and off
     catalogue_attribute_dictionary.jsonl frozen attribute vocabulary
     models/                              local checkpoints
 

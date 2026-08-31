@@ -39,6 +39,11 @@ from functools import lru_cache
 from pathlib import Path
 
 try:
+    from submission.llm_rescue import LLMTranscriptRescue
+except Exception:                                   # pragma: no cover
+    LLMTranscriptRescue = None  # type: ignore[assignment,misc]
+
+try:
     from submission.llm_message import LLMMessageWriter
 except Exception:                                   # pragma: no cover
     LLMMessageWriter = None  # type: ignore[assignment,misc]
@@ -755,6 +760,11 @@ class Agent:
         # Presentation-only phrasing for `message`. Default off; see llm_message.py.
         self.message_writer = (LLMMessageWriter()
                                if LLMMessageWriter is not None else None)
+        # Whole-transcript recovery, on a stall. Bound to this index's df so the module
+        # never imports the agent back, exactly like the deparaphraser.
+        self.rescue = (LLMTranscriptRescue().bind(self.ix.df)
+                       if LLMTranscriptRescue is not None else None)
+        self._transcripts: dict[str, list[str]] = {}
         self.llm_extract = LLMExtractor() if LLMExtractor is not None else None
         self.tagger = ScaffoldingTagger() if ScaffoldingTagger is not None else None
         # Bound to this index's df so the module never imports the agent back.
@@ -1001,6 +1011,7 @@ class Agent:
             return None                             # the layer may never break a session
 
     def _observe(self, st: SessionState, msg: str) -> None:
+        self._transcripts.setdefault(st.sid or "", []).append(msg)
         if PAT_NOINFO.search(msg):
             return                                  # explicit "no preference" carries nothing
         known = recognised(msg)
@@ -1350,6 +1361,27 @@ class Agent:
 
         try:
             self._observe(st, msg)
+
+            # TRANSCRIPT RESCUE, on a stall only. Several turns in, several candidates
+            # already rejected, and the per-turn machinery has produced nothing new -- so
+            # re-read the whole conversation once and see whether anything was missed
+            # across turns rather than within one. Recovered phrases must be attested in
+            # the catalogue, and enter at SEM rather than CONSTRAINT: they are the model's
+            # reading of what was said, not a phrase the customer is known to have used.
+            #
+            # Unreachable on scored traffic by control flow: the agent converges at MTTC
+            # 2.2 there, so the turn and rejection thresholds are never both met.
+            rescue = getattr(self, "rescue", None)
+            if rescue is not None and rescue.should_fire(
+                    st.sid or "", turn or st.turn, len(st.rejected)):
+                try:
+                    for phrase in rescue.recover(st.sid or "",
+                                                 self._transcripts.get(st.sid or "", [])):
+                        if phrase not in st.evidence:
+                            st.evidence[phrase] = (self.ix.df(phrase), SEM)
+                except Exception:
+                    pass                            # may never break a session
+
             probe = self._next_probe(st)
             pool = self._candidates(st, msg)
             ranked = self._rank(st, pool, top_k) if pool else list(st.last_rank[:top_k])

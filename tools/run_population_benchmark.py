@@ -61,6 +61,10 @@ def main() -> None:
         print(f"{name:<30} score={row['technical_score']:.6f} "
               f"HR={row['hit_rate_at_10']:.3f} MRR={row['mrr']:.3f} "
               f"MTTC={row['mttc']:.3f} wall={row['wall_seconds']:.1f}s")
+    # The submission branch ships the suites but not `experiments/results/`, which is a
+    # measurement archive rather than part of the product. Without this the run completes
+    # every session and then dies on the final write.
+    args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(output, indent=2) + "\n", encoding="utf-8")
     print(f"saved {args.output}")
 

@@ -1,8 +1,11 @@
 # Submission Package
 
 This directory contains the canonical TechJam Track 4 agent and its optional local and
-external model integrations. The official evaluator imports `starter.agent`; release
-validation requires `starter/agent.py` and `submission/agent.py` to be byte-identical.
+external model integrations. The official evaluator imports `starter.agent`, which **re-exports** the class defined
+here rather than copying it. `tests/test_submission_contract.py` asserts object identity
+(`starter.agent.Agent is submission.agent.Agent`), so the scored entry point and the
+implementation cannot drift. An earlier byte-copy arrangement had already drifted when it
+was audited, which is why identity is asserted instead.
 
 ## Verified performance
 
@@ -14,7 +17,7 @@ validation requires `starter/agent.py` and `submission/agent.py` to be byte-iden
 
 Balanced trial 38 was frozen before independent evaluation. It preserved the public score
 and improved the untouched-fold mean by `+0.001213` over the preceding configuration. See
-the [independent validation report](../experiments/notes/independent_validation.md).
+the [independent validation report](https://github.com/DanielNg0729/L-GPT/blob/full/experiments/notes/independent_validation.md).
 
 These internal proxy results are generalization evidence, not private-label estimates.
 
@@ -39,11 +42,24 @@ than general semantic similarity for the official task.
 
 | File or directory | Purpose |
 |---|---|
-| [`agent.py`](agent.py) | Canonical submitted `Agent` implementation |
-| [`llm_extract.py`](llm_extract.py) | Optional Groq-based extraction for unrecognized wording |
-| [`llm_rerank.py`](llm_rerank.py) | Optional experimental reranker, disabled and rejected for official use |
-| [`models/scaffolding_tagger/`](models/scaffolding_tagger/) | Fine-tuned local DistilBERT tagger stored through Git LFS |
+| [`agent.py`](agent.py) | Canonical `Agent`: the deterministic pipeline and every gate |
+| [`span_node.py`](span_node.py) | Exact catalogue span recovery from unrecognised wording |
+| [`route_node.py`](route_node.py) | Dialogue-act router; decides override vs no-evidence |
+| [`bert_extract.py`](bert_extract.py) | Scaffolding tagger: strips filler before mining |
+| [`llm_resolve.py`](llm_resolve.py) | Deparaphraser: unattested value to catalogue-attested value |
+| [`llm_rescue.py`](llm_rescue.py) | Whole-transcript recovery, once per session, on a stall |
+| [`llm_message.py`](llm_message.py) | Optional phrasing writer; off by default, no score effect |
+| [`llm_extract.py`](llm_extract.py) | Optional Groq extraction; off, superseded by the span node |
+| [`llm_rerank.py`](llm_rerank.py) | Optional reranker; off, measured negative and rejected |
+| [`catalogue_attribute_dictionary.jsonl`](catalogue_attribute_dictionary.jsonl) | Frozen attribute vocabulary used by the tagger's other half |
+| [`demo.py`](demo.py) | Annotated single-session walkthrough |
 | [`requirements.txt`](requirements.txt) | Submission runtime dependencies |
+
+The two learned checkpoints are **not in this repository**. They are gitignored and resolve
+from the Hugging Face Hub on first use — see [`../docs/MODEL_ARTIFACT_POLICY.md`](../docs/MODEL_ARTIFACT_POLICY.md).
+An earlier revision of this file described them as "stored through Git LFS", which was true
+before the migration and is not true now: a Git-LFS pointer left in place of real weights
+loaded "successfully" and scored as if healthy, which is the failure the migration ended.
 
 ## Reproduction
 
@@ -74,14 +90,17 @@ python -m submission.demo --sample-id public_0002
 See the annotated [`demo transcript`](../docs/DEMO.md).
 
 The complete investigation history is available in the
-[experiment registry](../experiments/INDEX.md) and
-[experiment-by-experiment decision log](../experiments/DECISION_LOG.md).
+[experiment registry](https://github.com/DanielNg0729/L-GPT/blob/full/experiments/INDEX.md) and
+[experiment-by-experiment decision log](https://github.com/DanielNg0729/L-GPT/blob/full/experiments/DECISION_LOG.md).
 The root [README](../README.md#final-shipped-pipeline) specifies the complete final
 execution path, including the gated BERT fallback and disabled optional API paths.
 
 ## Network, model, and cost disclosure
 
-The official configuration is offline.
+The span node is unconditional deterministic core. Of the five configurable layers
+(route classifier, BERT tagger, deparaphraser, transcript rescue, and message writer),
+the configuration enables four when a Groq key is available; the message writer remains
+off. Without a key, only the two local layers are active.
 
 | Item | Shipped behavior |
 |---|---|
@@ -92,7 +111,8 @@ The official configuration is offline.
 | Public token usage | 0 prompt tokens and 0 completion tokens |
 | Local model | Fine-tuned `distilbert-base-uncased` token tagger |
 | Missing local model | Deterministic lexical fallback |
-| Optional Groq extraction | Disabled unless `LLM_EXTRACT=1` and `GROQ_API_KEY` are both present |
+| Optional Groq deparaphraser and rescue | Flagged on, but inert without `GROQ_API_KEY`. Neither is reachable on the scored suites: the recognition gate matches every official message, and the rescue additionally needs a stalled session, which does not occur at MTTC 2.225 |
+| Optional Groq extraction | Disabled; superseded by the offline span node |
 | Optional Groq reranking | Disabled; experiments showed a negative effect |
 
 Optional extraction is constrained by two checks. It runs only on a message that fails the
@@ -102,27 +122,50 @@ of the visible message and attested in the frozen catalogue. Invalid output is d
 Failure tests cover missing credentials, DNS failure, timeouts, retryable and terminal HTTP
 errors, malformed JSON, empty output, hallucinated spans, and rate-limit exhaustion. Every
 tested failure returns the deterministic result without raising. See
-[`44_llm_failure_modes.py`](../experiments/log/44_llm_failure_modes.py).
+[`44_llm_failure_modes.py`](https://github.com/DanielNg0729/L-GPT/blob/full/experiments/log/44_llm_failure_modes.py).
 
 Credentials must be supplied through the environment or a local ignored `.env` file. They
 must never be committed.
 
 Supported environment variables are documented in [`.env.example`](../.env.example):
 
+Local layers — no credential, no network, no per-call cost:
+
 | Variable | Default | Purpose |
 |---|---|---|
-| `BERT_EXTRACT` | `1` | Enables the gated local tagger on unrecognized messages |
-| `BERT_TAGGER_DIR` | bundled model directory | Overrides the local model path |
+| `V2_ROUTE` | `1` | Dialogue-act router on unrecognised messages |
+| `BERT_EXTRACT` | `1` | Scaffolding tagger on unrecognised messages |
 | `BERT_KEEP` | `0.30` | Content-token retention threshold |
-| `LLM_EXTRACT` | `0` | Enables optional Groq extraction |
-| `LLM_RERANK` | `0` | Enables the rejected experimental Groq reranker |
-| `GROQ_API_KEY` | unset | Supplies optional API credentials |
-| `GROQ_MODEL` | `openai/gpt-oss-120b` | Selects the optional Groq model |
-| `LLM_RPM` | `25` | Optional extraction request-rate limit |
-| `LLM_TPM` | `5500` | Optional extraction token-rate limit |
-| `LLM_TIME_BUDGET` | `5400` | Optional extraction network-time budget in seconds |
-| `LLM_EXTRACT_CACHE` | submission-local cache | Overrides the extraction cache path |
-| `LLM_CACHE` | submission-local cache | Overrides the reranking cache path |
+| `BERT_DEVICE` | `auto` | Forces `cpu` if set to `cpu` |
+| `MESSAGE_VARIETY` | `1` | Deterministic phrasing variety; pure string work |
+
+Hosted layers — flagged on, but inert until `GROQ_API_KEY` is present:
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `GROQ_API_KEY` | unset | Activates every hosted layer; without it all are inert |
+| `LLM_RESOLVE` | `1` | Deparaphraser for unattested values |
+| `LLM_RESCUE` | `1` | Whole-transcript recovery on a stalled session |
+| `LLM_RESCUE_TURN` | `5` | First turn the rescue may fire |
+| `LLM_RESCUE_REJECTS` | `4` | Rejected candidates required before it may fire |
+| `LLM_MESSAGE` | `0` | Phrasing writer; no score effect, off by design |
+| `LLM_EXTRACT` | `0` | Superseded by the span node |
+| `LLM_RERANK` | `0` | Measured negative, rejected |
+| `LLM_RPM` / `LLM_TPM` | `25` / `5500` | Request- and token-rate limits |
+| `LLM_TIME_BUDGET` | `5400` | Network-time budget in seconds |
+| `LLM_CACHE`, `LLM_EXTRACT_CACHE` | submission-local | Cache paths |
+
+**Two variables are documented but should be left unset.** `BERT_TAGGER_DIR` and
+`V2_ROUTE_MODEL_DIR` are absolute overrides, returned ahead of both the local-weights check
+and the Hub fallback. `submission/models/` is gitignored, so on a fresh clone the directory
+they normally name does not exist; setting them there makes the load raise and the layer
+disable itself **silently**. Unset, resolution is local weights if genuinely present,
+otherwise the Hub — which is what a clone needs. `BERT_TAGGER_HUB` and `V2_ROUTE_HUB`
+override the Hub ids and are equally unnecessary.
+
+**Do not set `GROQ_MODEL` globally.** Each layer selects its own model in code — `20b` for
+resolve, rescue and message; `120b` for extract and rerank. A global `GROQ_MODEL` overrides
+all five at once, moving the three `20b` layers onto a model they were never measured on.
 
 ## Sequential disclosure
 
@@ -133,7 +176,7 @@ specifies a maximum list size and no minimum list size.
 
 The resulting public MRR equals HitRate at `0.995`, which means every successful session
 hits at rank 1. This benefit and the metric effect of shorter lists are reported explicitly
-in the [findings ledger](../experiments/FINDINGS.md).
+in the [findings ledger](https://github.com/DanielNg0729/L-GPT/blob/full/experiments/FINDINGS.md).
 
 ## Robustness and limitations
 
@@ -155,5 +198,5 @@ Given more time, we would quantize or distill the optional tagger, validate agai
 organizer-provided eligible-target pool, and collect independently authored paraphrase data.
 We would not continue optimizing against the consumed validation folds.
 
-See the [robustness benchmark](../experiments/README.md) and
-[robustness audit](../experiments/notes/robustness_audit.md) for the full evidence.
+See the [robustness benchmark](https://github.com/DanielNg0729/L-GPT/blob/full/experiments/README.md) and
+[robustness audit](https://github.com/DanielNg0729/L-GPT/blob/full/experiments/notes/robustness_audit.md) for the full evidence.
