@@ -174,6 +174,10 @@ class LLMResolver:
         self.calls = self.accepted = self.abstained = 0
         self.unattested = self.failures = self.retries = 0
         self.cache_hits = self.cache_misses = 0
+        # Reported through `Agent.respond()['usage']`. That accounting already polled
+        # these two attributes; nothing ever assigned them, so a run that really did
+        # spend tokens still disclosed zero.
+        self.prompt_tokens = self.completion_tokens = 0
         self._consecutive = 0
         self._spent = 0.0
         self._open_reason: str | None = None
@@ -235,6 +239,10 @@ class LLMResolver:
             try:
                 with urlopen(request, timeout=self.TIMEOUT) as response:
                     body = json.loads(response.read().decode("utf-8"))
+                # What the API actually charged, straight from the body we already parse.
+                used = body.get("usage") or {}
+                self.prompt_tokens += max(0, int(used.get("prompt_tokens", 0) or 0))
+                self.completion_tokens += max(0, int(used.get("completion_tokens", 0) or 0))
                 self._spent += time.time() - started
                 self._consecutive = 0
                 return body["choices"][0]["message"]["content"]
@@ -324,7 +332,9 @@ class LLMResolver:
         return {"enabled": self.enabled, "model": self.model, "calls": self.calls,
                 "accepted": self.accepted, "abstained": self.abstained,
                 "unattested": self.unattested, "failures": self.failures,
-                "retries": self.retries, "cache_hits": self.cache_hits,
+                "retries": self.retries,
+                "prompt_tokens": self.prompt_tokens,
+                "completion_tokens": self.completion_tokens, "cache_hits": self.cache_hits,
                 "cache_misses": self.cache_misses,
                 "cache_hit_rate": round(self.cache_hits / total, 4) if total else None,
                 "fully_cached": total > 0 and self.cache_misses == 0,

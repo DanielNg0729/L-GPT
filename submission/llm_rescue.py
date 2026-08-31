@@ -90,6 +90,10 @@ class LLMTranscriptRescue:
         self.model = model
         self.reaches = self.calls = self.usable = 0
         self.accepted = self.unattested = self.failures = self.retries = 0
+        # Reported through `Agent.respond()['usage']`. That accounting already polled
+        # these two attributes; nothing ever assigned them, so a run that really did
+        # spend tokens still disclosed zero.
+        self.prompt_tokens = self.completion_tokens = 0
         self._spent = 0.0
         self._open: str | None = None
         self._done: set[str] = set()
@@ -127,6 +131,10 @@ class LLMTranscriptRescue:
             try:
                 with urlopen(request, timeout=self.TIMEOUT) as response:
                     body = json.loads(response.read().decode("utf-8"))
+                # What the API actually charged, straight from the body we already parse.
+                used = body.get("usage") or {}
+                self.prompt_tokens += max(0, int(used.get("prompt_tokens", 0) or 0))
+                self.completion_tokens += max(0, int(used.get("completion_tokens", 0) or 0))
                 self._spent += time.time() - started
                 return body["choices"][0]["message"]["content"]
             except HTTPError as exc:
@@ -196,5 +204,7 @@ class LLMTranscriptRescue:
         return {"enabled": self.enabled, "model": self.model, "reaches": self.reaches,
                 "calls": self.calls, "usable": self.usable, "accepted": self.accepted,
                 "unattested": self.unattested, "failures": self.failures,
-                "retries": self.retries, "seconds": round(self._spent, 2),
+                "retries": self.retries,
+                "prompt_tokens": self.prompt_tokens,
+                "completion_tokens": self.completion_tokens, "seconds": round(self._spent, 2),
                 "circuit_reason": self._open}
