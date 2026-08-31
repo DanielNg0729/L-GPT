@@ -1,5 +1,9 @@
 # System Architecture
 
+This is the per-component rationale behind the pipeline. For the shape of the pipeline and
+what runs when, start with the [README's Architecture section](../../README.md#architecture);
+this document assumes it and explains *why* each part is built the way it is.
+
 ## Design principle
 
 The official simulator discloses constraints derived from the hidden target's catalogue
@@ -16,15 +20,24 @@ requirements that are absent from the visible message or frozen catalogue.
 ```text
 customer message
     -> official-form recognition
-    -> deterministic extraction
-    -> optional gated scaffolding extraction
+    -> deterministic extraction                       (recognised messages)
+    -> dialogue-act routing                           (unfamiliar wording only)
+    -> exact catalogue span and category recovery     (unfamiliar wording only)
+    -> gated scaffolding tagging                      (unfamiliar wording only)
     -> catalogue-attested n-gram mining
+    -> attribute deparaphrasing                       (unattested VALUES only)
     -> session-state update and override handling
     -> conjunctive, backoff, and disjunctive retrieval
     -> evidence-coverage ranking and calibrated prior
     -> rejection demotion and sequential disclosure
     -> validated response
 ```
+
+Two of those gates are governed by different questions, and conflating them is the easiest
+mistake to make here. Recognition asks whether the **message** has a familiar shape;
+attestation asks whether a **value** exists in the frozen catalogue. A perfectly recognised
+message can carry a value the catalogue has never seen, which is why the deparaphraser is
+reachable on clean traffic while the two classifiers are not.
 
 ## Components
 
@@ -37,9 +50,23 @@ evaluator contract, and the agent retains a last-good fallback.
 ### Recognition and extraction
 
 Anchored patterns recognize every released simulator message form. Recognized messages use
-deterministic parsing only. An unrecognized message may enter the local DistilBERT
-scaffolding tagger and the optional Groq extractor, but only if their dependencies and
-feature flags are available.
+deterministic parsing only. An unrecognized message may enter three further mechanisms, in
+order of cost: a DistilBERT **dialogue-act router**, which reads what the turn *means* when
+the wording is unfamiliar; **exact span recovery**, which finds catalogue-attested one- to
+three-token values and the longest matching category; and a DistilBERT **scaffolding
+tagger**, which strips conversational filler so mining sees only product text. Each runs
+only if its dependencies and feature flags are available, and every failure path returns the
+pre-model behaviour.
+
+The router exists because the recognition gate is a *detector*, not a classifier: it reports
+that a message is unfamiliar without saying what it means. Two behaviours depend on the
+meaning -- clearing the rejection set when the customer changes their mind, and contributing
+nothing when they state no preference. Hand-written lexical cues reached 37.5% and 0.0% on
+held-out templates against the model's 100%; the no-evidence row is decisive, because the
+held-out templates share zero vocabulary with the training ones.
+
+A hosted span extractor was also built and is retained **disabled**: the local tagger beat
+it on the hardest transform, so it was superseded rather than adopted.
 
 Every optional extracted phrase must pass two hard checks:
 
@@ -54,6 +81,26 @@ The miner enumerates bounded n-grams from visible text and retains only phrases 
 catalogue document frequency between 1 and `DF_CAP`. Longer matching phrases take
 precedence. This channel is nearly neutral on official messages but becomes the principal
 fallback under wording changes.
+
+### Attribute deparaphrasing
+
+Reached only where a value fails catalogue attestation -- exactly where the agent would
+otherwise suppress the clause -- so its floor is the shipped behaviour. A hosted model is
+given the unattested phrase alone, with no catalogue context and no candidate list, and
+proposes the trade term it names. The catalogue then decides: a proposal with no document
+frequency is discarded.
+
+The absence of a candidate list is deliberate and measured. A retrieval-augmented variant
+scored below doing nothing, because a list captures the answer whatever the instruction
+says: offered candidates as hints it should ignore when wrong, the model answered off-list
+twice in 21 attempts, against 23 of 23 unaided.
+
+Accepted proposals enter at a **reduced weight**, not at constraint strength. This is the
+single largest decision in this layer: the same knowledge at full weight recovers 81.5% of a
+perfect resolver against roughly 96% attenuated. The difference is entirely what a wrong
+proposal costs. A later audit confirmed it from the other direction -- deleting 41
+confidently wrong proposals changed the score by exactly 0.000000, because at the attenuated
+weight they were already unable to outrank real evidence.
 
 ### Session ledger
 
