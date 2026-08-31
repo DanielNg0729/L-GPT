@@ -4,7 +4,7 @@ TikTok TechJam 2026, Track 4 (Shopping Copilot). This is the short report requir
 the submission rules: method, model choice, cost and latency disclosure, limitations,
 and team contributions. Full engineering detail, the experiment programme, and
 reproduction commands live in [`README.md`](README.md) and
-[`experiments/`](experiments/).
+[`experiments/`](https://github.com/DanielNg0729/L-GPT/tree/experimental/experiments).
 
 ## 1. Problem insight
 
@@ -20,10 +20,10 @@ also measured: on a population re-drawn *inverse* to popularity, the score drops
 0.954 to 0.868 (§3).
 
 Both observations trace to the pre-agent research phase: the catalogue/session profile
-([`docs/research/data_profile.md`](docs/research/data_profile.md), 2026-08-26) measured
+([`docs/research/data_profile.md`](https://github.com/DanielNg0729/L-GPT/blob/experimental/docs/research/data_profile.md), 2026-08-26) measured
 the target-vs-catalogue popularity gap (median 6,846 vs 12 reviews) and the expected
 value of every clarifying question — the table the shipped ask policy encodes — and
-[`docs/research/industry_notes.md`](docs/research/industry_notes.md) records the
+[`docs/research/industry_notes.md`](https://github.com/DanielNg0729/L-GPT/blob/experimental/docs/research/industry_notes.md) records the
 production practices the design adopts (clarification budgeting, slot-state with
 override reset, popularity priors, lexical-first retrieval with semantic assist) and
 the two places it deliberately departs from them for the benchmark.
@@ -127,8 +127,8 @@ claims): template paraphrase 0.667 → **0.920** with the hybrid; attribute para
 | **Khiêm** — lead engineer & experimentation | The shipped agent end to end: exact-match core (recognition gate, template extraction, span recovery, grounded mining), FTS5 retrieval ladder, coverage ranking, session ledger, disclosure policy — the components behind the 0.9715 headline — plus the ~70-experiment programme, robustness and population-shift suites, release tests, and reproducibility infrastructure. |
 | **Dương** — LLM layer | Attribute deparaphraser (generate-then-verify), transcript rescue, and the gating that keeps hosted calls off the scored path and fail-safe. |
 | **Thanh Duy** — final architecture | The escalation-ladder design, component boundaries, integration review. |
-| **Huy** — industry research | Production conversational-commerce practice (clarification budgeting, dialogue state, popularity priors, lexical-first retrieval) grounding the design — [`docs/research/industry_notes.md`](docs/research/industry_notes.md). |
-| **Tài** — main research & relevance filter | Participant-kit setup and checksum verification, exact baseline reproduction (0.10671) and the scenario breakdown that directed effort; the early data profile whose probe expected-value and target-popularity analyses anticipated the shipped ask policy and ranking prior — [`docs/research/data_profile.md`](docs/research/data_profile.md); the windowed LLM contradiction filter and its measured A/B verdict — [`experiments/LLM_FILTER_NOTES.md`](experiments/LLM_FILTER_NOTES.md). |
+| **Huy** — industry research | Production conversational-commerce practice (clarification budgeting, dialogue state, popularity priors, lexical-first retrieval) grounding the design — [`docs/research/industry_notes.md`](https://github.com/DanielNg0729/L-GPT/blob/experimental/docs/research/industry_notes.md). |
+| **Tài** — main research & relevance filter | Participant-kit setup and checksum verification, exact baseline reproduction (0.10671) and the scenario breakdown that directed effort; the early data profile whose probe expected-value and target-popularity analyses anticipated the shipped ask policy and ranking prior — [`docs/research/data_profile.md`](https://github.com/DanielNg0729/L-GPT/blob/experimental/docs/research/data_profile.md); the windowed LLM contradiction filter and its measured A/B verdict — [`experiments/LLM_FILTER_NOTES.md`](https://github.com/DanielNg0729/L-GPT/blob/experimental/experiments/LLM_FILTER_NOTES.md). |
 
 Catalogue and sessions derive from Amazon Reviews 2023 (McAuley Lab, UCSD) — see
 [`DATA_ATTRIBUTION.md`](DATA_ATTRIBUTION.md).

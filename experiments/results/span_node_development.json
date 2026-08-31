@@ -1,9 +1,0 @@
-{
-  "experiment": "V2.03 exact template span extraction",
-  "dataset": "D:\\Coding\\Models\\TiktokTechJam\\robustness\\v2\\sets\\semantic_attribute_development_200.jsonl",
-  "cases": 460,
-  "exact_span_recovery": 1.0,
-  "failures": [],
-  "scope_note": "The BERT scaffolding tagger is intentionally excluded: all messages use recognised official-format wrappers.",
-  "decision": "Pass only at exact recovery; route or template parsing must be corrected before semantic family or attribute resolution."
-}

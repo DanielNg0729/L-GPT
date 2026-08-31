@@ -1,8 +1,0 @@
-{
-  "input": "cluster_level_new_paraphrases.jsonl",
-  "accepted_clusters": 4,
-  "accepted_paraphrases": 4,
-  "rejected": 0,
-  "rejected_examples": [],
-  "policy": "Candidates must be absent from the full catalogue inventory and the frozen semantic benchmark wording."
-}

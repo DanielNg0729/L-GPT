@@ -1,7 +1,0 @@
-{
-  "templates_per_action": 8,
-  "total_templates": 48,
-  "rows": 9600,
-  "invariant": "Only the conversational wrapper changes; category and attribute values remain verbatim.",
-  "role": "untouched final test for the turn-gated route-classifier experiment"
-}

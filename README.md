@@ -8,6 +8,12 @@ interface.
 
 The shipped path is offline, deterministic, and costs $0.00 per evaluation.
 
+> **Where the rest of the work is.** This branch carries the submission: the agent, the
+> organizer's unmodified kit, the tests, and the report. The measurement record that
+> justifies the design -- roughly 500 further files of experiments, datasets, results and
+> notes -- lives on the [`experimental`](https://github.com/DanielNg0729/L-GPT/tree/experimental)
+> branch, which is where every `experiments/` link below points.
+
 ## Run it
 
 Python 3.10 or newer. The scored path uses only the standard library.
@@ -240,11 +246,11 @@ hosted tie reranking, which lost to the popularity prior in measurement.
 **The agent is [`submission/agent.py`](submission/agent.py).** Everything else is either the
 organizer's kit, a component that file calls, or evidence for why it is built the way it is.
 
-The shipped system is **28 files**. Everything else lives under [`experiments/`](experiments/)
+The shipped system is **28 files**. Everything else lives under [`experiments/`](https://github.com/DanielNg0729/L-GPT/tree/experimental/experiments)
 — the measurement record, not the product. That ratio is deliberate: almost every design
 decision here was chosen against a measurement, and the negative results are kept because
 they are the reason the positive ones can be trusted. Start at
-[`experiments/INDEX.md`](experiments/INDEX.md).
+[`experiments/INDEX.md`](https://github.com/DanielNg0729/L-GPT/blob/experimental/experiments/INDEX.md).
 
 | Pipeline stage | Source | Runs when |
 |---|---|---|
@@ -279,13 +285,13 @@ and is enforced by `tests/test_upstream_integrity.py`.
 | [`submission/`](submission/) | Canonical agent, optional model integrations, and packaging documentation |
 | [`starter/`](starter/) | Evaluator entry point; re-exports the canonical agent so there is exactly one implementation |
 | [`evaluator/`](evaluator/) | Official local simulator and scorer |
-| [`docs/research/`](docs/research/) | Pre-agent research: catalogue/session data profile, industry-practice notes |
-| [`experiments/profile/`](experiments/profile/) | The profiling scripts behind the data profile (field coverage, probe expected value, target priors) |
-| [`experiments/log/`](experiments/log/) | Numbered chronological experiments, in the order they were run |
-| [`experiments/studies/`](experiments/studies/) | Reusable study scripts: `audit_` / `build_` / `evaluate_` / `train_` / `run_` |
-| [`experiments/datasets/`](experiments/datasets/) | Every generated suite — see [DATASETS.md](experiments/DATASETS.md) for what each one is and how it was made |
-| [`experiments/results/`](experiments/results/) | Raw measurement output, one file per run |
-| [`experiments/notes/`](experiments/notes/) | Literature review, validation write-ups, decision briefs |
+| [`docs/research/`](https://github.com/DanielNg0729/L-GPT/tree/experimental/docs/research) | Pre-agent research: catalogue/session data profile, industry-practice notes |
+| [`experiments/profile/`](https://github.com/DanielNg0729/L-GPT/tree/experimental/experiments/profile) | The profiling scripts behind the data profile (field coverage, probe expected value, target priors) |
+| [`experiments/log/`](https://github.com/DanielNg0729/L-GPT/tree/experimental/experiments/log) | Numbered chronological experiments, in the order they were run |
+| [`experiments/studies/`](https://github.com/DanielNg0729/L-GPT/tree/experimental/experiments/studies) | Reusable study scripts: `audit_` / `build_` / `evaluate_` / `train_` / `run_` |
+| [`experiments/datasets/`](https://github.com/DanielNg0729/L-GPT/tree/experimental/experiments/datasets) | Every generated suite — see [DATASETS.md](https://github.com/DanielNg0729/L-GPT/blob/experimental/experiments/DATASETS.md) for what each one is and how it was made |
+| [`experiments/results/`](https://github.com/DanielNg0729/L-GPT/tree/experimental/experiments/results) | Raw measurement output, one file per run |
+| [`experiments/notes/`](https://github.com/DanielNg0729/L-GPT/tree/experimental/experiments/notes) | Literature review, validation write-ups, decision briefs |
 | [`docs/`](docs/) | Competition evidence, design rationale, research, and validation reports |
 | [`tests/`](tests/) | Contract, determinism, fallback, model-gate, and robustness tests |
 | [`data/`](data/) | Released sessions, checksums, and catalogue download instructions |
@@ -298,10 +304,10 @@ and is enforced by `tests/test_upstream_integrity.py`.
 for the *optional* learned components and the experiments that trained them. The scored
 deterministic path never imports it.
 
-Start with the [experiment registry](experiments/INDEX.md) for a compact
-navigator. The [experiment decision log](experiments/DECISION_LOG.md) records
+Start with the [experiment registry](https://github.com/DanielNg0729/L-GPT/blob/experimental/experiments/INDEX.md) for a compact
+navigator. The [experiment decision log](https://github.com/DanielNg0729/L-GPT/blob/experimental/experiments/DECISION_LOG.md) records
 every versioned investigation, its result, acceptance or rejection, and its effect on the
-final design. The [complete findings ledger](experiments/FINDINGS.md) retains
+final design. The [complete findings ledger](https://github.com/DanielNg0729/L-GPT/blob/experimental/experiments/FINDINGS.md) retains
 methods, measurements, corrections, and negative results.
 
 ## Technology and data
@@ -387,8 +393,8 @@ python experiments/log/57_independent_validation.py
 Do not use `Tune800`, `Unseen4x800`, or `Shifted12x800` for additional parameter tuning.
 Their recorded evaluations are already consumed validation evidence. For a new candidate,
 create a new seeded suite and keep it separate from final reporting. Detailed construction,
-invariants, and historical outputs are in [experiments/README.md](experiments/README.md) and
-[the independent-validation report](experiments/notes/independent_validation.md).
+invariants, and historical outputs are in [experiments/README.md](https://github.com/DanielNg0729/L-GPT/blob/experimental/experiments/README.md) and
+[the independent-validation report](https://github.com/DanielNg0729/L-GPT/blob/experimental/experiments/notes/independent_validation.md).
 
 Run all automated tests:
 
@@ -541,8 +547,8 @@ already smaller than fold variance, so more of it would be fitting noise.
 | **Khiêm** — lead engineer & experimentation | Built the shipped agent end to end: the recognition gate and exact template matching, catalogue-attested span recovery and grounded n-gram mining, the FTS5 retrieval ladder, coverage ranking, the session ledger, and the disclosure policy — the components behind the 0.9715 headline — plus the numbered ~70-experiment programme, the robustness and population-shift suites, the release test suite, and the reproducibility infrastructure (integrity checker, Hub-resolved checkpoints, runbook). |
 | **Dương** | LLM layer: the attribute deparaphraser (generate-then-verify against the catalogue), the transcript rescue path, and the gating discipline that keeps every hosted call off the scored path and fail-safe. |
 | **Thanh Duy** | Final architecture: the hybrid escalation design (cheap exact mechanisms first, learned components reachable only when they cannot see the answer), component boundaries, and integration review. |
-| **Huy** — industry research | How production conversational-commerce systems budget clarification, keep dialogue state, use popularity priors, and stay lexical-first with semantic assist — distilled in [`docs/research/industry_notes.md`](docs/research/industry_notes.md), grounding the design requirements and the beyond-the-benchmark narrative. |
-| **Tài** — main research & relevance filter | Participant-kit setup with checksum verification and exact reproduction of the published BM25 baseline (0.10671) with the scenario breakdown that directed effort; the early catalogue/session profile ([`docs/research/data_profile.md`](docs/research/data_profile.md)) whose probe expected-value table and target-popularity analysis anticipated the shipped ask policy and ranking prior; the windowed LLM contradiction filter with its measured negative verdict, kept demo-only ([`experiments/LLM_FILTER_NOTES.md`](experiments/LLM_FILTER_NOTES.md)). |
+| **Huy** — industry research | How production conversational-commerce systems budget clarification, keep dialogue state, use popularity priors, and stay lexical-first with semantic assist — distilled in [`docs/research/industry_notes.md`](https://github.com/DanielNg0729/L-GPT/blob/experimental/docs/research/industry_notes.md), grounding the design requirements and the beyond-the-benchmark narrative. |
+| **Tài** — main research & relevance filter | Participant-kit setup with checksum verification and exact reproduction of the published BM25 baseline (0.10671) with the scenario breakdown that directed effort; the early catalogue/session profile ([`docs/research/data_profile.md`](https://github.com/DanielNg0729/L-GPT/blob/experimental/docs/research/data_profile.md)) whose probe expected-value table and target-popularity analysis anticipated the shipped ask policy and ranking prior; the windowed LLM contradiction filter with its measured negative verdict, kept demo-only ([`experiments/LLM_FILTER_NOTES.md`](https://github.com/DanielNg0729/L-GPT/blob/experimental/experiments/LLM_FILTER_NOTES.md)). |
 
 See [`REPORT.md`](REPORT.md) for the full submission report.
 

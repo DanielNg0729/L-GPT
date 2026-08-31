@@ -166,5 +166,5 @@ because it performed worse than the deterministic popularity tie-breaker.
 | RM3 query expansion | Held-out delta `-0.004` |
 | Learned probe policy | Worse MTTC and negative end-to-end deltas |
 
-See the [experiment registry](../../experiments/INDEX.md) and
-[complete findings](../../experiments/FINDINGS.md) for the full record.
+See the [experiment registry](https://github.com/DanielNg0729/L-GPT/blob/experimental/experiments/INDEX.md) and
+[complete findings](https://github.com/DanielNg0729/L-GPT/blob/experimental/experiments/FINDINGS.md) for the full record.

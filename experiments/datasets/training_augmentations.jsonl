@@ -1,5 +1,0 @@
-{"rule": "slip_resistant", "canonical": "slip resistant", "generated": [], "banned": ["maintains grip on slick surfaces", "helps prevent sliding on smooth ground"]}
-{"rule": "leather", "canonical": "leather", "generated": [], "banned": ["made from animal hide", "crafted from tanned hide material"]}
-{"rule": "pull_on", "canonical": "pull on closure", "generated": [], "banned": ["slips on without separate fasteners", "wears without needing a fastening"]}
-{"rule": "buckle", "canonical": "buckle closure", "generated": [], "banned": ["fastens using a metal clasp", "secured with an adjustable clasp"]}
-{"rule": "zipper", "canonical": "zipper closure", "generated": [], "banned": ["closes with interlocking teeth", "fastens using a sliding toothed track"]}

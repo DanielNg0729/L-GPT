@@ -1,9 +1,0 @@
-{
-  "base_model": "sentence-transformers/all-MiniLM-L6-v2",
-  "verified_pairs": 186,
-  "held_out_equivalence_canonicals": 34,
-  "epochs": 3,
-  "batch_size": 16,
-  "warmup_steps": 3,
-  "output": ".v2_model_cache\\attribute_encoder_preliminary"
-}
