@@ -1,0 +1,38 @@
+{
+  "experiment": "substring fallback re-tested at attenuated weights",
+  "baseline": "shipped suppression",
+  "arms": {
+    "shipped (suppress)": {
+      "official200": 0.9715,
+      "org_proxy_800": 0.963863,
+      "review800": 0.956138,
+      "uniform800": 0.918225,
+      "inverse800": 0.897825,
+      "attr_paraphrase800": 0.870212
+    },
+    "fragments @ CONSTRAINT": {
+      "official200": 0.9715,
+      "org_proxy_800": 0.963863,
+      "review800": 0.956138,
+      "uniform800": 0.918225,
+      "inverse800": 0.89565,
+      "attr_paraphrase800": 0.847444
+    },
+    "fragments @ MINED 0.48": {
+      "official200": 0.9715,
+      "org_proxy_800": 0.963863,
+      "review800": 0.956138,
+      "uniform800": 0.918225,
+      "inverse800": 0.89795,
+      "attr_paraphrase800": 0.867663
+    },
+    "fragments @ SEM 0.15": {
+      "official200": 0.9715,
+      "org_proxy_800": 0.963863,
+      "review800": 0.956138,
+      "uniform800": 0.918225,
+      "inverse800": 0.89795,
+      "attr_paraphrase800": 0.865538
+    }
+  }
+}

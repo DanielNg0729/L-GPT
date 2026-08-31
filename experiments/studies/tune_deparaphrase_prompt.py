@@ -95,6 +95,7 @@ RUN_SLUG = f"{MODEL_SLUG}__mt{MAX_TOKENS}"
 from evaluator.local_evaluator import catalog_index, evaluate, load_jsonl  # noqa: E402
 from submission.agent import CAT, Agent, raw_toks  # noqa: E402
 from submission.llm_resolve import LLMResolver  # noqa: E402
+from experiments.studies import shared_llm_cache as shared_cache  # noqa: E402
 
 SUITE = (ROOT / "experiments" / "datasets" / "open_vocabulary"
          / "review800_open_vocab_paraphrase.jsonl")
@@ -131,16 +132,51 @@ def build_user(arm: str, attr: str, ctx: dict) -> str:
     return "\n".join(lines)
 
 
-class ArmResolver(LLMResolver):
-    """Same system prompt, same acceptance gate. Only the user message differs.
+def _flush_shared() -> None:
+    """Persist the shared store. Called as answers arrive, so an interrupted run keeps
+    everything it paid for -- the previous per-arm caches only wrote on completion, and a
+    kill mid-arm threw the whole arm away."""
+    shared_cache.CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    shared_cache.CACHE_PATH.write_text(
+        json.dumps(shared_cache._load(), indent=1, sort_keys=True) + "\n", encoding="utf-8")
 
-    Each arm gets its own cache file: the cache is keyed by the user message, so a shared
-    cache would let arm A's answers satisfy arm B's lookups for any phrase whose assembled
-    prompt happened to collide, and silently flatten the comparison.
+
+class _SharedCacheView(dict):
+    """The resolver's `cache` attribute, backed by the repository-wide response store.
+
+    The resolver keys its cache on the user message alone, which is right for a process
+    that runs one model at one setting and wrong for a harness that varies both. This view
+    keeps the resolver's logic untouched and translates every lookup into the shared key --
+    model, max_tokens, effort, prompt -- so arms that differ only in how an answer is USED
+    replay instead of re-paying.
+
+    Distinct arms cannot collide: the prompt text is part of the key, and arms differ
+    precisely in their prompt text.
     """
+
+    def __init__(self, model: str, max_tokens: int) -> None:
+        super().__init__()
+        self._model, self._mt = model, max_tokens
+
+    def _k(self, prompt):
+        return shared_cache.key(self._model, prompt, max_tokens=self._mt)
+
+    def __contains__(self, prompt):
+        return self._k(prompt) in shared_cache._load()
+
+    def __getitem__(self, prompt):
+        return shared_cache._load()[self._k(prompt)]
+
+    def __setitem__(self, prompt, value):
+        shared_cache._load()[self._k(prompt)] = value
+
+
+class ArmResolver(LLMResolver):
+    """Same system prompt, same acceptance gate. Only the user message differs."""
 
     def __init__(self, arm: str, cache_path: Path, model: str = MODEL) -> None:
         super().__init__(model=model, cache_path=cache_path)
+        self.cache = _SharedCacheView(model, MAX_TOKENS)
         self.arm = arm
         self.proposals: list[dict] = []
         self.prompts: list[str] = []
@@ -161,7 +197,7 @@ class ArmResolver(LLMResolver):
             self._since_report = 0
             # Flush as we go: the arm otherwise writes its cache only on completion, so an
             # interrupted run loses every answer it paid for.
-            self.flush()
+            _flush_shared()
             print(f"      [{self.arm}] {self.calls} calls, {self.accepted} accepted, "
                   f"{self.abstained} abstained, {self.failures} failures, "
                   f"{self._spent:.0f}s in-request", flush=True)
@@ -243,7 +279,7 @@ def main() -> None:
         res = ArmResolver(arm, CACHE_DIR / f"arm_{arm}__{RUN_SLUG}.json")
         agent = make_agent_class(res, targets)(ROOT / "data" / "catalog.jsonl")
         result = evaluate(agent, samples, ids, cats, prods)
-        res.flush()
+        _flush_shared()
 
         checked = [p for p in res.proposals if p["proposal"] and p["target"]]
         correct = sum(1 for p in checked

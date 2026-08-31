@@ -45,7 +45,8 @@ os.environ["V2_ROUTE"] = "1"
 os.environ["BERT_EXTRACT"] = "1"
 
 from evaluator.local_evaluator import catalog_index, evaluate, load_jsonl  # noqa: E402
-from submission.agent import CONSTRAINT, MINED, SEM, Agent, raw_toks  # noqa: E402
+from submission.agent import (_SYNTHESISED_COLOUR, CONSTRAINT, MINED, SEM, Agent,  # noqa: E402
+                              raw_toks)
 
 SETS = ROOT / "experiments" / "datasets" / "sets"
 OV = ROOT / "experiments" / "datasets" / "open_vocabulary"
@@ -70,6 +71,16 @@ def make(weight):
             self._fragment = set()          # phrases that came from the fallback
 
         def _resolve(self, text, cap=None):
+            # REPRODUCE THE SHIPPED PREAMBLE, or this measures a different agent. An
+            # earlier version of this override reimplemented `_resolve` from the whole
+            # phrase onward and silently skipped the synthesised-colour handling that
+            # ships ahead of it, so every arm -- including the baseline -- ran without a
+            # fix worth +0.03 on two criteria. The baseline printed 0.970500 where the
+            # shipped agent scores 0.971500, which is how it was caught.
+            colour = _SYNTHESISED_COLOUR.match(str(text))
+            if colour:
+                text = colour.group(1).strip()
+
             t = raw_toks(text)[:self.RESOLVE_CAP if cap is None else cap]
             if not t:
                 return []
@@ -93,7 +104,11 @@ def make(weight):
         def _weight(self, phrase, df, tier):
             # A fragment is not what the customer said; it is the part of it the catalogue
             # recognises. Score it as such regardless of the tier its clause carried.
-            if phrase in self._fragment:
+            # The CONSTRAINT arm must leave the tier alone -- that is the behaviour
+            # experiment 69 rejected. An earlier version of this file mapped it to MINED
+            # like the others, so two arms silently ran the same configuration and
+            # reported identical numbers.
+            if phrase in self._fragment and weight in ("mined", "sem"):
                 return super()._weight(phrase, df, SEM if weight == "sem" else MINED)
             return super()._weight(phrase, df, tier)
 
