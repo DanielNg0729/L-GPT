@@ -10,14 +10,14 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 from evaluator.local_evaluator import catalog_index, evaluate, load_jsonl
-from robustness.v2.provenance_gate import assess
-from robustness.v2.semantic_rag import ProductPassageRetriever
+from experiments.studies.provenance_gate import assess
+from experiments.studies.semantic_rag import ProductPassageRetriever
 
 # Numeric experiment files are loaded explicitly so their classes remain importable by script.
 import importlib
 TagBase = importlib.import_module("03_attribute_tag_guess").AttributeTagAgent
 
-OUT = ROOT / "robustness" / "v2" / "results" / "public_value_only_attribute_tag_plus_rag.json"
+OUT = ROOT / "experiments" / "studies" / "results" / "public_value_only_attribute_tag_plus_rag.json"
 
 
 class TagPlusRAGAgent(TagBase):
@@ -73,7 +73,7 @@ def run(path, ids, cats, products, catalog):
 
 
 def main():
-    catalog=ROOT/'data/catalog.jsonl'; ids,cats,products=catalog_index(catalog); suite=ROOT/'robustness/v2/public_value_only'
+    catalog=ROOT/'data/catalog.jsonl'; ids,cats,products=catalog_index(catalog); suite=ROOT/'experiments/datasets/public_value_only'
     result={"candidate":"attribute_tag_plus_rag","canonical_replay":run(suite/'official200_canonical_replay.jsonl',ids,cats,products,catalog),"attribute_paraphrase":run(suite/'official200_attribute_paraphrase_dev.jsonl',ids,cats,products,catalog)}
     OUT.write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8'); print(json.dumps(result,indent=2))
 

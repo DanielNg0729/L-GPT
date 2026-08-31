@@ -35,7 +35,7 @@ SIZE MATTERS TOO. The shipped distilbert tagger is already 266 MB. roberta-base 
 deberta-v3-small are larger, and the submission rules allow "lightweight local assets".
 A win has to be big enough to justify the weight, and is reported alongside it.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/51_encoder_bakeoff.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/51_encoder_bakeoff.py
 """
 from __future__ import annotations
 
@@ -51,7 +51,7 @@ from pathlib import Path  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 from evaluator.local_evaluator import catalog_index, evaluate, load_jsonl  # noqa: E402
 from submission.agent import Agent, raw_toks, recognised  # noqa: E402

@@ -25,7 +25,7 @@ CENSUS FIRST. If P2 affects two products it is an overfit; if it affects thousan
 structural defect in our CAT channel. The census is run over the whole 50k catalogue,
 independent of which sessions happen to be in the public split.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/29_hitrate_repair.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/29_hitrate_repair.py
 """
 from __future__ import annotations
 

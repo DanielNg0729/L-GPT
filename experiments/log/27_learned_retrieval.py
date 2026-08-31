@@ -22,7 +22,7 @@ B4  learned sparse ("SPLADE-lite"): keep exact lexical matching but LEARN the te
 
 Both are evaluated where it counts: HR@10 and MTTC under the width-1 policy.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/27_learned_retrieval.py --mint 8000
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/27_learned_retrieval.py --mint 8000
 """
 from __future__ import annotations
 

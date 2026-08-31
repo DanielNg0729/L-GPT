@@ -42,7 +42,7 @@ WHAT WOULD MAKE THIS A BAD IDEA, stated before measuring:
   * committing on a noisy statistic can commit WRONG. Measured below on all three
     populations, including the one where the correct answer is "keep the prior".
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/38_bayesian_prior_calibration.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/38_bayesian_prior_calibration.py
 """
 from __future__ import annotations
 
@@ -54,7 +54,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 from evaluator.local_evaluator import catalog_index, evaluate, load_jsonl  # noqa: E402
 from submission.agent import Agent  # noqa: E402

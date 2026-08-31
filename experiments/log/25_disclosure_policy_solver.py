@@ -30,7 +30,7 @@ So a width policy is not a loophole; Pillar II asks for one. What would be gamin
 withholding a candidate we BELIEVE is correct purely to shrink the MRR denominator. The
 policy solved here withholds only where the evidence has not separated the candidates.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/25_disclosure_policy_solver.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/25_disclosure_policy_solver.py
 """
 from __future__ import annotations
 

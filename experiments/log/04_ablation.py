@@ -12,7 +12,7 @@ The ladder isolates the contribution of each mechanism:
     V4  + constraint-aware scoring w/ AND->OR backoff ladder
     V5  + dense bi-encoder fused by RRF  (added in 05_dense.py)
 
-Run:  PYTHONIOENCODING=utf-8 python experiments/scripts/04_ablation.py
+Run:  PYTHONIOENCODING=utf-8 python experiments/log/04_ablation.py
 """
 from __future__ import annotations
 

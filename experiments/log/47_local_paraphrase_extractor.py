@@ -34,7 +34,7 @@ adopt/reject decision rests on.
 SHIPPING CONSTRAINT: standard library only at inference, so a linear model whose
 coefficients transcribe into plain Python.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/47_local_paraphrase_extractor.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/47_local_paraphrase_extractor.py
 """
 from __future__ import annotations
 
@@ -49,7 +49,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 from evaluator.local_evaluator import (  # noqa: E402
     behavior_for, catalog_index, coarse_category, customer_reply, evaluate,

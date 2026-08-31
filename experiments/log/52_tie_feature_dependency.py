@@ -38,7 +38,7 @@ TWO THINGS THAT MAKE THIS HONEST, both of which the earlier work lacked:
 Every feature is computed from fields the rules make visible: title, features, description,
 price, categories, details, average_rating, rating_number, store.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/52_tie_feature_dependency.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/52_tie_feature_dependency.py
 """
 from __future__ import annotations
 
@@ -54,7 +54,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 from evaluator.local_evaluator import (  # noqa: E402
     behavior_for, catalog_index, coarse_category, customer_reply, initial_message,

@@ -17,7 +17,7 @@ Q2  WHICH COMPONENTS EARN THEIR PLACE ONLY WHEN THINGS GO WRONG?
     So a component's value is conditional, and measuring it only in the nominal condition
     understates insurance. This crosses every ablation with every paraphrase transform.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/32_conditional_attribution.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/32_conditional_attribution.py
 """
 from __future__ import annotations
 
@@ -29,7 +29,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 from evaluator.local_evaluator import catalog_index, evaluate, load_jsonl  # noqa: E402
 from submission.agent import Agent  # noqa: E402

@@ -34,7 +34,7 @@ TWO REPAIRS AND ONE NEW IDEA.
     does not discriminate would be worse than useless, so separability is measured first,
     with the distributions printed so the decision is inspectable rather than asserted.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/39_population_detector.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/39_population_detector.py
 """
 from __future__ import annotations
 
@@ -47,7 +47,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 from evaluator.local_evaluator import (  # noqa: E402
     behavior_for, catalog_index, coarse_category, customer_reply, evaluate,

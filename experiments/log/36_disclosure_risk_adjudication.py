@@ -29,7 +29,7 @@ negative anywhere, the other audit is right and the policy is a conditional bet.
   inverse-pop        targets anti-correlated with popularity -- worse still
   paraphrase T1/T5   templates broken, evidence thin, ranking degraded
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/36_disclosure_risk_adjudication.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/36_disclosure_risk_adjudication.py
 """
 from __future__ import annotations
 
@@ -40,7 +40,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 from evaluator.local_evaluator import catalog_index, evaluate, load_jsonl  # noqa: E402
 from submission.agent import Agent  # noqa: E402

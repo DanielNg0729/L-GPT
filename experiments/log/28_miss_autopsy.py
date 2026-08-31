@@ -11,7 +11,7 @@ for each of them, WHICH LAYER failed, because the fix is completely different pe
 It also re-measures HR under the full-10 policy on the SAME sessions, which is the direct
 test of whether sequential disclosure costs any recall at all.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/28_miss_autopsy.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/28_miss_autopsy.py
 """
 from __future__ import annotations
 

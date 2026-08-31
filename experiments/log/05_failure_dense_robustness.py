@@ -10,7 +10,7 @@ Three questions that decide the final architecture:
      (i) organiser-added natural-language paraphrasing of customer messages,
      (ii) ask_attribute='other' behaving differently in the private simulator?
 
-Run:  PYTHONIOENCODING=utf-8 python experiments/scripts/05_failure_dense_robustness.py
+Run:  PYTHONIOENCODING=utf-8 python experiments/log/05_failure_dense_robustness.py
       add --dense to include the (slow) bi-encoder pass
 """
 from __future__ import annotations
@@ -31,7 +31,7 @@ from evaluator.local_evaluator import (  # noqa: E402
     catalog_index, coarse_category, evaluate, intent_card, load_jsonl,
 )
 
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 from importlib import import_module  # noqa: E402
 
 abl = import_module("04_ablation")

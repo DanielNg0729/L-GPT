@@ -20,7 +20,7 @@ the guard intact and with rejection feedback disabled entirely. If the guard is 
 between us and a collapse, disabling rejection feedback should IMPROVE the paraphrased
 override sessions.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/35_override_safety.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/35_override_safety.py
 """
 from __future__ import annotations
 
@@ -31,7 +31,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 from evaluator.local_evaluator import catalog_index, load_jsonl  # noqa: E402
 from submission.agent import Agent  # noqa: E402

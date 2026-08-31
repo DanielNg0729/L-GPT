@@ -9,10 +9,10 @@ This is an analysis experiment, not a submission dependency.  It does not alter
 submission/agent.py or its cost.  Results are cached locally.
 
 Run a small stratified pilot (default):
-  python experiments/scripts/21_llm_extraction_robustness.py --online
+  python experiments/log/21_llm_extraction_robustness.py --online
 
 Run the full official 200-session harness with LLM extraction only:
-  python experiments/scripts/21_llm_extraction_robustness.py --online --all --levels exact
+  python experiments/log/21_llm_extraction_robustness.py --online --all --levels exact
 """
 from __future__ import annotations
 

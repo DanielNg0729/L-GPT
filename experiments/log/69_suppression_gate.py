@@ -33,7 +33,7 @@ NON-REGRESSION IS THE POINT. Official200 and the unseen population suites must n
 The paraphrase suite is where a gain is expected, but it is characterisation -- the
 organizer confirmed no paraphrasing -- so it cannot justify a regression elsewhere.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/69_suppression_gate.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/69_suppression_gate.py
 """
 from __future__ import annotations
 
@@ -78,8 +78,8 @@ def main() -> None:
     samples = load_jsonl(ROOT / "data" / "public_set.jsonl")
     cid, cats, prods = catalog_index(ROOT / "data" / "catalog.jsonl")
     base = Agent(ROOT / "data" / "catalog.jsonl")
-    rs = ROOT / "robustness" / "sets"
-    pvo = ROOT / "robustness" / "v2" / "public_value_only"
+    rs = ROOT / "experiments" / "datasets" / "sets"
+    pvo = ROOT / "experiments" / "studies" / "public_value_only"
     sets = {
         "official200": samples,
         "org-proxy": load_jsonl(rs / "organizer_proxy_800.jsonl"),

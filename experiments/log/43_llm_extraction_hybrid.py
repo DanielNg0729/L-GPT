@@ -37,7 +37,7 @@ Requires LLM_EXTRACT=1 and GROQ_API_KEY. Without them the extractor reports disa
 this pass measures the deterministic baseline only -- which is itself the proof that the
 agent is byte-identical offline.
 
-Run:  PYTHONIOENCODING=utf-8 LLM_EXTRACT=1 python -u experiments/scripts/43_llm_extraction_hybrid.py
+Run:  PYTHONIOENCODING=utf-8 LLM_EXTRACT=1 python -u experiments/log/43_llm_extraction_hybrid.py
 """
 from __future__ import annotations
 
@@ -49,7 +49,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 from evaluator.local_evaluator import catalog_index, evaluate, load_jsonl  # noqa: E402
 from submission.agent import Agent, recognised  # noqa: E402

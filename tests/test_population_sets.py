@@ -7,8 +7,8 @@ import sys
 import unittest
 from pathlib import Path
 
-from robustness.build_sets import scenario_sequence, weighted_without_replacement
-from robustness.build_independent_validation_sets import counts_for
+from experiments.studies.build_sets import scenario_sequence, weighted_without_replacement
+from experiments.studies.build_independent_validation_sets import counts_for
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -32,7 +32,7 @@ class RobustnessBuilderTest(unittest.TestCase):
         self.assertEqual(scenarios.count("boundary"), 40)
 
     def test_generated_sets_match_manifest_and_public_safety_invariants(self) -> None:
-        sets_dir = ROOT / "robustness" / "sets"
+        sets_dir = ROOT / "experiments" / "datasets" / "sets"
         manifest = json.loads((sets_dir / "manifest.json").read_text(encoding="utf-8"))
         public_rows = [json.loads(line) for line in
                        (ROOT / "data" / "public_set.jsonl").read_text(encoding="utf-8").splitlines()
@@ -58,7 +58,7 @@ class RobustnessBuilderTest(unittest.TestCase):
             self.assertEqual(scenarios.count("boundary"), 40, name)
 
     def test_optuna_v2_folds_are_stratified_and_public_disjoint(self) -> None:
-        sets_dir = ROOT / "robustness" / "optuna_v2_sets"
+        sets_dir = ROOT / "experiments" / "datasets" / "optuna_sets"
         manifest = json.loads((sets_dir / "manifest.json").read_text(encoding="utf-8"))
         public_rows = [json.loads(line) for line in
                        (ROOT / "data" / "public_set.jsonl").read_text(encoding="utf-8").splitlines()
@@ -83,8 +83,8 @@ class RobustnessBuilderTest(unittest.TestCase):
                 self.assertEqual(scenarios.count("boundary"), 4)
 
     def test_optuna_v2_aggregate_matches_official_efficiency_formula(self) -> None:
-        sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
-        module = importlib.import_module("55_optuna_official_v2")
+        sys.path.insert(0, str(ROOT / "experiments" / "log"))
+        module = importlib.import_module("55_optuna_official")
         public = {"sample_count": 200, "hit_rate_at_10": .995, "mrr": .995, "mttc": 2.32}
         private = {"sample_count": 800, "hit_rate_at_10": .9725,
                    "mrr": .97083375, "mttc": 2.975}

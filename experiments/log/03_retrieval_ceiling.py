@@ -14,7 +14,7 @@ is not open-ended semantic search -- it is provenance recovery, and exact phrase
 matching is the natural weapon. This script quantifies exactly how much
 selectivity each channel buys.
 
-Run:  PYTHONIOENCODING=utf-8 python experiments/scripts/03_retrieval_ceiling.py
+Run:  PYTHONIOENCODING=utf-8 python experiments/log/03_retrieval_ceiling.py
 """
 from __future__ import annotations
 

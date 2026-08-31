@@ -35,7 +35,7 @@ The unmatched rate is also a free, label-free paraphrase DETECTOR: if the organi
 clean templates we will observe ~0% unmatched, and if they paraphrase we will see it
 immediately -- the same trick as the population detector in `_w_pop_effective()`.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/41_recognition_gate.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/41_recognition_gate.py
 """
 from __future__ import annotations
 
@@ -47,7 +47,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 from evaluator.local_evaluator import (  # noqa: E402
     MAX_TURNS, TOP_K, catalog_index, coarse_category, customer_reply, initial_message,

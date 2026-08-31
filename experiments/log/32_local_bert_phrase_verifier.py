@@ -16,7 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "experiments" / "studies" / ".ml_deps"))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 from fastembed.rerank.cross_encoder import TextCrossEncoder  # noqa: E402
 from evaluator.local_evaluator import catalog_index, load_jsonl  # noqa: E402

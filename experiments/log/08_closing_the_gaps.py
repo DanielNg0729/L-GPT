@@ -18,7 +18,7 @@ Experiment 8: closing the four gaps left open by pass 7.
 
   D. CROSS-ENCODER RERANK -- probed for feasibility (offline, CPU, no network).
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/08_closing_the_gaps.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/08_closing_the_gaps.py
 """
 from __future__ import annotations
 

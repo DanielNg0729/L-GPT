@@ -32,7 +32,7 @@ Two mechanisms follow:
      fires, so a target shown before then is silently not-a-hit. Excluding it would be fatal.
      The exclusion set is therefore cleared whenever an override message is detected.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/09_disclosure_policy.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/09_disclosure_policy.py
 """
 from __future__ import annotations
 

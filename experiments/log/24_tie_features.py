@@ -25,7 +25,7 @@ bullet count, and the BM25-vs-coverage disagreement.
 
 18 features -> 34. Listwise objective on the same tie groups the cross-encoder uses.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/24_tie_features.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/24_tie_features.py
 """
 from __future__ import annotations
 
@@ -194,7 +194,7 @@ def main() -> None:
 
     import importlib.util
     spec = importlib.util.spec_from_file_location(
-        "p23", ROOT / "experiments" / "scripts" / "23_tie_crossencoder.py")
+        "p23", ROOT / "experiments" / "log" / "23_tie_crossencoder.py")
     p23 = importlib.util.module_from_spec(spec)
     # Proper module execution. exec()'ing the source text left __file__ undefined,
     # which pass 23 needs at import time.

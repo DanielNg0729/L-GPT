@@ -7,9 +7,9 @@ organized as a reproducible research package rather than as exploratory analysis
 
 | Path | Purpose |
 |---|---|
-| [`EXPERIMENT_INDEX.md`](EXPERIMENT_INDEX.md) | One-line question, result, and decision for every experiment |
-| [`EXPERIMENT_DECISION_LOG.md`](EXPERIMENT_DECISION_LOG.md) | Full one-by-one result, ruling, and final-design impact for every experiment |
-| [`EXPERIMENT_FINDINGS.md`](EXPERIMENT_FINDINGS.md) | Detailed methods, measurements, corrections, and interpretation |
+| [`INDEX.md`](INDEX.md) | One-line question, result, and decision for every experiment |
+| [`DECISION_LOG.md`](DECISION_LOG.md) | Full one-by-one result, ruling, and final-design impact for every experiment |
+| [`FINDINGS.md`](FINDINGS.md) | Detailed methods, measurements, corrections, and interpretation |
 | [`scripts/`](scripts/) | Runnable experiment and validation programs |
 | [`results/`](results/) | Versioned raw JSON outputs used by the reports |
 | [`archive/`](archive/) | Preserved original baseline implementation |
@@ -35,9 +35,9 @@ the path used to discover it.
 Run programs from the repository root, for example:
 
 ```bash
-python experiments/scripts/04_ablation.py
-python experiments/scripts/30_robustness_benchmark.py
-python experiments/scripts/57_independent_validation.py
+python experiments/log/04_ablation.py
+python experiments/log/30_robustness_benchmark.py
+python experiments/log/57_independent_validation.py
 ```
 
 Scripts write versionable outputs to `experiments/results/`. Large caches, Optuna databases,

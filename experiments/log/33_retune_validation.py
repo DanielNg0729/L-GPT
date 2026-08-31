@@ -21,7 +21,7 @@ is scored on FOUR sets, and adopted only if it does not lose on any of them:
     synth-B         800 unseen sessions, DIFFERENT seed and disjoint draw -- so a win
                     on synth-A cannot simply be synth-A's own sampling noise
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/33_retune_validation.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/33_retune_validation.py
 """
 from __future__ import annotations
 
@@ -32,7 +32,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 from evaluator.local_evaluator import catalog_index, evaluate, load_jsonl  # noqa: E402
 from submission.agent import Agent  # noqa: E402

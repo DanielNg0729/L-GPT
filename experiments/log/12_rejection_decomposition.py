@@ -19,7 +19,7 @@ Decomposition:
 If C ≈ B, the gain is genuine reranking and the shipped behaviour is fine.
 If C ≈ A, the gain was the denominator, and we should ship C instead.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/12_rejection_decomposition.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/12_rejection_decomposition.py
 """
 from __future__ import annotations
 

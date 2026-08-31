@@ -15,7 +15,7 @@ A turn-indexed schedule only approximates that. An adaptive rule reads it direct
 is what the brief's Pillar II describes: "trigger an immediate retrieval cutoff when facing
 Over-Generality (candidate pool overload)".
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/26_disclosure_validate.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/26_disclosure_validate.py
 """
 from __future__ import annotations
 

@@ -24,7 +24,7 @@ install risk. Those are reasons to MEASURE, which is what this pass does:
   * does cross-encoder reranking actually improve MRR here?
   * what does it cost in per-turn latency and RAM?
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/11_cross_encoder.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/11_cross_encoder.py
 """
 from __future__ import annotations
 

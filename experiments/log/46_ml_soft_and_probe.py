@@ -37,7 +37,7 @@ state, which is what the entropy/IDSS line (arXiv:2603.11399) actually amounts t
 
 MTTC is the only remaining lever: 2.320 against a 1.39 floor, worth 0.20 of the score.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/46_ml_soft_and_probe.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/46_ml_soft_and_probe.py
 """
 from __future__ import annotations
 
@@ -53,7 +53,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 from evaluator.local_evaluator import (  # noqa: E402
     behavior_for, catalog_index, coarse_category, customer_reply, evaluate,

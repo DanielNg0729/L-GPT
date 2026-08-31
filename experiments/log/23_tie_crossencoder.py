@@ -24,7 +24,7 @@ Bars, fixed in advance:
     within-tie target-first   popularity 57.4%  |  LLM 41.2%  |  feature-LTR 32.4%
     end-to-end                +0.005 held-out to adopt
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/23_tie_crossencoder.py --mint 12000
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/23_tie_crossencoder.py --mint 12000
 """
 from __future__ import annotations
 

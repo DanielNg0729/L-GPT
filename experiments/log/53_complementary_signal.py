@@ -24,7 +24,7 @@ permutation on the same subset rather than assumed.
 Also tested: simple two-signal fusion (popularity + each candidate, by rank) measured on ALL
 groups, because a feature can be complementary and still not survive being combined.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/53_complementary_signal.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/53_complementary_signal.py
 """
 from __future__ import annotations
 
@@ -38,7 +38,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 from evaluator.local_evaluator import catalog_index, load_jsonl  # noqa: E402
 from submission.agent import Agent  # noqa: E402

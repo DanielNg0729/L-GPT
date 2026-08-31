@@ -18,7 +18,7 @@ noise in the way.
 
 Reuses the cached synthetic features, so training is seconds rather than minutes.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/22_ml_tiebreak_accuracy.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/22_ml_tiebreak_accuracy.py
 """
 from __future__ import annotations
 
@@ -50,7 +50,7 @@ TUNE = [s for i, s in enumerate(samples) if i % 2 == 0]
 cid, cats, prods = catalog_index(ROOT / "data" / "catalog.jsonl")
 
 import importlib.util  # noqa: E402
-spec = importlib.util.spec_from_file_location("p21", ROOT / "experiments" / "scripts" / "21_synthetic_ltr.py")
+spec = importlib.util.spec_from_file_location("p21", ROOT / "experiments" / "log" / "21_synthetic_ltr.py")
 
 from submission.agent import Agent, CAT, CONSTRAINT, MINED  # noqa: E402
 

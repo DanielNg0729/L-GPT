@@ -19,7 +19,7 @@ far more noise -- an empirical question, not a theoretical one.
 The rule stays what it has been all project: adopt only if NOTHING regresses, and the clean
 score is the first column checked.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/42_mining_paraphrase_floor.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/42_mining_paraphrase_floor.py
 """
 from __future__ import annotations
 
@@ -30,7 +30,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 from evaluator.local_evaluator import catalog_index, evaluate, load_jsonl  # noqa: E402
 from submission.agent import Agent  # noqa: E402

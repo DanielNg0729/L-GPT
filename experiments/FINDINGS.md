@@ -27,8 +27,8 @@ one line in `docs/competition_specification.md`  -  "If natural-language paraphr
 added by the organizer, it cannot decide correctness"  -  and its numbers must not be read as
 harness results. They are marked **[PROBE]**.
 
-Reproduce individual programs from `experiments/scripts/`; see
-[`EXPERIMENT_INDEX.md`](EXPERIMENT_INDEX.md) for the complete registry.
+Reproduce individual programs from `experiments/log/`; see
+[`INDEX.md`](INDEX.md) for the complete registry.
 
 ---
 

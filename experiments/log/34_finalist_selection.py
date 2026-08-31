@@ -23,7 +23,7 @@ seven. Nine candidates were searched in pass 33 over four sets, so some of those
 multiple-comparison luck; requiring a win on three further independent conditions is the
 cheapest available guard against that.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/34_finalist_selection.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/34_finalist_selection.py
 """
 from __future__ import annotations
 
@@ -34,7 +34,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 from evaluator.local_evaluator import catalog_index, evaluate, load_jsonl  # noqa: E402
 from submission.agent import Agent  # noqa: E402

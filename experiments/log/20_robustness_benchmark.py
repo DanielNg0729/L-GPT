@@ -13,7 +13,7 @@ separate questions that are often conflated as "generalisation":
 Risk scale: 1 = invariant/confirmed, 2 = degrades but remains viable,
 3 = can become detrimental or relies on an unconfirmed population assumption.
 
-Run: python experiments/scripts/20_robustness_benchmark.py
+Run: python experiments/log/20_robustness_benchmark.py
 """
 from __future__ import annotations
 

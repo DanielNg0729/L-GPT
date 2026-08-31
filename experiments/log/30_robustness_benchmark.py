@@ -31,7 +31,7 @@ Three questions, each measured rather than asserted:
      plausible range, again on unseen sessions. A flat response means the constant is
      not carrying population-specific information.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/30_robustness_benchmark.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/30_robustness_benchmark.py
 """
 from __future__ import annotations
 

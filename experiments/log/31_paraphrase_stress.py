@@ -35,7 +35,7 @@ T6 and T7 are past what the spec contemplates: they paraphrase the product text 
 which would also break the ground-truth link the organizer relies on. They are included as
 the floor of the range, not as a scenario we expect.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/31_paraphrase_stress.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/31_paraphrase_stress.py
 """
 from __future__ import annotations
 

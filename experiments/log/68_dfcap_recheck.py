@@ -25,7 +25,7 @@ The pre-registered rule is unchanged: adopt only if NO condition regresses. Cond
 the ones that survive the organizer's "no paraphrase" confirmation as decision criteria
 (public, unseen, populations), plus the paraphrase suites reported as characterisation.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/68_dfcap_recheck.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/68_dfcap_recheck.py
 """
 from __future__ import annotations
 
@@ -42,7 +42,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from evaluator.local_evaluator import catalog_index, evaluate, load_jsonl  # noqa: E402
 from submission.agent import Agent  # noqa: E402
 
-# Uses the FROZEN release sets in robustness/sets rather than minting on the fly, so the
+# Uses the FROZEN release sets in experiments/datasets/sets rather than minting on the fly, so the
 # grid matches the published robustness suite exactly and is byte-reproducible.
 
 CAPS = (1500, 2715, 6000, 12000, 25000)
@@ -58,8 +58,8 @@ def main() -> None:
     shipped = base.ix.DF_CAP
     print(f"shipped DF_CAP = {shipped}  (trial 38)")
 
-    rs = ROOT / "robustness" / "sets"
-    pvo = ROOT / "robustness" / "v2" / "public_value_only"
+    rs = ROOT / "experiments" / "datasets" / "sets"
+    pvo = ROOT / "experiments" / "studies" / "public_value_only"
     sets = {
         "public200": samples,
         "org-proxy": load_jsonl(rs / "organizer_proxy_800.jsonl"),

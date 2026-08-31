@@ -14,7 +14,7 @@ without changing the exact-form V1 behavior?
 | SemanticShift-Holdout800 | Target-disjoint semantic holdout | Not opened |
 
 `SemanticShift-Dev200` and `SemanticShift-Holdout800` are documented in
-[`robustness/v2/README.md`](../../robustness/v2/README.md). The held-out set remains sealed
+[`experiments/studies/README.md`](../../experiments/studies/README.md). The held-out set remains sealed
 because no candidate met the development and clean-control requirements.
 
 ## Candidates

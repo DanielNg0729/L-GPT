@@ -23,7 +23,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 sys.path.insert(0, str(ROOT / "experiments" / "studies" / ".ml_deps"))
 
 DB = ROOT / "experiments" / "studies" / "optuna_official_v2.db"

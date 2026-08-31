@@ -1,0 +1,55 @@
+{
+  "experiment": "V2.72 turn-one category coverage audit",
+  "definition": "The exact normalized coarse target category disclosed by the organizer is present as CAT evidence after actual V2 local extraction.",
+  "llm_calls": 0,
+  "results": {
+    "TemplateParaphrase9600-Test": {
+      "sessions": 200,
+      "exact_category_recovered": 200,
+      "exact_category_failure": 0,
+      "failure_rate": 0.0,
+      "failure_examples": []
+    },
+    "Wrapper800": {
+      "sessions": 800,
+      "exact_category_recovered": 797,
+      "exact_category_failure": 3,
+      "failure_rate": 0.00375,
+      "failure_examples": [
+        {
+          "sample_id": "catalog_review_distinct_800_0013",
+          "expected_category": "Sleep & Lounge Bottoms",
+          "transformed_turn_1": "Give me an overview of Sleep & Lounge Bottoms, with no criteria yet.",
+          "category_evidence": [],
+          "expected_tokens": [
+            "sleep",
+            "lounge",
+            "bottoms"
+          ]
+        },
+        {
+          "sample_id": "catalog_review_distinct_800_0135",
+          "expected_category": "Props Feather Boas",
+          "transformed_turn_1": "I previously looked at Props Feather Boas with Material: high quality turkey feather in view.",
+          "category_evidence": [],
+          "expected_tokens": [
+            "props",
+            "feather",
+            "boas"
+          ]
+        },
+        {
+          "sample_id": "catalog_review_distinct_800_0517",
+          "expected_category": "Sleep & Lounge Bottoms",
+          "transformed_turn_1": "Give me an overview of Sleep & Lounge Bottoms, with no criteria yet.",
+          "category_evidence": [],
+          "expected_tokens": [
+            "sleep",
+            "lounge",
+            "bottoms"
+          ]
+        }
+      ]
+    }
+  }
+}

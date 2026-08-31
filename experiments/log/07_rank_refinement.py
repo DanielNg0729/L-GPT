@@ -14,7 +14,7 @@ reports the whole sweep curve, not just the argmax, and the final configuration 
 chosen from a FLAT region rather than a peak. Sensitivity is printed so the risk is
 visible rather than assumed away.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/07_rank_refinement.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/07_rank_refinement.py
 """
 from __future__ import annotations
 

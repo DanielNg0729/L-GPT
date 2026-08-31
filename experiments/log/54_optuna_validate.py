@@ -25,7 +25,7 @@ The adoption rule is unchanged and pre-registered: adopt only if NO condition re
 That rule is what caught IDF_POW, and a 1,600-trial search is exactly the situation it
 exists for -- with that many trials some apparent winners are multiple-comparison luck.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/54_optuna_validate.py --top 6
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/54_optuna_validate.py --top 6
 """
 from __future__ import annotations
 
@@ -37,7 +37,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 from evaluator.local_evaluator import catalog_index, evaluate, load_jsonl  # noqa: E402
 from submission.agent import Agent  # noqa: E402

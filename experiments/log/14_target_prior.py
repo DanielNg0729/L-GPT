@@ -33,7 +33,7 @@ Prior shapes tested, all deterministic and offline:
     P4  log(rn) direct, i.e. proportional-to-count in log space
     P5  P3 blended with P0
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/14_target_prior.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/14_target_prior.py
 """
 from __future__ import annotations
 

@@ -25,7 +25,7 @@ OUT = ROOT / "experiments" / "results" / "out_67_information_gain_runtime_benchm
 
 
 def load_current_module():
-    path = ROOT / "experiments" / "scripts" / "65_candidate_information_gain_probe.py"
+    path = ROOT / "experiments" / "log" / "65_candidate_information_gain_probe.py"
     spec = importlib.util.spec_from_file_location("information_gain_current", path)
     assert spec and spec.loader
     module = importlib.util.module_from_spec(spec)

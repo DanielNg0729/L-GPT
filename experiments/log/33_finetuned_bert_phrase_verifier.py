@@ -8,7 +8,7 @@ training settings using synthetic validation only; public harness scores are rep
 after that choice.
 
 Run (analysis dependency lives in ignored experiments/studies/.ml_deps):
-  python experiments/scripts/33_finetuned_bert_phrase_verifier.py
+  python experiments/log/33_finetuned_bert_phrase_verifier.py
 """
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "experiments" / "studies" / ".ml_deps"))
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 import optuna  # noqa: E402
 import torch  # noqa: E402

@@ -46,7 +46,7 @@ SHIPPING NOTE: a transformer at inference breaks the standard-library-only prope
 would run ONLY behind the recognition gate (0 clean messages reach it), so a failure there
 costs nothing, but the dependency is a real cost and is only worth paying for a real gain.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/49_bert_scaffolding_tagger.py --epochs 3
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/49_bert_scaffolding_tagger.py --epochs 3
 """
 from __future__ import annotations
 
@@ -64,7 +64,7 @@ from pathlib import Path  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 from evaluator.local_evaluator import (  # noqa: E402
     behavior_for, catalog_index, coarse_category, customer_reply, evaluate,

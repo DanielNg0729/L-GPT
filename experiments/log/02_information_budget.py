@@ -13,7 +13,7 @@ Two consequences worth proving empirically rather than asserting:
       dominant probe: it returns the first 2 undisclosed constraints whatever
       they are, whereas a typed ask returns nothing unless the classifier agrees.
 
-Run:  PYTHONIOENCODING=utf-8 python experiments/scripts/02_information_budget.py
+Run:  PYTHONIOENCODING=utf-8 python experiments/log/02_information_budget.py
 """
 from __future__ import annotations
 

@@ -13,7 +13,7 @@ import json
 import random
 from pathlib import Path
 
-from robustness.build_sets import (
+from experiments.studies.build_sets import (
     ROOT,
     distribution,
     load_jsonl,
@@ -24,7 +24,7 @@ from robustness.build_sets import (
     weighted_without_replacement,
     write_jsonl,
 )
-from robustness.build_optuna_v2_sets import popularity_strata
+from experiments.studies.build_optuna_sets import popularity_strata
 
 DEFAULT_OUT = ROOT / "robustness" / "independent_validation_sets"
 

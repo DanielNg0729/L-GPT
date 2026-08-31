@@ -26,7 +26,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CONFIG = ROOT / "robustness" / "config.json"
-DEFAULT_OUT = ROOT / "robustness" / "sets"
+DEFAULT_OUT = ROOT / "experiments" / "datasets" / "sets"
 
 
 def load_jsonl(path: Path) -> list[dict]:

@@ -11,10 +11,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 sys.path.insert(0, str(ROOT / "experiments" / "studies" / ".ml_deps"))
 
-BASE = importlib.import_module("55_optuna_official_v2")
+BASE = importlib.import_module("55_optuna_official")
 REGISTRY = ROOT / "robustness" / "validation_candidates.json"
 SAME_DIR = ROOT / "robustness" / "optuna_v2_sets"
 DIST_DIR = ROOT / "robustness" / "independent_validation_sets"

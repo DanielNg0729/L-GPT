@@ -14,7 +14,7 @@ Batches:
                                          prefix matching for truncated constraints
   C  signal extraction never measured  : negative evidence, evidence-subset ensemble
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/17_everything_else.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/17_everything_else.py
 """
 from __future__ import annotations
 

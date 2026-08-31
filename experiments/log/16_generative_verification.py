@@ -32,7 +32,7 @@ stops matching. We therefore measure the size of the prize FIRST, and treat adop
 separate decision -- with a mandatory fallback to plain coverage whenever verification
 finds nothing.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/16_generative_verification.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/16_generative_verification.py
 """
 from __future__ import annotations
 

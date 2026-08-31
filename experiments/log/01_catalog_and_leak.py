@@ -5,7 +5,7 @@ The central question this script answers: the evaluator synthesises every custom
 utterance deterministically from the *target product's own metadata*. So what,
 exactly, does the agent get told, and how identifying is it?
 
-Run:  python experiments/scripts/01_catalog_and_leak.py
+Run:  python experiments/log/01_catalog_and_leak.py
 """
 from __future__ import annotations
 

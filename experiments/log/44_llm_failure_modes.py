@@ -31,7 +31,7 @@ reaching the agent, and bounded wall clock. `hallucinating` is the interesting o
 the only mode where the endpoint is healthy and the OUTPUT is the attack, and it is caught
 by the verbatim substring check rather than by the breaker.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/44_llm_failure_modes.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/44_llm_failure_modes.py
 """
 from __future__ import annotations
 
@@ -45,7 +45,7 @@ from urllib.error import HTTPError, URLError
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 import submission.llm_extract as LE  # noqa: E402
 from evaluator.local_evaluator import catalog_index, evaluate, load_jsonl  # noqa: E402
@@ -153,7 +153,7 @@ def main() -> None:
                 LE.os.environ["GROQ_API_KEY"] = "sk-test-not-a-real-key"
 
             # Isolated cache: a warm cache would mask the failure path entirely.
-            ex = LE.LLMExtractor(cache_path=ROOT / "experiments" / "scripts" / f".fm_{mode}.json")
+            ex = LE.LLMExtractor(cache_path=ROOT / "experiments" / "log" / f".fm_{mode}.json")
             ex.cache = {}
             ex.TIME_BUDGET = 60.0
             ex.ZERO_YIELD_TRIP = 12   # scaled to this 40-session probe
@@ -182,7 +182,7 @@ def main() -> None:
             LE.os.environ["GROQ_API_KEY"] = real_env
         LE.os.environ.pop("LLM_EXTRACT", None)
         for mode in MODES:
-            (ROOT / "experiments" / "scripts" / f".fm_{mode}.json").unlink(missing_ok=True)
+            (ROOT / "experiments" / "log" / f".fm_{mode}.json").unlink(missing_ok=True)
 
     print("\n" + "=" * 88)
     if bad:

@@ -42,7 +42,7 @@ SELECTION RULE, fixed before looking: adopt only if the WORST population column 
 and neither the real-population column nor the paraphrase column regresses beyond noise
 (-0.005). Optimising the average would just re-buy the same bet.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/37_population_shift_hardening.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/37_population_shift_hardening.py
 """
 from __future__ import annotations
 
@@ -53,7 +53,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 from evaluator.local_evaluator import catalog_index, evaluate, load_jsonl  # noqa: E402
 from submission.agent import Agent  # noqa: E402

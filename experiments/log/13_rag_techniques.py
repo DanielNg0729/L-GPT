@@ -27,7 +27,7 @@ treats as standard, both fully deterministic:
      turn-1 browsing ranking is exactly that (category only, median 145 candidates).
      So this is tested per-turn, not just globally.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/13_rag_techniques.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/13_rag_techniques.py
 """
 from __future__ import annotations
 

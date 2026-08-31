@@ -20,7 +20,7 @@ across it. Note the real constraint is 100 independent QUERIES, not 40,000 rows 
 BM25 sweep in pass 8 showed 6 free parameters already overfit 100 sessions, and a tree
 ensemble has far more capacity.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/18_learning_to_rank.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/18_learning_to_rank.py
 """
 from __future__ import annotations
 

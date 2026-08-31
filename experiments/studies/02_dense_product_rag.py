@@ -10,12 +10,12 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 from evaluator.local_evaluator import catalog_index, evaluate, load_jsonl
-from robustness.v2.provenance_gate import assess
-from robustness.v2.semantic_rag import ProductPassageRetriever
+from experiments.studies.provenance_gate import assess
+from experiments.studies.semantic_rag import ProductPassageRetriever
 from submission.agent import Agent, CONSTRAINT
 
 
-OUT = ROOT / "robustness" / "v2" / "results" / "public_value_only_dense_rag.json"
+OUT = ROOT / "experiments" / "studies" / "results" / "public_value_only_dense_rag.json"
 
 
 class DensePassageRAGAgent(Agent):
@@ -99,7 +99,7 @@ def run(dataset: Path, ids, categories, products, catalog: Path) -> dict:
 def main() -> None:
     catalog = ROOT / "data" / "catalog.jsonl"
     ids, categories, products = catalog_index(catalog)
-    suite = ROOT / "robustness" / "v2" / "public_value_only"
+    suite = ROOT / "experiments" / "studies" / "public_value_only"
     output = {
         "candidate": "dense_product_passage_rag",
         "rag_weight": DensePassageRAGAgent.RAG_WEIGHT,

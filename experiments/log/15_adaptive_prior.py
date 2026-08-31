@@ -27,7 +27,7 @@ DECAY = 0 recovers the current fixed-weight behaviour, so the sweep contains the
 configuration as a special case and cannot do worse than it by construction on the
 tuning half.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/15_adaptive_prior.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/15_adaptive_prior.py
 """
 from __future__ import annotations
 

@@ -33,11 +33,11 @@ Scored through the organizer's own `evaluator/local_evaluator.py`, unmodified.
 
 | Evaluation | Sessions | HitRate@10 | MRR | MTTC | TechnicalScore |
 |---|---:|---:|---:|---:|---:|
-| Official public development set | 200 | 0.9950 | 0.9950 | 2.295 | **0.970100** |
-| Organizer-proxy population | 800 | — | — | — | **0.952788** |
-| Review-weighted unseen population | 800 | 0.9788 | 0.9754 | 2.844 | **0.945125** |
-| Uniform-target population | 800 | — | — | — | **0.882763** |
-| Inverse-popularity population | 800 | — | — | — | **0.866062** |
+| Official public development set | 200 | 0.9950 | 0.9950 | 2.275 | **0.970500** |
+| Organizer-proxy population | 800 | 0.9860 | 0.9840 | 2.701 | **0.954163** |
+| Review-weighted unseen population | 800 | 0.9790 | 0.9760 | 2.746 | **0.947263** |
+| Uniform-target population | 800 | 0.9240 | 0.9170 | 3.572 | **0.885581** |
+| Inverse-popularity population | 800 | 0.9010 | 0.8990 | 3.630 | **0.867775** |
 | Published weak BM25 baseline | 200 | 0.1250 | 0.0680 | 9.8100 | 0.106710 |
 
 Robustness under wording change, on suites we generated ourselves. These are
@@ -50,9 +50,14 @@ does not paraphrase.
 | Attribute paraphrase (values reworded) | 0.847103 | 0.847103 / **0.863969** with resolver | +0.016866 |
 | Both at once | 0.604585 | **0.810251** | +0.205666 |
 
-Every optional layer is measured at **+0.000000** on all five decision criteria. That is the
-no-regression rule holding, not an absence of effect: the components are unreachable on
-traffic the agent already understands, by control flow rather than by threshold.
+Every optional **learned** layer is measured at **+0.000000** on all five decision criteria,
+and that is the no-regression rule holding rather than an absence of effect: audited
+directly, the two DistilBERTs record **0 model loads and 0 inferences** across all 2,716
+messages of the public set and the unseen population, because 0 of those messages fail the
+recognition gate. The hosted deparaphraser is the one layer the message gate does not
+govern -- it is consulted per *value* -- and it is reachable **0 times on the public set and
+2 times in 800 unseen sessions**, where the values in question are a mid-word truncation
+from `intent_card()` and a malformed price.
 
 ## Architecture
 
@@ -128,7 +133,7 @@ catalogue does not contain. That is what keeps a hosted model from inventing req
 |---|---|---|
 | Node 1 dialogue-act router (DistilBERT, 257 MB) | unfamiliar wording only | 0 model loads, 0 inferences |
 | Content tagger (DistilBERT, 254 MB) | unfamiliar wording only | 0 model loads, 0 inferences |
-| Attribute deparaphraser (hosted, `openai/gpt-oss-120b`) | catalogue-unattested values only | 0 requests, 0 tokens |
+| Attribute deparaphraser (hosted, `openai/gpt-oss-20b`) | catalogue-unattested values only | 0 requests, 0 tokens |
 
 All three ship **enabled**. The deparaphraser additionally requires `GROQ_API_KEY`; without
 one it is inert — no client, no request, byte-identical to a lexical run — which is what an
@@ -144,21 +149,71 @@ hosted tie reranking, which lost to the popularity prior in measurement.
 
 ## Repository guide
 
+### Start here
+
+**The agent is [`submission/agent.py`](submission/agent.py).** Everything else is either the
+organizer's kit, a component that file calls, or evidence for why it is built the way it is.
+
+The shipped system is **28 files**. Everything else lives under [`experiments/`](experiments/)
+— the measurement record, not the product. That ratio is deliberate: almost every design
+decision here was chosen against a measurement, and the negative results are kept because
+they are the reason the positive ones can be trusted. Start at
+[`experiments/INDEX.md`](experiments/INDEX.md).
+
+| Pipeline stage | Source | Runs when |
+|---|---|---|
+| Recognition gate, template extraction, retrieval, ranking, clarification | [`submission/agent.py`](submission/agent.py) | always |
+| Exact catalogue span and category recovery | [`submission/span_node.py`](submission/span_node.py) | wrapper unrecognised |
+| Dialogue-act router (DistilBERT) | [`submission/route_node.py`](submission/route_node.py) | wrapper unrecognised |
+| Scaffolding tagger (DistilBERT) | [`submission/bert_extract.py`](submission/bert_extract.py) | wrapper unrecognised |
+| Attribute deparaphraser (hosted) | [`submission/llm_resolve.py`](submission/llm_resolve.py) | value unattested by the catalogue |
+| Shared Groq client — **plus an unadopted reranker** | [`submission/llm_rerank.py`](submission/llm_rerank.py) | client always; reranker never (opt-in, off) |
+| Unadopted LLM span extractor | [`submission/llm_extract.py`](submission/llm_extract.py) | never (opt-in, off) |
+
+The last two are retained as measured, rejected experiments rather than deleted. Note that
+`llm_rerank.py` is misleadingly named: it holds the HTTP plumbing the shipped deparaphraser
+imports, so removing it would break a layer that *is* enabled.
+
+### Integrity of the organizer's files
+
+The rules forbid modifying the evaluator, the public set, and the released contracts. That
+claim is checkable rather than asserted:
+
+```bash
+python tools/verify_upstream_integrity.py
+```
+
+It hashes all six protected files against [`UPSTREAM_INTEGRITY.sha256`](UPSTREAM_INTEGRITY.sha256)
+and is enforced by `tests/test_upstream_integrity.py`.
+
+### Layout
+
 | Path | Purpose |
 |---|---|
 | [`submission/`](submission/) | Canonical agent, optional model integrations, and packaging documentation |
 | [`starter/`](starter/) | Evaluator entry point; re-exports the canonical agent so there is exactly one implementation |
 | [`evaluator/`](evaluator/) | Official local simulator and scorer |
-| [`robustness/`](robustness/) | Reproducible private-like proxy and population-shift suites |
-| [`experiments/`](experiments/) | Experiment registry, runnable scripts, raw results, and complete findings |
+| [`experiments/log/`](experiments/log/) | Numbered chronological experiments, in the order they were run |
+| [`experiments/studies/`](experiments/studies/) | Reusable study scripts: `audit_` / `build_` / `evaluate_` / `train_` / `run_` |
+| [`experiments/datasets/`](experiments/datasets/) | Every generated suite: population shifts, paraphrase corpora, dictionaries |
+| [`experiments/results/`](experiments/results/) | Raw measurement output, one file per run |
+| [`experiments/notes/`](experiments/notes/) | Literature review, validation write-ups, decision briefs |
 | [`docs/`](docs/) | Competition evidence, design rationale, research, and validation reports |
 | [`tests/`](tests/) | Contract, determinism, fallback, model-gate, and robustness tests |
 | [`data/`](data/) | Released sessions, checksums, and catalogue download instructions |
+| [`tools/`](tools/) | Runtime benchmark and the upstream-integrity verifier |
 
-Start with the [experiment registry](experiments/EXPERIMENT_INDEX.md) for a compact
-navigator. The [experiment decision log](experiments/EXPERIMENT_DECISION_LOG.md) records
+**Two requirements files, and which one you need.**
+[`requirements.txt`](requirements.txt) is the submission: it pulls in
+`submission/requirements.txt` and is all the scored path needs.
+[`requirements-models.txt`](requirements-models.txt) pins Torch and Transformers
+for the *optional* learned components and the experiments that trained them. The scored
+deterministic path never imports it.
+
+Start with the [experiment registry](experiments/INDEX.md) for a compact
+navigator. The [experiment decision log](experiments/DECISION_LOG.md) records
 every versioned investigation, its result, acceptance or rejection, and its effect on the
-final design. The [complete findings ledger](experiments/EXPERIMENT_FINDINGS.md) retains
+final design. The [complete findings ledger](experiments/FINDINGS.md) retains
 methods, measurements, corrections, and negative results.
 
 ## Technology and data
@@ -169,7 +224,7 @@ methods, measurements, corrections, and negative results.
 - SQLite FTS5 for in-process lexical retrieval, no external search service
 - PyTorch and Hugging Face Transformers, lazily imported, for the two local DistilBERT
   components (dialogue-act router, content tagger)
-- Groq's OpenAI-compatible API (`openai/gpt-oss-120b`) for attribute deparaphrasing, via
+- Groq's OpenAI-compatible API (`openai/gpt-oss-20b`) for attribute deparaphrasing, via
   `urllib` — no vendor SDK is a dependency
 
 **Research and evaluation only, not runtime dependencies**
@@ -270,19 +325,19 @@ python -m robustness.build_sets
 python -m robustness.run_benchmark
 
 # Rebuild the fixed Tune800 and Unseen4x800 data sets from their recorded seeds.
-python -m robustness.build_optuna_v2_sets
+python -m robustness.build_optuna_sets
 
 # Rebuild the controlled Shifted12x800 data sets from their recorded seeds.
 python -m robustness.build_independent_validation_sets
 
 # Score the frozen candidate registry on Unseen4x800 plus Shifted12x800.
-python experiments/scripts/57_independent_validation.py
+python experiments/log/57_independent_validation.py
 ```
 
 Do not use `Tune800`, `Unseen4x800`, or `Shifted12x800` for additional parameter tuning.
 Their recorded evaluations are already consumed validation evidence. For a new candidate,
 create a new seeded suite and keep it separate from final reporting. Detailed construction,
-invariants, and historical outputs are in [robustness/README.md](robustness/README.md) and
+invariants, and historical outputs are in [experiments/README.md](experiments/README.md) and
 [the independent-validation report](docs/validation/independent_validation.md).
 
 Run all automated tests:
@@ -322,29 +377,29 @@ where noted.
 
 ```bash
 # The full layer x condition grid: five arms over five conditions.
-python -u robustness/v2/evaluate_full_pipeline.py
+python -u experiments/studies/evaluate_full_pipeline.py
 
 # Restrict to particular arms (the baseline is always kept):
-PIPELINE_ARMS="+SPAN,+ROUTE+SPAN" python -u robustness/v2/evaluate_full_pipeline.py
+PIPELINE_ARMS="+SPAN,+ROUTE+SPAN" python -u experiments/studies/evaluate_full_pipeline.py
 ```
 
 ```bash
 # Rebuild the open-vocabulary paraphrase suite from its generation record.
-python -u robustness/v2/build_open_vocabulary_paraphrase_input.py
-python -u robustness/v2/build_open_vocabulary_suite.py     # filters and materialises
-python -u robustness/v2/evaluate_open_vocabulary.py        # needs GROQ_API_KEY
+python -u experiments/studies/build_open_vocabulary_paraphrase_input.py
+python -u experiments/studies/build_open_vocabulary_suite.py     # filters and materialises
+python -u experiments/studies/evaluate_open_vocabulary.py        # needs GROQ_API_KEY
 ```
 
 ```bash
 # The two diagnostics that shaped the design.
-python -u robustness/v2/evaluate_open_vocab_oracle.py      # attribute ceiling, offline
-python -u robustness/v2/build_hostile_suite.py             # strip every free channel
-python -u robustness/v2/evaluate_hostile.py                # what remains, offline
+python -u experiments/studies/evaluate_open_vocab_oracle.py      # attribute ceiling, offline
+python -u experiments/studies/build_hostile_suite.py             # strip every free channel
+python -u experiments/studies/evaluate_hostile.py                # what remains, offline
 ```
 
 ```bash
 # Node 1 against the lexical alternative, on held-out templates.
-python -u robustness/v2/audit_node1_vs_regex.py
+python -u experiments/studies/audit_node1_vs_regex.py
 ```
 
 The paraphrase generation step is **not** re-run by default: `open_vocabulary_paraphrases.jsonl`
@@ -357,13 +412,13 @@ Scripts that call a hosted model say so in their docstring. Everything else runs
 
 ## Model, network, and cost disclosure
 
-- **Required external API: none.** The system scores 0.970100 with no network access.
+- **Required external API: none.** The system scores 0.970500 with no network access.
 - **Cost on the official evaluation: $0.00.** Reported token usage is 0 prompt and 0
   completion tokens, asserted by `tests/test_submission_contract.py`.
 - **Local models: two DistilBERT checkpoints** (dialogue-act router, content tagger),
   shipped in-repo, lazily loaded. Measured on the public set: **0 model loads and 0
   inferences** — the recognition gate short-circuits before either is constructed.
-- **Hosted model: `openai/gpt-oss-120b` via Groq**, enabled by default but additionally
+- **Hosted model: `openai/gpt-oss-20b` via Groq**, enabled by default but additionally
   requiring `GROQ_API_KEY`. Without a key the layer is inert. With one it is reached
   roughly once per 460 clean messages and measured at +0.000000 on every decision
   criterion. Disable outright with `LLM_RESOLVE=0`.

@@ -34,7 +34,7 @@ OUT = ROOT / "experiments" / "results" / "out_65_candidate_information_gain_prob
 
 
 def load_minter():
-    path = ROOT / "experiments" / "scripts" / "30_robustness_benchmark.py"
+    path = ROOT / "experiments" / "log" / "30_robustness_benchmark.py"
     spec = importlib.util.spec_from_file_location("robustness30", path)
     assert spec and spec.loader
     module = importlib.util.module_from_spec(spec)

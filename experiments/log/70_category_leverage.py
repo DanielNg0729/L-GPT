@@ -30,7 +30,7 @@ pre-registered rule is unchanged: adopt only if NO decision criterion regresses.
 that wins on official200 alone is a weight fitted to 200 sessions. `W_CATEGORY` came from
 the frozen trial-38 configuration, so moving it needs the same bar trial 38 cleared.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/70_category_leverage.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/70_category_leverage.py
 """
 from __future__ import annotations
 
@@ -57,7 +57,7 @@ def main() -> None:
 
     cid, cats, prods = catalog_index(ROOT / "data" / "catalog.jsonl")
     base = Agent(ROOT / "data" / "catalog.jsonl")
-    rs = ROOT / "robustness" / "sets"
+    rs = ROOT / "experiments" / "datasets" / "sets"
     sets = {
         "official200": load_jsonl(ROOT / "data" / "public_set.jsonl"),
         "org-proxy": load_jsonl(rs / "organizer_proxy_800.jsonl"),

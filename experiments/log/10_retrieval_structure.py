@@ -18,7 +18,7 @@ Each was listed as "untested" in the report's alternatives table. None is a swee
      parts of the category list. The catalogue carries the whole path. The deeper path is
      more selective; the question is whether the extra terms are attested on the target.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/10_retrieval_structure.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/10_retrieval_structure.py
 """
 from __future__ import annotations
 

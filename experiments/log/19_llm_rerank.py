@@ -16,9 +16,9 @@ Scope, deliberately narrow:
 Protocol matches every other pass: tune half first, held-out half adjudicates.
 
 Usage:
-  python experiments/scripts/19_llm_rerank.py --half tune  --online
-  python experiments/scripts/19_llm_rerank.py --half hold  --online
-  python experiments/scripts/19_llm_rerank.py --half tune  --online --model llama-3.3-70b-versatile
+  python experiments/log/19_llm_rerank.py --half tune  --online
+  python experiments/log/19_llm_rerank.py --half hold  --online
+  python experiments/log/19_llm_rerank.py --half tune  --online --model llama-3.3-70b-versatile
 """
 from __future__ import annotations
 

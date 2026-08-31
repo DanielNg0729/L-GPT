@@ -13,7 +13,7 @@ while (-not (Test-Path -LiteralPath $training) -or (Get-Content -LiteralPath $tr
     Start-Sleep -Seconds $PollSeconds
 }
 
-& $python -m robustness.v2.train_attribute_encoder *>> $stdout
+& $python -m experiments.studies.train_attribute_encoder *>> $stdout
 if ($LASTEXITCODE -ne 0) {
     "Fine-tuning failed with exit code $LASTEXITCODE" | Add-Content -LiteralPath $stderr
     exit $LASTEXITCODE

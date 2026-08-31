@@ -16,7 +16,7 @@ k gives 1/k by chance.
 Runs mostly from cache once pass 19 has populated it.
 
 Usage:
-  PYTHONIOENCODING=utf-8 LLM_RERANK=1 python -u experiments/scripts/20_tiebreak_accuracy.py --half tune
+  PYTHONIOENCODING=utf-8 LLM_RERANK=1 python -u experiments/log/20_tiebreak_accuracy.py --half tune
 """
 from __future__ import annotations
 
@@ -162,7 +162,7 @@ def main() -> None:
           f"cache_hits={out['llm_stats']['cache_hits']} "
           f"failures={out['llm_stats']['failures']}")
 
-    p = ROOT / "experiments" / "scripts" / f"out_20_{args.half}.json"
+    p = ROOT / "experiments" / "log" / f"out_20_{args.half}.json"
     p.write_text(json.dumps(out, indent=2) + "\n", encoding="utf-8")
     print(f"\n[saved] {p}")
 

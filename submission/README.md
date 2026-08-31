@@ -74,8 +74,8 @@ python -m submission.demo --sample-id public_0002
 See the annotated [`demo transcript`](../docs/DEMO.md).
 
 The complete investigation history is available in the
-[experiment registry](../experiments/EXPERIMENT_INDEX.md) and
-[experiment-by-experiment decision log](../experiments/EXPERIMENT_DECISION_LOG.md).
+[experiment registry](../experiments/INDEX.md) and
+[experiment-by-experiment decision log](../experiments/DECISION_LOG.md).
 The root [README](../README.md#final-shipped-pipeline) specifies the complete final
 execution path, including the gated BERT fallback and disabled optional API paths.
 
@@ -102,7 +102,7 @@ of the visible message and attested in the frozen catalogue. Invalid output is d
 Failure tests cover missing credentials, DNS failure, timeouts, retryable and terminal HTTP
 errors, malformed JSON, empty output, hallucinated spans, and rate-limit exhaustion. Every
 tested failure returns the deterministic result without raising. See
-[`44_llm_failure_modes.py`](../experiments/scripts/44_llm_failure_modes.py).
+[`44_llm_failure_modes.py`](../experiments/log/44_llm_failure_modes.py).
 
 Credentials must be supplied through the environment or a local ignored `.env` file. They
 must never be committed.
@@ -133,7 +133,7 @@ specifies a maximum list size and no minimum list size.
 
 The resulting public MRR equals HitRate at `0.995`, which means every successful session
 hits at rank 1. This benefit and the metric effect of shorter lists are reported explicitly
-in the [findings ledger](../experiments/EXPERIMENT_FINDINGS.md).
+in the [findings ledger](../experiments/FINDINGS.md).
 
 ## Robustness and limitations
 
@@ -155,5 +155,5 @@ Given more time, we would quantize or distill the optional tagger, validate agai
 organizer-provided eligible-target pool, and collect independently authored paraphrase data.
 We would not continue optimizing against the consumed validation folds.
 
-See the [robustness benchmark](../robustness/README.md) and
+See the [robustness benchmark](../experiments/README.md) and
 [robustness audit](../docs/validation/robustness_audit.md) for the full evidence.

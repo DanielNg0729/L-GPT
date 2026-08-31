@@ -31,7 +31,7 @@ def compact(result: dict) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--catalog", type=Path, default=ROOT / "data" / "catalog.jsonl")
-    parser.add_argument("--sets", type=Path, default=ROOT / "robustness" / "sets")
+    parser.add_argument("--sets", type=Path, default=ROOT / "experiments" / "datasets" / "sets")
     parser.add_argument("--only", nargs="*", help="set basenames without .jsonl")
     parser.add_argument("--output", type=Path,
                         default=ROOT / "robustness" / "results.json")

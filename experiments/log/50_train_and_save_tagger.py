@@ -19,7 +19,7 @@ That is a real finding about where the value sits, and it saves ~6 minutes of ad
 The model is saved to `submission/models/scaffolding_tagger/`. It is a genuine dependency
 cost -- see `bert_extract.py` for how that is contained.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/50_train_and_save_tagger.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/50_train_and_save_tagger.py
 """
 from __future__ import annotations
 
@@ -34,7 +34,7 @@ from pathlib import Path  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 from evaluator.local_evaluator import catalog_index, load_jsonl  # noqa: E402
 

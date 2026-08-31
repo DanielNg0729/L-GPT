@@ -43,7 +43,7 @@ THE MAPPING is graded, not a switch, so a mis-estimate degrades smoothly:
 with LO/HI calibrated offline. HI is anchored on the PUBLIC 200 -- real organizer data, not
 our minting -- which is what keeps the calibration honest.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/40_detector_driven_prior.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/40_detector_driven_prior.py
 """
 from __future__ import annotations
 
@@ -55,7 +55,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 from evaluator.local_evaluator import catalog_index, evaluate, load_jsonl  # noqa: E402
 from submission.agent import Agent  # noqa: E402

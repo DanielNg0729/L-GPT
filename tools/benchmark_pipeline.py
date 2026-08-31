@@ -47,11 +47,11 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 OUT = ROOT / "experiments" / "results" / "out_71_pipeline_runtime.json"
 
-_s = ilu.spec_from_file_location("_stress", ROOT / "experiments" / "scripts"
+_s = ilu.spec_from_file_location("_stress", ROOT / "experiments" / "log"
                                  / "31_paraphrase_stress.py")
 _stress = ilu.module_from_spec(_s)
 _s.loader.exec_module(_stress)
-_t = ilu.spec_from_file_location("_tmpl", ROOT / "robustness" / "v2"
+_t = ilu.spec_from_file_location("_tmpl", ROOT / "experiments" / "studies"
                                  / "run_official_template_paraphrase.py")
 _tm = ilu.module_from_spec(_t)
 _t.loader.exec_module(_tm)
@@ -74,7 +74,7 @@ def main() -> None:
     print(f"  {index_seconds:.2f}s\n")
 
     public = load_jsonl(ROOT / "data" / "public_set.jsonl")
-    review = load_jsonl(ROOT / "robustness" / "v2" / "open_vocabulary"
+    review = load_jsonl(ROOT / "experiments" / "studies" / "open_vocabulary"
                         / "review800_canonical_replay.jsonl")[:200]
     transform = _tm.transform(_tm.bank())
     conditions = {"official200 (clean)": (public, False),

@@ -11,12 +11,12 @@ sys.path.insert(0, str(ROOT))
 
 import numpy as np
 from evaluator.local_evaluator import catalog_index, evaluate, load_jsonl
-from robustness.v2.provenance_gate import assess
-from robustness.v2.semantic_grounding import MODEL_CACHE, MODEL_NAME
+from experiments.studies.provenance_gate import assess
+from experiments.studies.semantic_grounding import MODEL_CACHE, MODEL_NAME
 from submission.agent import Agent, CONSTRAINT
 
 
-OUT = ROOT / "robustness" / "v2" / "results" / "public_value_only_attribute_tag.json"
+OUT = ROOT / "experiments" / "studies" / "results" / "public_value_only_attribute_tag.json"
 CANONICAL = {
     "cotton":"cotton","leather":"leather","polyester":"polyester","nylon":"nylon","rubber":"rubber","suede":"suede","canvas":"canvas","wool":"wool",
     "black":"black","white":"white","blue":"blue","red":"red","pink":"pink","green":"green","brown":"brown","beige":"beige","gray":"gray",
@@ -82,7 +82,7 @@ def run(path: Path, ids, cats, products, catalog: Path) -> dict:
 
 
 def main() -> None:
-    catalog=ROOT/'data/catalog.jsonl'; ids,cats,products=catalog_index(catalog); suite=ROOT/'robustness/v2/public_value_only'
+    catalog=ROOT/'data/catalog.jsonl'; ids,cats,products=catalog_index(catalog); suite=ROOT/'experiments/datasets/public_value_only'
     out={"candidate":"attribute_tag_guess","canonical_replay":run(suite/'official200_canonical_replay.jsonl',ids,cats,products,catalog),"attribute_paraphrase":run(suite/'official200_attribute_paraphrase_dev.jsonl',ids,cats,products,catalog)}
     OUT.write_text(json.dumps(out,indent=2)+'\n',encoding='utf-8'); print(json.dumps(out,indent=2))
 

@@ -7,8 +7,8 @@ level, it is marked **[abstract-only]**.
 
 Companion documents: [`../competition/track4_brief.md`](../competition/track4_brief.md)
 (the official problem statement),
-[`../../experiments/EXPERIMENT_FINDINGS.md`](../../experiments/EXPERIMENT_FINDINGS.md)
-(empirical results), and [`../../experiments/scripts/`](../../experiments/scripts/)
+[`../../experiments/FINDINGS.md`](../../experiments/FINDINGS.md)
+(empirical results), and [`../../experiments/log/`](../../experiments/log/)
 (reproducible programs).
 
 ---
@@ -93,7 +93,7 @@ items; Yelp has 29 attributes and 70,311 items. Our setting has a 9-value closed
 enum and 50,000 items, but  -  critically  -  our "attributes" are not categorical facets over
 a curated schema. They are free-text bullets lifted verbatim from the product listing. That
 difference is the central argument of the
-[`experiment findings`](../../experiments/EXPERIMENT_FINDINGS.md), section 2.
+[`experiment findings`](../../experiments/FINDINGS.md), section 2.
 
 ---
 
@@ -169,7 +169,7 @@ even in the literature that popularised it.
 > cost of 958s to embed the catalog on CPU. Mechanism: the task is provenance recovery over
 > verbatim substrings, and dense embeddings deliberately blur the lexical precision that
 > solves it. See the
-> [`experiment findings`](../../experiments/EXPERIMENT_FINDINGS.md), section 5.
+> [`experiment findings`](../../experiments/FINDINGS.md), section 5.
 
 ---
 

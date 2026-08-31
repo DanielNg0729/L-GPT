@@ -26,7 +26,7 @@ Everything else follows the established protocol: train on synthetic data only, 
 the tune half, adjudicate on the held-out half. Public targets are excluded from minting
 so no evaluation session leaks into training.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/21_synthetic_ltr.py --mint 12000
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/21_synthetic_ltr.py --mint 12000
 """
 from __future__ import annotations
 

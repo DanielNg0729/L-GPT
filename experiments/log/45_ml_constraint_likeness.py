@@ -41,7 +41,7 @@ lesson is that opaque capacity destroys the signal.
 BENCHMARK: the same seven-condition grid every other change is held to -- clean must not
 regress, and the paraphrase and shifted-population columns are where the gain must appear.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/45_ml_constraint_likeness.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/45_ml_constraint_likeness.py
 """
 from __future__ import annotations
 
@@ -57,7 +57,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 from evaluator.local_evaluator import (  # noqa: E402
     catalog_index, evaluate, intent_card, load_jsonl,

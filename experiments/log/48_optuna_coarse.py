@@ -30,7 +30,7 @@ STORAGE. SQLite at experiments/studies/optuna_coarse.db, so the study is inspect
 
 and resumable -- re-running this script continues the same study rather than starting over.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/48_optuna_coarse.py --hours 3 --workers 6
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/48_optuna_coarse.py --hours 3 --workers 6
 """
 from __future__ import annotations
 
@@ -43,7 +43,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 DB = ROOT / "experiments" / "studies" / "optuna_coarse.db"
 STORAGE = f"sqlite:///{DB.as_posix()}"

@@ -28,7 +28,7 @@ of each class):
   * templates, WHEN THEY FIRE, are higher precision than mining -- so the right
     structure is template-first with mining as the fallback, never raw-message dump.
 
-Run:  PYTHONIOENCODING=utf-8 python -u experiments/scripts/06_grounded_mining.py
+Run:  PYTHONIOENCODING=utf-8 python -u experiments/log/06_grounded_mining.py
 """
 from __future__ import annotations
 
@@ -41,7 +41,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "experiments" / "scripts"))
+sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 from evaluator.local_evaluator import catalog_index, evaluate, load_jsonl  # noqa: E402
 
