@@ -7,13 +7,26 @@ import sys
 import unittest
 from pathlib import Path
 
-from experiments.studies.build_sets import scenario_sequence, weighted_without_replacement
-from experiments.studies.build_independent_validation_sets import counts_for
+# THESE TESTS EXERCISE THE INTERNAL PROXY-SUITE BUILDERS, WHICH ARE NOT PART OF THE
+# SUBMISSION. `experiments/` is carried on the `experimental` branch and pruned from the
+# submitted tree, so on that tree there is nothing here to test and the module must skip
+# rather than error. Importing it unconditionally turned `unittest discover` red on a
+# clean submission checkout, which is a false alarm about a suite that was deliberately
+# not shipped.
+try:
+    from experiments.studies.build_sets import (scenario_sequence,
+                                                weighted_without_replacement)
+    from experiments.studies.build_independent_validation_sets import counts_for
+    _HAVE_BUILDERS = True
+except ModuleNotFoundError:                         # pragma: no cover - submitted tree
+    _HAVE_BUILDERS = False
 
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
+@unittest.skipUnless(_HAVE_BUILDERS,
+                     "experiments/ is not part of the submitted tree")
 class RobustnessBuilderTest(unittest.TestCase):
     def test_weighted_sample_is_distinct_and_deterministic(self) -> None:
         items = [f"P{i}" for i in range(30)]
