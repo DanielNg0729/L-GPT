@@ -68,3 +68,7 @@ robustness/v2/prompt_arm_caches/
 
 # Branch-review scratch directory, created when reviewing a teammate branch locally.
 .review-*/
+
+# Provider-response caches under the new datasets path (the pre-move entry is stale).
+experiments/datasets/prompt_arm_caches/
+experiments/datasets/**/.*_cache*.json

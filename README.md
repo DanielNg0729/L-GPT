@@ -195,7 +195,7 @@ and is enforced by `tests/test_upstream_integrity.py`.
 | [`evaluator/`](evaluator/) | Official local simulator and scorer |
 | [`experiments/log/`](experiments/log/) | Numbered chronological experiments, in the order they were run |
 | [`experiments/studies/`](experiments/studies/) | Reusable study scripts: `audit_` / `build_` / `evaluate_` / `train_` / `run_` |
-| [`experiments/datasets/`](experiments/datasets/) | Every generated suite: population shifts, paraphrase corpora, dictionaries |
+| [`experiments/datasets/`](experiments/datasets/) | Every generated suite — see [DATASETS.md](experiments/DATASETS.md) for what each one is and how it was made |
 | [`experiments/results/`](experiments/results/) | Raw measurement output, one file per run |
 | [`experiments/notes/`](experiments/notes/) | Literature review, validation write-ups, decision briefs |
 | [`docs/`](docs/) | Competition evidence, design rationale, research, and validation reports |
