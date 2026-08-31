@@ -1,0 +1,6 @@
+# Python 3.10+.
+# Required to activate the local scaffolding tagger on unrecognised/paraphrased
+# messages. The agent degrades safely to its standard-library lexical path if either
+# dependency or the local weights are unavailable.
+torch>=2.2,<3
+transformers>=4.40,<6
