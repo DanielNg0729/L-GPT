@@ -1,0 +1,241 @@
+{
+  "experiment": "V2.50 Node 5 verifies the LLM's single proposal",
+  "threshold": 0.938,
+  "frozen_auroc": 0.9726,
+  "adversarial": {
+    "construction": "within-family cross-pairing",
+    "superseded": "v1 mined neighbours OF THE PROPOSAL; those were true positives mislabelled negative, so its AUROC 0.5760 is void",
+    "auroc": 0.8349,
+    "n_proposals": 20,
+    "n_distractors": 76,
+    "mean_proposal": 0.701,
+    "mean_distractor": 0.1966,
+    "proposals_accepted": 11,
+    "distractors_leaked": 8,
+    "detail": [
+      {
+        "family": "care",
+        "paraphrase": "keeps water from penetrating",
+        "proposal": "waterproof",
+        "competing": [
+          "water\u2011resistant"
+        ]
+      },
+      {
+        "family": "care",
+        "paraphrase": "repels light moisture",
+        "proposal": "water\u2011resistant",
+        "competing": [
+          "waterproof"
+        ]
+      },
+      {
+        "family": "closure",
+        "paraphrase": "closes with interlocking teeth",
+        "proposal": "zipper",
+        "competing": [
+          "metal clasp",
+          "buttons",
+          "slip\u2011on"
+        ]
+      },
+      {
+        "family": "closure",
+        "paraphrase": "fastens using a metal clasp",
+        "proposal": "metal clasp",
+        "competing": [
+          "zipper",
+          "buttons",
+          "slip\u2011on"
+        ]
+      },
+      {
+        "family": "closure",
+        "paraphrase": "fastens with round closures",
+        "proposal": "buttons",
+        "competing": [
+          "zipper",
+          "metal clasp",
+          "slip\u2011on"
+        ]
+      },
+      {
+        "family": "closure",
+        "paraphrase": "slips on without separate fasteners",
+        "proposal": "slip\u2011on",
+        "competing": [
+          "zipper",
+          "metal clasp",
+          "buttons"
+        ]
+      },
+      {
+        "family": "colour",
+        "paraphrase": "in a neutral ash shade",
+        "proposal": "ash",
+        "competing": [
+          "rose",
+          "crimson",
+          "tan",
+          "blue",
+          "black"
+        ]
+      },
+      {
+        "family": "colour",
+        "paraphrase": "in a rosy shade",
+        "proposal": "rose",
+        "competing": [
+          "ash",
+          "crimson",
+          "tan",
+          "blue",
+          "black"
+        ]
+      },
+      {
+        "family": "colour",
+        "paraphrase": "in a warm crimson shade",
+        "proposal": "crimson",
+        "competing": [
+          "ash",
+          "rose",
+          "tan",
+          "blue",
+          "black"
+        ]
+      },
+      {
+        "family": "colour",
+        "paraphrase": "in an earthy tan shade",
+        "proposal": "tan",
+        "competing": [
+          "ash",
+          "rose",
+          "crimson",
+          "blue",
+          "black"
+        ]
+      },
+      {
+        "family": "colour",
+        "paraphrase": "in an ocean toned shade",
+        "proposal": "blue",
+        "competing": [
+          "ash",
+          "rose",
+          "crimson",
+          "tan",
+          "black"
+        ]
+      },
+      {
+        "family": "colour",
+        "paraphrase": "in the darkest colour",
+        "proposal": "black",
+        "competing": [
+          "ash",
+          "rose",
+          "crimson",
+          "tan",
+          "blue"
+        ]
+      },
+      {
+        "family": "material",
+        "paraphrase": "made from a durable synthetic polyamide",
+        "proposal": "nylon",
+        "competing": [
+          "cotton",
+          "wool",
+          "leather",
+          "canvas",
+          "spandex"
+        ]
+      },
+      {
+        "family": "material",
+        "paraphrase": "made from a soft plant fibre",
+        "proposal": "cotton",
+        "competing": [
+          "nylon",
+          "wool",
+          "leather",
+          "canvas",
+          "spandex"
+        ]
+      },
+      {
+        "family": "material",
+        "paraphrase": "made from animal fleece fibre",
+        "proposal": "wool",
+        "competing": [
+          "nylon",
+          "cotton",
+          "leather",
+          "canvas",
+          "spandex"
+        ]
+      },
+      {
+        "family": "material",
+        "paraphrase": "made from animal hide",
+        "proposal": "leather",
+        "competing": [
+          "nylon",
+          "cotton",
+          "wool",
+          "canvas",
+          "spandex"
+        ]
+      },
+      {
+        "family": "material",
+        "paraphrase": "made from heavy woven cloth",
+        "proposal": "canvas",
+        "competing": [
+          "nylon",
+          "cotton",
+          "wool",
+          "leather",
+          "spandex"
+        ]
+      },
+      {
+        "family": "material",
+        "paraphrase": "made with a flexible elastic polymer",
+        "proposal": "spandex",
+        "competing": [
+          "nylon",
+          "cotton",
+          "wool",
+          "leather",
+          "canvas"
+        ]
+      },
+      {
+        "family": "other",
+        "paraphrase": "built to add very little weight",
+        "proposal": "lightweight",
+        "competing": [
+          "adjustable"
+        ]
+      },
+      {
+        "family": "other",
+        "paraphrase": "can be resized for fit",
+        "proposal": "adjustable",
+        "competing": [
+          "lightweight"
+        ]
+      }
+    ]
+  },
+  "end_to_end": {
+    "floor": 0.833,
+    "generate": 0.8708,
+    "generate_plus_verifier": 0.8648,
+    "rejected": 9,
+    "verified_pairs": 19
+  }
+}

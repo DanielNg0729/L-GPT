@@ -1,0 +1,63 @@
+{
+  "experiment": "V2.53 span node precision without the route classifier",
+  "bank": "robustness\\v2\\v1_turn_gated_bank\\final_test.jsonl",
+  "per_action": {
+    "buying_opening": {
+      "n": 1600,
+      "recognised": 0,
+      "category": 1599,
+      "attrs": 1615,
+      "value_hit": 1598,
+      "value_rows": 1600,
+      "rows_with_attrs": 1598
+    },
+    "plain_opening": {
+      "n": 1600,
+      "recognised": 0,
+      "category": 1600,
+      "attrs": 0,
+      "value_hit": 0,
+      "value_rows": 0,
+      "rows_with_attrs": 0
+    },
+    "override_opening": {
+      "n": 1600,
+      "recognised": 0,
+      "category": 1594,
+      "attrs": 2057,
+      "value_hit": 1597,
+      "value_rows": 1600,
+      "rows_with_attrs": 1597
+    },
+    "constraint_update": {
+      "n": 1600,
+      "recognised": 0,
+      "category": 0,
+      "attrs": 3684,
+      "value_hit": 1600,
+      "value_rows": 1600,
+      "rows_with_attrs": 1600
+    },
+    "no_evidence": {
+      "n": 1600,
+      "recognised": 0,
+      "category": 0,
+      "attrs": 0,
+      "value_hit": 0,
+      "value_rows": 0,
+      "rows_with_attrs": 0
+    },
+    "override_update": {
+      "n": 1600,
+      "recognised": 0,
+      "category": 0,
+      "attrs": 2014,
+      "value_hit": 1600,
+      "value_rows": 1600,
+      "rows_with_attrs": 1600
+    }
+  },
+  "no_evidence_attrs_per_message": 0.0,
+  "value_action_attrs_per_message": 1.4641,
+  "ratio": 0.0
+}

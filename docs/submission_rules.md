@@ -44,29 +44,24 @@ You may include:
 
 Do not include:
 
-- unreleased final evaluation data or labels
+- private evaluation data
 - copied organizer-only files
 - API keys or secrets
 - code that requires privileged host access
 - code that modifies evaluator files
-- code that depends on undeclared external services
+- code that depends on undeclared external services for official final scoring
 
 ## Model Policy
 
-Teams may use any legally accessible LLM API, local model, or non-LLM approach.
-LLM usage is optional.
+Teams may prototype with any legally accessible LLM API or local model during
+development.
 
-The final evaluation package will be released after the Devpost submission
-deadline, and teams will run the unmodified official evaluator in their own
-environments. Network access and external API calls are allowed. Teams must:
+For official final scoring, organizer policy may disable network access.
+Therefore:
 
-- manage their own credentials, usage limits, service availability, and costs
-- pass API keys through environment variables and never commit secret values
-- document the required environment-variable names and setup instructions
-- disclose model choice, network dependencies, latency, token usage, estimated
-  cost, and any fallback behavior
-
-An offline fallback is not mandatory.
+- your submission must clearly document whether it requires network access
+- if your system has an offline fallback, describe it
+- if your system cannot run without live credentials, say so explicitly
 
 ## Output Rules
 
@@ -90,20 +85,6 @@ Your submission package must contain:
 If your code cannot be reproduced from the submitted bundle and instructions,
 the organizer may treat the run as invalid.
 
-## Final Evaluation and Code Freeze
-
-- The repository commit submitted by the Devpost deadline is the frozen version
-  of the solution.
-- After the final evaluation package is released, teams must not modify their
-  Agent, prompts, indexes, model configuration, or other solution components.
-- Teams must run the unmodified official evaluator against the released final
-  package using the frozen submitted commit.
-- Teams must retain the generated `results.json`, including per-session results,
-  together with the submitted commit hash and relevant environment and execution
-  details.
-- The organizer may request logs or other supporting evidence to review the
-  reported results.
-
 ## Recommended File Layout
 
 ```text
@@ -116,9 +97,7 @@ submission/
 
 ## Final Notes
 
-- There is no standardized organizer-provided CPU, RAM, GPU, startup-time, or
-  per-response limit because teams run the final evaluation in their own
-  environments.
-- Final results must be generated using the unmodified released evaluator. The
-  current evaluator does not impose a separate explicit per-response timeout.
-- See `docs/final_evaluation_faq.md` for the complete final evaluation policy.
+- The organizer reserves the right to run your submission under CPU, memory,
+  timeout, and network restrictions.
+- The organizer will score only the frozen official artifacts and the output
+  produced by your submitted code in that environment.

@@ -1,0 +1,42 @@
+{
+  "experiment": "deparaphrase user-prompt arms",
+  "model": "openai/gpt-oss-20b",
+  "arms_run": "A",
+  "max_tokens": 160,
+  "suite": "experiments/datasets/open_vocabulary/review800_open_vocab_paraphrase.jsonl",
+  "sessions": 800,
+  "suite_limit": 800,
+  "pace_seconds": 2.0,
+  "all_arms_valid": true,
+  "frozen": "agent, system prompt, tier weights, template axis",
+  "correctness": "proposal attested in the TARGET product's catalogue text",
+  "negation_subset_note": "5 distinct values over 8 invocations; flag, not a verdict",
+  "arms": {
+    "A": {
+      "label": "attr only (shipped)",
+      "score": 0.870525,
+      "hit_rate_at_10": 0.90375,
+      "mrr": 0.9,
+      "calls": 60,
+      "accepted": 50,
+      "abstained": 7,
+      "unattested": 3,
+      "failures": 0,
+      "circuit_reason": null,
+      "invocations": 1088,
+      "distinct_prompts": 172,
+      "cache_hits": 1028,
+      "cache_misses": 60,
+      "cache_hit_rate": 0.9449,
+      "retries": 0,
+      "http_attempts": 60,
+      "seconds": 28.11,
+      "prompts_per_invocation": 0.158,
+      "checked": 1012,
+      "correct": 667,
+      "precision": 0.6590909090909091,
+      "negation_accepted": 2,
+      "example_prompt": "in a neutral middle tone"
+    }
+  }
+}

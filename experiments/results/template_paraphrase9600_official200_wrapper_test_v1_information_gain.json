@@ -1,0 +1,25 @@
+{
+  "dataset_name": "TemplateParaphrase9600",
+  "split": "Test wrappers",
+  "session_source": "Official200 organizer-faithful",
+  "variants": {
+    "raw_fallback": {
+      "hit_rate_at_10": 0.75,
+      "mrr": 0.717083,
+      "mttc": 5.425,
+      "recommended_technical_score": 0.7016249
+    },
+    "node1_route_only": {
+      "hit_rate_at_10": 0.75,
+      "mrr": 0.732659,
+      "mttc": 5.135,
+      "recommended_technical_score": 0.7120977
+    },
+    "node1_plus_node2": {
+      "hit_rate_at_10": 0.97,
+      "mrr": 0.965833,
+      "mttc": 2.565,
+      "recommended_technical_score": 0.9434499000000001
+    }
+  }
+}

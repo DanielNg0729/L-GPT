@@ -1,0 +1,38 @@
+{
+  "field_coverage": {
+    "parent_asin": 1.0,
+    "title": 0.99996,
+    "features": 0.89562,
+    "description": 0.52226,
+    "categories": 1.0,
+    "details": 0.9666,
+    "average_rating": 1.0,
+    "rating_number": 1.0,
+    "store": 0.99372,
+    "price": 0.21054
+  },
+  "n_coarse_categories": 1115,
+  "hard0_kind": {
+    "details key: value": 3,
+    "bare material word": 153,
+    "feature bullet (free text)": 44
+  },
+  "turn1_mean_words": 11.765,
+  "attr_reachability": {
+    "brand": 0.0,
+    "budget": 0.0,
+    "category": 0.0,
+    "color": 0.255,
+    "feature": 0.96,
+    "material": 0.765,
+    "other": 0.0,
+    "size": 0.045,
+    "style": 0.09,
+    "use_case": 0.02
+  },
+  "ceiling": {
+    "mttc": 1.39,
+    "efficiency": 0.961,
+    "technical_score": 0.9922000000000001
+  }
+}

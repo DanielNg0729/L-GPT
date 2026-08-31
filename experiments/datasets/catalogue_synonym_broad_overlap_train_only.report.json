@@ -1,0 +1,9 @@
+{
+  "input": "broad_semantic_paraphrases.jsonl",
+  "output": "robustness\\v2\\catalogue_synonym_broad_overlap_train_only.jsonl",
+  "accepted_canonicals": 47,
+  "accepted_pairs": 47,
+  "rejected_rows_or_candidates": 0,
+  "rejected_examples": [],
+  "policy": "Only visible-catalogue canonicals are accepted. Existing semantic development and holdout surface forms are forbidden. Lexical overlap is allowed for representation-only augmentation."
+}

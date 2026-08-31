@@ -81,14 +81,6 @@ FACET_NAMES = frozenset({
 })
 
 
-def _coarse_category(values: list[str]) -> str:
-    """Match the public category normalization without importing the evaluator."""
-    excluded = {"clothing", "clothing shoes & jewelry", "clothing, shoes & jewelry"}
-    cleaned = [part.strip() for value in values for part in value.split(",")
-               if part.strip() and part.strip().lower() not in excluded]
-    return " ".join(cleaned[-2:]) if cleaned else "clothing item"
-
-
 class ExactCatalogueSpanNode:
     """Exact category and short-attribute recovery. Frozen vocabularies, no inference."""
 
@@ -112,7 +104,7 @@ class ExactCatalogueSpanNode:
     def _build(self, catalog_path, dictionary_path, toks, coarse) -> None:
         if toks is None or coarse is None:               # pragma: no cover - direct use
             from submission.agent import raw_toks as toks  # type: ignore
-            coarse = _coarse_category
+            from evaluator.local_evaluator import coarse_category as coarse  # type: ignore
         seen: set[tuple[str, ...]] = set()
         with Path(catalog_path).open(encoding="utf-8") as handle:
             for line in handle:

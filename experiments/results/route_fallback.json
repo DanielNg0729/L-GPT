@@ -1,0 +1,16 @@
+{
+  "experiment": "V2.10 RouteShift lexical route-family fallback",
+  "development": {
+    "rows": 1200,
+    "exact_recogniser_coverage": 0.0,
+    "fallback_route_accuracy": 1.0,
+    "failures": []
+  },
+  "holdout": {
+    "rows": 1200,
+    "exact_recogniser_coverage": 0.0,
+    "fallback_route_accuracy": 1.0,
+    "failures": []
+  },
+  "decision_rule": "No integration unless held-out accuracy is complete and canonical traffic remains exact-recogniser-only."
+}

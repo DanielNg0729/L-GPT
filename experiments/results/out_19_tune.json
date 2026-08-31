@@ -1,0 +1,36 @@
+{
+  "half": "tune",
+  "depth": 1,
+  "model": "openai/gpt-oss-120b",
+  "baseline": {
+    "sample_count": 100,
+    "hit_rate_at_10": 0.99,
+    "mrr": 0.750667,
+    "mttc": 1.81,
+    "efficiency": 0.919,
+    "recommended_technical_score": 0.904
+  },
+  "llm": {
+    "sample_count": 100,
+    "hit_rate_at_10": 0.99,
+    "mrr": 0.661298,
+    "mttc": 1.81,
+    "efficiency": 0.919,
+    "recommended_technical_score": 0.877189
+  },
+  "delta": {
+    "hit_rate_at_10": 0.0,
+    "mrr": -0.089369,
+    "efficiency": 0.0,
+    "recommended_technical_score": -0.026811
+  },
+  "llm_stats": {
+    "enabled": true,
+    "model": "openai/gpt-oss-120b",
+    "api_calls": 84,
+    "cache_hits": 23,
+    "failures": 0,
+    "cached_entries": 134
+  },
+  "verdict": "REJECT"
+}

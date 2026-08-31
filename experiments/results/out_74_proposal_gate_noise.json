@@ -1,0 +1,121 @@
+{
+  "experiment": "admission-gate noise reduction for LLM-proposed evidence",
+  "suite": "review800_open_vocab_paraphrase.jsonl",
+  "network": "none; cache replay",
+  "provider_calls": 4,
+  "captured": 810,
+  "gates": [
+    {
+      "gate": "df>0  (shipped)",
+      "admitted": 810,
+      "correct": 611,
+      "wrong": 199,
+      "precision": 0.7543,
+      "kept_of_correct": 1.0
+    },
+    {
+      "gate": "conj",
+      "admitted": 732,
+      "correct": 575,
+      "wrong": 157,
+      "precision": 0.7855,
+      "kept_of_correct": 0.9411
+    },
+    {
+      "gate": "df>20",
+      "admitted": 779,
+      "correct": 611,
+      "wrong": 168,
+      "precision": 0.7843,
+      "kept_of_correct": 1.0
+    },
+    {
+      "gate": "conj + df>20",
+      "admitted": 709,
+      "correct": 575,
+      "wrong": 134,
+      "precision": 0.811,
+      "kept_of_correct": 0.9411
+    },
+    {
+      "gate": "df>50",
+      "admitted": 779,
+      "correct": 611,
+      "wrong": 168,
+      "precision": 0.7843,
+      "kept_of_correct": 1.0
+    },
+    {
+      "gate": "conj + df>50",
+      "admitted": 709,
+      "correct": 575,
+      "wrong": 134,
+      "precision": 0.811,
+      "kept_of_correct": 0.9411
+    },
+    {
+      "gate": "df>100",
+      "admitted": 769,
+      "correct": 611,
+      "wrong": 158,
+      "precision": 0.7945,
+      "kept_of_correct": 1.0
+    },
+    {
+      "gate": "conj + df>100",
+      "admitted": 702,
+      "correct": 575,
+      "wrong": 127,
+      "precision": 0.8191,
+      "kept_of_correct": 0.9411
+    },
+    {
+      "gate": "df>200",
+      "admitted": 766,
+      "correct": 609,
+      "wrong": 157,
+      "precision": 0.795,
+      "kept_of_correct": 0.9967
+    },
+    {
+      "gate": "conj + df>200",
+      "admitted": 700,
+      "correct": 573,
+      "wrong": 127,
+      "precision": 0.8186,
+      "kept_of_correct": 0.9378
+    },
+    {
+      "gate": "df>500",
+      "admitted": 745,
+      "correct": 605,
+      "wrong": 140,
+      "precision": 0.8121,
+      "kept_of_correct": 0.9902
+    },
+    {
+      "gate": "conj + df>500",
+      "admitted": 684,
+      "correct": 569,
+      "wrong": 115,
+      "precision": 0.8319,
+      "kept_of_correct": 0.9313
+    },
+    {
+      "gate": "df>1000",
+      "admitted": 658,
+      "correct": 573,
+      "wrong": 85,
+      "precision": 0.8708,
+      "kept_of_correct": 0.9378
+    },
+    {
+      "gate": "conj + df>1000",
+      "admitted": 609,
+      "correct": 539,
+      "wrong": 70,
+      "precision": 0.8851,
+      "kept_of_correct": 0.8822
+    }
+  ]
+}

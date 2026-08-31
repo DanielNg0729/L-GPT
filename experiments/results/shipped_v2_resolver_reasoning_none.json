@@ -1,0 +1,41 @@
+{
+  "experiment": "Actual shipped V2 resolver effort ablation",
+  "suite": "Official200 AttributeParaphrase",
+  "sessions": 200,
+  "agent_path": "submission/agent.py",
+  "agent_sha256": "211eed241b41343c979dd457d733833a4941f84227c43bb058ef80264000cf59",
+  "unchanged_components": [
+    "template extraction",
+    "eight-token limit",
+    "provenance gate",
+    "weak semantic weight",
+    "span node",
+    "route node",
+    "ranking"
+  ],
+  "controlled_change": {
+    "resolver_reasoning_effort": "none"
+  },
+  "scores": {
+    "suppression_floor": 0.833,
+    "reasoning_none": 0.833,
+    "delta": 0.0
+  },
+  "resolver": {
+    "enabled": true,
+    "model": "openai/gpt-oss-120b",
+    "calls": 1,
+    "accepted": 0,
+    "abstained": 0,
+    "unattested": 0,
+    "failures": 1,
+    "retries": 0,
+    "cache_hits": 0,
+    "cache_misses": 1,
+    "cache_hit_rate": 0.0,
+    "fully_cached": false,
+    "seconds": 0.13,
+    "circuit_reason": "HTTP 400"
+  },
+  "seconds": 83.43
+}

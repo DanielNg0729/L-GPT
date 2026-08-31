@@ -1,0 +1,310 @@
+{
+  "input": "external_train_only_pairs.jsonl",
+  "output": "D:\\Coding\\Models\\TiktokTechJam\\robustness\\v2\\catalogue_synonym_external_train_only.jsonl",
+  "accepted_canonicals": 7,
+  "accepted_pairs": 7,
+  "rejected_rows_or_candidates": 149,
+  "rejected_examples": [
+    {
+      "line": 130,
+      "canonical": "100 handmade by high skilled jewelry artisans",
+      "candidate": "100 handmade by high skilled jewellery artisans",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 171,
+      "canonical": "100 metal fiber metal",
+      "candidate": "100 metal fibre metal",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 287,
+      "canonical": "100 synthetic fiber",
+      "candidate": "100 synthetic fibre",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 289,
+      "canonical": "100 synthetic leather and synthetic fiber",
+      "candidate": "100 synthetic leather and synthetic fibre",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 360,
+      "canonical": "1928 jewelry company",
+      "candidate": "1928 jewellery company",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 377,
+      "canonical": "2 hand pockets",
+      "candidate": "two hand pockets",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 380,
+      "canonical": "2 inside pockets",
+      "candidate": "two inside pockets",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 386,
+      "canonical": "2 piece set",
+      "candidate": "two piece set",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 388,
+      "canonical": "2 pockets",
+      "candidate": "two pockets",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 389,
+      "canonical": "2 side pockets",
+      "candidate": "two side pockets",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 452,
+      "canonical": "30 day easy returns jewelry gift box included",
+      "candidate": "30 day easy returns jewellery gift box included",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 789,
+      "canonical": "75 polyester 25 metal fiber",
+      "candidate": "75 polyester 25 metal fibre",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 1093,
+      "canonical": "a jewelry gift box is included",
+      "candidate": "a jewellery gift box is included",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 1119,
+      "canonical": "acrylic fiber",
+      "candidate": "acrylic fibre",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 1412,
+      "canonical": "available in many sizes and color",
+      "candidate": "available in many sizes and colour",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 1533,
+      "canonical": "best jewelry for all occasions and outfits",
+      "candidate": "best jewellery for all occasions and outfits",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 1562,
+      "canonical": "black color",
+      "candidate": "black colour",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 1567,
+      "canonical": "black grey",
+      "candidate": "black gray",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 1602,
+      "canonical": "boma jewelry for life",
+      "candidate": "boma jewellery for life",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 1674,
+      "canonical": "box color black no logo",
+      "candidate": "box colour black no logo",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 1683,
+      "canonical": "brand color black main color black",
+      "candidate": "brand colour black main colour black",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 1846,
+      "canonical": "cap color navy 100 cotton twill fabric",
+      "candidate": "cap colour navy 100 cotton twill fabric",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 1852,
+      "canonical": "carbon fiber",
+      "candidate": "carbon fibre",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 1873,
+      "canonical": "carolyn jane s jewelry",
+      "candidate": "carolyn jane s jewellery",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 1878,
+      "canonical": "case colour silver",
+      "candidate": "case color silver",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 1966,
+      "canonical": "charcoal gray",
+      "candidate": "charcoal grey",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 2085,
+      "canonical": "color accented polo",
+      "candidate": "colour accented polo",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 2086,
+      "canonical": "color as picture",
+      "candidate": "colour as picture",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 2087,
+      "canonical": "color black",
+      "candidate": "colour black",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 2088,
+      "canonical": "color black silver",
+      "candidate": "colour black silver",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 2089,
+      "canonical": "color black white",
+      "candidate": "colour black white",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 2090,
+      "canonical": "color black white pink khaki",
+      "candidate": "colour black white pink khaki",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 2091,
+      "canonical": "color blue",
+      "candidate": "colour blue",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 2092,
+      "canonical": "color brown",
+      "candidate": "colour brown",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 2093,
+      "canonical": "color gold",
+      "candidate": "colour gold",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 2094,
+      "canonical": "color golden",
+      "candidate": "colour golden",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 2095,
+      "canonical": "color navy",
+      "candidate": "colour navy",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 2096,
+      "canonical": "color navy blue",
+      "candidate": "colour navy blue",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 2097,
+      "canonical": "color pink",
+      "candidate": "colour pink",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 2098,
+      "canonical": "color purple",
+      "candidate": "colour purple",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 2099,
+      "canonical": "color red",
+      "candidate": "colour red",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 2100,
+      "canonical": "color rose gold",
+      "candidate": "colour rose gold",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 2101,
+      "canonical": "color rose gold tone",
+      "candidate": "colour rose gold tone",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 2102,
+      "canonical": "color silver",
+      "candidate": "colour silver",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 2103,
+      "canonical": "color silver black",
+      "candidate": "colour silver black",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 2104,
+      "canonical": "color silver clear",
+      "candidate": "colour silver clear",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 2105,
+      "canonical": "color white",
+      "candidate": "colour white",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 2106,
+      "canonical": "color white black",
+      "candidate": "colour white black",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 2107,
+      "canonical": "color yellow",
+      "candidate": "colour yellow",
+      "reason": "invalid_or_benchmark_overlap"
+    },
+    {
+      "line": 2118,
+      "canonical": "colour black",
+      "candidate": "color black",
+      "reason": "invalid_or_benchmark_overlap"
+    }
+  ],
+  "policy": "Only visible-catalogue canonicals are accepted. Existing semantic development and holdout surface forms are forbidden from train-only output."
+}

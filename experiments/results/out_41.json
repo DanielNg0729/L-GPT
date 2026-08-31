@@ -1,0 +1,46 @@
+{
+  "T0 identity (control)": {
+    "n": 463,
+    "recognised": 463,
+    "unmatched": 0,
+    "shapes": {
+      "buying_open": 80,
+      "reply_matters": 185,
+      "override_open": 30,
+      "override": 30,
+      "reply_none": 42,
+      "browsing_open": 90,
+      "boundary": 6
+    }
+  },
+  "T1 scaffold reworded": {
+    "n": 749,
+    "recognised": 0,
+    "unmatched": 749,
+    "shapes": {}
+  },
+  "T2 scaffold stripped": {
+    "n": 768,
+    "recognised": 0,
+    "unmatched": 768,
+    "shapes": {}
+  },
+  "T3 conversational noise": {
+    "n": 548,
+    "recognised": 0,
+    "unmatched": 548,
+    "shapes": {}
+  },
+  "T4 case/punctuation churn": {
+    "n": 1110,
+    "recognised": 0,
+    "unmatched": 1110,
+    "shapes": {}
+  },
+  "T5 realistic (T1+T3)": {
+    "n": 754,
+    "recognised": 0,
+    "unmatched": 754,
+    "shapes": {}
+  }
+}

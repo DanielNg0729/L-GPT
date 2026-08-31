@@ -1,0 +1,65 @@
+{
+  "experiment": "V2.42 cross-encoder rerank for Node 4",
+  "bi_encoder": "sentence-transformers/all-mpnet-base-v2",
+  "topk": 50,
+  "results": {
+    "bi-encoder only": {
+      "dev200 (riddles)": {
+        "R@1": 0.0896,
+        "R@3": 0.0896,
+        "R@5": 0.0896,
+        "MRR": 0.1186,
+        "ceiling": 0.4478
+      },
+      "corpus (synonymy)": {
+        "R@1": 0.4396,
+        "R@3": 0.5824,
+        "R@5": 0.6758,
+        "MRR": 0.5383,
+        "ceiling": 0.8571
+      }
+    },
+    "ms-marco-MiniLM-L6": {
+      "dev200 (riddles)": {
+        "R@1": 0.0,
+        "R@3": 0.0,
+        "R@5": 0.0746,
+        "MRR": 0.0467
+      },
+      "corpus (synonymy)": {
+        "R@1": 0.2143,
+        "R@3": 0.4066,
+        "R@5": 0.4945,
+        "MRR": 0.3479
+      }
+    },
+    "ESCI e-commerce": {
+      "dev200 (riddles)": {
+        "R@1": 0.0,
+        "R@3": 0.0,
+        "R@5": 0.0,
+        "MRR": 0.0311
+      },
+      "corpus (synonymy)": {
+        "R@1": 0.1593,
+        "R@3": 0.2747,
+        "R@5": 0.3846,
+        "MRR": 0.2686
+      }
+    },
+    "nli-deberta-v3-small": {
+      "dev200 (riddles)": {
+        "R@1": 0.0746,
+        "R@3": 0.209,
+        "R@5": 0.2388,
+        "MRR": 0.1743
+      },
+      "corpus (synonymy)": {
+        "R@1": 0.3956,
+        "R@3": 0.5824,
+        "R@5": 0.6758,
+        "MRR": 0.5127
+      }
+    }
+  }
+}

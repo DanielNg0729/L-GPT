@@ -1,0 +1,47 @@
+{"canonical": "100 cotton", "synonyms": ["pure cotton"], "source": "external_overlap_augmentation"}
+{"canonical": "100 ethylene vinyl acetate", "synonyms": ["100 eva"], "source": "external_overlap_augmentation"}
+{"canonical": "100 organic cotton", "synonyms": ["pure organic cotton"], "source": "external_overlap_augmentation"}
+{"canonical": "100 percent cotton", "synonyms": ["pure cotton"], "source": "external_overlap_augmentation"}
+{"canonical": "100 percent organic cotton", "synonyms": ["pure organic cotton"], "source": "external_overlap_augmentation"}
+{"canonical": "100 percent polyester", "synonyms": ["pure polyester"], "source": "external_overlap_augmentation"}
+{"canonical": "100 polyester", "synonyms": ["pure polyester"], "source": "external_overlap_augmentation"}
+{"canonical": "100 polyurethane", "synonyms": ["100 pu"], "source": "external_overlap_augmentation"}
+{"canonical": "100 polyvinyl chloride", "synonyms": ["100 pvc"], "source": "external_overlap_augmentation"}
+{"canonical": "100 pu", "synonyms": ["100 polyurethane"], "source": "external_overlap_augmentation"}
+{"canonical": "100 pvc", "synonyms": ["100 polyvinyl chloride"], "source": "external_overlap_augmentation"}
+{"canonical": "100 synthetic", "synonyms": ["entirely synthetic"], "source": "external_overlap_augmentation"}
+{"canonical": "100 synthetic nylon", "synonyms": ["entirely synthetic nylon"], "source": "external_overlap_augmentation"}
+{"canonical": "10k yellow gold", "synonyms": ["10 karat yellow gold"], "source": "external_overlap_augmentation"}
+{"canonical": "14k gold", "synonyms": ["14 karat gold"], "source": "external_overlap_augmentation"}
+{"canonical": "14k yellow gold", "synonyms": ["14 karat yellow gold"], "source": "external_overlap_augmentation"}
+{"canonical": "buckle closure", "synonyms": ["buckle fastening"], "source": "external_overlap_augmentation"}
+{"canonical": "button closure", "synonyms": ["button fastening"], "source": "external_overlap_augmentation"}
+{"canonical": "cubic zirconia", "synonyms": ["cz"], "source": "external_overlap_augmentation"}
+{"canonical": "ethylene vinyl acetate", "synonyms": ["eva"], "source": "external_overlap_augmentation"}
+{"canonical": "fast drying", "synonyms": ["quick dry"], "source": "external_overlap_augmentation"}
+{"canonical": "faux fur", "synonyms": ["imitation fur"], "source": "external_overlap_augmentation"}
+{"canonical": "faux leather", "synonyms": ["imitation leather"], "source": "external_overlap_augmentation"}
+{"canonical": "faux suede", "synonyms": ["imitation suede"], "source": "external_overlap_augmentation"}
+{"canonical": "high rise", "synonyms": ["high waist"], "source": "external_overlap_augmentation"}
+{"canonical": "high waist", "synonyms": ["high rise"], "source": "external_overlap_augmentation"}
+{"canonical": "hooded", "synonyms": ["with a hood"], "source": "external_overlap_augmentation"}
+{"canonical": "hook and loop", "synonyms": ["touch fastener"], "source": "external_overlap_augmentation"}
+{"canonical": "hook and loop closure", "synonyms": ["touch fastener closure"], "source": "external_overlap_augmentation"}
+{"canonical": "magnet closure", "synonyms": ["magnetic closure"], "source": "external_overlap_augmentation"}
+{"canonical": "magnetic closure", "synonyms": ["magnet closure"], "source": "external_overlap_augmentation"}
+{"canonical": "polyurethane", "synonyms": ["pu"], "source": "external_overlap_augmentation"}
+{"canonical": "polyvinyl chloride", "synonyms": ["pvc"], "source": "external_overlap_augmentation"}
+{"canonical": "quick dry", "synonyms": ["fast drying"], "source": "external_overlap_augmentation"}
+{"canonical": "seamless", "synonyms": ["without seams"], "source": "external_overlap_augmentation"}
+{"canonical": "sleeveless", "synonyms": ["without sleeves"], "source": "external_overlap_augmentation"}
+{"canonical": "slip resistant", "synonyms": ["non slip"], "source": "external_overlap_augmentation"}
+{"canonical": "snap closure", "synonyms": ["press stud closure"], "source": "external_overlap_augmentation"}
+{"canonical": "solid sterling silver", "synonyms": ["solid 925 silver"], "source": "external_overlap_augmentation"}
+{"canonical": "sterling silver", "synonyms": ["925 silver"], "source": "external_overlap_augmentation"}
+{"canonical": "synthetic", "synonyms": ["man made material"], "source": "external_overlap_augmentation"}
+{"canonical": "turn lock closure", "synonyms": ["twist lock closure"], "source": "external_overlap_augmentation"}
+{"canonical": "turtleneck", "synonyms": ["polo neck"], "source": "external_overlap_augmentation"}
+{"canonical": "uv protection", "synonyms": ["uv blocking"], "source": "external_overlap_augmentation"}
+{"canonical": "velcro", "synonyms": ["hook and loop"], "source": "external_overlap_augmentation"}
+{"canonical": "velcro closure", "synonyms": ["hook and loop closure"], "source": "external_overlap_augmentation"}
+{"canonical": "waterproof", "synonyms": ["watertight"], "source": "external_overlap_augmentation"}

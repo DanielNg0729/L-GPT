@@ -1,0 +1,7 @@
+{"canonical": "gray", "synonyms": ["grey"], "source": "external_train_only"}
+{"canonical": "grey", "synonyms": ["gray"], "source": "external_train_only"}
+{"canonical": "jewelry", "synonyms": ["jewellery"], "source": "external_train_only"}
+{"canonical": "velcro", "synonyms": ["hook and loop"], "source": "external_train_only"}
+{"canonical": "velcro closure", "synonyms": ["hook and loop closure"], "source": "external_train_only"}
+{"canonical": "zip closure", "synonyms": ["zipper closure"], "source": "external_train_only"}
+{"canonical": "zipper closure", "synonyms": ["zip closure"], "source": "external_train_only"}

@@ -1,0 +1,91 @@
+{
+  "processed_attributes": 2566,
+  "accepted_pairs": 232,
+  "unique_surface_forms": 211,
+  "ambiguous_surface_forms": 20,
+  "ambiguous_training_pairs": 41,
+  "ambiguous_examples": {
+    "pleather": [
+      "faux leather",
+      "synthetic leather"
+    ],
+    "artificial": [
+      "man made",
+      "manmade",
+      "synthetic"
+    ],
+    "gender neutral": [
+      "unisex",
+      "women men"
+    ],
+    "fabric": [
+      "cloth",
+      "textile"
+    ],
+    "imported": [
+      "import",
+      "importado"
+    ],
+    "unused": [
+      "brand new",
+      "new"
+    ],
+    "synthetic": [
+      "man made",
+      "manmade"
+    ],
+    "athletic": [
+      "sport",
+      "sports"
+    ],
+    "zipper closure": [
+      "zip closure",
+      "zip up closure"
+    ],
+    "round neck": [
+      "crewneck",
+      "scoop neckline"
+    ],
+    "multicolor": [
+      "multi color",
+      "multi colored"
+    ],
+    "faux leather": [
+      "material leatherette man made",
+      "pleather"
+    ],
+    "synthetic leather": [
+      "material leatherette man made",
+      "pleather"
+    ],
+    "men s": [
+      "adult male",
+      "male"
+    ],
+    "synthetic material": [
+      "man made material",
+      "manmade material"
+    ],
+    "handmade": [
+      "hand crafted",
+      "handcrafted and handfinished"
+    ],
+    "plain": [
+      "basic",
+      "pattern solid"
+    ],
+    "ultralight": [
+      "radically lightweight",
+      "super lightweight"
+    ],
+    "nylon": [
+      "chinlon",
+      "polyamide"
+    ],
+    "pocketless": [
+      "no pocket",
+      "no pockets"
+    ]
+  },
+  "training_policy": "Exclude ambiguous surface forms from contrastive encoder training; retain them for verifier and ambiguity analysis."
+}

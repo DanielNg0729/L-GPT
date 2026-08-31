@@ -44,9 +44,12 @@ import time
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
-from submission.llm_client import ENDPOINT, load_project_env
+try:
+    from submission.llm_rerank import ENDPOINT, _load_project_env
+except Exception:                                   # pragma: no cover - standalone import
+    from llm_rerank import ENDPOINT, _load_project_env  # type: ignore
 
-load_project_env()
+_load_project_env()
 
 DEFAULT_MODEL = os.environ.get("GROQ_MODEL", "openai/gpt-oss-20b")
 

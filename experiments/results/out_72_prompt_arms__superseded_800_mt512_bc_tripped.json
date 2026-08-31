@@ -1,0 +1,60 @@
+{
+  "experiment": "deparaphrase user-prompt arms",
+  "suite": "experiments/datasets/open_vocabulary/review800_open_vocab_paraphrase.jsonl",
+  "frozen": "agent, system prompt, tier weights, template axis",
+  "correctness": "proposal attested in the TARGET product's catalogue text",
+  "negation_subset_note": "5 distinct values over 8 invocations; flag, not a verdict",
+  "arms": {
+    "A": {
+      "label": "attr only (shipped)",
+      "score": 0.864244,
+      "hit_rate_at_10": 0.90125,
+      "mrr": 0.894479,
+      "calls": 170,
+      "accepted": 113,
+      "abstained": 56,
+      "unattested": 1,
+      "failures": 139,
+      "circuit_reason": null,
+      "checked": 799,
+      "correct": 606,
+      "precision": 0.7584480600750939,
+      "negation_accepted": 4,
+      "example_prompt": "in a neutral middle tone"
+    },
+    "B": {
+      "label": "attr + full message",
+      "score": 0.847103,
+      "hit_rate_at_10": 0.885,
+      "mrr": 0.878594,
+      "calls": 11,
+      "accepted": 3,
+      "abstained": 2,
+      "unattested": 0,
+      "failures": 18,
+      "circuit_reason": "6 consecutive failures",
+      "checked": 3,
+      "correct": 2,
+      "precision": 0.6666666666666666,
+      "negation_accepted": 1,
+      "example_prompt": "Attribute to name: \"in a neutral middle tone\"\nFull message it came from: \"For that, what matters is: leather; in a neutral middle tone.\""
+    },
+    "C": {
+      "label": "attr + category + turns",
+      "score": 0.847103,
+      "hit_rate_at_10": 0.885,
+      "mrr": 0.878594,
+      "calls": 7,
+      "accepted": 1,
+      "abstained": 0,
+      "unattested": 0,
+      "failures": 18,
+      "circuit_reason": "6 consecutive failures",
+      "checked": 1,
+      "correct": 0,
+      "precision": 0.0,
+      "negation_accepted": 0,
+      "example_prompt": "Category: women jeans\nAttribute to name: \"in a neutral middle tone\"\nOther requirements already stated (context only, NOT the answer): leather\nConversation so far:\n  turn 1: Hi, I need Women Jeans.\n  turn 2: For that, what matters is: leather; in a neutral middle tone."
+    }
+  }
+}

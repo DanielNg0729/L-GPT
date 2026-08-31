@@ -1,0 +1,1465 @@
+{
+  "experiment": "V2.57 attribute resolver: accuracy vs integration",
+  "n": 233,
+  "exact": 13,
+  "overlap": 77,
+  "abstain": 97,
+  "wrong": 59,
+  "ceiling": 0.945125,
+  "floor": 0.847103,
+  "gap": 0.098022,
+  "cells": {
+    "oracle@SEM 0.15": 0.924262,
+    "oracle@SEM 0.45": 0.937412,
+    "oracle@CONSTRAINT": 0.940275,
+    "llm@SEM 0.15": 0.863969,
+    "llm@SEM 0.45": 0.863638,
+    "llm@CONSTRAINT": 0.8522
+  },
+  "resolver": {
+    "calls": 30,
+    "accepted": 1,
+    "abstained": 4,
+    "unattested": 0,
+    "failed": 25
+  },
+  "detail": [
+    {
+      "paraphrase": "almost entirely from plant fibre",
+      "atom": "98 cotton 2 elastane",
+      "proposal": "cotton",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "almost entirely plant fibre",
+      "atom": "99 cotton 1 spandex",
+      "proposal": "cotton",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "almost entirely synthetic fibre",
+      "atom": "90 polyester",
+      "proposal": null
+    },
+    {
+      "paraphrase": "avoid using chemical whiteners",
+      "atom": "do not bleach",
+      "proposal": null
+    },
+    {
+      "paraphrase": "big carrying bag style",
+      "atom": "large tote",
+      "proposal": "tote",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "blend emphasizing flexibility",
+      "atom": "rayon polyester spandex stretch",
+      "proposal": null
+    },
+    {
+      "paraphrase": "blend of multiple different fibres",
+      "atom": "polyester cotton spandex rayon",
+      "proposal": null
+    },
+    {
+      "paraphrase": "blend of natural and synthetic",
+      "atom": "cotton polyester",
+      "proposal": null
+    },
+    {
+      "paraphrase": "blend of plant and synthetic fibre",
+      "atom": "60 cotton 40 polyester",
+      "proposal": null
+    },
+    {
+      "paraphrase": "blend of stretch and wood based fibre",
+      "atom": "spandex rayon",
+      "proposal": null
+    },
+    {
+      "paraphrase": "blend of three different fibres",
+      "atom": "polyester cotton spandex",
+      "proposal": null
+    },
+    {
+      "paraphrase": "blend of woven material and plastic",
+      "atom": "fabric and synthetic",
+      "proposal": null
+    },
+    {
+      "paraphrase": "blocks moisture and air penetration",
+      "atom": "waterproof and windproof fabric",
+      "proposal": "waterproof",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "bottom from elastic artificial material",
+      "atom": "synthetic rubber sole",
+      "proposal": "spandex",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "bottom made from animal hide",
+      "atom": "leather sole",
+      "proposal": "leather",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "bottom made from artificial material",
+      "atom": "man made sole",
+      "proposal": "synthetic",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "bottom made from lab created material",
+      "atom": "manmade sole",
+      "proposal": null
+    },
+    {
+      "paraphrase": "bottom made from man made material",
+      "atom": "synthetic sole",
+      "proposal": "synthetic",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "bottom made from soft brushed leather",
+      "atom": "suede sole",
+      "proposal": "suede",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "bottom with airy cushioning",
+      "atom": "foam sole",
+      "proposal": null
+    },
+    {
+      "paraphrase": "brushed leather mixed with weave",
+      "atom": "50 suede 50 mesh",
+      "proposal": null
+    },
+    {
+      "paraphrase": "brushed leather with fine fibre lining",
+      "atom": "100 microfibre lined suede",
+      "proposal": "leather",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "built to last a long time",
+      "atom": "slim style extremely comfortable",
+      "proposal": "durable",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "built to last and quite lightweight",
+      "atom": "classic lightweight and durable",
+      "proposal": null
+    },
+    {
+      "paraphrase": "can be cleaned in an appliance",
+      "atom": "machine wash",
+      "proposal": "machine washable",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "can be washed by hand or machine",
+      "atom": "hand wash machine wash",
+      "proposal": "washable",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "coated to block harmful sun rays",
+      "atom": "uv protection coating coating",
+      "proposal": "uv protection",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "contains about a third plant fibre",
+      "atom": "35 cotton",
+      "proposal": null
+    },
+    {
+      "paraphrase": "contains about three quarters plant",
+      "atom": "75 cotton",
+      "proposal": null
+    },
+    {
+      "paraphrase": "contains eight percent stretch",
+      "atom": "8 spandex",
+      "proposal": null
+    },
+    {
+      "paraphrase": "contains no animal products",
+      "atom": "100 vegan",
+      "proposal": "vegan",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "created from artificial substances",
+      "atom": "man made material",
+      "proposal": "synthetic",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "created in a laboratory",
+      "atom": "man made",
+      "proposal": null
+    },
+    {
+      "paraphrase": "cushioned bottom with flexible material",
+      "atom": "polyurethane sole",
+      "proposal": null
+    },
+    {
+      "paraphrase": "designed for easy comfortable fit",
+      "atom": "comfort fit band",
+      "proposal": null
+    },
+    {
+      "paraphrase": "designed for female shoppers",
+      "atom": "department womens",
+      "proposal": "women",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "designed for male shoppers",
+      "atom": "department mens",
+      "proposal": "men",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "do not apply hot pressing",
+      "atom": "do not iron",
+      "proposal": null
+    },
+    {
+      "paraphrase": "does not filter light direction",
+      "atom": "non polarized",
+      "proposal": null
+    },
+    {
+      "paraphrase": "doubles the apparent size",
+      "atom": "magnification power x2",
+      "proposal": null
+    },
+    {
+      "paraphrase": "elastic material with synthetic",
+      "atom": "rubber polyester",
+      "proposal": "spandex",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "entirely animal hide and woven material",
+      "atom": "100 leather and textile",
+      "proposal": null
+    },
+    {
+      "paraphrase": "entirely free from animal products",
+      "atom": "100 vegan materials",
+      "proposal": "vegan",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "entirely from a synthetic fibre",
+      "atom": "100 acrylic",
+      "proposal": "polyester",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "entirely from animal fleece",
+      "atom": "100 wool",
+      "proposal": "wool",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "entirely from animal hide",
+      "atom": "100 leather",
+      "proposal": "leather",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "entirely from artificial materials",
+      "atom": "100 manmade",
+      "proposal": "synthetic",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "entirely from artificial open weave",
+      "atom": "100 synthetic mesh",
+      "proposal": null
+    },
+    {
+      "paraphrase": "entirely from artificial substances",
+      "atom": "all men made material",
+      "proposal": "synthetic",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "entirely from brushed leather",
+      "atom": "100 suede",
+      "proposal": "brushed leather",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "entirely from cellulose fibre",
+      "atom": "100 viscose",
+      "proposal": null
+    },
+    {
+      "paraphrase": "entirely from elastic open weave",
+      "atom": "100 mesh webbing bungee",
+      "proposal": null
+    },
+    {
+      "paraphrase": "entirely from flexible foam like material",
+      "atom": "100 pu",
+      "proposal": "foam",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "entirely from human strands",
+      "atom": "100 human hair",
+      "proposal": "human hair",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "entirely from lab created material",
+      "atom": "100 man made",
+      "proposal": "synthetic",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "entirely from man made materials",
+      "atom": "100 synthetic",
+      "proposal": "synthetic",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "entirely from nylon like fibre",
+      "atom": "100 polyamide",
+      "proposal": "nylon",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "entirely from open weave fabric",
+      "atom": "100 mesh",
+      "proposal": "mesh",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "entirely from plant fibre",
+      "atom": "100 cotton",
+      "proposal": "cotton",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "entirely from plastic fibre",
+      "atom": "100 nylon",
+      "proposal": "polyester",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "entirely from premium plant fibre",
+      "atom": "100 supima cotton",
+      "proposal": "cotton",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "entirely from quality artificial material",
+      "atom": "100 premium synthetic",
+      "proposal": "synthetic",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "entirely from sturdy heavy fabric",
+      "atom": "100 canvas",
+      "proposal": null
+    },
+    {
+      "paraphrase": "entirely from synthetic fibre",
+      "atom": "100 polyester",
+      "proposal": null
+    },
+    {
+      "paraphrase": "entirely from synthetic thread",
+      "atom": "100 polyester fibers",
+      "proposal": "polyester",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "entirely from woven material",
+      "atom": "100 textile",
+      "proposal": "woven",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "entirely from woven or knit material",
+      "atom": "100 fabric",
+      "proposal": null
+    },
+    {
+      "paraphrase": "equal parts plant and synthetic",
+      "atom": "50 cotton 50 polyester",
+      "proposal": null
+    },
+    {
+      "paraphrase": "fast drying open weave material",
+      "atom": "quick drying mesh",
+      "proposal": "mesh",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "fastens at waist with cord",
+      "atom": "drawstring waist closure",
+      "proposal": "drawstring",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "fastens by pulling a cord tight",
+      "atom": "drawstring closure",
+      "proposal": "drawstring",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "fastens by threading through holes",
+      "atom": "lace up closure",
+      "proposal": "lace-up",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "fastens by wrapping and knotting",
+      "atom": "tie closure",
+      "proposal": "drawstring",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "fastens with disc shaped fasteners",
+      "atom": "button closure",
+      "proposal": "snap",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "fastens with elastic fit design",
+      "atom": "stretch fitted closure",
+      "proposal": "elastic",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "fastens with elastic mechanism",
+      "atom": "elasticated closure",
+      "proposal": "elastic",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "fastens with interlocking metal hooks",
+      "atom": "hook eye closure",
+      "proposal": "snap",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "fastens with interlocking teeth",
+      "atom": "zipper closure",
+      "proposal": "zipper",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "fastens with magnetic discs",
+      "atom": "top magnetic snap closure",
+      "proposal": "magnetic",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "fastens with mechanical disc mechanism",
+      "atom": "ratchet snap closure",
+      "proposal": null
+    },
+    {
+      "paraphrase": "fastens with metal clasp",
+      "atom": "buckle closure",
+      "proposal": "metal clasp",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "fastens with metal pieces",
+      "atom": "hook and eye closure",
+      "proposal": null
+    },
+    {
+      "paraphrase": "fastens with press together discs",
+      "atom": "snap closure",
+      "proposal": "snap",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "fastens with stretchy material",
+      "atom": "elastic closure",
+      "proposal": "elastic",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "fastens with toggle style hardware",
+      "atom": "toggle hardware design",
+      "proposal": "toggle",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "fastens with two part folding mechanism",
+      "atom": "bifold closure",
+      "proposal": "snap",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "fastens with velcro like material",
+      "atom": "hook and loop closure",
+      "proposal": "velcro",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "fastens with velcro like mechanism",
+      "atom": "hook loop closure",
+      "proposal": "hook-and-loop",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "fits at standard garment dimensions",
+      "atom": "fit true to size",
+      "proposal": "regular",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "fits regular garment measurements",
+      "atom": "size standard",
+      "proposal": "regular",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "flexible bottom with shape memory",
+      "atom": "thermoplastic elastomers sole",
+      "proposal": "memory foam",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "for adults of any gender",
+      "atom": "department unisex adult",
+      "proposal": null
+    },
+    {
+      "paraphrase": "front opening design",
+      "atom": "no closure closure",
+      "proposal": null
+    },
+    {
+      "paraphrase": "has a soft touched surface",
+      "atom": "brushed",
+      "proposal": null
+    },
+    {
+      "paraphrase": "has curly wave pattern",
+      "atom": "hair type curly",
+      "proposal": null
+    },
+    {
+      "paraphrase": "has integrated support structure",
+      "atom": "built in bra closure",
+      "proposal": null
+    },
+    {
+      "paraphrase": "has specialized grip technology",
+      "atom": "vibram tc5 plus outsole",
+      "proposal": null
+    },
+    {
+      "paraphrase": "has strengthened stitched front",
+      "atom": "reinforced stitched toe cap",
+      "proposal": "double-stitched",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "high quality animal hide top",
+      "atom": "premium leather upper",
+      "proposal": "leather",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "hugs the body shape closely",
+      "atom": "form fitting",
+      "proposal": "slim",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "in a bright sunny shade",
+      "atom": "color yellow",
+      "proposal": null
+    },
+    {
+      "paraphrase": "in a cool sky tone",
+      "atom": "color blue",
+      "proposal": "sky blue",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "in a neutral middle tone",
+      "atom": "color gray",
+      "proposal": "neutral",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "in a rosy shade",
+      "atom": "color pink",
+      "proposal": "rose",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "in a royal rich tone",
+      "atom": "color purple",
+      "proposal": null
+    },
+    {
+      "paraphrase": "in a vibrant warm tone",
+      "atom": "color red",
+      "proposal": null
+    },
+    {
+      "paraphrase": "in a warm vibrant tone",
+      "atom": "color orange",
+      "proposal": null
+    },
+    {
+      "paraphrase": "in an earthy dark shade",
+      "atom": "color brown",
+      "proposal": "brown",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "in an earthy verdant tone",
+      "atom": "color green",
+      "proposal": null
+    },
+    {
+      "paraphrase": "in the darkest colour",
+      "atom": "color black",
+      "proposal": null
+    },
+    {
+      "paraphrase": "in the lightest shade",
+      "atom": "color white",
+      "proposal": null
+    },
+    {
+      "paraphrase": "inner layer made from synthetic",
+      "atom": "polyester lining",
+      "proposal": "polyester",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "inner layer with airy material",
+      "atom": "breathable mesh lining",
+      "proposal": "mesh",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "inner surface made from animal hide",
+      "atom": "leather lining",
+      "proposal": "leather",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "lab made with open weave",
+      "atom": "synthetic and mesh",
+      "proposal": "mesh",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "machine dry method",
+      "atom": "tumble dry",
+      "proposal": null
+    },
+    {
+      "paraphrase": "machine dry on mild heat",
+      "atom": "tumble dry low",
+      "proposal": null
+    },
+    {
+      "paraphrase": "made from a soft plant fibre",
+      "atom": "cotton",
+      "proposal": "cotton",
+      "exact": true,
+      "overlap": true
+    },
+    {
+      "paraphrase": "made from a strong plastic fibre",
+      "atom": "nylon",
+      "proposal": null
+    },
+    {
+      "paraphrase": "made from animal fleece",
+      "atom": "wool",
+      "proposal": "wool",
+      "exact": true,
+      "overlap": true
+    },
+    {
+      "paraphrase": "made from animal hide",
+      "atom": "leather",
+      "proposal": null
+    },
+    {
+      "paraphrase": "made from artificial material",
+      "atom": "material synthetic",
+      "proposal": null
+    },
+    {
+      "paraphrase": "made from brushed leather garment",
+      "atom": "suede sweater",
+      "proposal": "leather",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "made from cattle skin",
+      "atom": "cowhide leather",
+      "proposal": "leather",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "made from cellulose fibre",
+      "atom": "viscose",
+      "proposal": null
+    },
+    {
+      "paraphrase": "made from delicate openwork fabric",
+      "atom": "lace",
+      "proposal": "lace",
+      "exact": true,
+      "overlap": true
+    },
+    {
+      "paraphrase": "made from delicate sheer fabric",
+      "atom": "organza",
+      "proposal": "chiffon",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "made from dried plant stalks",
+      "atom": "straw",
+      "proposal": "straw",
+      "exact": true,
+      "overlap": true
+    },
+    {
+      "paraphrase": "made from dried woven plant",
+      "atom": "rattan straw",
+      "proposal": null
+    },
+    {
+      "paraphrase": "made from elastic material",
+      "atom": "rubber",
+      "proposal": "elastic",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "made from fluffy wool like fabric",
+      "atom": "sherpa",
+      "proposal": "fleece",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "made from fluffy wool like material",
+      "atom": "sherpa fleece",
+      "proposal": "wool",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "made from hard polymer material",
+      "atom": "plastic",
+      "proposal": "plastic",
+      "exact": true,
+      "overlap": true
+    },
+    {
+      "paraphrase": "made from lab created thread",
+      "atom": "synthetic fiber",
+      "proposal": null
+    },
+    {
+      "paraphrase": "made from lightweight airy fabric",
+      "atom": "chiffon",
+      "proposal": null
+    },
+    {
+      "paraphrase": "made from metal mixture",
+      "atom": "alloy",
+      "proposal": "alloy",
+      "exact": true,
+      "overlap": true
+    },
+    {
+      "paraphrase": "made from metallic material",
+      "atom": "metal",
+      "proposal": "metal",
+      "exact": true,
+      "overlap": true
+    },
+    {
+      "paraphrase": "made from natural protein fibre",
+      "atom": "silk",
+      "proposal": "silk",
+      "exact": true,
+      "overlap": true
+    },
+    {
+      "paraphrase": "made from open weave fabric",
+      "atom": "mesh",
+      "proposal": "mesh",
+      "exact": true,
+      "overlap": true
+    },
+    {
+      "paraphrase": "made from plant fibre material",
+      "atom": "fabric cotton",
+      "proposal": "cotton",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "made from plant stalk fibre",
+      "atom": "linen",
+      "proposal": "jute",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "made from processed wood fibre",
+      "atom": "rayon",
+      "proposal": "mdf",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "made from real animal skin",
+      "atom": "genuine leather",
+      "proposal": "leather",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "made from rubber tree sap",
+      "atom": "latex",
+      "proposal": null
+    },
+    {
+      "paraphrase": "made from soft fluffy material",
+      "atom": "fleece",
+      "proposal": null
+    },
+    {
+      "paraphrase": "made from sparkly decorative elements",
+      "atom": "rhinestone alloy curb chain",
+      "proposal": "sequins",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "made from sturdy thick fabric",
+      "atom": "canvas",
+      "proposal": null
+    },
+    {
+      "paraphrase": "made from synthetic fibre",
+      "atom": "material polyester",
+      "proposal": "polyester",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "made from synthetic stretch blend",
+      "atom": "material polyester and spandex",
+      "proposal": "spandex",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "made from two colored strong metal",
+      "atom": "two tone titanium ring",
+      "proposal": null
+    },
+    {
+      "paraphrase": "made from two density levels",
+      "atom": "dual density",
+      "proposal": null
+    },
+    {
+      "paraphrase": "made from ultra fine thread",
+      "atom": "microfiber",
+      "proposal": null
+    },
+    {
+      "paraphrase": "made from vinyl polymer",
+      "atom": "pvc",
+      "proposal": "vinyl",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "made from woven or knit material",
+      "atom": "textile",
+      "proposal": "fabric",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "made mostly from plant fibre",
+      "atom": "material 97 cotton",
+      "proposal": "cotton",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "made to mimic animal hide",
+      "atom": "faux leather",
+      "proposal": "faux leather",
+      "exact": true,
+      "overlap": true
+    },
+    {
+      "paraphrase": "manufactured domestically in america",
+      "atom": "made in the usa",
+      "proposal": "usa",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "manufactured in america",
+      "atom": "made in usa",
+      "proposal": "usa",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "material with elastic properties",
+      "atom": "stretchy fabric",
+      "proposal": "elastic",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "mix favoring synthetic fibre",
+      "atom": "65 polyester 35 cotton",
+      "proposal": "polyester",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "mix of plant and synthetic fibres",
+      "atom": "65 cotton 35 polyester",
+      "proposal": "blended",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "mix of plant fibre with other materials",
+      "atom": "cotton blend",
+      "proposal": "blend",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "mix of plant fibres",
+      "atom": "cotton viscose blend",
+      "proposal": null
+    },
+    {
+      "paraphrase": "more plant than synthetic",
+      "atom": "67 cotton 33 polyester",
+      "proposal": "cotton",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "mostly cellulose with minimal stretch",
+      "atom": "96 rayon 4 spandex",
+      "proposal": "cotton",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "mostly cellulose with slight stretch",
+      "atom": "95 rayon 5 elastane",
+      "proposal": "cotton",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "mostly cellulose with stretch",
+      "atom": "95 viscose 5 elastane",
+      "proposal": null
+    },
+    {
+      "paraphrase": "mostly created from synthetic material",
+      "atom": "made of 65 polyester",
+      "proposal": "synthetic",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "mostly from woven material",
+      "atom": "90 fabric",
+      "proposal": null
+    },
+    {
+      "paraphrase": "mostly nylon like with significant stretch",
+      "atom": "72 polyamide 28 elastane",
+      "proposal": "nylon",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "mostly plant fibre with minimal stretch",
+      "atom": "98 cotton 2 spandex",
+      "proposal": "cotton",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "mostly plant fibre with slight stretch",
+      "atom": "95 cotton 5 spandex",
+      "proposal": null
+    },
+    {
+      "paraphrase": "mostly plant with one fifth stretch",
+      "atom": "80 cotton 20 spandex",
+      "proposal": null
+    },
+    {
+      "paraphrase": "mostly plant with synthetic blend",
+      "atom": "85 cotton 15 polyester",
+      "proposal": null
+    },
+    {
+      "paraphrase": "mostly plastic blend fibre",
+      "atom": "85 nylon 15 polyester",
+      "proposal": null
+    },
+    {
+      "paraphrase": "mostly plastic fibre with some stretch",
+      "atom": "90 nylon 10 spandex",
+      "proposal": "polyester",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "mostly plastic with good stretch",
+      "atom": "82 nylon 18 spandex",
+      "proposal": null
+    },
+    {
+      "paraphrase": "mostly plastic with minimal stretch",
+      "atom": "95 nylon 5 spandex",
+      "proposal": "plastic",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "mostly plastic with minor stretch",
+      "atom": "92 nylon 8 spandex",
+      "proposal": "plastic",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "mostly plastic with some stretch",
+      "atom": "85 nylon 15 spandex",
+      "proposal": "polyester",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "mostly processed fibre with stretch",
+      "atom": "95 rayon 5 spandex",
+      "proposal": "elastane",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "mostly stretch with synthetic base",
+      "atom": "65 spandex 35 polyester",
+      "proposal": null
+    },
+    {
+      "paraphrase": "mostly synthetic with good stretch",
+      "atom": "88 polyester 12 spandex",
+      "proposal": null
+    },
+    {
+      "paraphrase": "mostly synthetic with minimal stretch",
+      "atom": "92 polyester 8 spandex",
+      "proposal": "polyester",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "mostly synthetic with modest stretch",
+      "atom": "85 polyester 15 elastane",
+      "proposal": "polyester",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "mostly synthetic with one fifth stretch",
+      "atom": "80 polyester 20 spandex",
+      "proposal": "polyester",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "mostly synthetic with plant blend",
+      "atom": "85 polyester 15 cotton",
+      "proposal": "polyester",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "mostly synthetic with significant stretch",
+      "atom": "82 polyester 18 spandex",
+      "proposal": null
+    },
+    {
+      "paraphrase": "mostly synthetic with some stretch",
+      "atom": "90 polyester 10 spandex",
+      "proposal": "polyester",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "mostly synthetic with stretch",
+      "atom": "93 polyester 7 elastane",
+      "proposal": "polyester",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "mostly wool like fibre with stretch",
+      "atom": "95 acrylic 5 spandex",
+      "proposal": "wool",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "optical element blocking full spectrum",
+      "atom": "composite uv400 lens",
+      "proposal": null
+    },
+    {
+      "paraphrase": "optical element from mineral",
+      "atom": "mineral crystal lens",
+      "proposal": null
+    },
+    {
+      "paraphrase": "optical element made from polymer",
+      "atom": "resin lens",
+      "proposal": "plastic",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "plant fibre treated to prevent shrinking",
+      "atom": "preshrunk cotton",
+      "proposal": "pre\u2011shrunk",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "plant fibre with stretch component",
+      "atom": "cotton spandex",
+      "proposal": null
+    },
+    {
+      "paraphrase": "plastic with stretch component",
+      "atom": "nylon spandex",
+      "proposal": null
+    },
+    {
+      "paraphrase": "pulls on easily without fasteners",
+      "atom": "slip on closure",
+      "proposal": "slip\u2011on",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "quality artificial leather material",
+      "atom": "high quality pu leather",
+      "proposal": null
+    },
+    {
+      "paraphrase": "refreshed by dry brushing only",
+      "atom": "dry cloth clean",
+      "proposal": null
+    },
+    {
+      "paraphrase": "requires manual cleaning",
+      "atom": "hand wash only",
+      "proposal": null
+    },
+    {
+      "paraphrase": "slips on easily at opening",
+      "atom": "pull on entry",
+      "proposal": null
+    },
+    {
+      "paraphrase": "slips on without separate fasteners",
+      "atom": "pull on closure",
+      "proposal": "slip\u2011on",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "smooth knit synthetic fabric",
+      "atom": "jersey polyester",
+      "proposal": "polyester",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "smooth synthetic stretch knit",
+      "atom": "jersey polyester spandex",
+      "proposal": null
+    },
+    {
+      "paraphrase": "soft fluffy layered material",
+      "atom": "sherpa polyester fleece flannel",
+      "proposal": "fleece",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "sole that leaves no dark marks",
+      "atom": "non marking outsole",
+      "proposal": null
+    },
+    {
+      "paraphrase": "sourced from another country",
+      "atom": "imported",
+      "proposal": null
+    },
+    {
+      "paraphrase": "sourced internationally then designed",
+      "atom": "imported designed in usa",
+      "proposal": null
+    },
+    {
+      "paraphrase": "stretch plastic blend",
+      "atom": "spandex nylon",
+      "proposal": null
+    },
+    {
+      "paraphrase": "stretchable blend of fibres",
+      "atom": "elastic polyester cotton",
+      "proposal": "spandex",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "stretchable open weave",
+      "atom": "elastic mesh",
+      "proposal": null
+    },
+    {
+      "paraphrase": "stretchable synthetic blend",
+      "atom": "elastic polyester spandex",
+      "proposal": null
+    },
+    {
+      "paraphrase": "stretches and snaps back",
+      "atom": "elastic",
+      "proposal": "elastic",
+      "exact": true,
+      "overlap": true
+    },
+    {
+      "paraphrase": "structure made from cellulose polymer",
+      "atom": "acetate frame",
+      "proposal": null
+    },
+    {
+      "paraphrase": "structure made from hard polymer",
+      "atom": "plastic frame",
+      "proposal": "plastic",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "structure made from metal",
+      "atom": "metal frame",
+      "proposal": null
+    },
+    {
+      "paraphrase": "structure made from mixed materials",
+      "atom": "lightweight composite frame",
+      "proposal": "mixed",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "sturdy fabric used in institutional wear",
+      "atom": "material uniform cloth",
+      "proposal": "polyester",
+      "exact": false,
+      "overlap": false
+    },
+    {
+      "paraphrase": "sturdy material used in uniforms",
+      "atom": "uniform cloth",
+      "proposal": null
+    },
+    {
+      "paraphrase": "synthetic blend with stretch",
+      "atom": "polyester spandex",
+      "proposal": null
+    },
+    {
+      "paraphrase": "synthetic fibre from petroleum products",
+      "atom": "polyester",
+      "proposal": "polyester",
+      "exact": true,
+      "overlap": true
+    },
+    {
+      "paraphrase": "synthetic stretch fuzzy material",
+      "atom": "polyester spandex fleece",
+      "proposal": null
+    },
+    {
+      "paraphrase": "synthetic stretch with open weave",
+      "atom": "polyester spandex mesh",
+      "proposal": "mesh",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "top from whole animal leather",
+      "atom": "cow full grain upper",
+      "proposal": "full-grain leather",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "top part made from material",
+      "atom": "fabric upper",
+      "proposal": null
+    },
+    {
+      "paraphrase": "velvety leather top surface",
+      "atom": "nubuck suede upper",
+      "proposal": "suede",
+      "exact": false,
+      "overlap": true
+    },
+    {
+      "paraphrase": "washable by either method",
+      "atom": "machine wash hand wash",
+      "proposal": null
+    },
+    {
+      "paraphrase": "water resistant with fluffy lining",
+      "atom": "fleece lined waterproof",
+      "proposal": null
+    },
+    {
+      "paraphrase": "with a flexible cushioned base",
+      "atom": "rubber sole",
+      "proposal": null
+    },
+    {
+      "paraphrase": "with a lightweight cushioned base",
+      "atom": "ethylene vinyl acetate sole",
+      "proposal": null
+    },
+    {
+      "paraphrase": "with gel padding for comfort",
+      "atom": "gel cushioning system",
+      "proposal": null
+    },
+    {
+      "paraphrase": "with stretchy material blended in",
+      "atom": "spandex",
+      "proposal": "spandex",
+      "exact": true,
+      "overlap": true
+    }
+  ]
+}

@@ -94,9 +94,12 @@ from pathlib import Path
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
-from submission.llm_client import ENDPOINT, load_project_env
+try:
+    from submission.llm_rerank import ENDPOINT, _load_project_env
+except Exception:  # pragma: no cover - keep importable standalone
+    from llm_rerank import ENDPOINT, _load_project_env  # type: ignore
 
-load_project_env()
+_load_project_env()
 
 # MODEL CHOICE, MEASURED. Both sizes were run on the full 800-session open-vocabulary
 # attribute suite, same code, same 172 distinct prompts, same max_tokens:

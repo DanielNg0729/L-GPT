@@ -1,0 +1,63 @@
+{
+  "purpose": "high-precision conflict detector for unconfirmed override-opening evidence",
+  "rule": "same recognised family, both values attested, zero catalogue co-occurrence",
+  "source_faithful_set": "robustness\\override_focus\\override_focus_800.jsonl",
+  "variants": {
+    "shipped_full_opening_evidence": {
+      "source_faithful_override_focus_800": {
+        "sample_count": 800,
+        "hit_rate_at_10": 0.97625,
+        "mrr": 0.973021,
+        "mttc": 4.07,
+        "efficiency": 0.693,
+        "recommended_technical_score": 0.918631,
+        "wall_seconds": 244.92123639999772
+      },
+      "contradictory_opening_probe_800": {
+        "sample_count": 800,
+        "hit_rate_at_10": 0.9275,
+        "mrr": 0.915875,
+        "mttc": 4.9275,
+        "efficiency": 0.60725,
+        "recommended_technical_score": 0.859962,
+        "wall_seconds": 133.14248889998998
+      }
+    },
+    "catalog_conflict_guard": {
+      "source_faithful_override_focus_800": {
+        "sample_count": 800,
+        "hit_rate_at_10": 0.97625,
+        "mrr": 0.973021,
+        "mttc": 4.07,
+        "efficiency": 0.693,
+        "recommended_technical_score": 0.918631,
+        "wall_seconds": 256.1524870999856
+      },
+      "contradictory_opening_probe_800": {
+        "sample_count": 800,
+        "hit_rate_at_10": 0.9275,
+        "mrr": 0.915875,
+        "mttc": 4.9275,
+        "efficiency": 0.60725,
+        "recommended_technical_score": 0.859962,
+        "wall_seconds": 135.77181410000776
+      },
+      "source_faithful_detector": {
+        "opening_values": 800,
+        "confirmed_openings": 487,
+        "family_comparable": 55,
+        "pair_supported": 55,
+        "conflicts_removed": 0,
+        "abstained": 276
+      },
+      "contradictory_detector": {
+        "opening_values": 800,
+        "confirmed_openings": 0,
+        "family_comparable": 589,
+        "pair_supported": 589,
+        "conflicts_removed": 0,
+        "abstained": 211
+      }
+    }
+  }
+}

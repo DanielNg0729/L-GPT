@@ -1,0 +1,42 @@
+{
+  "scope": "target/evaluator unchanged; LLM sees visible message only",
+  "sample_count": 200,
+  "conditions": {
+    "exact": "Official customer text, unchanged.",
+    "surface": "Template wording and discourse prefix rewritten; requirement strings preserved.",
+    "reordered": "Surface rewrite plus clause-order/punctuation disruption; requirement strings preserved."
+  },
+  "results": {
+    "hybrid|exact": {
+      "sample_count": 200,
+      "hit_rate_at_10": 0.995,
+      "mrr": 0.9925,
+      "mttc": 2.385,
+      "efficiency": 0.8615,
+      "recommended_technical_score": 0.96755
+    },
+    "hybrid|surface": {
+      "sample_count": 200,
+      "hit_rate_at_10": 0.88,
+      "mrr": 0.88,
+      "mttc": 3.94,
+      "efficiency": 0.706,
+      "recommended_technical_score": 0.8452
+    },
+    "hybrid|reordered": {
+      "sample_count": 200,
+      "hit_rate_at_10": 0.88,
+      "mrr": 0.876667,
+      "mttc": 3.97,
+      "efficiency": 0.703,
+      "recommended_technical_score": 0.8436
+    }
+  },
+  "llm_stats": {
+    "calls": 0,
+    "cache_hits": 0,
+    "failures": 0,
+    "errors": {},
+    "cached_entries": 415
+  }
+}

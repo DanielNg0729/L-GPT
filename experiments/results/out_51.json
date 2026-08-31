@@ -1,0 +1,127 @@
+{
+  "shipped (no tagger)": {
+    "scores": {
+      "clean": 0.9696,
+      "unseen800": 0.957225,
+      "T1": 0.8523,
+      "T2": 0.8691501,
+      "T5": 0.8477
+    }
+  },
+  "distilbert (shipped)": {
+    "scores": {
+      "clean": 0.9696,
+      "unseen800": 0.957225,
+      "T1": 0.893,
+      "T2": 0.8691501,
+      "T5": 0.8974
+    },
+    "params_m": 66.364418,
+    "lifts": {
+      "T2 scaffold stripped": {
+        "acc": 0.9923175416133163,
+        "majority": 0.8917471772785474,
+        "lift": 0.10057036433476896
+      },
+      "T5 realistic (T1+T3)": {
+        "acc": 0.9765561293829845,
+        "majority": 0.7244156020657788,
+        "lift": 0.2521405273172057
+      },
+      "T4 case/punctuation churn": {
+        "acc": 0.9806881243063263,
+        "majority": 0.5577691453940067,
+        "lift": 0.42291897891231967
+      }
+    },
+    "train_s": 89.74617195129395,
+    "checkpoint": "distilbert-base-uncased"
+  },
+  "bert-base": {
+    "scores": {
+      "clean": 0.9696,
+      "unseen800": 0.957225,
+      "T1": 0.8882,
+      "T2": 0.8691501,
+      "T5": 0.8926000000000001
+    },
+    "params_m": 108.893186,
+    "lifts": {
+      "T2 scaffold stripped": {
+        "acc": 0.8895355604702596,
+        "majority": 0.8917471772785474,
+        "lift": -0.002211616808287742
+      },
+      "T5 realistic (T1+T3)": {
+        "acc": 0.9744495786898614,
+        "majority": 0.7244156020657788,
+        "lift": 0.25003397662408255
+      },
+      "T4 case/punctuation churn": {
+        "acc": 0.9811320754716981,
+        "majority": 0.5577691453940067,
+        "lift": 0.42336293007769144
+      }
+    },
+    "train_s": 188.7133195400238,
+    "checkpoint": "bert-base-uncased"
+  },
+  "roberta-base": {
+    "scores": {
+      "clean": 0.9696,
+      "unseen800": 0.957225,
+      "T1": 0.8931,
+      "T2": 0.8691501,
+      "T5": 0.8972
+    },
+    "params_m": 124.056578,
+    "lifts": {
+      "T2 scaffold stripped": {
+        "acc": 0.9935979513444302,
+        "majority": 0.8917471772785474,
+        "lift": 0.10185077406588283
+      },
+      "T5 realistic (T1+T3)": {
+        "acc": 0.9725808643653167,
+        "majority": 0.7244156020657788,
+        "lift": 0.24816526229953784
+      },
+      "T4 case/punctuation churn": {
+        "acc": 0.9786348501664817,
+        "majority": 0.5577691453940067,
+        "lift": 0.420865704772475
+      }
+    },
+    "train_s": 173.5541729927063,
+    "checkpoint": "roberta-base"
+  },
+  "deberta-v3-small": {
+    "scores": {
+      "clean": 0.9696,
+      "unseen800": 0.957225,
+      "T1": 0.8523,
+      "T2": 0.8691501,
+      "T5": 0.8477
+    },
+    "params_m": 141.305858,
+    "lifts": {
+      "T2 scaffold stripped": {
+        "acc": 0.10825282272145269,
+        "majority": 0.8917471772785474,
+        "lift": -0.7834943545570947
+      },
+      "T5 realistic (T1+T3)": {
+        "acc": 0.7244156020657787,
+        "majority": 0.7244156020657788,
+        "lift": -1.1102230246251565e-16
+      },
+      "T4 case/punctuation churn": {
+        "acc": 0.5577691453940067,
+        "majority": 0.5577691453940067,
+        "lift": 0.0
+      }
+    },
+    "train_s": 73.34796285629272,
+    "checkpoint": "microsoft/deberta-v3-small"
+  }
+}

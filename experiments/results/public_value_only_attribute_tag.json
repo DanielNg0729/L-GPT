@@ -1,0 +1,31 @@
+{
+  "candidate": "attribute_tag_guess",
+  "canonical_replay": {
+    "result": {
+      "hit_rate_at_10": 0.995,
+      "mrr": 0.995,
+      "mttc": 2.32,
+      "efficiency": 0.868,
+      "recommended_technical_score": 0.9696
+    },
+    "gate": {
+      "seen": 436,
+      "blocked": 436
+    }
+  },
+  "attribute_paraphrase": {
+    "result": {
+      "hit_rate_at_10": 0.925,
+      "mrr": 0.908333,
+      "mttc": 3.635,
+      "efficiency": 0.7365,
+      "recommended_technical_score": 0.8823
+    },
+    "gate": {
+      "seen": 487,
+      "blocked": 255,
+      "eligible": 232,
+      "accepted": 186
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "experiment": "V2.58 template residual attribution",
+  "score": 0.91954,
+  "hit_rate_at_10": 0.9587,
+  "max_attribute_tokens": 3,
+  "total_values": 3190,
+  "buckets": {
+    "recovered": 2395,
+    "TOO LONG (> 3 tokens)": 669,
+    "NOT IN DICTIONARY": 85,
+    "DICT BUT MISSED": 41
+  },
+  "examples": {
+    "TOO LONG (> 3 tokens)": [
+      "heel measures approximately 1 71",
+      "platform measures approximately 0 75 inches",
+      "mesh lightweight and breathable women shoes helping your f",
+      "memory foam insole comfortable and soft lightweight shoes "
+    ],
+    "NOT IN DICTIONARY": [
+      "color grey",
+      "color green",
+      "composite uv400 lens",
+      "100 human hair"
+    ],
+    "DICT BUT MISSED": [
+      "lightweight composite frame",
+      "drawstring waist closure",
+      "genuine leather",
+      "man made material"
+    ]
+  }
+}

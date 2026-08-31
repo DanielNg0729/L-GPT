@@ -1,0 +1,43 @@
+{
+  "candidate": "dense_product_passage_rag",
+  "rag_weight": 0.15,
+  "canonical_replay": {
+    "result": {
+      "hit_rate_at_10": 0.995,
+      "mrr": 0.995,
+      "mttc": 2.32,
+      "efficiency": 0.868,
+      "recommended_technical_score": 0.9696
+    },
+    "gate": {
+      "seen": 436,
+      "full_attested": 424,
+      "blocked": 436,
+      "known_construction": 5
+    },
+    "retriever": {
+      "queries": 0,
+      "load_failure": 0
+    }
+  },
+  "attribute_paraphrase": {
+    "result": {
+      "hit_rate_at_10": 0.795,
+      "mrr": 0.795,
+      "mttc": 4.51,
+      "efficiency": 0.649,
+      "recommended_technical_score": 0.7658
+    },
+    "gate": {
+      "seen": 505,
+      "full_attested": 199,
+      "blocked": 265,
+      "eligible": 240,
+      "known_construction": 1
+    },
+    "retriever": {
+      "queries": 240,
+      "load_failure": 0
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "experiment": "V2.49 LLM resolver against every population",
+  "model": "openai/gpt-oss-120b",
+  "weight": 0.15,
+  "suites": {
+    "official200": {
+      "suppression": 0.9701,
+      "llm": 0.9701,
+      "delta": 0.0,
+      "reaches": 1,
+      "calls": 0
+    },
+    "org-proxy": {
+      "suppression": 0.952788,
+      "llm": 0.952788,
+      "delta": 0.0,
+      "reaches": 2,
+      "calls": 0
+    },
+    "review800": {
+      "suppression": 0.945125,
+      "llm": 0.945125,
+      "delta": 0.0,
+      "reaches": 7,
+      "calls": 0
+    },
+    "uniform": {
+      "suppression": 0.882763,
+      "llm": 0.882763,
+      "delta": 0.0,
+      "reaches": 9,
+      "calls": 0
+    },
+    "inverse": {
+      "suppression": 0.866062,
+      "llm": 0.866062,
+      "delta": 0.0,
+      "reaches": 7,
+      "calls": 0
+    },
+    "attr-para": {
+      "suppression": 0.833,
+      "llm": 0.8708,
+      "delta": 0.0378,
+      "reaches": 304,
+      "calls": 0
+    }
+  },
+  "worst_decision_delta": 0.0,
+  "verdict": "CLEARS node 7 -- no regression on any decision criterion",
+  "resolver": {
+    "calls": 0,
+    "accepted": 0,
+    "abstained": 0,
+    "unattested": 0,
+    "failed": 0
+  }
+}

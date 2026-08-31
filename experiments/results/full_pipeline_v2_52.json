@@ -1,0 +1,196 @@
+{
+  "experiment": "V2.52 full pipeline grid",
+  "arms": {
+    "V1 baseline": {
+      "official200": {
+        "score": 0.9701,
+        "hr10": 0.995,
+        "mrr": 0.995,
+        "mttc": 2.295
+      },
+      "unseen800": {
+        "score": 0.945125,
+        "hr10": 0.9788,
+        "mrr": 0.9754,
+        "mttc": 2.844
+      },
+      "template": {
+        "score": 0.66681,
+        "hr10": 0.705,
+        "mrr": 0.6915,
+        "mttc": 5.657
+      },
+      "attribute": {
+        "score": 0.847103,
+        "hr10": 0.885,
+        "mrr": 0.8786,
+        "mttc": 3.949
+      },
+      "both": {
+        "score": 0.604585,
+        "hr10": 0.6388,
+        "mrr": 0.6274,
+        "mttc": 6.15
+      }
+    },
+    "+ROUTE": {
+      "official200": {
+        "score": 0.9701,
+        "hr10": 0.995,
+        "mrr": 0.995,
+        "mttc": 2.295
+      },
+      "unseen800": {
+        "score": 0.945125,
+        "hr10": 0.9788,
+        "mrr": 0.9754,
+        "mttc": 2.844
+      },
+      "template": {
+        "score": 0.665265,
+        "hr10": 0.705,
+        "mrr": 0.6833,
+        "mttc": 5.611
+      },
+      "attribute": {
+        "score": 0.847103,
+        "hr10": 0.885,
+        "mrr": 0.8786,
+        "mttc": 3.949
+      },
+      "both": {
+        "score": 0.603552,
+        "hr10": 0.6375,
+        "mrr": 0.6233,
+        "mttc": 6.109
+      }
+    },
+    "+SPAN": {
+      "official200": {
+        "score": 0.9701,
+        "hr10": 0.995,
+        "mrr": 0.995,
+        "mttc": 2.295
+      },
+      "unseen800": {
+        "score": 0.945125,
+        "hr10": 0.9788,
+        "mrr": 0.9754,
+        "mttc": 2.844
+      },
+      "template": {
+        "score": 0.910025,
+        "hr10": 0.9587,
+        "mrr": 0.9267,
+        "mttc": 3.368
+      },
+      "attribute": {
+        "score": 0.847103,
+        "hr10": 0.885,
+        "mrr": 0.8786,
+        "mttc": 3.949
+      },
+      "both": {
+        "score": 0.804681,
+        "hr10": 0.855,
+        "mrr": 0.8237,
+        "mttc": 4.496
+      }
+    },
+    "+ROUTE+SPAN": {
+      "official200": {
+        "score": 0.9701,
+        "hr10": 0.995,
+        "mrr": 0.995,
+        "mttc": 2.295
+      },
+      "unseen800": {
+        "score": 0.945125,
+        "hr10": 0.9788,
+        "mrr": 0.9754,
+        "mttc": 2.844
+      },
+      "template": {
+        "score": 0.91954,
+        "hr10": 0.9587,
+        "mrr": 0.9423,
+        "mttc": 3.126
+      },
+      "attribute": {
+        "score": 0.847103,
+        "hr10": 0.885,
+        "mrr": 0.8786,
+        "mttc": 3.949
+      },
+      "both": {
+        "score": 0.810251,
+        "hr10": 0.8525,
+        "mrr": 0.8333,
+        "mttc": 4.3
+      }
+    },
+    "V2 full": {
+      "official200": {
+        "score": 0.9701,
+        "hr10": 0.995,
+        "mrr": 0.995,
+        "mttc": 2.295
+      },
+      "unseen800": {
+        "score": 0.945125,
+        "hr10": 0.9788,
+        "mrr": 0.9754,
+        "mttc": 2.844
+      },
+      "template": {
+        "score": 0.918973,
+        "hr10": 0.9575,
+        "mrr": 0.9422,
+        "mttc": 3.121
+      },
+      "attribute": {
+        "score": 0.847103,
+        "hr10": 0.885,
+        "mrr": 0.8786,
+        "mttc": 3.949
+      },
+      "both": {
+        "score": 0.811687,
+        "hr10": 0.8538,
+        "mrr": 0.8346,
+        "mttc": 4.279
+      }
+    }
+  },
+  "conditions": [
+    "official200",
+    "unseen800",
+    "template",
+    "attribute",
+    "both"
+  ],
+  "resolver": {
+    "enabled": false,
+    "model": "openai/gpt-oss-120b",
+    "calls": 0,
+    "accepted": 0,
+    "abstained": 0,
+    "unattested": 0,
+    "failures": 0,
+    "retries": 0,
+    "cache_hits": 0,
+    "cache_misses": 0,
+    "cache_hit_rate": null,
+    "fully_cached": false,
+    "seconds": 0.0,
+    "circuit_reason": null
+  },
+  "span_node": {
+    "ok": true,
+    "categories": 1114,
+    "attributes": 7920,
+    "category": 4805,
+    "attribute": 28404
+  },
+  "worst_decision_delta_v2_full": 0.0
+}

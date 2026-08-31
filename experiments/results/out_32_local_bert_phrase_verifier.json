@@ -1,0 +1,38 @@
+{
+  "bert_top1|T0_exact": {
+    "hit_rate_at_10": 0.995,
+    "mrr": 0.9925,
+    "mttc": 2.5,
+    "recommended_technical_score": 0.96525
+  },
+  "bert_top1|T1_surface": {
+    "hit_rate_at_10": 0.825,
+    "mrr": 0.82,
+    "mttc": 4.21,
+    "recommended_technical_score": 0.7943
+  },
+  "bert_top1|T5_realistic": {
+    "hit_rate_at_10": 0.775,
+    "mrr": 0.771667,
+    "mttc": 4.525,
+    "recommended_technical_score": 0.7485001
+  },
+  "bert_top2|T0_exact": {
+    "hit_rate_at_10": 0.995,
+    "mrr": 0.9925,
+    "mttc": 2.5,
+    "recommended_technical_score": 0.96525
+  },
+  "bert_top2|T1_surface": {
+    "hit_rate_at_10": 0.8,
+    "mrr": 0.790417,
+    "mttc": 4.845,
+    "recommended_technical_score": 0.7602251
+  },
+  "bert_top2|T5_realistic": {
+    "hit_rate_at_10": 0.73,
+    "mrr": 0.725,
+    "mttc": 5.29,
+    "recommended_technical_score": 0.6967
+  }
+}

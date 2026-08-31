@@ -1,0 +1,70 @@
+{
+  "distinct_constraints_mean": 4.0,
+  "hidden_chars_mean": 143.265,
+  "probe_strategies": {
+    "always 'other'": {
+      "mean_turns_to_full_disclosure": 2.05,
+      "pct_fully_disclosed_by_turn_3": 1.0,
+      "frac_known_after_1_probe": 0.475,
+      "frac_known_after_2_probes": 0.975,
+      "frac_known_after_3_probes": 1.0
+    },
+    "always 'feature'": {
+      "mean_turns_to_full_disclosure": 10.24,
+      "pct_fully_disclosed_by_turn_3": 0.085,
+      "frac_known_after_1_probe": 0.41375,
+      "frac_known_after_2_probes": 0.49875,
+      "frac_known_after_3_probes": 0.505
+    },
+    "always 'material'": {
+      "mean_turns_to_full_disclosure": 10.96,
+      "pct_fully_disclosed_by_turn_3": 0.005,
+      "frac_known_after_1_probe": 0.33875,
+      "frac_known_after_2_probes": 0.37375,
+      "frac_known_after_3_probes": 0.3775
+    },
+    "cycle feature/material/color": {
+      "mean_turns_to_full_disclosure": 4.125,
+      "pct_fully_disclosed_by_turn_3": 0.58,
+      "frac_known_after_1_probe": 0.41375,
+      "frac_known_after_2_probes": 0.77,
+      "frac_known_after_3_probes": 0.84375
+    },
+    "cycle ALL 10 enum values": {
+      "mean_turns_to_full_disclosure": 6.395,
+      "pct_fully_disclosed_by_turn_3": 0.0,
+      "frac_known_after_1_probe": 0.0,
+      "frac_known_after_2_probes": 0.0,
+      "frac_known_after_3_probes": 0.0
+    },
+    "always 'category' (dead)": {
+      "mean_turns_to_full_disclosure": 11.0,
+      "pct_fully_disclosed_by_turn_3": 0.0,
+      "frac_known_after_1_probe": 0.0,
+      "frac_known_after_2_probes": 0.0,
+      "frac_known_after_3_probes": 0.0
+    },
+    "always 'brand' (dead)": {
+      "mean_turns_to_full_disclosure": 11.0,
+      "pct_fully_disclosed_by_turn_3": 0.0,
+      "frac_known_after_1_probe": 0.0,
+      "frac_known_after_2_probes": 0.0,
+      "frac_known_after_3_probes": 0.0
+    },
+    "always null (no ask)": {
+      "mean_turns_to_full_disclosure": 11.0,
+      "pct_fully_disclosed_by_turn_3": 0.0,
+      "frac_known_after_1_probe": 0.0,
+      "frac_known_after_2_probes": 0.0,
+      "frac_known_after_3_probes": 0.0
+    }
+  },
+  "constraint_kind_distribution": {
+    "feature": 404,
+    "material": 302,
+    "style": 19,
+    "use_case": 4,
+    "color": 60,
+    "size": 11
+  }
+}

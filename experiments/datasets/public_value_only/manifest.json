@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "truth_status": "public-target value-only semantic perturbation; not private evaluation data",
+  "invariants": [
+    "same 200 released targets",
+    "same user profiles",
+    "same scenario labels",
+    "same evaluator templates and turn seed",
+    "same V1 prior and ranking"
+  ],
+  "canonical_replay": {
+    "path": "official200_canonical_replay.jsonl",
+    "sha256": "2f3ce14f85b9287f114177d24eeea6875f69c8cdd769b358d4c9bed5f0eb970f"
+  },
+  "attribute_paraphrase_development": {
+    "path": "official200_attribute_paraphrase_dev.jsonl",
+    "sha256": "270808529eb0e35989d87d8fdaeb0c8082da36246b1654395551ab1a8dba6ad0",
+    "rewritten_atoms": 551,
+    "sessions_with_rewrite": 192,
+    "rules": {
+      "adjustable": 7,
+      "black": 19,
+      "blue": 2,
+      "breathable": 1,
+      "brown": 2,
+      "buckle": 4,
+      "button": 12,
+      "canvas": 2,
+      "cotton": 104,
+      "elastic": 9,
+      "gray": 4,
+      "green": 3,
+      "hand_wash": 22,
+      "imported": 99,
+      "leather": 52,
+      "lightweight": 12,
+      "nylon": 18,
+      "pink": 3,
+      "polyester": 81,
+      "pull_on": 27,
+      "red": 5,
+      "rubber": 34,
+      "water_resistant": 3,
+      "waterproof": 3,
+      "white": 4,
+      "wool": 3,
+      "zipper": 16
+    }
+  },
+  "canonical_materialisation": {
+    "rewritten_atoms": 0,
+    "sessions_with_rewrite": 0,
+    "rules": {}
+  }
+}

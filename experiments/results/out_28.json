@@ -1,0 +1,209 @@
+{
+  "misses": [
+    {
+      "sample_id": "public_0020",
+      "scenario": "buying",
+      "target": "B08P4SSFX4",
+      "gate": 0,
+      "best_rank": 229,
+      "turns": [
+        {
+          "turn": 1,
+          "msg": "I'm looking for Novelty Women. A key requirement is: cotton.",
+          "in_pool": true,
+          "pool_size": 400,
+          "rank": 386,
+          "n_evidence": 2
+        },
+        {
+          "turn": 2,
+          "msg": "For that, what matters is: Imported.",
+          "in_pool": true,
+          "pool_size": 400,
+          "rank": 319,
+          "n_evidence": 3
+        },
+        {
+          "turn": 3,
+          "msg": "For that, what matters is: Solid colors: 100% Cotton; Heather Grey: 90% Cotton, 10% Polyester; All Other Heathers: 50% Cotton, 50% Polyester.",
+          "in_pool": true,
+          "pool_size": 400,
+          "rank": 253,
+          "n_evidence": 6
+        },
+        {
+          "turn": 4,
+          "msg": "For that, what matters is: color: grey.",
+          "in_pool": true,
+          "pool_size": 409,
+          "rank": 229,
+          "n_evidence": 7
+        },
+        {
+          "turn": 5,
+          "msg": "I don't have an additional preference for color.",
+          "in_pool": true,
+          "pool_size": 409,
+          "rank": 229,
+          "n_evidence": 7
+        },
+        {
+          "turn": 6,
+          "msg": "I don't have an additional preference for style.",
+          "in_pool": true,
+          "pool_size": 409,
+          "rank": 229,
+          "n_evidence": 7
+        },
+        {
+          "turn": 7,
+          "msg": "I don't have an additional preference for size.",
+          "in_pool": true,
+          "pool_size": 409,
+          "rank": 229,
+          "n_evidence": 7
+        },
+        {
+          "turn": 8,
+          "msg": "I don't have an additional preference for use_case.",
+          "in_pool": true,
+          "pool_size": 409,
+          "rank": 229,
+          "n_evidence": 7
+        },
+        {
+          "turn": 9,
+          "msg": "I don't have an additional preference for other.",
+          "in_pool": true,
+          "pool_size": 409,
+          "rank": 229,
+          "n_evidence": 7
+        },
+        {
+          "turn": 10,
+          "msg": "I don't have an additional preference for other.",
+          "in_pool": true,
+          "pool_size": 409,
+          "rank": 229,
+          "n_evidence": 7
+        }
+      ],
+      "uncovered": [
+        [
+          "color grey",
+          52,
+          "con"
+        ]
+      ]
+    },
+    {
+      "sample_id": "public_0037",
+      "scenario": "browsing",
+      "target": "B08KKBBMMD",
+      "gate": 0,
+      "best_rank": null,
+      "turns": [
+        {
+          "turn": 1,
+          "msg": "I'm looking for Boys Pants, but I'm still exploring.",
+          "in_pool": false,
+          "pool_size": 10,
+          "rank": null,
+          "n_evidence": 1
+        },
+        {
+          "turn": 2,
+          "msg": "For that, what matters is: Imported; Pull On closure.",
+          "in_pool": false,
+          "pool_size": 400,
+          "rank": null,
+          "n_evidence": 3
+        },
+        {
+          "turn": 3,
+          "msg": "For that, what matters is: cotton.",
+          "in_pool": false,
+          "pool_size": 401,
+          "rank": null,
+          "n_evidence": 4
+        },
+        {
+          "turn": 4,
+          "msg": "For that, what matters is: Machine Wash.",
+          "in_pool": false,
+          "pool_size": 401,
+          "rank": null,
+          "n_evidence": 5
+        },
+        {
+          "turn": 5,
+          "msg": "I don't have an additional preference for color.",
+          "in_pool": false,
+          "pool_size": 401,
+          "rank": null,
+          "n_evidence": 5
+        },
+        {
+          "turn": 6,
+          "msg": "I don't have an additional preference for style.",
+          "in_pool": false,
+          "pool_size": 401,
+          "rank": null,
+          "n_evidence": 5
+        },
+        {
+          "turn": 7,
+          "msg": "I don't have an additional preference for size.",
+          "in_pool": false,
+          "pool_size": 401,
+          "rank": null,
+          "n_evidence": 5
+        },
+        {
+          "turn": 8,
+          "msg": "I don't have an additional preference for use_case.",
+          "in_pool": false,
+          "pool_size": 401,
+          "rank": null,
+          "n_evidence": 5
+        },
+        {
+          "turn": 9,
+          "msg": "I don't have an additional preference for other.",
+          "in_pool": false,
+          "pool_size": 401,
+          "rank": null,
+          "n_evidence": 5
+        },
+        {
+          "turn": 10,
+          "msg": "I don't have an additional preference for other.",
+          "in_pool": false,
+          "pool_size": 401,
+          "rank": null,
+          "n_evidence": 5
+        }
+      ],
+      "uncovered": [
+        [
+          "boys pants",
+          10,
+          "cat"
+        ]
+      ]
+    }
+  ],
+  "shipped": {
+    "hit_rate_at_10": 0.99,
+    "mrr": 0.99,
+    "mttc": 2.435,
+    "recommended_technical_score": 0.9633
+  },
+  "full10": {
+    "hit_rate_at_10": 0.99,
+    "mrr": 0.776062,
+    "mttc": 1.865,
+    "recommended_technical_score": 0.910519
+  },
+  "width1_caused": []
+}

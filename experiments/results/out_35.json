@@ -1,0 +1,74 @@
+{
+  "shipped (guard on) | T0 identity (control)": {
+    "boundary": 1.0,
+    "browsing": 1.0,
+    "buying": 0.9875,
+    "intent_override": 1.0
+  },
+  "shipped (guard on) | T1 scaffold reworded": {
+    "boundary": 0.9,
+    "browsing": 0.8375,
+    "buying": 0.825,
+    "intent_override": 0.8666666666666667
+  },
+  "shipped (guard on) | T2 scaffold stripped": {
+    "boundary": 0.9,
+    "browsing": 0.875,
+    "buying": 0.8875,
+    "intent_override": 0.8666666666666667
+  },
+  "shipped (guard on) | T5 realistic (T1+T3)": {
+    "boundary": 0.9,
+    "browsing": 0.7875,
+    "buying": 0.825,
+    "intent_override": 0.8666666666666667
+  },
+  "guard DEFEATED | T0 identity (control)": {
+    "boundary": 1.0,
+    "browsing": 1.0,
+    "buying": 0.9875,
+    "intent_override": 1.0
+  },
+  "guard DEFEATED | T1 scaffold reworded": {
+    "boundary": 0.9,
+    "browsing": 0.8375,
+    "buying": 0.825,
+    "intent_override": 0.8666666666666667
+  },
+  "guard DEFEATED | T2 scaffold stripped": {
+    "boundary": 0.9,
+    "browsing": 0.875,
+    "buying": 0.8875,
+    "intent_override": 0.8666666666666667
+  },
+  "guard DEFEATED | T5 realistic (T1+T3)": {
+    "boundary": 0.9,
+    "browsing": 0.7875,
+    "buying": 0.825,
+    "intent_override": 0.8666666666666667
+  },
+  "no rejection feedback | T0 identity (control)": {
+    "boundary": 1.0,
+    "browsing": 1.0,
+    "buying": 0.9875,
+    "intent_override": 1.0
+  },
+  "no rejection feedback | T1 scaffold reworded": {
+    "boundary": 0.9,
+    "browsing": 0.8375,
+    "buying": 0.825,
+    "intent_override": 0.8666666666666667
+  },
+  "no rejection feedback | T2 scaffold stripped": {
+    "boundary": 0.9,
+    "browsing": 0.875,
+    "buying": 0.8875,
+    "intent_override": 0.8666666666666667
+  },
+  "no rejection feedback | T5 realistic (T1+T3)": {
+    "boundary": 0.9,
+    "browsing": 0.7875,
+    "buying": 0.825,
+    "intent_override": 0.8666666666666667
+  }
+}

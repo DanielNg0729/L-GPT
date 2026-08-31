@@ -1,0 +1,475 @@
+{
+  "split": "eval only",
+  "confusion": {
+    "buying_opening": {
+      "buying_opening": 1040,
+      "override_opening": 398,
+      "plain_opening": 162
+    },
+    "constraint_update": {
+      "constraint_update": 1600
+    },
+    "no_evidence": {
+      "no_evidence": 1600
+    },
+    "override_opening": {
+      "override_opening": 1600
+    },
+    "override_update": {
+      "override_update": 1600
+    },
+    "plain_opening": {
+      "plain_opening": 1600
+    }
+  },
+  "template_summary": {
+    "At first I sought {category} after initially favoring {b}.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "override_opening": 200
+      },
+      "examples": []
+    },
+    "At first I sought {category} and had {b} as a prior preference.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "override_opening": 200
+      },
+      "examples": []
+    },
+    "At first I sought {category} where {b} was my starting point.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "override_opening": 200
+      },
+      "examples": []
+    },
+    "At first I sought {category} with an earlier inclination toward {b}.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "override_opening": 200
+      },
+      "examples": []
+    },
+    "I am looking around at {category} at this stage.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "plain_opening": 200
+      },
+      "examples": []
+    },
+    "I am looking around at {category} to review the available options.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "plain_opening": 200
+      },
+      "examples": []
+    },
+    "I am looking around at {category} while I compare possibilities.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "plain_opening": 200
+      },
+      "examples": []
+    },
+    "I am looking around at {category} without deciding yet.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "plain_opening": 200
+      },
+      "examples": []
+    },
+    "I leave it up to you concerning {attribute}.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "no_evidence": 200
+      },
+      "examples": []
+    },
+    "I leave it up to you in relation to {attribute}.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "no_evidence": 200
+      },
+      "examples": []
+    },
+    "I leave it up to you when it comes to {attribute}.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "no_evidence": 200
+      },
+      "examples": []
+    },
+    "I leave it up to you with respect to {attribute}.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "no_evidence": 200
+      },
+      "examples": []
+    },
+    "Instead of my earlier preference, select {a} as my revised priority.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "override_update": 200
+      },
+      "examples": []
+    },
+    "Instead of my earlier preference, select {a} as the replacement requirement.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "override_update": 200
+      },
+      "examples": []
+    },
+    "Instead of my earlier preference, select {a} from this point onward.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "override_update": 200
+      },
+      "examples": []
+    },
+    "Instead of my earlier preference, select {a} rather than the previous choice.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "override_update": 200
+      },
+      "examples": []
+    },
+    "Let us explore {category} at this stage.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "plain_opening": 200
+      },
+      "examples": []
+    },
+    "Let us explore {category} to review the available options.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "plain_opening": 200
+      },
+      "examples": []
+    },
+    "Let us explore {category} while I compare possibilities.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "plain_opening": 200
+      },
+      "examples": []
+    },
+    "Let us explore {category} without deciding yet.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "plain_opening": 200
+      },
+      "examples": []
+    },
+    "Make sure it combines a need for {a} as well as {b}.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "constraint_update": 200
+      },
+      "examples": []
+    },
+    "Make sure it combines both {a} and {b} as requirements.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "constraint_update": 200
+      },
+      "examples": []
+    },
+    "Make sure it combines {a} alongside {b}.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "constraint_update": 200
+      },
+      "examples": []
+    },
+    "Make sure it combines {a} combined with {b}.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "constraint_update": 200
+      },
+      "examples": []
+    },
+    "My earlier preference no longer applies; choose {a} as my revised priority.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "override_update": 200
+      },
+      "examples": []
+    },
+    "My earlier preference no longer applies; choose {a} as the replacement requirement.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "override_update": 200
+      },
+      "examples": []
+    },
+    "My earlier preference no longer applies; choose {a} from this point onward.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "override_update": 200
+      },
+      "examples": []
+    },
+    "My earlier preference no longer applies; choose {a} rather than the previous choice.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "override_update": 200
+      },
+      "examples": []
+    },
+    "My goal is {category} built with {a}.": {
+      "accuracy": 0.0,
+      "predictions": {
+        "override_opening": 200
+      },
+      "examples": [
+        {
+          "message": "My goal is Shirts Casual Button-Down Shirts built with Cotton.",
+          "predicted": "override_opening",
+          "confidence": 0.837915
+        },
+        {
+          "message": "My goal is Sweaters Cardigans built with polyester.",
+          "predicted": "override_opening",
+          "confidence": 0.763236
+        },
+        {
+          "message": "My goal is Tops & Tees Tanks & Camis built with Cotton.",
+          "predicted": "override_opening",
+          "confidence": 0.852506
+        },
+        {
+          "message": "My goal is Shoes Slippers built with Rubber.",
+          "predicted": "override_opening",
+          "confidence": 0.677032
+        }
+      ]
+    },
+    "My goal is {category} prioritizing {a}.": {
+      "accuracy": 0.0,
+      "predictions": {
+        "override_opening": 168,
+        "plain_opening": 32
+      },
+      "examples": [
+        {
+          "message": "My goal is Shirts Casual Button-Down Shirts prioritizing Cotton.",
+          "predicted": "override_opening",
+          "confidence": 0.675265
+        },
+        {
+          "message": "My goal is Sweaters Cardigans prioritizing polyester.",
+          "predicted": "override_opening",
+          "confidence": 0.579829
+        },
+        {
+          "message": "My goal is Tops & Tees Tanks & Camis prioritizing Cotton.",
+          "predicted": "override_opening",
+          "confidence": 0.717641
+        },
+        {
+          "message": "My goal is Shoes Slippers prioritizing Rubber.",
+          "predicted": "override_opening",
+          "confidence": 0.4904
+        }
+      ]
+    },
+    "My goal is {category} that must include {a}.": {
+      "accuracy": 0.975,
+      "predictions": {
+        "buying_opening": 195,
+        "override_opening": 2,
+        "plain_opening": 3
+      },
+      "examples": [
+        {
+          "message": "My goal is Running Road Running that must include leather.",
+          "predicted": "override_opening",
+          "confidence": 0.375194
+        },
+        {
+          "message": "My goal is Jackets & Vests Wool & Pea Coats that must include Wool.",
+          "predicted": "plain_opening",
+          "confidence": 0.435415
+        },
+        {
+          "message": "My goal is Tees & Blouses Blouses & Button-Down Shirts that must include White.",
+          "predicted": "plain_opening",
+          "confidence": 0.42779
+        },
+        {
+          "message": "My goal is Dresses Casual that must include Pull On closure.",
+          "predicted": "override_opening",
+          "confidence": 0.467462
+        }
+      ]
+    },
+    "My goal is {category} whose defining requirement is {a}.": {
+      "accuracy": 0.32,
+      "predictions": {
+        "plain_opening": 126,
+        "buying_opening": 64,
+        "override_opening": 10
+      },
+      "examples": [
+        {
+          "message": "My goal is Shirts Casual Button-Down Shirts whose defining requirement is Cotton.",
+          "predicted": "plain_opening",
+          "confidence": 0.384995
+        },
+        {
+          "message": "My goal is Sweaters Cardigans whose defining requirement is polyester.",
+          "predicted": "plain_opening",
+          "confidence": 0.410723
+        },
+        {
+          "message": "My goal is Shoes Slippers whose defining requirement is Rubber.",
+          "predicted": "plain_opening",
+          "confidence": 0.501445
+        },
+        {
+          "message": "My goal is Work & Utility Industrial & Construction Boots whose defining requirement is Rubber.",
+          "predicted": "plain_opening",
+          "confidence": 0.435368
+        }
+      ]
+    },
+    "My original thought was {category} after initially favoring {b}.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "override_opening": 200
+      },
+      "examples": []
+    },
+    "My original thought was {category} and had {b} as a prior preference.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "override_opening": 200
+      },
+      "examples": []
+    },
+    "My original thought was {category} where {b} was my starting point.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "override_opening": 200
+      },
+      "examples": []
+    },
+    "My original thought was {category} with an earlier inclination toward {b}.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "override_opening": 200
+      },
+      "examples": []
+    },
+    "Nothing more matters concerning {attribute}.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "no_evidence": 200
+      },
+      "examples": []
+    },
+    "Nothing more matters in relation to {attribute}.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "no_evidence": 200
+      },
+      "examples": []
+    },
+    "Nothing more matters when it comes to {attribute}.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "no_evidence": 200
+      },
+      "examples": []
+    },
+    "Nothing more matters with respect to {attribute}.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "no_evidence": 200
+      },
+      "examples": []
+    },
+    "Seeking {category} built with {a}.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "buying_opening": 200
+      },
+      "examples": []
+    },
+    "Seeking {category} prioritizing {a}.": {
+      "accuracy": 0.905,
+      "predictions": {
+        "buying_opening": 181,
+        "override_opening": 18,
+        "plain_opening": 1
+      },
+      "examples": [
+        {
+          "message": "Seeking Work & Utility Industrial & Construction Boots prioritizing Rubber.",
+          "predicted": "override_opening",
+          "confidence": 0.656721
+        },
+        {
+          "message": "Seeking Running Road Running prioritizing leather.",
+          "predicted": "override_opening",
+          "confidence": 0.46043
+        },
+        {
+          "message": "Seeking Athletic Walking prioritizing Rubber.",
+          "predicted": "override_opening",
+          "confidence": 0.515487
+        },
+        {
+          "message": "Seeking Outdoor & Work Snow & Cold Weather prioritizing Rubber.",
+          "predicted": "override_opening",
+          "confidence": 0.601791
+        }
+      ]
+    },
+    "Seeking {category} that must include {a}.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "buying_opening": 200
+      },
+      "examples": []
+    },
+    "Seeking {category} whose defining requirement is {a}.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "buying_opening": 200
+      },
+      "examples": []
+    },
+    "The important details are a need for {a} as well as {b}.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "constraint_update": 200
+      },
+      "examples": []
+    },
+    "The important details are both {a} and {b} as requirements.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "constraint_update": 200
+      },
+      "examples": []
+    },
+    "The important details are {a} alongside {b}.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "constraint_update": 200
+      },
+      "examples": []
+    },
+    "The important details are {a} combined with {b}.": {
+      "accuracy": 1.0,
+      "predictions": {
+        "constraint_update": 200
+      },
+      "examples": []
+    }
+  }
+}

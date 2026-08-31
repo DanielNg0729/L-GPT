@@ -1,0 +1,9 @@
+{
+  "input": "catalogue_direct_equivalents.jsonl",
+  "pairs": 115,
+  "clusters": 50,
+  "linked_phrases": 117,
+  "rejected": 0,
+  "rejected_examples": [],
+  "status": "catalogue_grounded_proposals_require_verification_before_runtime_use"
+}

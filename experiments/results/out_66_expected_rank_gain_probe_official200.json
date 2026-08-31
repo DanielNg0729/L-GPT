@@ -1,0 +1,28 @@
+{
+  "hypothesis_cap": 5,
+  "hypothesis_prior": "p(rank=i) proportional to 1/i for i in current top five",
+  "objective": "expected reciprocal-rank gain after simulated visible-catalogue reply",
+  "fixed_v1": {
+    "hit_rate_at_10": 0.995,
+    "mrr": 0.995,
+    "mttc": 2.32,
+    "recommended_technical_score": 0.9696
+  },
+  "expected_rank_gain": {
+    "hit_rate_at_10": 0.995,
+    "mrr": 0.995,
+    "mttc": 2.35,
+    "recommended_technical_score": 0.969
+  },
+  "delta_score": -0.0006000000000000449,
+  "question_counts": {
+    "material": 170,
+    "other": 66,
+    "feature": 150,
+    "color": 44,
+    "style": 16,
+    "size": 9,
+    "use_case": 5
+  },
+  "mean_selected_expected_gain": 0.04379694276949117
+}

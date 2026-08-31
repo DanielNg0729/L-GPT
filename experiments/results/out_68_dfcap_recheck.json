@@ -1,0 +1,45 @@
+{
+  "shipped": 2715,
+  "results": {
+    "1500": {
+      "public200": 0.9701,
+      "org-proxy": 0.952813,
+      "review800": 0.945175,
+      "uniform": 0.883875,
+      "inverse": 0.866262,
+      "attr-para": 0.7812
+    },
+    "2715": {
+      "public200": 0.9701,
+      "org-proxy": 0.952788,
+      "review800": 0.945125,
+      "uniform": 0.882763,
+      "inverse": 0.866262,
+      "attr-para": 0.777
+    },
+    "6000": {
+      "public200": 0.9701,
+      "org-proxy": 0.952537,
+      "review800": 0.9451,
+      "uniform": 0.882763,
+      "inverse": 0.866262,
+      "attr-para": 0.7729
+    },
+    "12000": {
+      "public200": 0.9701,
+      "org-proxy": 0.9526,
+      "review800": 0.945075,
+      "uniform": 0.882763,
+      "inverse": 0.865062,
+      "attr-para": 0.7728
+    },
+    "25000": {
+      "public200": 0.9701,
+      "org-proxy": 0.9526,
+      "review800": 0.945075,
+      "uniform": 0.882738,
+      "inverse": 0.865037,
+      "attr-para": 0.7728
+    }
+  }
+}

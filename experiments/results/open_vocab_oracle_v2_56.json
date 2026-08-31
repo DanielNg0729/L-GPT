@@ -1,0 +1,17 @@
+{
+  "experiment": "V2.56 open-vocabulary attribute ceiling",
+  "mappings": 233,
+  "ceiling": 0.945125,
+  "floor": 0.847103,
+  "gap": 0.098022,
+  "oracle_resolve": 0.940275,
+  "oracle_drop": 0.847103,
+  "oracle_family": 0.900585,
+  "llm_measured": 0.016866,
+  "fraction_of_gap": {
+    "oracle": 0.9505,
+    "drop": 0.0,
+    "family": 0.5456,
+    "llm": 0.1721
+  }
+}

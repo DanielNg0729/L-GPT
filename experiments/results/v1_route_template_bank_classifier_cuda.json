@@ -1,0 +1,22 @@
+{
+  "experiment": "V2.15 template-disjoint V1-action route classifier",
+  "seed": 20260829,
+  "epochs": 6,
+  "fit_rows": 13105,
+  "development_rows": 3600,
+  "development_templates": 18,
+  "test_rows": 9600,
+  "selected_epoch": 1,
+  "development_accuracy": 1.0,
+  "test_accuracy": 0.859896,
+  "per_action_test_accuracy": {
+    "buying_opening": 0.43,
+    "constraint_update": 0.7325,
+    "no_evidence": 1.0,
+    "override_opening": 1.0,
+    "override_update": 1.0,
+    "plain_opening": 0.996875
+  },
+  "model_artifact": "D:\\Coding\\Models\\TiktokTechJam\\.v2_model_cache\\v1_route_template_bank_classifier_cuda",
+  "selection": "best accuracy on template-disjoint internal development families; independently authored test opened once"
+}

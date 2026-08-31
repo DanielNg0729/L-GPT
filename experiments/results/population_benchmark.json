@@ -1,0 +1,42 @@
+{
+  "truth_status": "participant-safe proxy; not organizer private data",
+  "catalog": "D:\\Coding\\Models\\TiktokTechJam\\data\\catalog.jsonl",
+  "sets": {
+    "organizer_proxy_800": {
+      "sample_count": 800,
+      "hit_rate_at_10": 0.98625,
+      "mrr": 0.983542,
+      "mttc": 2.70125,
+      "efficiency": 0.829875,
+      "technical_score": 0.954163,
+      "scenario_metrics": {
+        "boundary": {
+          "sample_count": 40,
+          "hit_rate_at_10": 1.0,
+          "mrr": 1.0,
+          "mttc": 3.25
+        },
+        "browsing": {
+          "sample_count": 320,
+          "hit_rate_at_10": 0.984375,
+          "mrr": 0.984375,
+          "mttc": 2.625
+        },
+        "buying": {
+          "sample_count": 320,
+          "hit_rate_at_10": 0.984375,
+          "mrr": 0.979688,
+          "mttc": 2.275
+        },
+        "intent_override": {
+          "sample_count": 120,
+          "hit_rate_at_10": 0.991667,
+          "mrr": 0.986111,
+          "mttc": 3.858333
+        }
+      },
+      "usage": {},
+      "wall_seconds": 88.64272022247314
+    }
+  }
+}

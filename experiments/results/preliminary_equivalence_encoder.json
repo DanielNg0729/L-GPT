@@ -1,0 +1,11 @@
+{
+  "experiment": "V2.05 frozen pretrained equivalence verifier baseline",
+  "model": ".v2_model_cache/attribute_encoder_preliminary",
+  "rows": 134,
+  "positives": 40,
+  "negatives": 94,
+  "auroc": 0.781915,
+  "mean_positive_similarity": 0.589485,
+  "mean_negative_similarity": 0.320567,
+  "decision_rule": "A trained verifier must beat this held-out canonical split and be evaluated separately from retrieval recall."
+}

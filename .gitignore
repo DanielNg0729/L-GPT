@@ -2,8 +2,27 @@ __pycache__/
 *.py[cod]
 .DS_Store
 .env
+# Legacy local experiment caches from the pre-refactor workspace.
+notes/
+submission/.llm_cache.json
+submission/.llm_extract_cache.json
+experiments/studies/.llm_extraction_cache.json
+experiments/studies/.ltr_feats.npz
+experiments/studies/.retr_pairs.pkl
+experiments/studies/.tie_groups.pkl
+experiments/studies/.tie_groups_v2.pkl
+experiments/studies/.mlm_adapted/
+experiments/studies/tie_ce_model/
+experiments/studies/.ml_deps/
+experiments/studies/*.db
+experiments/results/out_54.json
 results.json
+robustness/results.json
+robustness/stress_results.json
+.v2_model_cache/
+.venv-v2/
 data/catalog.jsonl
+data/catalog.jsonl.gz
 data/releases/
 # Organizer-only code, private evaluation data, manifests, and build reports.
 organizer/
@@ -16,3 +35,97 @@ docs/participant_release_checklist.md
 tests/test_5core_builder.py
 tests/test_organizer_pipeline.py
 *.log
+# LLM resolver cache. Deliberately NOT tracked: committing it would turn a runtime
+# convenience into a checked-in lookup table over the evaluation suite's paraphrases,
+# which is precisely the self-scoring this repo's audits exist to prevent. Every run
+# must be free to re-derive its answers.
+robustness/v2/.llm_resolver_cache.json
+# Shipped resolver's runtime cache. Same reason as the research one: a committed cache of
+# resolved paraphrases is a lookup table over evaluation vocabulary, and it would also
+# ship answers the agent is supposed to derive.
+submission/.llm_resolve_cache.json
+robustness/v2/open_vocabulary/.pipeline_resolve_cache.json
+robustness/v2/open_vocabulary/.resolver_cache_open_vocab.json
+
+# MODEL CHECKPOINTS ARE NOT VERSIONED HERE. They live on the Hugging Face Hub:
+#   KhiemGOM/techjam-route-classifier      dialogue-act router (Node 1)
+#   KhiemGOM/techjam-scaffolding-tagger    content/scaffolding tagger
+# Both resolve automatically at load time; set V2_ROUTE_MODEL_DIR or BERT_TAGGER_DIR to a
+# local directory to override. Git LFS was tried and rejected: a history rewrite left a
+# 134-byte pointer in the working tree instead of the weights, and the agent kept scoring
+# its usual number because these layers are gated off clean traffic -- a dead model
+# reported as a healthy run. A clone without `git lfs pull`, or past a bandwidth quota,
+# reproduces exactly that. Hub resolution fails loudly instead -- and the code now
+# actually does that: `_resolve_source()` in route_node.py and bert_extract.py falls
+# back to the Hub id, and neither tests for a local directory before loading. An
+# earlier version claimed this in THIS COMMENT while still checking `is_dir()` and
+# disabling with "model directory missing", so both layers switched off silently on
+# every clone but the machine that trained them.
+submission/models/
+
+# Training outputs and provider-response caches. Neither belongs in the repository:
+# checkpoints are published to the Hugging Face Hub (see docs/MODEL_ARTIFACT_POLICY.md),
+# and the prompt caches are per-experiment scratch. Both were UNIGNORED until an audit
+# caught them -- a `git add -A` would have committed model weights back in, which is the
+# exact problem the Hub migration existed to solve.
+checkpoints/
+robustness/v2/prompt_arm_caches/
+
+# Branch-review scratch directory, created when reviewing a teammate branch locally.
+.review-*/
+
+# Provider-response caches under the new datasets path (the pre-move entry is stale).
+experiments/datasets/prompt_arm_caches/
+experiments/datasets/**/.*_cache*.json
+
+# Demo UI. Not part of the submission; the scored path never imports it.
+.web/
+
+# ---------------------------------------------------------------------------
+# Merged from main. Needed now that `provided/` is in this tree, and the secret
+# rules are stricter than ours were -- keys, pems and secrets.json were not
+# covered on this branch at all.
+# ---------------------------------------------------------------------------
+# --- BTC data: quá lớn cho git, lấy lại bằng `cd provided && ./fetch.sh` ---
+provided/release/*.gz
+provided/release/*.zip
+provided/techjam-conversational-search/data/catalog.jsonl
+
+# --- secrets: TUYỆT ĐỐI không commit (vi phạm rule cuộc thi) ---
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets.json
+
+# --- python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+*.egg-info/
+
+# --- output của agent / evaluator ---
+results.json
+runs/
+*.log
+
+# --- artifact nặng tự sinh ---
+*.faiss
+*.npy
+*.index
+cache/
+.embeddings/
+
+# --- macOS / editor ---
+.DS_Store
+.vscode/
+.idea/
+
+# --- tài liệu gốc có bản quyền của BTC (Early Bird Access) ---
+# Deliverable yêu cầu repo PUBLIC -> không đưa vào history để khỏi phải rewrite sau.
+# Bản tóm tắt tự viết (*.md) thì vẫn commit bình thường.
+TikTok_TechJam_2026_Tracks_and_Problem_Statements.pdf
+TikTok_TechJam_2026_Tracks_and_Problem_Statements.html
