@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "source": "D:\\Coding\\Models\\TiktokTechJam\\robustness\\v2\\sets\\semantic_attribute_development_200.jsonl",
+  "value_change": "none",
+  "splits": [
+    {
+      "split": "development",
+      "path": "route_shift_development.jsonl",
+      "rows": 1200,
+      "templates": {
+        "opening": "I need {category} with {a}.",
+        "constraint_reply": "Please prioritize {a} and {b}.",
+        "no_preference": "No other preference for {attribute}.",
+        "boundary": "Choose freely on {attribute}; I have no preference.",
+        "nudge": "These do not suit me. Ask one product property.",
+        "override": "Please replace my earlier requirement: {a}."
+      }
+    },
+    {
+      "split": "holdout",
+      "path": "route_shift_holdout.jsonl",
+      "rows": 1200,
+      "templates": {
+        "opening": "Seeking {category}; it must have {a}.",
+        "constraint_reply": "The important details are {a}; {b}.",
+        "no_preference": "Nothing more matters for {attribute}.",
+        "boundary": "I do not care about {attribute}; use your judgment.",
+        "nudge": "Not right yet. Ask about one attribute at a time.",
+        "override": "Actually, change the previous choice. I now want {a}."
+      }
+    }
+  ]
+}

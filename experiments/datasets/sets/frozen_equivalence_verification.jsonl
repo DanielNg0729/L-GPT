@@ -1,0 +1,134 @@
+{"canonical": "modern", "candidate": "contemporary", "label": 1, "source": "verified_synonym"}
+{"canonical": "large", "candidate": "big", "label": 1, "source": "verified_synonym"}
+{"canonical": "textile", "candidate": "fabric", "label": 1, "source": "verified_synonym"}
+{"canonical": "zipper", "candidate": "zip", "label": 1, "source": "verified_synonym"}
+{"canonical": "compact", "candidate": "mini", "label": 1, "source": "verified_synonym"}
+{"canonical": "synthetic leather", "candidate": "pleather", "label": 1, "source": "verified_synonym"}
+{"canonical": "microfiber", "candidate": "microfibre", "label": 1, "source": "verified_synonym"}
+{"canonical": "spandex", "candidate": "elastane", "label": 1, "source": "verified_synonym"}
+{"canonical": "padded footbed", "candidate": "cushioned insole", "label": 1, "source": "verified_synonym"}
+{"canonical": "crewneck", "candidate": "round neck", "label": 1, "source": "verified_synonym"}
+{"canonical": "gray", "candidate": "grey", "label": 1, "source": "verified_synonym"}
+{"canonical": "cloth", "candidate": "fabric", "label": 1, "source": "verified_synonym"}
+{"canonical": "fashionable", "candidate": "stylish", "label": 1, "source": "verified_synonym"}
+{"canonical": "fashionable", "candidate": "trendy", "label": 1, "source": "verified_synonym"}
+{"canonical": "multi colored", "candidate": "multicolor", "label": 1, "source": "verified_synonym"}
+{"canonical": "womens mens", "candidate": "men's and women's", "label": 1, "source": "verified_synonym"}
+{"canonical": "embroidered", "candidate": "embroidery", "label": 1, "source": "verified_synonym"}
+{"canonical": "standard", "candidate": "regular", "label": 1, "source": "verified_synonym"}
+{"canonical": "standard", "candidate": "normal", "label": 1, "source": "verified_synonym"}
+{"canonical": "laptop", "candidate": "notebook computer", "label": 1, "source": "verified_synonym"}
+{"canonical": "wavy", "candidate": "undulating", "label": 1, "source": "verified_synonym"}
+{"canonical": "children", "candidate": "kids", "label": 1, "source": "verified_synonym"}
+{"canonical": "smartphone", "candidate": "mobile phone", "label": 1, "source": "verified_synonym"}
+{"canonical": "smartphone", "candidate": "cell phone", "label": 1, "source": "verified_synonym"}
+{"canonical": "super lightweight", "candidate": "ultralight", "label": 1, "source": "verified_synonym"}
+{"canonical": "super lightweight", "candidate": "featherweight", "label": 1, "source": "verified_synonym"}
+{"canonical": "wallet", "candidate": "billfold", "label": 1, "source": "verified_synonym"}
+{"canonical": "elastane", "candidate": "spandex", "label": 1, "source": "verified_synonym"}
+{"canonical": "inside zipper", "candidate": "zippered interior", "label": 1, "source": "verified_synonym"}
+{"canonical": "origin united states", "candidate": "Made in USA", "label": 1, "source": "verified_synonym"}
+{"canonical": "radically lightweight", "candidate": "ultralight", "label": 1, "source": "verified_synonym"}
+{"canonical": "radically lightweight", "candidate": "extremely light", "label": 1, "source": "verified_synonym"}
+{"canonical": "shape", "candidate": "form", "label": 1, "source": "verified_synonym"}
+{"canonical": "shape", "candidate": "silhouette", "label": 1, "source": "verified_synonym"}
+{"canonical": "wedding", "candidate": "bridal", "label": 1, "source": "verified_synonym"}
+{"canonical": "woven", "candidate": "interlaced", "label": 1, "source": "verified_synonym"}
+{"canonical": "athletic sneaker", "candidate": "sport shoe", "label": 1, "source": "verified_synonym"}
+{"canonical": "boho", "candidate": "bohemian", "label": 1, "source": "verified_synonym"}
+{"canonical": "fall winter 2013", "candidate": "AW13", "label": 1, "source": "verified_synonym"}
+{"canonical": "glossy", "candidate": "shiny", "label": 1, "source": "verified_synonym"}
+{"canonical": "modern", "candidate": "omni heat thermal reflective", "label": 0, "source": "same_family"}
+{"canonical": "modern", "candidate": "case diameter 27mm", "label": 0, "source": "unrelated"}
+{"canonical": "large", "candidate": "xx large", "label": 0, "source": "shared_head"}
+{"canonical": "large", "candidate": "as shown", "label": 0, "source": "same_family"}
+{"canonical": "large", "candidate": "1 cr123a batteries required included", "label": 0, "source": "unrelated"}
+{"canonical": "textile", "candidate": "100 fabric or textile", "label": 0, "source": "shared_head"}
+{"canonical": "textile", "candidate": "multicolor", "label": 0, "source": "same_family"}
+{"canonical": "textile", "candidate": "92 polyester 8 spandex 85 polyester 15 spandex", "label": 0, "source": "unrelated"}
+{"canonical": "zipper", "candidate": "partial length instep zipper", "label": 0, "source": "shared_head"}
+{"canonical": "zipper", "candidate": "back zip closure", "label": 0, "source": "same_family"}
+{"canonical": "zipper", "candidate": "70 viscose 30 polyester", "label": 0, "source": "unrelated"}
+{"canonical": "compact", "candidate": "rfid blocking compact", "label": 0, "source": "shared_head"}
+{"canonical": "compact", "candidate": "contoured cushioned footbed", "label": 0, "source": "same_family"}
+{"canonical": "compact", "candidate": "graphic", "label": 0, "source": "unrelated"}
+{"canonical": "synthetic leather", "candidate": "composition faux leather", "label": 0, "source": "shared_head"}
+{"canonical": "synthetic leather", "candidate": "canvas cotton leather", "label": 0, "source": "same_family"}
+{"canonical": "synthetic leather", "candidate": "n a", "label": 0, "source": "unrelated"}
+{"canonical": "microfiber", "candidate": "100 microfiber", "label": 0, "source": "shared_head"}
+{"canonical": "microfiber", "candidate": "case shape round", "label": 0, "source": "same_family"}
+{"canonical": "microfiber", "candidate": "upper made of fine quality leather", "label": 0, "source": "unrelated"}
+{"canonical": "spandex", "candidate": "fabric 80 nylon 20 spandex", "label": 0, "source": "shared_head"}
+{"canonical": "spandex", "candidate": "length about 57 inches 145 cm", "label": 0, "source": "same_family"}
+{"canonical": "spandex", "candidate": "plaid", "label": 0, "source": "unrelated"}
+{"canonical": "padded footbed", "candidate": "anti odor footbed", "label": 0, "source": "shared_head"}
+{"canonical": "padded footbed", "candidate": "spring ring chain clasp", "label": 0, "source": "same_family"}
+{"canonical": "padded footbed", "candidate": "fabric 80 chinlon 20 spandex", "label": 0, "source": "unrelated"}
+{"canonical": "crewneck", "candidate": "topstitched rib crewneck", "label": 0, "source": "shared_head"}
+{"canonical": "crewneck", "candidate": "two hand pockets", "label": 0, "source": "same_family"}
+{"canonical": "crewneck", "candidate": "scalloped hem", "label": 0, "source": "unrelated"}
+{"canonical": "gray", "candidate": "charcoal gray", "label": 0, "source": "shared_head"}
+{"canonical": "gray", "candidate": "chocolate brown", "label": 0, "source": "same_family"}
+{"canonical": "gray", "candidate": "90 leather 10 synthetic", "label": 0, "source": "unrelated"}
+{"canonical": "cloth", "candidate": "material quality uniform cloth", "label": 0, "source": "shared_head"}
+{"canonical": "cloth", "candidate": "shirred mesh glitter tutu skirt", "label": 0, "source": "same_family"}
+{"canonical": "cloth", "candidate": "common sliding sole", "label": 0, "source": "unrelated"}
+{"canonical": "fashionable", "candidate": "modest comfortable but most importantly fashionable", "label": 0, "source": "shared_head"}
+{"canonical": "fashionable", "candidate": "hooded", "label": 0, "source": "same_family"}
+{"canonical": "fashionable", "candidate": "omni tech waterproof breathable critically seam sealed", "label": 0, "source": "unrelated"}
+{"canonical": "multi colored", "candidate": "crafted in 14k gold", "label": 0, "source": "same_family"}
+{"canonical": "multi colored", "candidate": "quality materials used to make disguise products", "label": 0, "source": "unrelated"}
+{"canonical": "womens mens", "candidate": "department name mens", "label": 0, "source": "shared_head"}
+{"canonical": "womens mens", "candidate": "1 cr123a batteries required included", "label": 0, "source": "same_family"}
+{"canonical": "womens mens", "candidate": "steel shank", "label": 0, "source": "unrelated"}
+{"canonical": "embroidered", "candidate": "handmade embroidered", "label": 0, "source": "shared_head"}
+{"canonical": "embroidered", "candidate": "boot opening measures approximately 9 around", "label": 0, "source": "same_family"}
+{"canonical": "embroidered", "candidate": "medieval", "label": 0, "source": "unrelated"}
+{"canonical": "standard", "candidate": "special size type standard", "label": 0, "source": "shared_head"}
+{"canonical": "standard", "candidate": "dress is fully lined with crinoline layer", "label": 0, "source": "same_family"}
+{"canonical": "standard", "candidate": "30 length pure cotton", "label": 0, "source": "unrelated"}
+{"canonical": "laptop", "candidate": "5 pocket style", "label": 0, "source": "same_family"}
+{"canonical": "laptop", "candidate": "9 inches", "label": 0, "source": "unrelated"}
+{"canonical": "wavy", "candidate": "classic style", "label": 0, "source": "same_family"}
+{"canonical": "wavy", "candidate": "90 polyamide 10 spandex", "label": 0, "source": "unrelated"}
+{"canonical": "children", "candidate": "one size fits most children", "label": 0, "source": "shared_head"}
+{"canonical": "children", "candidate": "hook and eye", "label": 0, "source": "same_family"}
+{"canonical": "children", "candidate": "tempered steel shank", "label": 0, "source": "unrelated"}
+{"canonical": "smartphone", "candidate": "platform measures approximately 75", "label": 0, "source": "same_family"}
+{"canonical": "smartphone", "candidate": "bead beaded charm", "label": 0, "source": "unrelated"}
+{"canonical": "super lightweight", "candidate": "ultra lightweight", "label": 0, "source": "shared_head"}
+{"canonical": "super lightweight", "candidate": "machine wash and hand wash", "label": 0, "source": "same_family"}
+{"canonical": "super lightweight", "candidate": "extremely flexible comfortable lightweight", "label": 0, "source": "unrelated"}
+{"canonical": "wallet", "candidate": "wrist wallet", "label": 0, "source": "shared_head"}
+{"canonical": "wallet", "candidate": "snowboarding", "label": 0, "source": "same_family"}
+{"canonical": "wallet", "candidate": "full grain leather or suede upper", "label": 0, "source": "unrelated"}
+{"canonical": "elastane", "candidate": "94 polyester 6 elastane", "label": 0, "source": "shared_head"}
+{"canonical": "elastane", "candidate": "2 pack", "label": 0, "source": "same_family"}
+{"canonical": "elastane", "candidate": "55 wool 25 cotton 15 polyester 5 spandex", "label": 0, "source": "unrelated"}
+{"canonical": "inside zipper", "candidate": "closure back zipper", "label": 0, "source": "shared_head"}
+{"canonical": "inside zipper", "candidate": "button measures 1 25 in diameter", "label": 0, "source": "same_family"}
+{"canonical": "inside zipper", "candidate": "oval", "label": 0, "source": "unrelated"}
+{"canonical": "origin united states", "candidate": "country of origin united states", "label": 0, "source": "shared_head"}
+{"canonical": "origin united states", "candidate": "italian craftsmanship certificate of authenticity included", "label": 0, "source": "same_family"}
+{"canonical": "origin united states", "candidate": "water resistant to 30 m 100 feet", "label": 0, "source": "unrelated"}
+{"canonical": "radically lightweight", "candidate": "extremely flexible comfortable lightweight", "label": 0, "source": "shared_head"}
+{"canonical": "radically lightweight", "candidate": "lightweight mesh material allows foot to breathe", "label": 0, "source": "same_family"}
+{"canonical": "radically lightweight", "candidate": "made with highest quality craftsmanship", "label": 0, "source": "unrelated"}
+{"canonical": "shape", "candidate": "round toe shape", "label": 0, "source": "shared_head"}
+{"canonical": "shape", "candidate": "heel measures approximately 3 14 inches", "label": 0, "source": "same_family"}
+{"canonical": "shape", "candidate": "memory foam insole", "label": 0, "source": "unrelated"}
+{"canonical": "wedding", "candidate": "guest of wedding", "label": 0, "source": "shared_head"}
+{"canonical": "wedding", "candidate": "model size waist s 26 inches", "label": 0, "source": "same_family"}
+{"canonical": "wedding", "candidate": "mock neck", "label": 0, "source": "unrelated"}
+{"canonical": "woven", "candidate": "weave type woven", "label": 0, "source": "shared_head"}
+{"canonical": "woven", "candidate": "non stretch", "label": 0, "source": "same_family"}
+{"canonical": "woven", "candidate": "country origin india", "label": 0, "source": "unrelated"}
+{"canonical": "athletic sneaker", "candidate": "running training sneaker", "label": 0, "source": "shared_head"}
+{"canonical": "athletic sneaker", "candidate": "platform measures approximately 2", "label": 0, "source": "same_family"}
+{"canonical": "athletic sneaker", "candidate": "70 polyester 30 viscose", "label": 0, "source": "unrelated"}
+{"canonical": "boho", "candidate": "poly viscose", "label": 0, "source": "same_family"}
+{"canonical": "boho", "candidate": "moisture is wicked away providing all day comfort", "label": 0, "source": "unrelated"}
+{"canonical": "fall winter 2013", "candidate": "made in usa assembled in mexico honduras", "label": 0, "source": "same_family"}
+{"canonical": "fall winter 2013", "candidate": "bra sized", "label": 0, "source": "unrelated"}
+{"canonical": "glossy", "candidate": "long sleeve hooded sweatshirt", "label": 0, "source": "same_family"}
+{"canonical": "glossy", "candidate": "shaft measures approximately 13 5 from arch", "label": 0, "source": "unrelated"}
