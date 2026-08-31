@@ -27,7 +27,7 @@ sys.path.insert(0, str(ROOT / "experiments" / "log"))
 sys.path.insert(0, str(ROOT / "experiments" / "studies" / ".ml_deps"))
 
 DB = ROOT / "experiments" / "studies" / "optuna_official_v2.db"
-STORAGE = f"sqlite:///{DB.as_posix()}"
+STORAGE = f"sqlite: / {DB.as_posix()}"
 STUDY = "track4_official_v2"
 PRIMARY = ROOT / "robustness" / "optuna_v2_sets" / "primary_800.jsonl"
 

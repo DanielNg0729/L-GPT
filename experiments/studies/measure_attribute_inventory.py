@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 CATALOG = ROOT / "data" / "catalog.jsonl"
-OUT = ROOT / "experiments" / "studies" / "results" / "catalogue_attribute_inventory.json"
+OUT = ROOT / "experiments" / "results" / "catalogue_attribute_inventory.json"
 
 TOKEN = re.compile(r"[a-z0-9]+")
 DETAIL_KEY_EXCLUSIONS = re.compile(

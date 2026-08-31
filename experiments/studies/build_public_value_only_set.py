@@ -71,7 +71,7 @@ def write_jsonl(path: Path, rows: list[dict]) -> str:
 
 
 def main() -> None:
-    out = ROOT / "experiments" / "studies" / "public_value_only"
+    out = ROOT / "experiments" / "datasets" / "public_value_only"
     samples = load_jsonl(ROOT / "data" / "public_set.jsonl")
     _, _, products = catalog_index(ROOT / "data" / "catalog.jsonl")
     canonical, canonical_counts = materialise(samples, products, "canonical")

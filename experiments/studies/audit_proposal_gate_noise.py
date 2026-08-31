@@ -47,9 +47,9 @@ from evaluator.local_evaluator import catalog_index, evaluate, load_jsonl  # noq
 from submission.agent import CAT, Agent, raw_toks  # noqa: E402
 from submission.llm_resolve import LLMResolver  # noqa: E402
 
-SUITE = (ROOT / "experiments" / "studies" / "open_vocabulary"
+SUITE = (ROOT / "experiments" / "datasets" / "open_vocabulary"
          / "review800_open_vocab_paraphrase.jsonl")
-CACHE = ROOT / "experiments" / "studies" / "prompt_arm_caches" / "arm_A__openai_gpt_oss_120b.json"
+CACHE = ROOT / "experiments" / "datasets" / "prompt_arm_caches" / "arm_A__openai_gpt_oss_120b__mt512.json"
 OUT = ROOT / "experiments" / "results" / "out_74_proposal_gate_noise.json"
 DF_FLOORS = (20, 50, 100, 200, 500, 1000)
 

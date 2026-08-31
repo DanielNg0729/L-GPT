@@ -11,5 +11,5 @@ from optuna_dashboard import run_server  # noqa: E402
 
 
 if __name__ == "__main__":
-    storage = f"sqlite:///{(ROOT / 'experiments' / 'studies' / 'optuna_official_v2.db').as_posix()}"
+    storage = f"sqlite: / {(ROOT / 'experiments' / 'studies' / 'optuna_official_v2.db').as_posix()}"
     run_server(storage, host="127.0.0.1", port=8081)

@@ -11,9 +11,9 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 
 ROOT = Path(__file__).resolve().parents[2]
-TEST = ROOT / "experiments" / "studies" / "v1_turn_gated_bank" / "final_test.jsonl"
+TEST = ROOT / "experiments" / "studies" / "turn_gated_bank" / "final_test.jsonl"
 MODEL = ROOT / ".v2_model_cache" / "v1_route_template_bank_classifier_cuda"
-OUT = ROOT / "experiments" / "studies" / "results" / "v2_18_sixway_reference_diagnostic.json"
+OUT = ROOT / "experiments" / "results" / "v2_18_sixway_reference_diagnostic.json"
 LABELS = ["buying_opening", "constraint_update", "no_evidence", "override_opening", "override_update", "plain_opening"]
 OPENING = {"buying_opening", "plain_opening", "override_opening"}
 

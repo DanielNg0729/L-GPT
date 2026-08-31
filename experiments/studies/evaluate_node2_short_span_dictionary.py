@@ -25,11 +25,11 @@ from evaluator.local_evaluator import catalog_index, coarse_category, load_jsonl
 from submission.agent import raw_toks  # noqa: E402
 from submission.bert_extract import KEEP_THRESHOLD, MAX_WORDS, MODEL_DIR  # noqa: E402
 
-TEST = ROOT / "experiments" / "studies" / "v1_turn_gated_bank" / "final_test.jsonl"
+TEST = ROOT / "experiments" / "studies" / "turn_gated_bank" / "final_test.jsonl"
 DATASET = "TemplateParaphrase9600"
 SPLIT = "Test"
 DICTIONARY = ROOT / "experiments" / "datasets" / "catalogue_attribute_dictionary.jsonl"
-OUT = ROOT / "experiments" / "studies" / "results" / "v2_25_node2_short_span_dictionary_final_test.json"
+OUT = ROOT / "experiments" / "results" / "v2_25_node2_short_span_dictionary_final_test.json"
 CATALOG = ROOT / "data" / "catalog.jsonl"
 BATCH = 64
 

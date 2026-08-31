@@ -59,7 +59,7 @@ def main() -> None:
     print(f"shipped DF_CAP = {shipped}  (trial 38)")
 
     rs = ROOT / "experiments" / "datasets" / "sets"
-    pvo = ROOT / "experiments" / "studies" / "public_value_only"
+    pvo = ROOT / "experiments" / "datasets" / "public_value_only"
     sets = {
         "public200": samples,
         "org-proxy": load_jsonl(rs / "organizer_proxy_800.jsonl"),

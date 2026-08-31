@@ -17,8 +17,8 @@ from submission.agent import Agent
 from experiments.studies.run_semantic_attribute import v2_behavior, v2_customer_reply, v2_initial_message
 
 ROOT = Path(__file__).resolve().parents[2]
-DATASET = ROOT / "experiments" / "studies" / "sets" / "semantic_attribute_development_200.jsonl"
-OUT = ROOT / "experiments" / "studies" / "results" / "route_node_development.json"
+DATASET = ROOT / "experiments" / "datasets" / "sets" / "semantic_attribute_development_200.jsonl"
+OUT = ROOT / "experiments" / "results" / "route_node_development.json"
 
 SHAPES = (
     ("buying_open", re.compile(r"^I'm looking for .+\. A key requirement is: .+\.$")),

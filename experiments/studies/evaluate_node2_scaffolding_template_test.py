@@ -28,10 +28,10 @@ from evaluator.local_evaluator import load_jsonl  # noqa: E402
 from submission.agent import Agent, raw_toks  # noqa: E402
 from submission.bert_extract import KEEP_THRESHOLD, MAX_WORDS, MODEL_DIR  # noqa: E402
 
-TEST = ROOT / "experiments" / "studies" / "v1_turn_gated_bank" / "final_test.jsonl"
+TEST = ROOT / "experiments" / "studies" / "turn_gated_bank" / "final_test.jsonl"
 DATASET = "TemplateParaphrase9600"
 SPLIT = "Test"
-OUT = ROOT / "experiments" / "studies" / "results" / "v2_24_node2_scaffolding_final_test.json"
+OUT = ROOT / "experiments" / "results" / "v2_24_node2_scaffolding_final_test.json"
 BATCH = 64
 SEED = 20260831
 

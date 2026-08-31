@@ -12,9 +12,9 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 
 ROOT = Path(__file__).resolve().parents[2]
-DATA = ROOT / "experiments" / "studies" / "v1_route_template_bank" / "test.jsonl"
+DATA = ROOT / "experiments" / "studies" / "route_template_bank" / "test.jsonl"
 MODEL = ROOT / ".v2_model_cache" / "v1_route_template_bank_classifier_cuda"
-OUT = ROOT / "experiments" / "studies" / "results" / "v1_route_template_bank_failure_analysis.json"
+OUT = ROOT / "experiments" / "results" / "v1_route_template_bank_failure_analysis.json"
 
 
 def main():

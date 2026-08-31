@@ -10,9 +10,9 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-OLD = ROOT / "experiments" / "studies" / "results" / "v2_24_node2_scaffolding_final_test.json"
-NEW = ROOT / "experiments" / "studies" / "results" / "v2_25_node2_short_span_dictionary_final_test.json"
-OUT = ROOT / "experiments" / "studies" / "results" / "template_paraphrase9600_node2_comparison.json"
+OLD = ROOT / "experiments" / "results" / "v2_24_node2_scaffolding_final_test.json"
+NEW = ROOT / "experiments" / "results" / "v2_25_node2_short_span_dictionary_final_test.json"
+OUT = ROOT / "experiments" / "results" / "template_paraphrase9600_node2_comparison.json"
 
 
 def main() -> None:

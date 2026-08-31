@@ -49,7 +49,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 V2 = ROOT / "experiments" / "studies"
-TEST = V2 / "v1_turn_gated_bank" / "final_test.jsonl"
+TEST = V2 / "turn_gated_bank" / "final_test.jsonl"
 OUT = V2 / "results" / "node1_vs_regex_v2_55.json"
 
 OPENING_ACTIONS = {"buying_opening", "plain_opening", "override_opening"}

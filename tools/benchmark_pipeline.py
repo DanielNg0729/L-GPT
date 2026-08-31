@@ -74,7 +74,7 @@ def main() -> None:
     print(f"  {index_seconds:.2f}s\n")
 
     public = load_jsonl(ROOT / "data" / "public_set.jsonl")
-    review = load_jsonl(ROOT / "experiments" / "studies" / "open_vocabulary"
+    review = load_jsonl(ROOT / "experiments" / "datasets" / "open_vocabulary"
                         / "review800_canonical_replay.jsonl")[:200]
     transform = _tm.transform(_tm.bank())
     conditions = {"official200 (clean)": (public, False),

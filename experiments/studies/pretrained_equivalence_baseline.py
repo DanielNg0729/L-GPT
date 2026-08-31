@@ -10,8 +10,8 @@ import numpy as np
 from experiments.studies.pretrained_attribute_baseline import MODEL, load_model, read_jsonl
 
 ROOT = Path(__file__).resolve().parents[2]
-DATA = ROOT / "experiments" / "studies" / "sets" / "frozen_equivalence_verification.jsonl"
-OUT = ROOT / "experiments" / "studies" / "results" / "pretrained_equivalence_baseline.json"
+DATA = ROOT / "experiments" / "datasets" / "sets" / "frozen_equivalence_verification.jsonl"
+OUT = ROOT / "experiments" / "results" / "pretrained_equivalence_baseline.json"
 
 
 def auc(labels: list[int], scores: list[float]) -> float:

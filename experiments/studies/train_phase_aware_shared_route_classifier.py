@@ -23,11 +23,11 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 
 ROOT = Path(__file__).resolve().parents[2]
-TRAIN_SPLIT = ROOT / "experiments" / "studies" / "v1_route_template_bank" / "train.jsonl"
-EVAL_SPLIT = ROOT / "experiments" / "studies" / "v1_route_template_bank" / "test.jsonl"
+TRAIN_SPLIT = ROOT / "experiments" / "studies" / "route_template_bank" / "train.jsonl"
+EVAL_SPLIT = ROOT / "experiments" / "studies" / "route_template_bank" / "test.jsonl"
 BASE = ROOT / "submission" / "models" / "scaffolding_tagger"
 MODEL_OUT = ROOT / ".v2_model_cache" / "phase_aware_shared_sixway_cuda.pt"
-OUT = ROOT / "experiments" / "studies" / "results" / "phase_aware_shared_sixway_eval.json"
+OUT = ROOT / "experiments" / "results" / "phase_aware_shared_sixway_eval.json"
 LABELS = ("buying_opening", "constraint_update", "no_evidence", "override_opening", "override_update", "plain_opening")
 OPENING = {"buying_opening", "plain_opening", "override_opening"}
 SEED = 20260830

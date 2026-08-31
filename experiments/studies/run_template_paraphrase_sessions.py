@@ -7,7 +7,7 @@ ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT));os.environ
 from evaluator.local_evaluator import MAX_TURNS,TOP_K,behavior_for,catalog_index,classify_constraint,load_jsonl,metric_summary,normalize_recommendations
 from submission.agent import Agent,raw_toks
 from experiments.studies.route_node import RouteOnlyV2Agent,RouteAndSpanV2Agent
-SRC=ROOT/'experiments/studies/sets/semantic_attribute_development_200.jsonl';WRAP=ROOT/'experiments/studies/v1_turn_gated_bank/final_test.jsonl';OUT=ROOT/'experiments/results/template_paraphrase9600_session_test_v2_26.json'
+SRC=ROOT/'experiments/datasets/sets/semantic_attribute_development_200.jsonl';WRAP=ROOT/'experiments/datasets/turn_gated_bank/final_test.jsonl';OUT=ROOT/'experiments/results/template_paraphrase9600_session_test_v2_26.json'
 class Raw(Agent):
  def __init__(self,p):super().__init__(p);self.tagger=None
 class Oracle(Agent):

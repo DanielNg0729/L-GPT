@@ -12,7 +12,7 @@ from evaluator.local_evaluator import (
     load_jsonl, materialize_hidden_fields,
 )
 
-ROOT=Path(__file__).resolve().parents[2]; SOURCE=ROOT/"experiments" / "studies"/"sets"/"semantic_attribute_development_200.jsonl"; PUBLIC=ROOT/"data"/"public_set.jsonl"; CATALOG=ROOT/"data"/"catalog.jsonl"; OUT=ROOT/"experiments" / "studies"/"v1_route_template_bank"
+ROOT=Path(__file__).resolve().parents[2]; SOURCE=ROOT/"experiments" / "datasets"/"sets"/"semantic_attribute_development_200.jsonl"; PUBLIC=ROOT/"data"/"public_set.jsonl"; CATALOG=ROOT/"data"/"catalog.jsonl"; OUT=ROOT/"experiments" / "studies"/"route_template_bank"
 
 P={
  "buying_opening": {"train":["I need {category}","Please locate {category}","Help me buy {category}"],"test":["Seeking {category}","My goal is {category}"],"train_tails":["with {a}.","that has {a}.","featuring {a}.","where {a} is essential."],"test_tails":["built with {a}.","whose defining requirement is {a}.","that must include {a}.","prioritizing {a}."]},

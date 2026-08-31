@@ -9,7 +9,7 @@ from evaluator.local_evaluator import load_jsonl
 from submission.agent import recognised
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "experiments" / "studies" / "results" / "route_fallback.json"
+OUT = ROOT / "experiments" / "results" / "route_fallback.json"
 
 
 def fallback(message: str) -> str | None:

@@ -54,7 +54,7 @@ sys.path.insert(0, str(ROOT))
 V2 = ROOT / "experiments" / "studies"
 CACHE = ROOT / ".v2_model_cache"
 RUN = CACHE / os.environ.get("SPAN_RUN", "span_extractor_valrand")
-TEST = V2 / "v1_turn_gated_bank" / "final_test.jsonl"
+TEST = V2 / "turn_gated_bank" / "final_test.jsonl"
 OUT = V2 / "results" / "span_bert_heldout_v2_64.json"
 
 SLOT_RE = re.compile(r"\{(\w+)\}")

@@ -18,7 +18,7 @@ from types import SimpleNamespace
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-V2, OV = ROOT / "experiments" / "studies", ROOT / "experiments" / "studies" / "open_vocabulary"
+V2, OV = ROOT / "experiments" / "studies", ROOT / "experiments" / "datasets" / "open_vocabulary"
 L_GPT = ROOT / ".review-l-gpt-shopping-copilot"
 OUT = V2 / "results" / "llm_context_bakeoff_wrapper800.json"
 CACHE = V2 / ".llm_context_bakeoff_wrapper800_cache.json"

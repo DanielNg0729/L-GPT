@@ -11,8 +11,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 SYNONYMS = ROOT / "experiments" / "datasets" / "catalogue_synonym_training.jsonl"
-NEGATIVES = ROOT / "experiments" / "studies" / "sets" / "canonical_verification_negatives.jsonl"
-OUT = ROOT / "experiments" / "studies" / "sets" / "frozen_equivalence_verification.jsonl"
+NEGATIVES = ROOT / "experiments" / "datasets" / "sets" / "canonical_verification_negatives.jsonl"
+OUT = ROOT / "experiments" / "datasets" / "sets" / "frozen_equivalence_verification.jsonl"
 
 
 def selected(canonical: str) -> bool:

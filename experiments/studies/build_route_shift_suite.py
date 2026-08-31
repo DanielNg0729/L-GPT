@@ -7,7 +7,7 @@ from pathlib import Path
 from evaluator.local_evaluator import load_jsonl
 
 ROOT = Path(__file__).resolve().parents[2]
-SOURCE = ROOT / "experiments" / "studies" / "sets" / "semantic_attribute_development_200.jsonl"
+SOURCE = ROOT / "experiments" / "datasets" / "sets" / "semantic_attribute_development_200.jsonl"
 OUT = ROOT / "experiments" / "studies" / "route_shift"
 
 TEMPLATES = {

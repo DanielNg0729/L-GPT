@@ -96,10 +96,10 @@ from evaluator.local_evaluator import catalog_index, evaluate, load_jsonl  # noq
 from submission.agent import CAT, Agent, raw_toks  # noqa: E402
 from submission.llm_resolve import LLMResolver  # noqa: E402
 
-SUITE = (ROOT / "experiments" / "studies" / "open_vocabulary"
+SUITE = (ROOT / "experiments" / "datasets" / "open_vocabulary"
          / "review800_open_vocab_paraphrase.jsonl")
 OUT = ROOT / "experiments" / "results" / "out_72_deparaphrase_prompt_arms.json"
-CACHE_DIR = ROOT / "experiments" / "studies" / "prompt_arm_caches"
+CACHE_DIR = ROOT / "experiments" / "datasets" / "prompt_arm_caches"
 NEG = re.compile(r"\b(no|non|without|free|never|not|avoid|instead of|rather than)\b", re.I)
 
 EXAMPLE = {

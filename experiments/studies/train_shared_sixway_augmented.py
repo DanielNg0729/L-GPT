@@ -8,7 +8,7 @@ from torch.nn import functional as F
 from torch.utils.data import DataLoader,TensorDataset
 from evaluator.local_evaluator import load_jsonl
 from transformers import AutoModelForSequenceClassification,AutoTokenizer
-ROOT=Path(__file__).resolve().parents[2]; TRAIN=ROOT/'experiments/studies/v1_route_template_bank/train.jsonl'; AUG=ROOT/'experiments/datasets/route_phrase_augmentation.jsonl'; EVAL=ROOT/'experiments/studies/v1_route_template_bank/test.jsonl'; BASE=ROOT/'submission/models/scaffolding_tagger'; OUT=ROOT/'experiments/results/shared_sixway_phrase_augmented_eval.json'; MODEL=ROOT/'.v2_model_cache/shared_sixway_phrase_augmented_cuda'; LABELS=('buying_opening','constraint_update','no_evidence','override_opening','override_update','plain_opening'); OPEN={'buying_opening','plain_opening','override_opening'}; SEED=20260831
+ROOT=Path(__file__).resolve().parents[2]; TRAIN=ROOT/'experiments/datasets/route_template_bank/train.jsonl'; AUG=ROOT/'experiments/datasets/route_phrase_augmentation.jsonl'; EVAL=ROOT/'experiments/datasets/route_template_bank/test.jsonl'; BASE=ROOT/'submission/models/scaffolding_tagger'; OUT=ROOT/'experiments/results/shared_sixway_phrase_augmented_eval.json'; MODEL=ROOT/'.v2_model_cache/shared_sixway_phrase_augmented_cuda'; LABELS=('buying_opening','constraint_update','no_evidence','override_opening','override_update','plain_opening'); OPEN={'buying_opening','plain_opening','override_opening'}; SEED=20260831
 def stat(x): print(f'[{time.strftime("%H:%M:%S")}] {x}',flush=True)
 def enc(tok,rows,d):
  x=tok([r['message'] for r in rows],padding=True,truncation=True,max_length=80,return_tensors='pt'); return {k:v.to(d) for k,v in x.items() if k in {'input_ids','attention_mask'}}

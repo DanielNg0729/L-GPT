@@ -51,7 +51,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 V2 = ROOT / "experiments" / "studies"
-BANK = V2 / "v1_turn_gated_bank" / "final_test.jsonl"
+BANK = V2 / "turn_gated_bank" / "final_test.jsonl"
 OUT = V2 / "results" / "span_node_precision_v2_53.json"
 
 CARRIES_VALUE = {"buying_opening", "override_opening", "constraint_update",

@@ -72,7 +72,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 V2 = ROOT / "experiments" / "studies"
-TRAIN = V2 / "v1_route_template_bank" / "train.jsonl"
+TRAIN = V2 / "route_template_bank" / "train.jsonl"
 OUT = V2 / "span_bert_v2" / "train.jsonl"
 DEV = V2 / "span_bert_v2" / "dev.jsonl"
 

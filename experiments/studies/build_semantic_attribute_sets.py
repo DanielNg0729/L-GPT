@@ -200,7 +200,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--catalog", type=Path, default=ROOT / "data" / "catalog.jsonl")
     parser.add_argument("--public", type=Path, default=ROOT / "data" / "public_set.jsonl")
-    parser.add_argument("--out", type=Path, default=ROOT / "experiments" / "studies" / "sets")
+    parser.add_argument("--out", type=Path, default=ROOT / "experiments" / "datasets" / "sets")
     parser.add_argument("--development-size", type=int, default=200)
     parser.add_argument("--holdout-size", type=int, default=800)
     parser.add_argument("--seed", type=int, default=20260831)

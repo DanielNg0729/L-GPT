@@ -14,10 +14,10 @@ from experiments.studies.semantic_grounding import MODEL_CACHE, MODEL_NAME
 
 ROOT = Path(__file__).resolve().parents[2]
 TRAINING = ROOT / "experiments" / "datasets" / "catalogue_synonym_train_only_merged.jsonl"
-VERIFICATION = ROOT / "experiments" / "studies" / "sets" / "frozen_equivalence_verification.jsonl"
-NEGATIVES = ROOT / "experiments" / "studies" / "sets" / "canonical_verification_negatives.jsonl"
+VERIFICATION = ROOT / "experiments" / "datasets" / "sets" / "frozen_equivalence_verification.jsonl"
+NEGATIVES = ROOT / "experiments" / "datasets" / "sets" / "canonical_verification_negatives.jsonl"
 OUT = MODEL_CACHE / "attribute_encoder"
-REPORT = ROOT / "experiments" / "studies" / "results" / "attribute_encoder_training.json"
+REPORT = ROOT / "experiments" / "results" / "attribute_encoder_training.json"
 
 
 def held_out_canonicals() -> set[str]:

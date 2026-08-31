@@ -1,6 +1,6 @@
 """Experiment 36: adjudicate a grading disagreement between two independent robustness audits.
 
-An independently-run benchmark (docs/validation/robustness_benchmark.md) graded SEQUENTIAL DISCLOSURE
+An independently-run benchmark (experiments/notes/robustness_benchmark.md) graded SEQUENTIAL DISCLOSURE
 as population-risk 3 / organizer-risk 3 -- its joint-worst rating. This audit graded the
 same component P1/O1. That is a two-grade gap on both axes, so one of us is wrong, and it
 is cheap to settle by measurement rather than by argument.

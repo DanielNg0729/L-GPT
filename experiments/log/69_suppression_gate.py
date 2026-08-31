@@ -79,7 +79,7 @@ def main() -> None:
     cid, cats, prods = catalog_index(ROOT / "data" / "catalog.jsonl")
     base = Agent(ROOT / "data" / "catalog.jsonl")
     rs = ROOT / "experiments" / "datasets" / "sets"
-    pvo = ROOT / "experiments" / "studies" / "public_value_only"
+    pvo = ROOT / "experiments" / "datasets" / "public_value_only"
     sets = {
         "official200": samples,
         "org-proxy": load_jsonl(rs / "organizer_proxy_800.jsonl"),

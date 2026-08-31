@@ -26,7 +26,7 @@ MedianPruner kills hopeless configurations after ~4 s instead of ~35 s.
 
 STORAGE. SQLite at experiments/studies/optuna_coarse.db, so the study is inspectable live:
 
-    optuna-dashboard sqlite:///experiments/studies/optuna_coarse.db
+    optuna-dashboard sqlite: / experiments/studies/optuna_coarse.db
 
 and resumable -- re-running this script continues the same study rather than starting over.
 
@@ -46,7 +46,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "experiments" / "log"))
 
 DB = ROOT / "experiments" / "studies" / "optuna_coarse.db"
-STORAGE = f"sqlite:///{DB.as_posix()}"
+STORAGE = f"sqlite: / {DB.as_posix()}"
 STUDY = "track4_coarse_v1"
 
 SYNTH_N = 300          # per-trial synthetic draw; small enough to keep trials ~30 s

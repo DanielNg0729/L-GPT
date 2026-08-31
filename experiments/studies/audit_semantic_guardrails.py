@@ -12,7 +12,7 @@ from experiments.studies.semantic_evidence_tier import SemanticEvidence, Semanti
 from submission.agent import Agent, CONSTRAINT
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "experiments" / "studies" / "results" / "semantic_guardrail_audit.json"
+OUT = ROOT / "experiments" / "results" / "semantic_guardrail_audit.json"
 # This configuration is deliberately audit-only.  It verifies lexical provenance and
 # disabled Node 7 integration while Nodes 4 and 5 have not supplied real predictions.
 SCAFFOLD_CONFIG = GuardrailConfig(min_verifier_score=0.0, max_retrieval_rank=0)
@@ -95,13 +95,13 @@ def main() -> None:
             "node7_default_identity": {"input_scores": scores, "output_scores": identity_scores, "is_identity": scores == identity_scores, "policy": {"maximum_weight": 0.0, "minimum_confidence": 1.0}},
         },
         "legacy_semantic_shift": {
-            "development200": run_suite(ROOT / "experiments" / "studies" / "sets" / "semantic_attribute_development_200.jsonl", ids, categories, products, catalog),
-            "holdout800": run_suite(ROOT / "experiments" / "studies" / "sets" / "semantic_attribute_holdout_800.jsonl", ids, categories, products, catalog),
+            "development200": run_suite(ROOT / "experiments" / "datasets" / "sets" / "semantic_attribute_development_200.jsonl", ids, categories, products, catalog),
+            "holdout800": run_suite(ROOT / "experiments" / "datasets" / "sets" / "semantic_attribute_holdout_800.jsonl", ids, categories, products, catalog),
         },
     }
     if not args.legacy_only:
         result["canonical_traffic"] = {
-            "official200": run_suite(ROOT / "experiments" / "studies" / "public_value_only" / "official200_canonical_replay.jsonl", ids, categories, products, catalog),
+            "official200": run_suite(ROOT / "experiments" / "datasets" / "public_value_only" / "official200_canonical_replay.jsonl", ids, categories, products, catalog),
             "unseen800": run_suite(ROOT / "robustness" / "optuna_v2_sets" / "population_shift_01_800.jsonl", ids, categories, products, catalog),
         }
     output = OUT if not args.legacy_only else OUT.with_name("semantic_guardrail_legacy_audit.json")

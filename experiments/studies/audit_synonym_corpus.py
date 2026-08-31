@@ -8,7 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "experiments" / "datasets" / "catalogue_synonym_training.jsonl"
-OUT = ROOT / "experiments" / "studies" / "results" / "synonym_corpus_audit.json"
+OUT = ROOT / "experiments" / "results" / "synonym_corpus_audit.json"
 
 
 def key(value: str) -> str:

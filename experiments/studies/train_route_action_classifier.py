@@ -6,7 +6,7 @@ import torch
 from torch.utils.data import DataLoader, TensorDataset
 from evaluator.local_evaluator import load_jsonl
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
-ROOT=Path(__file__).resolve().parents[2]; DATA=ROOT/"experiments" / "studies"/"v1_route_actions"; BASE=ROOT/"submission"/"models"/"scaffolding_tagger"; OUT=ROOT/"experiments" / "studies"/"results"/"v1_route_action_classifier.json"; MODEL_OUT=ROOT/".v2_model_cache"/"v1_route_action_classifier"
+ROOT=Path(__file__).resolve().parents[2]; DATA=ROOT/"experiments" / "studies"/"route_actions"; BASE=ROOT/"submission"/"models"/"scaffolding_tagger"; OUT=ROOT/"experiments" / "results"//"v1_route_action_classifier.json"; MODEL_OUT=ROOT/".v2_model_cache"/"v1_route_action_classifier"
 def enc(t,r): return t([x["message"] for x in r],padding=True,truncation=True,max_length=64,return_tensors="pt")
 def main():
  train,test=load_jsonl(DATA/"train.jsonl"),load_jsonl(DATA/"holdout.jsonl"); labels=sorted({x["action"] for x in train}); lid={x:i for i,x in enumerate(labels)}

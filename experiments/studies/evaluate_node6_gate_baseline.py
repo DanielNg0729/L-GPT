@@ -18,7 +18,7 @@ from experiments.studies.build_semantic_attribute_sets import classify
 from experiments.studies.pretrained_attribute_baseline import DEV, DICTIONARY, MODEL, load_model, normalise, read_jsonl
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "experiments" / "studies" / "results" / "node6_preaugmentation_gate_baseline.json"
+OUT = ROOT / "experiments" / "results" / "node6_preaugmentation_gate_baseline.json"
 
 
 def split(canonical: str) -> str:

@@ -18,8 +18,8 @@ ROOT = Path(__file__).resolve().parents[2]
 MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 CACHE = ROOT / ".v2_model_cache"
 DICTIONARY = ROOT / "experiments" / "datasets" / "catalogue_attribute_dictionary.jsonl"
-DEV = ROOT / "experiments" / "studies" / "sets" / "semantic_attribute_development_200.jsonl"
-OUT = ROOT / "experiments" / "studies" / "results" / "pretrained_attribute_baseline_dev.json"
+DEV = ROOT / "experiments" / "datasets" / "sets" / "semantic_attribute_development_200.jsonl"
+OUT = ROOT / "experiments" / "results" / "pretrained_attribute_baseline_dev.json"
 
 
 def read_jsonl(path: Path) -> list[dict]:

@@ -25,12 +25,12 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 
 ROOT = Path(__file__).resolve().parents[2]
-TRAIN_SPLIT = ROOT / "experiments" / "studies" / "v1_route_template_bank" / "train.jsonl"
-EVAL_SPLIT = ROOT / "experiments" / "studies" / "v1_route_template_bank" / "test.jsonl"
-TEST_SPLIT = ROOT / "experiments" / "studies" / "v1_turn_gated_bank" / "final_test.jsonl"
+TRAIN_SPLIT = ROOT / "experiments" / "studies" / "route_template_bank" / "train.jsonl"
+EVAL_SPLIT = ROOT / "experiments" / "studies" / "route_template_bank" / "test.jsonl"
+TEST_SPLIT = ROOT / "experiments" / "studies" / "turn_gated_bank" / "final_test.jsonl"
 BASE = ROOT / "submission" / "models" / "scaffolding_tagger"
 MODEL_OUT = ROOT / ".v2_model_cache" / "v1_turn_gated_followup_last_epoch_cuda"
-OUT = ROOT / "experiments" / "studies" / "results" / "v1_turn_gated_followup_last_epoch_diagnostic.json"
+OUT = ROOT / "experiments" / "results" / "v1_turn_gated_followup_last_epoch_diagnostic.json"
 LABELS = ("constraint_update", "no_evidence", "override_update")
 SEED = 20260829
 

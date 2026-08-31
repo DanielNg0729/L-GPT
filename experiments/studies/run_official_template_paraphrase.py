@@ -9,7 +9,7 @@ from submission.agent import Agent
 from experiments.studies.route_node import RouteOnlyV2Agent,RouteAndSpanV2Agent
 import importlib.util
 spec=importlib.util.spec_from_file_location('stress',ROOT/'experiments/log/31_paraphrase_stress.py');stress=importlib.util.module_from_spec(spec);spec.loader.exec_module(stress)
-WRAP=ROOT/'experiments/studies/v1_turn_gated_bank/final_test.jsonl'
+WRAP=ROOT/'experiments/datasets/turn_gated_bank/final_test.jsonl'
 # Retain each V1 clarification-policy comparison as a distinct reproducible artifact.
 OUT=ROOT/'experiments/results/template_paraphrase9600_official200_wrapper_test_v1_information_gain.json'
 def bank():

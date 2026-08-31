@@ -10,7 +10,7 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer
 ROOT=Path(__file__).resolve().parents[2]
 DATA=ROOT/"experiments" / "studies"/"route_classifier"
 BASE=ROOT/"submission"/"models"/"scaffolding_tagger"
-OUT=ROOT/"experiments" / "studies"/"results"/"pretrained_route_classifier.json"
+OUT=ROOT/"experiments" / "results"//"pretrained_route_classifier.json"
 
 def encode(tokenizer, rows):
  e=tokenizer([r["message"] for r in rows],padding=True,truncation=True,max_length=64,return_tensors="pt")

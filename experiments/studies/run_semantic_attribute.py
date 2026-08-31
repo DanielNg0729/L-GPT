@@ -248,7 +248,7 @@ def make_agent(candidate: str, catalog: Path, development_rows: list[dict]) -> A
 def main() -> None:
     parser = argparse.ArgumentParser(description="V2 semantic-attribute robustness runner")
     parser.add_argument("--dataset", type=Path,
-                        default=ROOT / "experiments" / "studies" / "sets" / "semantic_attribute_development_200.jsonl")
+                        default=ROOT / "experiments" / "datasets" / "sets" / "semantic_attribute_development_200.jsonl")
     parser.add_argument("--candidate", choices=("literal", "route-only", "route-span", "development-lexicon", "semantic-feature"), default="literal")
     parser.add_argument("--value-mode", choices=("paraphrase", "canonical"), default="paraphrase",
                         help="Use semantic rewrites or replay canonical values on the same rows.")
@@ -259,7 +259,7 @@ def main() -> None:
     parser.add_argument("--output", type=Path, default=None)
     args = parser.parse_args()
 
-    development_rows = load_jsonl(ROOT / "experiments" / "studies" / "sets" / "semantic_attribute_development_200.jsonl")
+    development_rows = load_jsonl(ROOT / "experiments" / "datasets" / "sets" / "semantic_attribute_development_200.jsonl")
     rows = load_jsonl(args.dataset)
     catalog = ROOT / "data" / "catalog.jsonl"
     ids, categories, products = catalog_index(catalog)

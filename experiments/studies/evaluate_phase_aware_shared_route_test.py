@@ -16,8 +16,8 @@ from experiments.studies.train_phase_aware_shared_route_classifier import (
 
 
 ROOT = Path(__file__).resolve().parents[2]
-TEST_SPLIT = ROOT / "experiments" / "studies" / "v1_turn_gated_bank" / "final_test.jsonl"
-OUT = ROOT / "experiments" / "studies" / "results" / "phase_aware_shared_sixway_test.json"
+TEST_SPLIT = ROOT / "experiments" / "studies" / "turn_gated_bank" / "final_test.jsonl"
+OUT = ROOT / "experiments" / "results" / "phase_aware_shared_sixway_test.json"
 
 def status(text):
     print(f"[{time.strftime('%H:%M:%S')}] {text}", flush=True)

@@ -17,7 +17,7 @@ from experiments.studies.semantic_rag import ProductPassageRetriever
 import importlib
 TagBase = importlib.import_module("03_attribute_tag_guess").AttributeTagAgent
 
-OUT = ROOT / "experiments" / "studies" / "results" / "public_value_only_attribute_tag_plus_rag.json"
+OUT = ROOT / "experiments" / "results" / "public_value_only_attribute_tag_plus_rag.json"
 
 
 class TagPlusRAGAgent(TagBase):

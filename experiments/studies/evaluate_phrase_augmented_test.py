@@ -6,7 +6,7 @@ import torch
 from torch.utils.data import DataLoader, TensorDataset
 from evaluator.local_evaluator import load_jsonl
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
-ROOT=Path(__file__).resolve().parents[2]; TEST=ROOT/'experiments/studies/v1_turn_gated_bank/final_test.jsonl'; MODEL=ROOT/'.v2_model_cache/shared_sixway_phrase_augmented_cuda'; OUT=ROOT/'experiments/results/shared_sixway_phrase_augmented_test.json'; LABELS=('buying_opening','constraint_update','no_evidence','override_opening','override_update','plain_opening'); OPEN={'buying_opening','plain_opening','override_opening'}
+ROOT=Path(__file__).resolve().parents[2]; TEST=ROOT/'experiments/datasets/turn_gated_bank/final_test.jsonl'; MODEL=ROOT/'.v2_model_cache/shared_sixway_phrase_augmented_cuda'; OUT=ROOT/'experiments/results/shared_sixway_phrase_augmented_test.json'; LABELS=('buying_opening','constraint_update','no_evidence','override_opening','override_update','plain_opening'); OPEN={'buying_opening','plain_opening','override_opening'}
 def main():
  rows=load_jsonl(TEST); d=torch.device('cuda:0'); tok=AutoTokenizer.from_pretrained(MODEL,local_files_only=True); m=AutoModelForSequenceClassification.from_pretrained(MODEL,local_files_only=True).to(d).eval(); x=tok([r['message'] for r in rows],padding=True,truncation=True,max_length=80,return_tensors='pt'); phase=torch.tensor([0 if r['action'] in OPEN else 1 for r in rows]); pred=[]
  with torch.no_grad():

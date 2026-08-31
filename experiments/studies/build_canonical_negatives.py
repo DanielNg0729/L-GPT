@@ -15,7 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 DICTIONARY = ROOT / "experiments" / "datasets" / "catalogue_attribute_dictionary.jsonl"
-DEFAULT_OUT = ROOT / "experiments" / "studies" / "sets" / "canonical_verification_negatives.jsonl"
+DEFAULT_OUT = ROOT / "experiments" / "datasets" / "sets" / "canonical_verification_negatives.jsonl"
 
 
 def tokens(text: str) -> list[str]:

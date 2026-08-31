@@ -16,7 +16,7 @@ from experiments.studies.semantic_grounding import MODEL_CACHE, MODEL_NAME
 from submission.agent import Agent, CONSTRAINT
 
 
-OUT = ROOT / "experiments" / "studies" / "results" / "public_value_only_attribute_tag.json"
+OUT = ROOT / "experiments" / "results" / "public_value_only_attribute_tag.json"
 CANONICAL = {
     "cotton":"cotton","leather":"leather","polyester":"polyester","nylon":"nylon","rubber":"rubber","suede":"suede","canvas":"canvas","wool":"wool",
     "black":"black","white":"white","blue":"blue","red":"red","pink":"pink","green":"green","brown":"brown","beige":"beige","gray":"gray",

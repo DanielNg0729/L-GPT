@@ -16,7 +16,7 @@ from experiments.studies.train_phase_aware_shared_route_classifier import (
 
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "experiments" / "studies" / "results" / "phase_aware_shared_sixway_eval_failure_analysis.json"
+OUT = ROOT / "experiments" / "results" / "phase_aware_shared_sixway_eval_failure_analysis.json"
 
 
 def main():

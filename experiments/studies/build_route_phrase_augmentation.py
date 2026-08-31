@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from evaluator.local_evaluator import load_jsonl
 ROOT=Path(__file__).resolve().parents[2]
-SOURCE=ROOT/'experiments/studies/sets/semantic_attribute_development_200.jsonl'
+SOURCE=ROOT/'experiments/datasets/sets/semantic_attribute_development_200.jsonl'
 OUT=ROOT/'experiments/datasets/route_phrase_augmentation.jsonl'
 T={
 'buying_opening':['My aim is to get {category} that satisfies {a}.','The item I want is {category}, with {a} required.','I would like to purchase {category}; {a} matters.','Find {category} for me, provided it includes {a}.','I am after {category} meeting the condition {a}.','Help source {category} with the property {a}.','Please recommend {category} that delivers {a}.','I need a {category} where {a} is a priority.'],

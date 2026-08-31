@@ -20,12 +20,12 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 
 ROOT = Path(__file__).resolve().parents[2]
-TRAIN = ROOT / "experiments" / "studies" / "v1_route_template_bank" / "train.jsonl"
-DEVELOPMENT = ROOT / "experiments" / "studies" / "v1_route_template_bank" / "test.jsonl"
-FINAL = ROOT / "experiments" / "studies" / "v1_turn_gated_bank" / "final_test.jsonl"
+TRAIN = ROOT / "experiments" / "studies" / "route_template_bank" / "train.jsonl"
+DEVELOPMENT = ROOT / "experiments" / "studies" / "route_template_bank" / "test.jsonl"
+FINAL = ROOT / "experiments" / "studies" / "turn_gated_bank" / "final_test.jsonl"
 BASE = ROOT / "submission" / "models" / "scaffolding_tagger"
 MODEL_ROOT = ROOT / ".v2_model_cache"
-OUT = ROOT / "experiments" / "studies" / "results" / "v1_turn_gated_classifiers_cuda.json"
+OUT = ROOT / "experiments" / "results" / "v1_turn_gated_classifiers_cuda.json"
 SEED = 20260829
 GROUPS = {
     "opening": ("buying_opening", "plain_opening", "override_opening"),

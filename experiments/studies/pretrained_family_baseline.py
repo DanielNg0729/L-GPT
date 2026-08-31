@@ -12,7 +12,7 @@ from experiments.studies.pretrained_attribute_baseline import (
 )
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "experiments" / "studies" / "results" / "pretrained_family_baseline_dev.json"
+OUT = ROOT / "experiments" / "results" / "pretrained_family_baseline_dev.json"
 
 
 def main() -> None:

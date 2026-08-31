@@ -18,7 +18,7 @@ from sklearn.svm import LinearSVC
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "experiments" / "studies" / "route_shift"
-OUT = ROOT / "experiments" / "studies" / "results" / "route_classifier.json"
+OUT = ROOT / "experiments" / "results" / "route_classifier.json"
 
 
 def main() -> None:

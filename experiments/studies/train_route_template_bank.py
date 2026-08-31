@@ -22,9 +22,9 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 
 ROOT = Path(__file__).resolve().parents[2]
-DATA = ROOT / "experiments" / "studies" / "v1_route_template_bank"
+DATA = ROOT / "experiments" / "studies" / "route_template_bank"
 BASE = ROOT / "submission" / "models" / "scaffolding_tagger"
-OUT = ROOT / "experiments" / "studies" / "results" / "v1_route_template_bank_classifier_cuda.json"
+OUT = ROOT / "experiments" / "results" / "v1_route_template_bank_classifier_cuda.json"
 MODEL_OUT = ROOT / ".v2_model_cache" / "v1_route_template_bank_classifier_cuda"
 SEED = 20260829
 

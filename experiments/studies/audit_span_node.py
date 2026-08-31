@@ -15,8 +15,8 @@ from submission.agent import Agent, CONSTRAINT
 from experiments.studies.run_semantic_attribute import v2_behavior
 
 ROOT = Path(__file__).resolve().parents[2]
-DATASET = ROOT / "experiments" / "studies" / "sets" / "semantic_attribute_development_200.jsonl"
-OUT = ROOT / "experiments" / "studies" / "results" / "span_node_development.json"
+DATASET = ROOT / "experiments" / "datasets" / "sets" / "semantic_attribute_development_200.jsonl"
+OUT = ROOT / "experiments" / "results" / "span_node_development.json"
 
 
 def expected_values(sample: dict) -> list[str]:
