@@ -64,6 +64,15 @@ Run the organizer's evaluator test with:
 python -m unittest discover -s tests -v
 ```
 
+Run the required public multi-turn demonstration with:
+
+```bash
+python -m submission.demo --sample-id public_0002
+```
+
+It prints each customer message, structured question, recommendation list, token usage, and
+the public target's rank. It uses only the released public session and official simulator.
+
 ## Optional Groq configuration
 
 No API key or network access is required for the reported public result. To enable the
@@ -73,6 +82,27 @@ optional semantic recovery helpers, copy [`.env.example`](.env.example) to `.env
 Without a key, no hosted request is made. With a key, the resolver and transcript rescue are
 conservative fallbacks: their proposed evidence is discarded unless it is present in the
 frozen catalogue. The response always reports non-negative prompt and completion token usage.
+
+## Runtime, model, and cost disclosure
+
+- Python: 3.10 or newer. Dependencies are `torch` and `transformers`; the core retrieval
+  path otherwise uses the standard library and in-memory SQLite FTS5.
+- Measured public result: the exact, offline path reports zero prompt and completion tokens.
+  The score is reproducible without a network connection or API key.
+- Measured latency: 17.93 seconds for the complete 200-session public evaluation, including
+  catalogue index construction, in the final local audit environment.
+- Local models: guarded DistilBERT route and token-tagging checkpoints,
+  `KhiemGOM/techjam-route-classifier` and `KhiemGOM/techjam-scaffolding-tagger`. They are
+  lazily loaded only for unfamiliar message wording; if unavailable, the agent uses its
+  deterministic lexical fallback.
+- Hosted model: optional Groq `openai/gpt-oss-20b` for the resolver and transcript rescue.
+  It requires `GROQ_API_KEY`, is never called without one, and uses the account and pricing
+  chosen by the team running evaluation.
+- Estimated official-evaluation cost: **$0.00** for the documented offline configuration.
+  Optional hosted usage is not required for the reported score and must be budgeted by the
+  credential owner.
+- Hardware: the public-score run was performed on a Windows development laptop. The official
+  exact-template path does not invoke the optional local checkpoints or require a GPU.
 
 ## Repository layout
 
