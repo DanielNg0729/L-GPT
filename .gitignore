@@ -1,43 +1,18 @@
-# --- BTC data: quá lớn cho git, lấy lại bằng `cd provided && ./fetch.sh` ---
-provided/release/*.gz
-provided/release/*.zip
-provided/techjam-conversational-search/data/catalog.jsonl
-
-# --- secrets: TUYỆT ĐỐI không commit (vi phạm rule cuộc thi) ---
-.env
-.env.*
-!.env.example
-*.key
-*.pem
-secrets.json
-
-# --- python ---
 __pycache__/
 *.py[cod]
-.venv/
-venv/
-.ipynb_checkpoints/
-*.egg-info/
-
-# --- output của agent / evaluator ---
-results.json
-runs/
-*.log
-
-# --- artifact nặng tự sinh ---
-*.faiss
-*.npy
-*.index
-cache/
-.embeddings/
-
-# --- macOS / editor ---
 .DS_Store
-.vscode/
-.idea/
-
-# --- tài liệu gốc có bản quyền của BTC (Early Bird Access) ---
-# Deliverable yêu cầu repo PUBLIC -> không đưa vào history để khỏi phải rewrite sau.
-# Bản tóm tắt tự viết (*.md) thì vẫn commit bình thường.
-TikTok_TechJam_2026_Tracks_and_Problem_Statements.pdf
-TikTok_TechJam_2026_Tracks_and_Problem_Statements.html
+.env
+results.json
+data/catalog.jsonl
+data/releases/
+# Organizer-only code, private evaluation data, manifests, and build reports.
+organizer/
+secure/
+# Internal provenance and release-audit working documents.
+docs/audits/
+docs/data_selection_audit.md
+docs/participant_release_checklist.md
+# Organizer-only pipeline tests.
+tests/test_5core_builder.py
+tests/test_organizer_pipeline.py
+*.log
