@@ -26,7 +26,8 @@ So the corpora split along two independent axes, and they are kept apart deliber
 | **attribute / value** | the value itself | the sentence around it | catalogue attestation, deparaphrasing |
 
 A suite that moved both at once would tell us something failed without telling us which
-half. Where we do test both together, it is a separate, explicitly labelled suite.
+half. We *do* also test both together — see §5.1 — but as an explicitly separate condition,
+never mixed into a single-axis suite.
 
 ---
 
@@ -126,6 +127,39 @@ values remain verbatim."*
 
 The augmentation set is **train-only and wrapper-disjoint** by construction — it may not
 contain any phrasing that appears in a test bank.
+
+### 5.1 The conditions are composed, not stored
+
+This is the part most easily missed when reading the directory listing: **the evaluation
+conditions are not five files.** They are two session files and one wrapper transform,
+combined at run time by `studies/evaluate_full_pipeline.py`. The wrapper bank is a stored
+dataset; applying it is a function.
+
+| condition | session file | wrapper transform |
+|---|---|---|
+| `official200` | `data/public_set.jsonl` | no |
+| `unseen800` | `open_vocabulary/review800_canonical_replay.jsonl` | no |
+| `template` | `open_vocabulary/review800_canonical_replay.jsonl` | **yes** |
+| `attribute` | `open_vocabulary/review800_open_vocab_paraphrase.jsonl` | no |
+| **`both`** | `open_vocabulary/review800_open_vocab_paraphrase.jsonl` | **yes** |
+
+The transform is built by `studies/run_official_template_paraphrase.py`, which draws its
+wrappers from `datasets/turn_gated_bank/final_test.jsonl` — the held-out bank, so a wrapper
+used here is one no model was trained on.
+
+Two consequences worth stating:
+
+**`both` is a composition, so it needs no third corpus.** Searching the datasets directory
+for a "both" file finds nothing, and that is correct rather than a gap. It is
+`review800_open_vocab_paraphrase.jsonl` with held-out wrappers rendered over the top —
+values reworded *and* the sentences around them reworded.
+
+**Every condition shares its session base with a control.** `template` differs from
+`unseen800` only by the transform; `both` differs from `attribute` only by the transform.
+So the wrapper axis and the value axis can each be isolated by subtraction, from one grid,
+without a second sample. That is why the pair
+(0.604585 deterministic → 0.810251 with the shipped layers) on `both` is attributable at
+all: the same 800 targets appear in all four cells.
 
 ---
 
