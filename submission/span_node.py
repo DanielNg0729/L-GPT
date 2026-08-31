@@ -121,7 +121,7 @@ class ExactCatalogueSpanNode:
         if dictionary_path is None:
             here = Path(__file__).resolve().parent
             for candidate in (here / "catalogue_attribute_dictionary.jsonl",
-                              here.parent / "robustness" / "v2"
+                              here.parent / "experiments" / "datasets"
                               / "catalogue_attribute_dictionary.jsonl"):
                 if candidate.exists():
                     dictionary_path = candidate

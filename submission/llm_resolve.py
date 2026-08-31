@@ -101,7 +101,25 @@ except Exception:  # pragma: no cover - keep importable standalone
 
 _load_project_env()
 
-DEFAULT_MODEL = os.environ.get("GROQ_MODEL", "openai/gpt-oss-120b")
+# MODEL CHOICE, MEASURED. Both sizes were run on the full 800-session open-vocabulary
+# attribute suite, same code, same 172 distinct prompts, same max_tokens:
+#
+#            score      proposal precision   in-request seconds
+#   120b     0.868219   0.737                100.7
+#    20b     0.870525   0.659                 28.1
+#
+# The score difference (+0.002306) is INSIDE the +/-0.0027 bootstrap band for an
+# 800-session suite, so the two are score-equivalent and the smaller model is chosen on
+# cost, not on quality. It is 3.6x faster in-request and reserves the same tokens per call,
+# which matters because the provider's tokens-per-minute allowance -- not its request
+# allowance -- is what this layer runs into first.
+#
+# A WARNING ABOUT THE PRECISION COLUMN. 20b answers far more often at lower precision, and
+# on a 250-session subsample that looked like a +0.0139 win for coverage over precision.
+# It collapsed to +0.0023 when the same comparison was run on all 800. Do not read the
+# precision gap as a quality finding in either direction; the honest statement is that the
+# scores are indistinguishable and only the cost differs.
+DEFAULT_MODEL = os.environ.get("GROQ_MODEL", "openai/gpt-oss-20b")
 CACHE_PATH = Path(os.environ.get(
     "LLM_RESOLVE_CACHE", str(Path(__file__).resolve().parent / ".llm_resolve_cache.json")))
 
@@ -139,6 +157,7 @@ class LLMResolver:
     #
     # Backoff is deterministic (no jitter). This is a single-threaded client, so jitter
     # buys nothing against self-contention, and a reproducible run is worth more here.
+    MAX_TOKENS = int(_num("LLM_RESOLVE_MAX_TOKENS", 512))
     RETRIES = int(_num("LLM_RESOLVE_RETRIES", 3))
     TRIP_AFTER = int(_num("LLM_RESOLVE_TRIP_AFTER", 6))
     ZERO_YIELD_TRIP = 60                 # calls yielding nothing before giving up entirely
@@ -188,7 +207,20 @@ class LLMResolver:
             # GPT-OSS bills hidden reasoning against max_tokens and returns EMPTY content
             # when the budget runs out mid-thought: HTTP 200 with nothing to parse. The
             # headroom is for the reasoning, not for the two-word answer.
-            "max_tokens": 512, "reasoning_effort": "low",
+            #
+            # 512 is deliberately generous and stays the default. It is also the dominant
+            # cost of a call, because the provider reserves `prompt + max_tokens` against
+            # the tokens-per-minute allowance rather than actual usage -- 585 reserved for
+            # a request that measured 229 actual, 35 of which was reasoning. Measured on
+            # six prompts, 160 / 256 / 512 return byte-identical answers (the `NONE`
+            # abstention included) and only 96 truncates. Lowering it therefore buys ~2.5x
+            # the throughput and daily capacity for no observed change in output.
+            #
+            # It is exposed rather than lowered because six prompts is thin evidence for a
+            # shipped default, and an empty completion is a silent failure: the caller sees
+            # None and suppresses, which looks exactly like a legitimate abstention.
+            # Harnesses that need throughput set it; the shipped path does not.
+            "max_tokens": self.MAX_TOKENS, "reasoning_effort": "low",
             "messages": [{"role": "system", "content": SYSTEM},
                          {"role": "user", "content": phrase}],
         }).encode("utf-8")

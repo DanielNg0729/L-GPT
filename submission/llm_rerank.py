@@ -1,4 +1,23 @@
 """
+Shared Groq client, plus an optional LLM tie-break layer that was measured and NOT adopted.
+
+READ THIS BEFORE DELETING THIS FILE. The name undersells it: this module holds the HTTP
+plumbing every hosted layer depends on -- `ENDPOINT`, `_load_project_env()` and
+`RateLimiter` -- and `submission/llm_resolve.py`, which IS shipped and enabled, imports
+from it. Removing the file because "we don't rerank" breaks the deparaphraser's import,
+which degrades it to inert silently rather than loudly. `llm_extract.py` and eleven
+robustness scripts import from here too.
+
+What is genuinely unused is the `LLMReranker` CLASS below. It is wired in `agent.py` but
+gated behind `LLM_RERANK`, which defaults to off, so it makes no request and costs no
+tokens in the shipped configuration. It is retained as evidence: a measured, rejected
+experiment, in the same category as the NLI verifier and the retrieval-augmented resolver
+variant. The tidier arrangement -- moving the shared client into its own module so this one
+becomes truly optional -- touches fourteen files and was judged not worth the risk close to
+submission.
+
+---
+
 Optional LLM tie-break layer. Strictly off the critical path.
 
 WHY THIS EXISTS
