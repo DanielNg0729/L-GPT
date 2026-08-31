@@ -104,6 +104,17 @@ attestation, and the response always reports non-negative prompt and completion 
   `KhiemGOM/techjam-route-classifier` and `KhiemGOM/techjam-scaffolding-tagger`. They are
   lazily loaded only for unfamiliar message wording; if unavailable, the agent uses its
   deterministic lexical fallback.
+
+  The weights are **not in this repository** -- they are downloaded from the Hugging Face
+  Hub on first use, which is the only network dependency of the offline configuration and
+  is never reached on the public set. To pre-fetch them, or to run with no network at all:
+
+  ```bash
+  python -c "from huggingface_hub import snapshot_download as d; [d(r) for r in ('KhiemGOM/techjam-route-classifier', 'KhiemGOM/techjam-scaffolding-tagger')]"
+  ```
+
+  Nothing needs to be configured afterwards: resolution prefers a local checkpoint that
+  actually contains weights and otherwise uses the Hub.
 - Hosted model: optional Groq `openai/gpt-oss-20b` for the resolver and transcript rescue.
   It requires `GROQ_API_KEY`, is never called without one, and uses the account and pricing
   chosen by the team running evaluation.
