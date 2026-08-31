@@ -152,6 +152,11 @@ DEAD_ATTRIBUTES = ("category", "brand", "budget")
 # Once retrieval is strong, evidence arrives fast enough that ordering stops binding.
 PROBE_ORDER = ("feature", "material", "other", "color", "style", "size", "use_case")
 
+# The one constraint the released simulator FORMATS instead of quoting. Anchored, so it
+# cannot match a genuine catalogue phrase that merely begins with the word: "Solid colors:
+# 100% Cotton" is real product text and is left alone. See `_resolve`.
+_SYNTHESISED_COLOUR = re.compile(r"^\s*colou?r\s*[:\-]\s*(.+)$", re.I)
+
 
 def _askable(attribute: str, st: "SessionState") -> bool:
     """May this attribute be asked now? Every attribute is asked at most once -- except
@@ -795,6 +800,41 @@ class Agent:
         The honest framing of what this does: the agent declines to act on text it cannot
         verify, instead of inventing evidence from its fragments.
         """
+        # SYNTHESISED COLOUR: KEEP THE WORD, DROP THE LABEL.
+        #
+        # `intent_card` builds this one constraint by FORMATTING rather than quoting:
+        # `f"color: {colour}"`, where the colour was regexed out of the target's own
+        # searchable text. So the colour WORD is guaranteed verbatim in the target and the
+        # `color <word>` bigram is not -- the target may say "Heather Grey" in a materials
+        # sentence and never carry the literal "Color: Grey" that other products have in
+        # their `details`.
+        #
+        # Resolving the bigram is therefore worse than useless: it is highly selective
+        # (`color grey` matches 52 products) and it selects AGAINST the target. That is the
+        # failure mode the suppression note below describes, except suppression cannot
+        # catch it -- the phrase IS attested, just not here, so `df > 0` waves it through.
+        # Nothing observable distinguishes it: on the one public-set miss, the full evidence
+        # set including `color grey` is satisfied by exactly one product, confidently, and
+        # it is the wrong one.
+        #
+        # The bare word is broader (`grey` matches 2,017) but it is never wrong. Measured
+        # against the shipped resolution, on every decision criterion:
+        #
+        #     official200 +0.0010   org-proxy +0.0097   review800 +0.0089
+        #     uniform     +0.0326   inverse   +0.0301
+        #
+        # Uniform and inverse gain 25 and 23 additional HITS per 800 sessions, so this is
+        # recovered targets rather than a ranking artefact. It is largest on those two
+        # because an obscure target has no popularity prior to fall back on, so a false
+        # selective constraint is unrecoverable there.
+        #
+        # Emitting BOTH the bigram and the word was also measured and is worse on all five
+        # (+0.0004 / +0.0062 / +0.0052 / +0.0303 / +0.0246): re-admitting the bigram
+        # re-admits its ability to point away from the target.
+        colour = _SYNTHESISED_COLOUR.match(str(text))
+        if colour:
+            text = colour.group(1).strip()
+
         t = raw_toks(text)[:self.RESOLVE_CAP if cap is None else cap]
         if not t:
             return []
