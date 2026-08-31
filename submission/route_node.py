@@ -92,14 +92,22 @@ HUB_ID = os.environ.get("V2_ROUTE_HUB", "KhiemGOM/techjam-route-classifier")
 _LOCAL = Path(__file__).resolve().parent / "models" / "route_classifier"
 
 
+def _has_weights(path: Path) -> bool:
+    """A checkpoint is a directory that actually contains weights, not merely a name."""
+    return path.is_dir() and any(path.glob("*.safetensors"))
+
+
 def _resolve_source() -> str:
+    # ONE RULE: a path is used only if it actually holds weights -- the override included.
+    # The override used to be returned blind, ahead of both the local check and the Hub, so
+    # a path that was not there got handed to `transformers` as though it were a Hub repo
+    # id. That raises, which trips the breaker, which disables the route classifier in SILENCE. It is
+    # the same gitignored-checkpoint failure this resolution order exists to prevent, so an
+    # override must not be a way back into it.
     override = os.environ.get("V2_ROUTE_MODEL_DIR")
-    if override:
+    if override and _has_weights(Path(override)):
         return override
-    # A directory with no weights in it is not a checkpoint. Requiring the safetensors
-    # file avoids the Git-LFS failure this migration existed to end: a 134-byte pointer
-    # left in place of the weights, loading "successfully", and scoring as if healthy.
-    if _LOCAL.is_dir() and any(_LOCAL.glob("*.safetensors")):
+    if _has_weights(_LOCAL):
         return str(_LOCAL)
     return HUB_ID
 

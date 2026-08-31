@@ -1347,9 +1347,14 @@ class Agent:
     def _model_usage(self) -> tuple[int, int]:
         """Cumulative token totals across optional external model components."""
         prompt = completion = 0
+        # The resolver and the rescue are the only hosted layers that are ON by
+        # DEFAULT, so in the shipped configuration they are the only ones that can
+        # spend a judge's tokens -- and they were the two missing from this list.
         for component in (getattr(self, "llm", None),
                           getattr(self, "llm_extract", None),
-                          getattr(self, "filter", None)):
+                          getattr(self, "filter", None),
+                          getattr(self, "resolver", None),
+                          getattr(self, "rescue", None)):
             if component is None:
                 continue
             prompt += max(0, int(getattr(component, "prompt_tokens", 0) or 0))

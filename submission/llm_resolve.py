@@ -176,6 +176,7 @@ class LLMResolver:
         self.cache_path = cache_path
         self.calls = self.accepted = self.abstained = 0
         self.unattested = self.failures = self.retries = 0
+        self.prompt_tokens = self.completion_tokens = 0
         self.cache_hits = self.cache_misses = 0
         self._consecutive = 0
         self._spent = 0.0
@@ -239,6 +240,9 @@ class LLMResolver:
                 with urlopen(request, timeout=self.TIMEOUT) as response:
                     body = json.loads(response.read().decode("utf-8"))
                 self._spent += time.time() - started
+                usage = body.get("usage") or {}
+                self.prompt_tokens += max(0, int(usage.get("prompt_tokens") or 0))
+                self.completion_tokens += max(0, int(usage.get("completion_tokens") or 0))
                 self._consecutive = 0
                 return body["choices"][0]["message"]["content"]
             except HTTPError as exc:
@@ -327,7 +331,9 @@ class LLMResolver:
         return {"enabled": self.enabled, "model": self.model, "calls": self.calls,
                 "accepted": self.accepted, "abstained": self.abstained,
                 "unattested": self.unattested, "failures": self.failures,
-                "retries": self.retries, "cache_hits": self.cache_hits,
+                "retries": self.retries,
+                "prompt_tokens": self.prompt_tokens,
+                "completion_tokens": self.completion_tokens, "cache_hits": self.cache_hits,
                 "cache_misses": self.cache_misses,
                 "cache_hit_rate": round(self.cache_hits / total, 4) if total else None,
                 "fully_cached": total > 0 and self.cache_misses == 0,
