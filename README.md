@@ -110,8 +110,11 @@ attestation, and the response always reports non-negative prompt and completion 
 - Estimated official-evaluation cost: **$0.00** for the documented offline configuration.
   Optional hosted usage is not required for the reported score and must be budgeted by the
   credential owner.
-- Hardware: the public-score run was performed on a Windows development laptop. The official
-  exact-template path does not invoke the optional local checkpoints or require a GPU.
+- Hardware: Windows laptop with a 13th Gen Intel Core i9-13900HX (24 cores, 32 logical
+  processors), 32 GB RAM, and an NVIDIA GeForce RTX 4060 Laptop GPU. The official
+  exact-template public-score path does not invoke the optional local checkpoints or require
+  a GPU. The RTX 4060 was used for the separate local-model training and semantic robustness
+  experiments retained on the `full` branch.
 
 ## Repository layout
 
