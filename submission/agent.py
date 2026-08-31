@@ -49,6 +49,11 @@ except Exception:                                   # pragma: no cover
     LLMMessageWriter = None  # type: ignore[assignment,misc]
 
 try:
+    from submission.llm_filter import LLMRelevanceFilter
+except Exception:                                   # pragma: no cover
+    LLMRelevanceFilter = None  # type: ignore[assignment,misc]
+
+try:
     from submission.llm_rerank import LLMReranker
 except Exception:  # The deterministic agent must remain importable in every harness.
     LLMReranker = None  # type: ignore[assignment,misc]
@@ -748,7 +753,17 @@ class Agent:
     # it is the behaviour Pillar II asks for. What WOULD be gaming is withholding a
     # candidate we believe is correct purely to shrink the MRR denominator; this policy
     # instead shows our single best candidate every turn and keeps asking until it lands.
-    DISCLOSURE: tuple[int, ...] = (1,) * 9 + (10,)
+    # TEAM MODE SWITCH. The schedule is configurable because the team also demos this
+    # agent as a real shopping surface, where ten visible products beat one:
+    # `DISCLOSURE=full` returns ten every turn (the demo/.env setting) and gives the
+    # optional relevance filter a visible list to clean rather than a single slot.
+    # Measured on the public 200: full 0.900181 vs sequential 0.971500 -- the whole gap
+    # is MRR rank position; HitRate is identical either way. The DEFAULT stays
+    # sequential so a fresh clone reproduces the runbook's 0.971500 unchanged.
+    DISCLOSURE: tuple[int, ...] = (
+        (10,) * 10
+        if os.environ.get("DISCLOSURE", "sequential").strip().lower() == "full"
+        else (1,) * 9 + (10,))
 
     def _width(self, turn: int) -> int:
         return self.DISCLOSURE[min(turn, len(self.DISCLOSURE)) - 1]
@@ -760,6 +775,10 @@ class Agent:
         # Presentation-only phrasing for `message`. Default off; see llm_message.py.
         self.message_writer = (LLMMessageWriter()
                                if LLMMessageWriter is not None else None)
+        # Contradiction demotion over the ranked list. Bound to the index's per-product
+        # context snippets; off by default even with a key (see llm_filter.py header).
+        self.filter = (LLMRelevanceFilter().bind(self.ix.doc.get)
+                       if LLMRelevanceFilter is not None else None)
         # Whole-transcript recovery, on a stall. Bound to this index's df so the module
         # never imports the agent back, exactly like the deparaphraser.
         self.rescue = (LLMTranscriptRescue().bind(self.ix.df)
@@ -1329,7 +1348,8 @@ class Agent:
         """Cumulative token totals across optional external model components."""
         prompt = completion = 0
         for component in (getattr(self, "llm", None),
-                          getattr(self, "llm_extract", None)):
+                          getattr(self, "llm_extract", None),
+                          getattr(self, "filter", None)):
             if component is None:
                 continue
             prompt += max(0, int(getattr(component, "prompt_tokens", 0) or 0))
@@ -1401,6 +1421,23 @@ class Agent:
                 fresh = [a for a in ranked if a not in st.rejected]
                 stale = [a for a in ranked if a in st.rejected]
                 ranked = (fresh + stale) or ranked
+
+            # CONTRADICTION DEMOTION, judged in windows over the ranked head. Runs after
+            # rejection feedback so it judges the order the shopper will actually see,
+            # and before the width slice so a demoted head candidate is replaced by the
+            # next survivor rather than shrinking the list. Off by default; every
+            # failure inside leaves `ranked` exactly as the lexical layers built it.
+            flt = getattr(self, "filter", None)
+            if flt is not None and flt.should_fire(len(st.evidence), len(ranked)):
+                try:
+                    ranked = flt.rearrange(
+                        ranked,
+                        [p for p, _ in sorted(st.evidence.items(),
+                                              key=lambda kv: kv[1][0])],
+                        self._transcripts.get(st.sid or "", []),
+                        need=self._width(turn or st.turn))
+                except Exception:
+                    pass                            # may never break a session
             if ranked:
                 st.last_rank = ranked
         except Exception:

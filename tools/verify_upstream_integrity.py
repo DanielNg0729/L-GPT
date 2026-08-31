@@ -38,10 +38,17 @@ PROTECTED = (
 
 
 def digest(path: Path) -> str:
+    """Content hash, line-ending-normalized.
+
+    Hashed after CRLF -> LF so the manifest verifies on every platform: a Windows
+    checkout with autocrlf materializes these text files with CRLF while the
+    repository stores LF, and raw hashing then reports every protected file as
+    modified on one platform or the other (this happened; content was identical).
+    A real content change is still caught; only a pure line-ending flip is forgiven.
+    """
     h = hashlib.sha256()
     with path.open("rb") as fh:
-        for chunk in iter(lambda: fh.read(1 << 20), b""):
-            h.update(chunk)
+        h.update(fh.read().replace(b"\r\n", b"\n"))
     return h.hexdigest()
 
 

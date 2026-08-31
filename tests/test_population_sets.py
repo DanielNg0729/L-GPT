@@ -44,7 +44,10 @@ class RobustnessBuilderTest(unittest.TestCase):
         self.assertEqual(manifest["private_like_sessions"], 800)
         for name, info in manifest["sets"].items():
             path = sets_dir / info["path"]
-            self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), info["sha256"])
+            # Line-ending-normalized to match build_sets.sha256 (Windows checkouts
+            # materialize CRLF; the content, not the newline flavour, is what is pinned).
+            normalized = path.read_bytes().replace(b"\r\n", b"\n")
+            self.assertEqual(hashlib.sha256(normalized).hexdigest(), info["sha256"])
             rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()
                     if line.strip()]
             targets = [row["ground_truth"]["parent_asin"] for row in rows]

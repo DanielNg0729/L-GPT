@@ -92,7 +92,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 V2 = ROOT / "experiments" / "studies"
-OV = V2 / "open_vocabulary"
+OV = ROOT / "experiments" / "datasets" / "open_vocabulary"
 OUT = V2 / "results" / "full_pipeline_v2_52.json"
 
 _s = ilu.spec_from_file_location("_stress", ROOT / "experiments" / "log"

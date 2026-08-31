@@ -76,7 +76,12 @@ def _load_project_env() -> None:
 
 _load_project_env()
 
-ENDPOINT = "https://api.groq.com/openai/v1/chat/completions"
+# Any OpenAI-compatible chat-completions endpoint works; GROQ_API_KEY holds its Bearer
+# token whatever the provider. Cloudflare Workers AI shape:
+#   https://api.cloudflare.com/client/v4/accounts/<ACCOUNT_ID>/ai/v1/chat/completions
+# with model @cf/openai/gpt-oss-20b (same model family as the Groq default).
+ENDPOINT = (os.environ.get("LLM_ENDPOINT", "").strip()
+            or "https://api.groq.com/openai/v1/chat/completions")
 DEFAULT_MODEL = os.environ.get("GROQ_MODEL", "openai/gpt-oss-120b")
 CACHE_PATH = Path(os.environ.get(
     "LLM_CACHE", str(Path(__file__).resolve().parent / ".llm_cache.json")))

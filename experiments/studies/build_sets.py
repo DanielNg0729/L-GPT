@@ -134,10 +134,12 @@ def write_jsonl(path: Path, rows: list[dict]) -> None:
 
 
 def sha256(path: Path) -> str:
+    # Line-ending-normalized (CRLF -> LF) so the manifest hash is identical whether
+    # the sets were built or checked out on Windows or Unix. See
+    # tools/verify_upstream_integrity.py for the incident that motivated this.
     digest = hashlib.sha256()
     with path.open("rb") as fh:
-        for block in iter(lambda: fh.read(1024 * 1024), b""):
-            digest.update(block)
+        digest.update(fh.read().replace(b"\r\n", b"\n"))
     return digest.hexdigest()
 
 

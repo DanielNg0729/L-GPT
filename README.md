@@ -279,6 +279,8 @@ and is enforced by `tests/test_upstream_integrity.py`.
 | [`submission/`](submission/) | Canonical agent, optional model integrations, and packaging documentation |
 | [`starter/`](starter/) | Evaluator entry point; re-exports the canonical agent so there is exactly one implementation |
 | [`evaluator/`](evaluator/) | Official local simulator and scorer |
+| [`docs/research/`](docs/research/) | Pre-agent research: catalogue/session data profile, industry-practice notes |
+| [`experiments/profile/`](experiments/profile/) | The profiling scripts behind the data profile (field coverage, probe expected value, target priors) |
 | [`experiments/log/`](experiments/log/) | Numbered chronological experiments, in the order they were run |
 | [`experiments/studies/`](experiments/studies/) | Reusable study scripts: `audit_` / `build_` / `evaluate_` / `train_` / `run_` |
 | [`experiments/datasets/`](experiments/datasets/) | Every generated suite — see [DATASETS.md](experiments/DATASETS.md) for what each one is and how it was made |
@@ -534,7 +536,15 @@ already smaller than fold variance, so more of it would be fitting noise.
 
 ## Team contributions
 
-*(Fill in before submission — the judging criteria require this for non-solo entries.)*
+| Member | Responsibility |
+|---|---|
+| **Khiêm** — lead engineer & experimentation | Built the shipped agent end to end: the recognition gate and exact template matching, catalogue-attested span recovery and grounded n-gram mining, the FTS5 retrieval ladder, coverage ranking, the session ledger, and the disclosure policy — the components behind the 0.9715 headline — plus the numbered ~70-experiment programme, the robustness and population-shift suites, the release test suite, and the reproducibility infrastructure (integrity checker, Hub-resolved checkpoints, runbook). |
+| **Dương** | LLM layer: the attribute deparaphraser (generate-then-verify against the catalogue), the transcript rescue path, and the gating discipline that keeps every hosted call off the scored path and fail-safe. |
+| **Thanh Duy** | Final architecture: the hybrid escalation design (cheap exact mechanisms first, learned components reachable only when they cannot see the answer), component boundaries, and integration review. |
+| **Huy** — industry research | How production conversational-commerce systems budget clarification, keep dialogue state, use popularity priors, and stay lexical-first with semantic assist — distilled in [`docs/research/industry_notes.md`](docs/research/industry_notes.md), grounding the design requirements and the beyond-the-benchmark narrative. |
+| **Tài** — main research & relevance filter | Participant-kit setup with checksum verification and exact reproduction of the published BM25 baseline (0.10671) with the scenario breakdown that directed effort; the early catalogue/session profile ([`docs/research/data_profile.md`](docs/research/data_profile.md)) whose probe expected-value table and target-popularity analysis anticipated the shipped ask policy and ranking prior; the windowed LLM contradiction filter with its measured negative verdict, kept demo-only ([`experiments/LLM_FILTER_NOTES.md`](experiments/LLM_FILTER_NOTES.md)). |
+
+See [`REPORT.md`](REPORT.md) for the full submission report.
 
 Catalogue and sessions derive from Amazon Reviews 2023 by McAuley Lab, UCSD. See
 [`DATA_ATTRIBUTION.md`](DATA_ATTRIBUTION.md).
