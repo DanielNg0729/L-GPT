@@ -546,7 +546,7 @@ class SessionState:
     replays history, so accumulation here is load-bearing: it is worth +0.05 alone."""
 
     __slots__ = ("evidence", "asked", "turn", "last_rank", "tags", "buying",
-                 "rejected", "sid", "probe_pool_key", "probe_pool")
+                 "rejected", "sid", "probe_pool_key", "probe_pool", "lost", "stale")
 
     def __init__(self, tags: list[str] | None = None, sid: str | None = None) -> None:
         self.sid = sid          # identifies the session for population sampling
@@ -559,6 +559,19 @@ class SessionState:
         self.rejected: set[str] = set()   # shown on a turn that did not end the session
         self.probe_pool_key: tuple[tuple[str, str], ...] | None = None
         self.probe_pool: tuple[str, ...] | None = None
+        # PARSE FAILURES in this session: messages the recognition gate did not know, so
+        # template extraction never ran on them. This is the precondition for the
+        # transcript rescue, which is a TEMPLATE solver -- it re-reads the conversation
+        # when the per-turn PARSE failed. A reworded VALUE inside a wrapper that parsed
+        # fine is not counted here; that is the deparaphraser's fault to fix, and letting
+        # both layers claim it put the rescue on traffic where it had nothing to recover.
+        self.lost = 0
+        # CONSECUTIVE TURNS THAT TAUGHT US NOTHING: the customer spoke and the evidence
+        # ledger did not grow. This is the stall signal the rescue always claimed to use
+        # ("nothing new arriving") but never actually measured; it used the count of
+        # distinct rejected candidates instead, which INVERTS under paraphrase because a
+        # stuck agent keeps re-showing the same few items and so never accumulates them.
+        self.stale = 0
 
 
 # --------------------------------------------------------------------------- agent
@@ -927,6 +940,36 @@ class Agent:
         except Exception:
             return None                             # may never break a session
 
+    def _admit_value(self, text: str, tier: str,
+                     deparaphrase: bool = True) -> list[tuple[str, str]]:
+        """THE ONE PATH EVERY CANDIDATE VALUE TAKES, whatever produced it.
+
+        Attest it against the frozen catalogue; if the catalogue cannot, ask the
+        deparaphraser once and admit its proposal at the attenuated SEM tier; if that too
+        comes back empty, drop it. Nothing enters the ledger without passing through here.
+
+        WHY THIS IS ONE FUNCTION AND NOT TWO. It used to be inlined in the template branch
+        alone, so only values that the TEMPLATE extractor isolated could ever be
+        deparaphrased. Every other producer of candidate values -- and the transcript
+        rescue is one, it returns a list of requirements -- had its own private handling.
+        The rescue attested its proposals itself and DISCARDED whatever the catalogue could
+        not confirm: measured at 163 dropped against 150 kept on the compound axis, which
+        is more than half of its output thrown away without ever offering it to the layer
+        built for exactly that case.
+
+        The tier a proposal carries is decided by its PROVENANCE, not by which producer
+        called: an attested value keeps the caller's tier, a deparaphrased one is always
+        SEM, because it is a model's inference about meaning rather than something the
+        customer was observed to say.
+        """
+        got = self._resolve(text)
+        if got:
+            return [(phrase, tier) for phrase in got]
+        if not deparaphrase:
+            return []
+        proposed = self._deparaphrase(text)
+        return [(proposed, SEM)] if proposed else []
+
     def _deparaphrase(self, text: str) -> str | None:
         """Ask the optional LLM layer to name the catalogue value behind a paraphrase.
 
@@ -958,6 +1001,9 @@ class Agent:
         self._seen_messages = getattr(self, "_seen_messages", 0) + 1
         if not known:
             self._unrecognised = getattr(self, "_unrecognised", 0) + 1
+            # LOSS EVENT: the wrapper is unfamiliar, so template extraction did not run on
+            # this turn and whatever it would have read may be missing.
+            st.lost += 1
             # NODE 1. Only reachable here, so a recognised message never touches it and
             # the clean path is unchanged by control flow rather than by threshold.
             action = self._route(msg, st.turn)
@@ -977,21 +1023,18 @@ class Agent:
             st.buying = any(tier == CONSTRAINT for _, tier in found)
         resolved: list[tuple[str, str]] = []
         for text, tier in found:
-            got = self._resolve(text)
-            resolved.extend((ph, tier) for ph in got)
-            if not got and tier == CONSTRAINT:
-                # SUPPRESSED CLAUSE. `_resolve` returned nothing, so the catalogue cannot
-                # attest this value and the agent is about to discard it. This is the ONLY
-                # point the deparaphraser is consulted -- it can therefore add evidence
-                # where there was none, and can never overwrite evidence that exists.
-                #
-                # The proposal enters at SEM, not at `tier`. It is the model's inference
-                # about what the customer meant, not something the customer said, and the
-                # weight difference is worth more than the resolution itself: 81.5% of a
-                # perfect resolver at CONSTRAINT strength against ~96% attenuated.
-                ph = self._deparaphrase(text)
-                if ph:
-                    resolved.append((ph, SEM))
+            # DEPARAPHRASE ONLY A SUPPRESSED CONSTRAINT. A category or a soft preference
+            # that the catalogue cannot attest is not worth a call: it contributes recall,
+            # not the decisive match, and paying per turn for it was measured as cost
+            # without gain. A CONSTRAINT is the customer's stated requirement, so losing
+            # one is what actually costs the target.
+            #
+            # An unattested value inside a wrapper the regex read correctly is the
+            # DEPARAPHRASER's fault to fix, never the rescue's -- the rescue is a TEMPLATE
+            # solver for a failed parse. Letting both claim this fault is what once had the
+            # rescue firing 41 times on the attribute axis, where it has nothing to add.
+            resolved.extend(self._admit_value(text, tier,
+                                              deparaphrase=(tier == CONSTRAINT)))
         # Fall back to mining whenever templates yielded no CONSTRAINT: a category alone
         # is not enough to conclude the message was understood.
         mine_text = msg
@@ -1067,6 +1110,7 @@ class Agent:
                 # is never worse than either. Evidence is a dict keyed by phrase, so a
                 # phrase found twice is stored once at the first tier that claimed it.
                 resolved.extend((ph, MINED) for ph, _ in self.ix.mine(msg))
+        before = len(st.evidence)
         for ph, tier in resolved:
             if not ph or ph in st.evidence:
                 continue
@@ -1075,6 +1119,9 @@ class Agent:
             # ranking but still contributes recall and coverage tie-breaking. The idf
             # term already discounts them.
             st.evidence[ph] = (df if df > 0 else self.ix.DF_CAP * 2, tier)
+        # A turn that added no evidence is a turn we learned nothing from. Consecutive, so
+        # one uninformative turn is not a stall; several in a row is.
+        st.stale = 0 if len(st.evidence) > before else st.stale + 1
         self._recover_override_opening(st, msg)
 
     # -- Layer 3 ------------------------------------------------------------
@@ -1256,16 +1303,34 @@ class Agent:
             # the catalogue, and enter at SEM rather than CONSTRAINT: they are the model's
             # reading of what was said, not a phrase the customer is known to have used.
             #
-            # Unreachable on scored traffic by control flow: the agent converges at MTTC
-            # 2.2 there, so the turn and rejection thresholds are never both met.
+            # UNREACHABLE ON SCORED TRAFFIC BY CONTROL FLOW, because `st.lost` is 0 there.
+            # The turn and rejection thresholds alone do NOT achieve that, and the comment
+            # here used to claim they did: under sequential disclosure a session still
+            # alive at turn 5 has necessarily collected four or five rejections, so the two
+            # thresholds collapse into one condition. Measured, 6 of 200 official sessions
+            # opened that gate and the layer re-read transcripts whose every constraint had
+            # already been captured verbatim -- 34 phrases accepted, +0.000000.
+            #
+            # `st.lost` is the real precondition: an unfamiliar wrapper, or a stated value
+            # the catalogue could not attest. With none of either there is provably nothing
+            # for a re-read to recover.
             rescue = getattr(self, "rescue", None)
             if rescue is not None and rescue.should_fire(
-                    st.sid or "", turn or st.turn, len(st.rejected)):
+                    st.sid or "", turn or st.turn, len(st.rejected), st.lost,
+                    st.stale):
                 try:
-                    for phrase in rescue.recover(st.sid or "",
-                                                 self._transcripts.get(st.sid or "", [])):
-                        if phrase not in st.evidence:
-                            st.evidence[phrase] = (self.ix.df(phrase), SEM)
+                    for value in rescue.recover(
+                            st.sid or "", self._transcripts.get(st.sid or "", [])):
+                        # THROUGH THE SAME SEAM AS EVERY OTHER CANDIDATE VALUE. The rescue
+                        # returns reworded requirements; attesting them here rather than
+                        # inside the layer means an unattested one reaches the
+                        # deparaphraser instead of being discarded, which is what it was
+                        # built for. Both admitted tiers are SEM either way: recovered
+                        # across turns, or inferred from a rewording, both are the model's
+                        # reading rather than the customer's words.
+                        for phrase, tier in self._admit_value(value, SEM):
+                            if phrase and phrase not in st.evidence:
+                                st.evidence[phrase] = (self.ix.df(phrase), tier)
                 except Exception:
                     pass                            # may never break a session
 
