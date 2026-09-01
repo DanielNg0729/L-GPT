@@ -71,6 +71,30 @@ python -m submission.demo --sample-id public_0002
 It prints each customer message, structured question, recommendation list, token usage, and
 the public target's rank, using only the released public session and official simulator.
 
+## Final evaluation
+
+The rules freeze the submitted commit, have the team run the unmodified evaluator against
+the released final package themselves, and require the generated `results.json` to be
+retained together with the commit hash and the environment it ran in.
+
+`results.json` carries the metrics and the per-session results, but nothing about which
+commit produced it or what it ran on, and the evaluator is organizer-owned so it cannot be
+made to record that. Run this immediately after the evaluation:
+
+```bash
+python -m evaluator.local_evaluator
+python tools/record_run.py
+```
+
+`tools/record_run.py` writes `results_provenance.json` beside `results.json`, carrying the
+commit hash, whether the working tree was clean, the branch, Python version, platform, and
+the headline metrics it read back out of `results.json`. It warns if the tree is dirty,
+because numbers produced from uncommitted changes do not correspond to any commit.
+
+**Keep both files.** They are deliberately not tracked in git, because the final evaluation
+happens after the commit is frozen and so cannot be committed into it. Archive them
+somewhere durable; the organizer may request them as supporting evidence.
+
 ## Groq configuration
 
 `GROQ_API_KEY` is the only switch that changes anything. Copy [`.env.example`](.env.example)
@@ -191,9 +215,11 @@ Caching affects cost, not outcome.
 
 | Path | Purpose |
 |---|---|
+| [`REPORT.pdf`](REPORT.pdf) | The submission report: method, suites, results, disclosures, limitations |
 | [`starter/agent.py`](starter/agent.py) | Official evaluator entry point, re-exporting our Agent |
 | [`submission/`](submission/) | Our agent, guarded fallback modules, dictionary, setup details |
 | [`evaluator/`](evaluator/) | Unmodified organizer local evaluator |
+| [`tools/record_run.py`](tools/record_run.py) | Records commit and environment beside a `results.json` |
 | [`data/public_set.jsonl`](data/public_set.jsonl) | Organizer public development sessions |
 | [`docs/`](docs/) | Organizer contract, rules, score configuration, and final-evaluation FAQ |
 | [`tests/`](tests/) | Organizer evaluator tests |

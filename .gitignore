@@ -3,6 +3,9 @@ __pycache__/
 .DS_Store
 .env
 results.json
+# Written beside results.json by tools/record_run.py. Like results.json it is
+# produced after the commit is frozen, so it is retained outside git, not in it.
+results_provenance.json
 data/catalog.jsonl
 data/releases/
 # Organizer-only code, private evaluation data, manifests, and build reports.
