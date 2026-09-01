@@ -1,0 +1,281 @@
+
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=21mm,bottom=20mm]{geometry}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+% ragged2e's \RaggedRight keeps hyphenation ON, which plain \raggedright suppresses --
+% that suppression pushed a contributions row 60pt past the margin.
+\usepackage{ragged2e}
+\usepackage{enumitem}
+% A tall `tabular` cannot break across pages, so LaTeX moves the whole block and leaves the
+% preceding page half empty. `longtable` splits, which is what a reference table wants.
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{tikz}
+% `float` gives [H], exact placement. With the default [t] the ladder figure floated back
+% to the top of page 1 and printed ABOVE the title block.
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true,linkcolor=accent,urlcolor=accent,citecolor=accent]{hyperref}
+\usetikzlibrary{positioning,arrows.meta}
+
+\definecolor{accent}{HTML}{1F5F4F}
+\definecolor{ink}{HTML}{12181F}
+\definecolor{muted}{HTML}{5B6672}
+\definecolor{rule}{HTML}{C8D0D8}
+\definecolor{band}{HTML}{EEF3F1}
+\definecolor{warm}{HTML}{9A5B2E}
+
+\color{ink}
+
+\titleformat{\section}
+  {\normalfont\sffamily\bfseries\color{accent}\large}{\thesection}{0.7em}{}
+\titlespacing*{\section}{0pt}{12pt}{4pt}
+\titleformat{\subsection}
+  {\normalfont\sffamily\bfseries\color{accent}}{\thesubsection}{0.6em}{}
+
+\setlength{\parskip}{5.5pt}
+\setlength{\parindent}{0pt}
+% Long unbreakable tokens (file names, identifiers) cannot be hyphenated, so in justified
+% text TeX has no legal break and overflows the margin. Emergency stretch loosens the line.
+\setlength{\emergencystretch}{2.5em}
+\renewcommand{\arraystretch}{1.22}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\sffamily\scriptsize\color{muted}Team L-GPT \textbar{} TikTok TechJam 2026, Track 4}
+\fancyfoot[R]{\sffamily\scriptsize\color{muted}\thepage}
+
+\newcommand{\lead}[1]{{\itshape\color{muted}#1}\par}
+\newcommand{\code}[1]{{\ttfamily\small #1}}
+
+\begin{document}
+\begin{flushleft}
+{\sffamily\bfseries\LARGE Grounded Multi-Turn Product Search}\\[3pt]
+{\sffamily\color{muted} TikTok TechJam 2026, Track 4 (Shopping Copilot)}\\[3pt]
+{\sffamily\bfseries\color{accent} Team L-GPT \textperiodcentered\ Submission report}
+\end{flushleft}
+\vspace{-6pt}{\color{rule}\rule{\textwidth}{0.5pt}}\vspace{-2pt}
+\lead{Method, model choice, cost and latency disclosure, limitations, and team contributions. All figures measured on commit \code{b16a87e} through the organizer's unmodified evaluator, from a clean clone.}
+\section{Problem insight}
+The released simulator builds every customer utterance from the target product's own catalogue record. Every spoken constraint is therefore a verbatim substring of the target document, and the task is string-provenance recovery rather than semantic similarity. Exact phrase matching is the estimator matched to that generative process.
+
+Targets derive from real purchase records, so probability mass concentrates on heavily reviewed items. A review-count prior is consequently load-bearing in ranking. The population folds below bound what that bias costs.
+
+Four transformer approaches were built and rejected on measurement: a dense bi-encoder, ColBERT late interaction, a cross-encoder reranker, and learning-to-rank over the candidate pool. Each degraded lexical precision. The learned components that ship decide what to keep or what a phrase means, never what matches.
+
+\section{Method}
+Escalation ladder. Exact mechanisms run first; learned components are reachable only when the exact ones produce nothing. The ordering is enforced by control flow, not by a confidence threshold.
+
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  font=\sffamily\scriptsize,
+  box/.style={draw=rule,fill=white,rounded corners=1.6pt,align=center,
+              inner sep=3.2pt,minimum height=7mm,text width=32mm},
+  lex/.style={box,draw=accent,fill=band},
+  learn/.style={box,draw=warm,fill=white},
+  gate/.style={draw=accent,fill=accent,text=white,rounded corners=1.6pt,align=center,
+               inner sep=3.4pt,text width=32mm,minimum height=7mm},
+  adm/.style={draw=accent,line width=0.7pt,fill=band,rounded corners=1.6pt,align=center,
+              inner sep=3.4pt,text width=52mm,minimum height=8.5mm},
+  ar/.style={-{Stealth[length=1.6mm]},draw=muted,line width=0.35pt},
+  ln/.style={draw=muted,line width=0.35pt},
+  lbl/.style={font=\sffamily\scriptsize\bfseries,inner sep=1.2pt},
+  note/.style={align=left,text=muted,font=\sffamily\scriptsize}
+]
+% Two producers of candidate values converge on one attestation step; the deparaphraser is
+% its own node because it is a distinct (hosted) component, not part of attestation. The
+% pool then feeds BOTH outputs: the ranking and the next question.
+% No side annotations -- they made the bounding box asymmetric and pushed the spine 55pt
+% off the text-block centre. Facts that were in them are in the caption.
+\node[gate]  (gate)   at ( 0,   0)    {Recognition gate};
+\node[lex]   (tpl)    at (-2.9,-1.3)  {Template extraction};
+\node[learn] (unfam)  at ( 2.9,-1.3)  {Router \textbullet{} Tagger\\ Span recovery};
+\node[learn] (resc)   at ( 2.9,-2.7)  {Transcript rescue};
+\node[lex]   (attest) at ( 0,  -4.1)  {Attest against catalogue};
+\node[learn] (depar)  at ( 5.3,-4.1)  {Deparaphraser};
+\node[lex]   (ledger) at ( 0,  -5.4)  {Session evidence ledger};
+\node[lex]   (retr)   at ( 0,  -6.6)  {FTS5 retrieval ladder};
+\node[lex]   (rank)   at (-2.4,-8.5)  {Coverage ranking\\ \textbullet{} popularity prior};
+\node[lex]   (probe)  at ( 2.4,-8.5)  {Clarification policy\\ \textbullet{} min.\ expected pool};
+
+\draw[ar] (gate.west)  -| node[lbl,text=accent,pos=0.72,left] {parses} (tpl.north);
+\draw[ar] (gate.east)  -| node[lbl,text=warm,pos=0.72,right] {unfamiliar} (unfam.north);
+\draw[ar] (unfam.south) -- (resc.north);
+\draw[ar] (tpl.south)  -- ++(0,-1.55) -- (attest.west);
+% Enter from ABOVE, not from the east: the deparaphraser arrow also leaves attest.east, and
+% two arrows meeting the same anchor read as one double-headed line.
+\draw[ar] (resc.south) -- ++(0,-0.55) -| ([xshift=11mm]attest.north);
+% Label BELOW the arrow: above it collides with the rescue line descending into attest.
+\draw[ar] (attest.east) -- node[lbl,text=warm,below=0.8mm,midway] {unattested} (depar.west);
+\draw[ar] (depar.south) |- (ledger.east);
+\draw[ar] (attest) -- (ledger);
+\draw[ar] (ledger) -- (retr);
+
+% EXPLICIT T-SPLIT rather than two `-|` paths. `-|` runs horizontally and then drops, so the
+% arrowhead lands at the end of a stub and reads as an arrow stuck on a horizontal line.
+% A shared bus with two clear vertical drops shows the fan-out for what it is.
+\draw[ln] (retr.south) -- (0,-7.55);
+\draw[ln] (-2.4,-7.55) -- (2.4,-7.55);
+\draw[ar] (-2.4,-7.55) -- (rank.north);
+\draw[ar] ( 2.4,-7.55) -- (probe.north);
+
+% BALANCE THE BOUNDING BOX. The deparaphraser sits right of the spine with no counterweight,
+% so `\centering` shifts everything left: measured at 15pt before this path was added.
+\path (-6.9,-4.1) (6.9,-4.1);
+\end{tikzpicture}
+\caption{Control flow. Lexical stages in green, learned in amber. Both producers of
+candidate values converge on one attestation step; an unattested value goes to the
+deparaphraser and is admitted at an attenuated tier, or dropped. The retrieved pool feeds
+both outputs, so choosing the next question costs no extra retrieval. On the official set
+the amber column records 0 loads, 0 inferences and 0 tokens: the gate leaves nothing
+unparsed, so it is unreachable by control flow.}
+\end{figure}
+
+\begin{center}\small
+\begin{tabular}{@{}>{\RaggedRight\arraybackslash}p{0.20\textwidth}>{\RaggedRight\arraybackslash}p{0.08\textwidth}>{\RaggedRight\arraybackslash}p{0.64\textwidth}@{}}
+\toprule \textbf{Stage} & \textbf{Kind} & \textbf{Role} \\ \midrule
+Recognition gate & lexical & Matches the simulator's message shapes. 0 unparsed across the 200 official sessions, which is what makes every learned layer below unreachable on clean traffic. \\[1.5pt]
+Template extraction & lexical & Reads constraints from known forms; they enter at full weight. \\[1.5pt]
+Router, tagger, span recovery & local & Unparsed wording only. Exact catalogue-attested span recovery, a tagger that strips conversational filler before mining, and a dialogue-act router deciding override / no-evidence / constraint-update. Rebuilt from training vocabulary, regexes reached 37.5\% of overrides and 0\% of no-evidence turns on a vocabulary-disjoint bank. \\[1.5pt]
+Transcript rescue & hosted & Fires once per session when the session contains unparsed messages and has gone MIN\_STALE consecutive turns adding no evidence. Re-reads the whole conversation; the only component seeing more than one turn. \\[1.5pt]
+Admission & both & Single path for every candidate value: attest against the frozen catalogue, else deparaphrase once at the attenuated tier, else drop. \\[1.5pt]
+Clarification policy & lexical & Chooses the attribute minimising expected surviving candidates, from precomputed catalogue reply signatures over the pool the ranker is about to use. \\[1.5pt]
+Retrieval and ranking & lexical & SQLite FTS5 ladder (conjunctive, backoff, disjunctive), coverage ranking with the review-count prior, and rejection feedback demoting shown-and-missed candidates. \\[1.5pt]
+\bottomrule\end{tabular}\end{center}
+On the official public set both learned checkpoints record 0 loads and 0 inferences, torch is never imported, and neither hosted layer is called. The headline score comes entirely from the deterministic path.
+
+\subsection*{Choosing the next question}
+A reply signature is precomputed for every candidate and attribute from the frozen catalogue: the first two values the customer has not disclosed, which is what the simulator would say. Candidates sharing a signature are indistinguishable under that question, so signatures partition the pool into blocks of size $n_i$ over a pool of $N$. The agent asks the attribute minimising
+
+\[ \mathbb{E}\,[\,|\text{pool after reply}|\,] \;=\; \frac{1}{N}\sum_i n_i^{2} \]
+the expected size of the block a uniformly drawn target falls into. This is collision entropy rather than Shannon, since the cost is candidates left to rank. It reuses the pool the ranker is about to consume, reads only precomputed signatures, and falls back to a fixed order on any failure.
+
+\code{category}, \code{brand} and \code{budget} are never asked: no evaluator branch can pay them out, measured at 0/200. That is a property of the simulator, not of the method. Nothing in the policy is specific to seven attributes; the criterion ranks whatever askable set it is given, so a deployment with more attributes, or a live shopper who can answer about budget and brand, simply widens the set. These three are excluded because the thing answering cannot reward them, and asking would spend a turn for a guaranteed zero.
+
+Caveat on magnitude: every probe ordering lands within 0.003, inside the 0.0168 fold noise. The criterion is principled and free rather than measurably better at this sample size.
+
+\section{Evaluation suites}
+One suite is the organizer's; the rest are generated. Construction and provenance:
+
+{\small\begin{longtable}{@{}>{\RaggedRight\arraybackslash}p{0.18\textwidth}>{\RaggedRight\arraybackslash}p{0.06\textwidth}>{\RaggedRight\arraybackslash}p{0.09\textwidth}>{\RaggedRight\arraybackslash}p{0.55\textwidth}@{}}
+\toprule \textbf{Suite} & \textbf{Rows} & \textbf{Source} & \textbf{Construction} \\ \midrule \endhead
+Official public set & 200 & organizer & Released development sessions, byte-identical to the participant kit and covered by the upstream-integrity checksums. \\[1.5pt]
+Population proxies & 800 x 4 & generated & Targets resampled from the released catalogue, sampled without replacement with P(target) proportional to review count raised to a weight exponent: 1.0 matched to the public set, 0 uniform, inverted for the adversarial fold. Sessions rendered through the simulator's own message shapes. \\[1.5pt]
+Template paraphrase & 200 & generated & Each simulator message re-rendered into a held-out wrapper of the same dialogue act. Wrapper banks split by template family, so no test wrapper shares a string with any training one. Disclosed values pass through verbatim. \\[1.5pt]
+Attribute paraphrase & 200 & generated & Values reworded, wrapper untouched. Canonical values mined from the catalogue, paraphrased by a different model family, then filtered: candidates sharing a token with the original, already attested in the catalogue, or seen in an earlier suite are rejected. \\[1.5pt]
+Both axes at once & 200 & composed & The attribute-paraphrase sessions with held-out wrappers rendered over them. Not a separate corpus; each axis is isolated by subtraction against a shared session base. \\[1.5pt]
+\bottomrule\end{longtable}}
+Constraints held across all generated corpora:
+
+\begin{itemize}[leftmargin=*,itemsep=1pt,parsep=0pt,topsep=2pt]
+\item Generator and solver are different model families. Paraphrases were not produced by the model the agent calls.
+\item Wrapper banks split by template family, not by row: no test string appears in training in any form.
+\item No corpus derives from a private set. Every proxy is resampled from the released catalogue.
+\item Known weaknesses (for instance a small distinct-paraphrase pool) are recorded in the manifests rather than worked around.
+\end{itemize}
+The official set is 200 sessions from one popularity distribution with wording from one template family. It cannot separate a system that solved the task from one that fitted the sample. The population folds vary the target distribution; the paraphrase axes vary the wording.
+
+\section{Results}
+Organizer's unmodified evaluator, clean clone of the submitted commit, no environment file, no API key.
+
+\begin{center}\small\begin{tabular}{@{}lrrrrr@{}}\toprule
+\textbf{Evaluation} & \textbf{Sessions} & \textbf{HitRate@10} & \textbf{MRR} & \textbf{MTTC} & \textbf{TechnicalScore} \\ \midrule
+Official public development set & 200 & 0.9950 & 0.9950 & 2.225 & \textbf{0.971500} \\
+Organizer-proxy population & 800 & 0.9938 & 0.9923 & 2.535 & \textbf{0.963863} \\
+Review-weighted unseen population & 800 & 0.9850 & 0.9835 & 2.571 & \textbf{0.956138} \\
+Uniform-target population & 800 & 0.9550 & 0.9500 & 3.214 & \textbf{0.918225} \\
+Inverse-popularity population & 800 & 0.9300 & 0.9287 & 3.290 & \textbf{0.897825} \\
+\midrule
+Published weak BM25 baseline & 200 & 0.1250 & 0.0680 & 9.8100 & 0.106710 \\
+\bottomrule\end{tabular}\end{center}
+The population folds are proxies, not private-label estimates. The spread between the matched proxy and the inverse-popularity redraw bounds the ranking prior's dependence on the target distribution.
+
+\subsection*{Under wording change}
+200 sessions per axis, shared session base. Offline is the deterministic path with no credential; shipped adds the two hosted layers.
+
+\begin{center}\small\begin{tabular}{@{}llrrr@{}}\toprule
+\textbf{Condition} & \textbf{Perturbation} & \textbf{Offline} & \textbf{Shipped} & \textbf{Recovered} \\ \midrule
+Official public set & no perturbation & 0.971500 & \textbf{0.971500} & +0.000000 \\
+Template paraphrase & wrapper reworded & 0.930650 & \textbf{0.939525} & +0.008875 \\
+Attribute paraphrase & values reworded & 0.838400 & \textbf{0.866000} & +0.027600 \\
+Both axes at once & wrapper and values & 0.761937 & \textbf{0.788549} & +0.026612 \\
+\bottomrule\end{tabular}\end{center}
+The axes are kept separate because they break different components. A reworded wrapper defeats the recognition gate and is handled by the router, tagger and span node; a reworded value remains parsed but leaves the catalogue vocabulary, which only the deparaphraser addresses. A single blended paraphrase figure would not attribute recovery to either.
+
+\section{Reproducibility}
+\textbf{Clean clone.} The submitted commit cloned fresh with no environment file, no response caches and no local model weights: 0.971500, HitRate@10 0.9950, MRR 0.9950, MTTC 2.225, zero tokens. Both learned checkpoints downloaded from the Hub into an empty cache and ran inference on an unparsed message.
+
+\textbf{Cache independence.} The hosted layers cache responses, so the perturbation axes were run twice: once with warm caches, once from the cold clone where every call was paid for.
+
+\begin{center}\small\begin{tabular}{@{}lrrr@{}}\toprule
+\textbf{Condition} & \textbf{Warm cache} & \textbf{Cold clone} & \textbf{Difference} \\ \midrule
+Template paraphrase & 0.939525 & 0.939525 & \textbf{+0.000000} \\
+Attribute paraphrase & 0.866000 & 0.866000 & \textbf{+0.000000} \\
+\bottomrule\end{tabular}\end{center}
+The cold run made 17 rescue and 13 deparaphrase calls on the template axis and 23 on the attribute axis, all cache misses, and reached identical scores. Caching affects cost, not outcome.
+
+\section{Model choice}
+Local: two DistilBERT checkpoints, a dialogue-act router and a scaffolding tagger, published as KhiemGOM/techjam-route-classifier and KhiemGOM/techjam-scaffolding-tagger. Gitignored rather than committed, fetched from the Hugging Face Hub on first use. That fetch is the repository's only network dependency, and the README documents a pre-fetch command. Both load lazily and fail closed: absent torch, transformers or weights, the agent runs its standard-library lexical path unchanged.
+
+Hosted: openai/gpt-oss-20b via Groq, used by the attribute deparaphraser and the transcript rescue. Both require GROQ\_API\_KEY, both are inert without one, and neither is required for any reported score.
+
+Both hosted layers propose; the catalogue disposes. A recovered phrase becomes evidence only if it exists in the frozen catalogue, and enters at an attenuated tier rather than full constraint strength. Measured: identical proposals admitted at full weight recover 81.5\% of a perfect resolver, attenuated 96\%. The gap is the cost of wrong proposals.
+
+Candidate values take one admission path regardless of producer: attest, else deparaphrase once, else drop. Previously each layer admitted evidence privately, and the rescue discarded 163 of its own proposals on the compound axis as unattested without offering them to the deparaphraser. Unifying the path is worth +0.0266 there.
+
+\section{Cost, latency, and token disclosure}
+On the scored set the two configurations are the same run. With both hosted layers enabled and a credential present, the official set makes zero calls and spends zero tokens: the recognition gate parses every official message, so the rescue's parse-failure precondition is zero and the deparaphraser is never reached. This is control flow, not a threshold.
+
+\begin{center}\small\begin{tabular}{@{}lrrl@{}}\toprule
+\textbf{Phase} & \textbf{Offline} & \textbf{Hosted} & \textbf{Note} \\ \midrule
+Agent index build & 10.3\,s & 10.3\,s & one-off, at construction \\
+Evaluator catalogue index & 0.6\,s & 0.6\,s & one-off \\
+200 scored sessions & 15.0\,s & 15.1\,s & 75\,ms per session \\
+\midrule
+End to end & \textbf{25.7\,s} & \textbf{25.8\,s} & \\
+API calls & 0 & \textbf{0} & \\
+Tokens & 0 & \textbf{0} & prompt and completion \\
+Cost & USD 0.00 & \textbf{USD 0.00} & \\
+\bottomrule\end{tabular}\end{center}
+Median of three runs, idle machine. Roughly 11 s of the end-to-end figure is one-off index construction, paid at startup rather than per session.
+
+\textbf{Hosted cost.} Incurred only on off-template wording, which the official set does not contain. Across both perturbation axes, 400 sessions: under 9,000 tokens, below one US cent at current rates. Per-turn usage is aggregated from the provider's accounting and reported in the response usage field. Network time dominates: the same 200 sessions take 15 s offline and about 70 s when 30 hosted calls are made serially.
+
+\textbf{Environment.} Python 3.10+. torch and transformers are the only dependencies beyond the standard library, required solely by the optional local models; no GPU is used on the official path. Windows laptop, 13th Gen Intel Core i9-13900HX, 32 GB RAM.
+
+\section{Limitations}
+\textbf{Simulator-shaped.} The verbatim-substring property belongs to the organizer's generative process, not to shopping. Against human phrasing the exact layers degrade, and the robustness evidence here is self-generated synthetic variation.
+
+\textbf{Popularity-leaning.} The inverse-popularity fold bounds the cost of the ranking prior. A different demand distribution would need it re-calibrated; the agent self-calibrates its weight from label-free pool statistics, which limits but does not remove the exposure.
+
+\textbf{Hosted calls are not bit-reproducible.} Even at temperature zero. Two independent runs on separate clones returned identical completions, but that is an observation, not a guarantee. All headline figures come from the offline path.
+
+\textbf{Disclosure optimises the metric, not the experience.} One candidate per turn and ten on the last maximises MRR under the official formula; a shopper would prefer a shortlist throughout.
+
+\section{Team contributions}
+\begin{center}\small
+\begin{tabular}{@{}>{\RaggedRight\arraybackslash}p{0.11\textwidth}>{\RaggedRight\arraybackslash}p{0.185\textwidth}>{\RaggedRight\arraybackslash}p{0.615\textwidth}@{}}
+\toprule \textbf{Member} & \textbf{Responsibility} & \textbf{Contribution} \\ \midrule
+\textbf{Khiem} & Lead engineer, experimentation & Shipped agent end to end: recognition gate, template extraction, span recovery, grounded mining, FTS5 retrieval ladder, coverage ranking, session ledger, disclosure policy. Experiment programme, robustness and population-shift suites, release tests. \\[1.5pt]
+\textbf{Duong} & Hosted model layer & Attribute deparaphraser (generate-then-verify), transcript rescue, and the gating that keeps hosted calls off the scored path. \\[1.5pt]
+\textbf{Thanh Duy} & Architecture, reproducibility audit & Final escalation-ladder design, component boundaries and integration review. Owned reproducibility: verifying that a clean clone reproduces the reported figures, that the organizer-owned files remain unmodified, and that every documented command does what it claims. Built an alternative pipeline, measured and rejected. \\[1.5pt]
+\textbf{Huy} & Data analysis, industry research & Exploratory analysis of the catalogue and released sessions, and the production conversational-commerce practice the design draws on: clarification budgeting, dialogue state with override reset, popularity priors, lexical-first retrieval. Built an alternative pipeline, measured and rejected. \\[1.5pt]
+\textbf{Tai} & Rules compliance, evaluation, deliverables & Read the specification, submission rules and evaluation FAQ against the implementation, checking the shipped configuration violates none of them. Participant-kit setup and checksum verification, exact reproduction of the published baseline (0.10671), and the data profile whose probe expected-value and target-popularity analyses informed the ask policy and ranking prior. Non-code deliverables including the demo and this report. Built an additional hosted node, measured and rejected. \\[1.5pt]
+\bottomrule\end{tabular}\end{center}
+Rejected alternatives are listed rather than omitted. The shipped design is only defensible against the ones that lost, and three of the four escalation stages exist because a simpler or a heavier approach was measured first and did worse.
+
+\lead{Catalogue and sessions derive from Amazon Reviews 2023 (McAuley Lab, UCSD); see \texttt{DATA\_\allowbreak ATTRIBUTION\allowbreak .md} in the repository.}
+\end{document}
